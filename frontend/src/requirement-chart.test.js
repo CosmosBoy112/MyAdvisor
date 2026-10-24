@@ -34,6 +34,9 @@ test('chart buttons switch completed rows and explain a zero-result view',async(
    const buttons=()=>all(root).filter(n=>n.tag==='button'&&n.props.class?.includes('chart-toggle'));
    const rows=()=>all(root).filter(n=>n.tag==='button'&&n.props.class==='chart-row');
    assert.equal(rows().length,2);
+   const pending=rows().find(n=>text(n).includes('Pending course group'));
+   assert.match(text(pending),/3 credits still to earn/);
+   assert.match(text(pending),/0 needed after current courses/);
    buttons()[1].props.onClick();await nextTick();
    assert.equal(buttons()[1].props['aria-pressed'],true);
    assert.equal(rows().length,requirements===items?1:0);

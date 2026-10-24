@@ -124,10 +124,10 @@ function value(n){return Number.isFinite(n)?n:'—';}
    <section class="overview-grid">
     <div class="progress-panel panel"><div class="panel-heading"><span>Degree progress</span><span class="subtle-pill">{{report.catalogYear||'Requirement year unknown'}}</span></div>
      <div class="credit-headline"><strong>{{value(report.totals?.completed)}}</strong><span>/ {{value(report.totals?.required)}} credits completed</span><span v-if="totals" class="percent">{{totals.percent}}%</span></div>
-     <div v-if="totals" class="credit-bar" role="img" :aria-label="`${report.totals.completed} completed, ${report.totals.inProgress} in progress, ${totals.remaining} remaining credits`"><span class="bar-complete" :style="{width:totals.completeWidth+'%'}"></span><span class="bar-progress" :style="{width:totals.progressWidth+'%'}"></span></div>
+     <div v-if="totals" class="credit-bar" role="img" :aria-label="`${report.totals.completed} completed, ${report.totals.inProgress} in progress, ${totals.additional} additional credits after current courses, ${totals.remaining} total credits still to earn`"><span class="bar-complete" :style="{width:totals.completeWidth+'%'}"></span><span class="bar-progress" :style="{width:totals.progressWidth+'%'}"></span></div>
      <p v-else class="unknown-note">Some credit totals need confirmation. We haven’t filled in missing values.</p>
-     <div class="credit-legend"><div><span class="legend-dot legend-complete"></span><span>Completed<strong>{{value(report.totals?.completed)}}</strong></span></div><div><span class="legend-dot legend-progress"></span><span>In progress<strong>{{value(report.totals?.inProgress)}}</strong></span></div><div><span class="legend-dot gray"></span><span>Remaining<strong>{{value(totals?.remaining)}}</strong></span></div></div>
-     <p class="panel-footnote">Remaining assumes current courses are completed successfully. Requirement totals may overlap.</p>
+     <div class="credit-legend"><div><span class="legend-dot legend-complete"></span><span>Completed<strong>{{value(report.totals?.completed)}}</strong></span></div><div><span class="legend-dot legend-progress"></span><span>In progress<strong>{{value(report.totals?.inProgress)}}</strong></span></div><div><span class="legend-dot gray"></span><span>After current courses<strong>{{value(totals?.additional)}}</strong></span></div></div>
+     <p class="panel-footnote"><template v-if="totals"><strong>{{value(totals.remaining)}} credits still to earn</strong>, including {{value(report.totals.inProgress)}} in progress. The gray segment assumes current courses are passed. </template>Requirement totals may overlap.</p>
     </div>
     <CreditChart :totals="report.totals"/>
    </section>

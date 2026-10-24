@@ -2,7 +2,7 @@ export function progress(totals) {
   const {required,completed,inProgress} = totals || {};
   if (![required,completed,inProgress].every(Number.isFinite) || required <= 0 || completed < 0 || inProgress < 0) return null;
   const completeWidth=Math.min(completed,required)/required*100;
-  return {remaining:Math.max(0,required-completed-inProgress),completeWidth,progressWidth:Math.min(inProgress,Math.max(0,required-completed))/required*100,percent:Math.round(completeWidth)};
+  return {remaining:Math.max(0,required-completed),additional:Math.max(0,required-completed-inProgress),completeWidth,progressWidth:Math.min(inProgress,Math.max(0,required-completed))/required*100,percent:Math.round(completeWidth)};
 }
 export function filterRequirements(items, filter) {
  return items.filter(r=>filter==='all'||(filter==='remaining'&&r.status!=='complete')||(filter==='complete'&&r.status==='complete'));
