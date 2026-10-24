@@ -206,3 +206,9 @@ Auth0 SDK가 토큰을 `localstorage`에 저장하고 refresh token으로 갱신
 로그아웃은 Auth0 SDK가 저장된 인증 캐시를 지우고 수행합니다. 로컬 저장소 토큰은 페이지 JavaScript에서 접근할 수 있으므로 외부 스크립트와 HTML 주입을 제한해야 합니다. 브라우저 저장소를 차단하거나 삭제한 경우에는 재로그인이 필요합니다.
 
 참고: https://support.auth0.com/center/s/article/Why-is-authentication-lost-after-refreshing-my-SPA
+
+## PDF 분석 대기가 길어질 때
+
+업로드 중에는 인증 확인 / 서버 분석 단계와 경과 시간을 표시합니다. 인증 확인은 최대 20초, AI의 전체 응답 수신은 최대 100초, 브라우저 요청 전체는 최대 140초로 제한됩니다. DB 연결·응답·쿼리·잠금 대기에도 제한을 적용했습니다. 분석 완료 후 보고서 목록 갱신은 결과 표시를 막지 않습니다.
+
+`Stop waiting`은 브라우저 대기를 종료합니다. 이미 서버에 도착한 작업은 완료되어 저장될 수 있으므로 다시 업로드하기 전에 My reports를 확인하세요. 서버 로그는 임의 요청 ID, 단계(pdf/ai/database/complete), 소요 시간, 오류 유형만 기록하고 PDF 내용·파일명·키를 기록하지 않습니다.

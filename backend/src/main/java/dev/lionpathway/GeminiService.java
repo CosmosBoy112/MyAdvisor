@@ -3,6 +3,7 @@ import java.net.URI;
 import java.net.http.*;
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.*;
 import com.fasterxml.jackson.databind.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
@@ -30,7 +31,7 @@ import org.springframework.stereotype.Service;
   try{
    var payload=Map.of("systemInstruction",Map.of("parts",List.of(Map.of("text",system))),"contents",List.of(Map.of("role","user","parts",List.of(Map.of("text",text)))),"generationConfig",config);
    var request=HttpRequest.newBuilder(URI.create("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent")).timeout(Duration.ofSeconds(100)).header("Content-Type","application/json").header("x-goog-api-key",apiKey).POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload))).build();
-   var response=client.send(request,HttpResponse.BodyHandlers.ofString());
+   var response=BoundedHttp.send(client,request,Duration.ofSeconds(100));
    if(response.statusCode()!=200){
     String message=switch(response.statusCode()){
      case 400 -> "The AI request was rejected. Check the model and structured-output configuration.";
@@ -42,7 +43,9 @@ import org.springframework.stereotype.Service;
    }
    JsonNode result=mapper.readTree(response.body());var answer=new StringBuilder();for(JsonNode part:result.path("candidates").path(0).path("content").path("parts"))if(!part.path("thought").asBoolean(false)&&part.path("text").isTextual())answer.append(part.path("text").asText());
    if(answer.isEmpty())throw new UpstreamFailure("The AI service did not return an answer. Try a different report or question.");return answer.toString();
-  }catch(InterruptedException e){Thread.currentThread().interrupt();throw new UpstreamFailure("The AI request was interrupted.");}catch(java.io.IOException e){throw new UpstreamFailure("Could not reach the AI service. Please try again.");}
+  }catch(java.net.http.HttpTimeoutException e){throw new AnalysisTimeout("AI analysis exceeded 100 seconds. No result was saved. Please retry with a shorter report.");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new UpstreamFailure("The AI request was interrupted.");}catch(java.io.IOException e){throw new UpstreamFailure("Could not reach the AI service. Please try again.");}
  }
 }
 class UpstreamFailure extends RuntimeException{UpstreamFailure(String message){super(message);}}
+
+class AnalysisTimeout extends RuntimeException{AnalysisTimeout(String message){super(message);}}

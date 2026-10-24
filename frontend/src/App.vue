@@ -3,12 +3,15 @@ import {computed,inject,nextTick,ref,watch,onMounted} from 'vue';
 import {useAuth0} from '@auth0/auth0-vue';
 import {ArrowUp,ArrowUpRight,ArrowRight,Plus,X,FileText,Check,ChevronDown,ChevronRight,BookOpen,GraduationCap,Compass,MessageCircle,ShieldCheck,LoaderCircle,LogOut,Download,Info,Search,RotateCcw} from 'lucide-vue-next';
 import sample from './sample.json';
+import {apiRequest} from './api.js';
 import {sessionStatus} from './auth-config.js';
 import {progress,filterRequirements,validateFile} from './model.js';
 const configured=inject('authConfigured');
 const auth=configured?useAuth0():null;
 const report=ref(null),intent=ref(''),file=ref(null),fileInput=ref(null),busy=ref(false),error=ref(''),notice=ref(''),dragging=ref(false),filter=ref('all'),expanded=ref(null),source=ref(null),chatOpen=ref(false),question=ref(''),messages=ref([]),chatBusy=ref(false),chatBody=ref(null),consent=ref(false);
 const base=import.meta.env.VITE_API_BASE_URL||'';
+const uploadStage=ref('auth'),elapsed=ref(0);let uploadController=null;
+function cancelUpload(){uploadController?.abort();}
 const savedReports=ref([]),historyBusy=ref(false),historyOpen=ref(false),reportBusy=ref(false),deleteConfirm=ref(false),deleteBusy=ref(false),service=ref(null),serviceError=ref('');
 const signedIn=computed(()=>Boolean(auth?.isAuthenticated.value));
 const authLoading=computed(()=>Boolean(auth?.isLoading.value));
@@ -27,24 +30,14 @@ const completedCount=computed(()=>report.value?.requirements.filter(x=>x.status=
 const statuses={complete:'Complete',in_progress:'In progress',remaining:'Remaining',review:'Needs review'};
 const greeting=computed(()=>auth?.user.value?.given_name||'there');
 async function headers(){if(!configured||!auth.isAuthenticated.value)throw Error('Sign in to analyze your personal report.');return {Authorization:`Bearer ${await auth.getAccessTokenSilently()}`};}
-async function request(path,options={}){
- const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),150000);
- try{
-  const response=await fetch(base+path,{...options,signal:controller.signal,headers:{...await headers(),...options.headers}});
-  if(response.status===204)return null;
-  const raw=await response.text();let data={};try{data=raw?JSON.parse(raw):{};}catch{throw Error('The server returned an unreadable response. Please try again.');}
-  if(response.status===401)throw Error('Your session could not be verified. Sign out and sign in again.');
-  if(response.status===403)throw Error('Access is unavailable. Check that the backend is running with the live profile.');
-  if(!response.ok)throw Error(data.message||'The request could not be completed.');return data;
- }catch(e){if(e.name==='AbortError')throw Error('Analysis timed out. Check saved reports before retrying; processing may have completed.');if(e instanceof TypeError)throw Error('Cannot reach the analysis server. Check your connection and retry.');throw e;}finally{clearTimeout(timer);}
-}
+function request(path,options={},settings={}){return apiRequest(base+path,options,{getHeaders:headers,...settings});}
 function pick(f){error.value='';const problem=validateFile(f);if(problem){error.value=problem;return;}file.value=f;}
 function drop(event){dragging.value=false;if(event.dataTransfer.files.length)pick(event.dataTransfer.files[0]);}
 async function signIn(){error.value='';if(!configured){notice.value='Live sign-in needs Auth0 configuration. You can explore the sample without an account.';return;}try{if(intent.value.trim())sessionStorage.setItem('lionpathway-goal',intent.value);await auth.loginWithRedirect();}catch(e){error.value=e.message;}}
 function signOut(){auth?.logout({logoutParams:{returnTo:window.location.origin}});}
 function demo(){report.value=structuredClone(sample);messages.value=[];filter.value='all';error.value='';notice.value='';window.scrollTo(0,0);}
 function reset(){report.value=null;messages.value=[];chatOpen.value=false;source.value=null;error.value='';expanded.value=null;deleteConfirm.value=false;}
-async function analyze(){error.value='';if(authLoading.value){error.value='Sign-in is still loading. Please try again in a moment.';return;}if(!file.value){fileInput.value.click();return;}if(!configured){error.value='Live PDF analysis requires Auth0, Gemini, and the backend. Use “Explore a sample” to preview the experience.';return;}if(!auth.isAuthenticated.value){await signIn();return;}if(!consent.value){error.value='Please allow your report text to be sent to Gemini for analysis.';return;}busy.value=true;try{const form=new FormData();form.append('file',file.value);form.append('intent',intent.value);report.value=await request('/api/reports',{method:'POST',body:form});messages.value=[];filter.value='all';expanded.value=null;file.value=null;consent.value=false;await loadHistory();window.scrollTo(0,0);}catch(e){error.value=e.message;}finally{busy.value=false;}}
+async function analyze(){error.value='';if(authLoading.value){error.value='Sign-in is still loading. Please try again in a moment.';return;}if(!file.value){fileInput.value.click();return;}if(!configured){error.value='Live PDF analysis requires Auth0, Gemini, and the backend. Use “Explore a sample” to preview the experience.';return;}if(!auth.isAuthenticated.value){await signIn();return;}if(!consent.value){error.value='Please allow your report text to be sent to Gemini for analysis.';return;}if(busy.value)return;busy.value=true;elapsed.value=0;uploadStage.value='auth';uploadController=new AbortController();const started=Date.now();const ticker=setInterval(()=>elapsed.value=Math.floor((Date.now()-started)/1000),1000);try{const form=new FormData();form.append('file',file.value);form.append('intent',intent.value);report.value=await request('/api/reports',{method:'POST',body:form},{signal:uploadController.signal,onStage:stage=>uploadStage.value=stage});messages.value=[];filter.value='all';expanded.value=null;file.value=null;consent.value=false;void loadHistory();window.scrollTo(0,0);}catch(e){error.value=e.message;}finally{clearInterval(ticker);uploadController=null;busy.value=false;}}
 function askAbout(item){chatOpen.value=true;question.value=`What does “${item.title}” mean, and what is left to complete?`;}
 function demoAnswer(q){let item=report.value.requirements.find(r=>q.toLowerCase().includes(r.title.toLowerCase()));if(!item&&/minor|math/i.test(q))item=report.value.requirements.find(r=>r.id==='minor');if(item)return `${item.description}\n\nSample source: page ${item.evidence.page}. This is an illustrative answer, not a live Gemini response.`;if(/credit|left|remaining/i.test(q))return 'In this sample, 72 of 120 credits are completed, 15 are in progress, and 33 remain beyond current courses. Finishing the credit total does not automatically satisfy every requirement.\n\nThis is an illustrative answer, not a live Gemini response.';return 'This is sample mode. Try asking about Department List, Supportive Electives, the Mathematics minor, or remaining credits. Live Gemini answers become available when the services are configured.';}
 async function send(){const q=question.value.trim();if(!q||chatBusy.value)return;question.value='';messages.value.push({role:'user',text:q});chatBusy.value=true;try{const answer=report.value.demo?demoAnswer(q):(await request(`/api/reports/${report.value.id}/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})).answer;messages.value.push({role:'assistant',text:answer});}catch(e){messages.value.push({role:'error',text:e.message});}finally{chatBusy.value=false;await nextTick();chatBody.value?.scrollTo({top:chatBody.value.scrollHeight,behavior:'smooth'});}}
@@ -75,7 +68,7 @@ function value(n){return Number.isFinite(n)?n:'—';}
     </form>
     <label v-if="file" class="consent"><input type="checkbox" v-model="consent"> Allow report text to be sent to Gemini for analysis. Remove personal identifiers before uploading.</label>
     <div v-if="file && (serviceError || (service && !service.live))" class="service-status"><Info :size="15"/><span>{{serviceError||'The server is in sample-only mode. Start it with the live profile to analyze PDFs.'}}</span><button type="button" @click="checkService">Retry</button></div>
-    <p v-if="busy" class="loading-message" role="status">Reading your report and checking the requirements…</p>
+    <div v-if="busy" class="upload-progress"><p class="loading-message" role="status">{{uploadStage==='auth'?'Verifying your sign-in…':'Uploading and analyzing your report…'}} {{elapsed}}s</p><p v-if="uploadStage==='analysis'" class="upload-hint">AI analysis can take up to 100 seconds. You can stop waiting at any time.</p><button type="button" class="cancel-upload" @click="cancelUpload">Stop waiting</button></div>
     <p v-if="error" class="error" role="alert">{{error}}</p>
     <div class="hero-actions"><span>Start with your LionPATH What-If Report</span><span class="action-dot">·</span><button @click="demo">Explore a sample <ArrowRight :size="14"/></button></div>
     <div class="value-strip"><span><BookOpen :size="16"/> Understand your requirements</span><span><Compass :size="16"/> See what’s left</span><span><MessageCircle :size="16"/> Ask better questions</span></div>
