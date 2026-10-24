@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
   var pages=pdf.read(file.getBytes());var report=validator.validate(gemini.analyze(pages,intent),pages);UUID id=UUID.randomUUID();String name=Optional.ofNullable(file.getOriginalFilename()).orElse("report.pdf").replaceAll("[^a-zA-Z0-9._ -]","_");if(name.length()>200)name=name.substring(name.length()-200);
   report.put("id",id.toString());report.put("demo",false);report.put("fileName",name);report.put("intent",intent);repository.save(id,jwt.getSubject(),name,report);return report;
  }
+ @GetMapping public List<Map<String,Object>> list(@AuthenticationPrincipal Jwt jwt){return repository.list(jwt.getSubject());}
+ @GetMapping("/{id}/messages")public List<Map<String,Object>> messages(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){repository.get(id,jwt.getSubject());return repository.history(id);}
  @GetMapping("/{id}")public JsonNode get(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){return repository.get(id,jwt.getSubject());}
  @PostMapping("/{id}/chat")public Map<String,String> chat(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id,@Valid @RequestBody Question body){var report=repository.get(id,jwt.getSubject());String answer=gemini.chat(report,body.question(),repository.history(id));repository.conversation(id,body.question(),answer);return Map.of("answer",answer);}
  @DeleteMapping("/{id}")public void delete(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){repository.delete(id,jwt.getSubject());}

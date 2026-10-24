@@ -31,7 +31,15 @@ import org.springframework.stereotype.Service;
    var payload=Map.of("systemInstruction",Map.of("parts",List.of(Map.of("text",system))),"contents",List.of(Map.of("role","user","parts",List.of(Map.of("text",text)))),"generationConfig",config);
    var request=HttpRequest.newBuilder(URI.create("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent")).timeout(Duration.ofSeconds(100)).header("Content-Type","application/json").header("x-goog-api-key",apiKey).POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload))).build();
    var response=client.send(request,HttpResponse.BodyHandlers.ofString());
-   if(response.statusCode()!=200)throw new UpstreamFailure("The AI service is unavailable or its configuration needs attention. Please retry later.");
+   if(response.statusCode()!=200){
+    String message=switch(response.statusCode()){
+     case 400 -> "The AI request was rejected. Check the model and structured-output configuration.";
+     case 401,403 -> "The AI service could not authorize this request. Check the server API key and project permissions.";
+     case 404 -> "The configured AI model is unavailable. Check GEMINI_MODEL on the server.";
+     case 429 -> "The AI usage limit was reached. Wait a moment or check the project quota.";
+     default -> "The AI service is temporarily unavailable. Please try again later.";
+    };throw new UpstreamFailure(message);
+   }
    JsonNode result=mapper.readTree(response.body());var answer=new StringBuilder();for(JsonNode part:result.path("candidates").path(0).path("content").path("parts"))if(!part.path("thought").asBoolean(false)&&part.path("text").isTextual())answer.append(part.path("text").asText());
    if(answer.isEmpty())throw new UpstreamFailure("The AI service did not return an answer. Try a different report or question.");return answer.toString();
   }catch(InterruptedException e){Thread.currentThread().interrupt();throw new UpstreamFailure("The AI request was interrupted.");}catch(java.io.IOException e){throw new UpstreamFailure("Could not reach the AI service. Please try again.");}
