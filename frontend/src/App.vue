@@ -3,6 +3,7 @@ import {computed,inject,nextTick,ref,watch,onMounted} from 'vue';
 import {useAuth0} from '@auth0/auth0-vue';
 import {ArrowUp,ArrowUpRight,ArrowRight,Plus,X,FileText,Check,ChevronDown,ChevronRight,BookOpen,GraduationCap,Compass,MessageCircle,ShieldCheck,LoaderCircle,LogOut,Download,Info,Search,RotateCcw} from 'lucide-vue-next';
 import sample from './sample.json';
+import {sessionStatus} from './auth-config.js';
 import {progress,filterRequirements,validateFile} from './model.js';
 const configured=inject('authConfigured');
 const auth=configured?useAuth0():null;
@@ -11,9 +12,10 @@ const base=import.meta.env.VITE_API_BASE_URL||'';
 const savedReports=ref([]),historyBusy=ref(false),historyOpen=ref(false),reportBusy=ref(false),deleteConfirm=ref(false),deleteBusy=ref(false),service=ref(null),serviceError=ref('');
 const signedIn=computed(()=>Boolean(auth?.isAuthenticated.value));
 const authLoading=computed(()=>Boolean(auth?.isLoading.value));
+const session=computed(()=>sessionStatus(configured,authLoading.value,signedIn.value));
 async function checkService(){try{const r=await fetch(base+'/api/health');if(!r.ok)throw Error();service.value=await r.json();serviceError.value='';}catch{serviceError.value='The analysis server is not connected. Start the Spring Boot backend, then retry.';}}
 onMounted(()=>{checkService();const draft=sessionStorage.getItem('lionpathway-goal');if(draft){intent.value=draft;sessionStorage.removeItem('lionpathway-goal');notice.value='You’re signed in. Attach your PDF again to begin the analysis.';}});
-watch(signedIn,async ready=>{if(ready)await loadHistory();else savedReports.value=[];},{immediate:true});
+watch(session,async state=>{if(state==='signed-in')await loadHistory();else if(state==='signed-out')savedReports.value=[];},{immediate:true});
 watch(()=>auth?.error.value,e=>{if(e)error.value='Sign-in could not finish: '+(e.message||'Check Auth0 allowed URLs and API audience.');},{immediate:true});
 async function loadHistory(){historyBusy.value=true;try{savedReports.value=await request('/api/reports');}catch(e){error.value=e.message;}finally{historyBusy.value=false;}}
 async function openReport(id){reportBusy.value=true;error.value='';try{const next=await request(`/api/reports/${id}`);const history=await request(`/api/reports/${id}/messages`);report.value=next;messages.value=history.map(m=>({role:m.role,text:m.content}));historyOpen.value=false;filter.value='all';expanded.value=null;source.value=null;chatOpen.value=false;window.scrollTo(0,0);}catch(e){error.value=e.message;}finally{reportBusy.value=false;}}
@@ -54,7 +56,7 @@ function value(n){return Number.isFinite(n)?n:'—';}
  <div class="app-shell" @keydown.esc="source=null;chatOpen=false;historyOpen=false;deleteConfirm=false">
   <header class="topbar">
    <button class="brand" @click="reset" aria-label="LionPathway home"><span class="brand-icon"><GraduationCap :size="23"/></span><span>Lion<span class="brand-light">Pathway</span><span class="brand-dot">.</span></span></button>
-   <div class="header-right"><span class="independent">Built for Penn State students</span><span class="header-divider"></span><button v-if="signedIn" class="sign-in" @click="historyOpen=true;loadHistory()"><BookOpen :size="15"/> My reports</button><button v-if="!signedIn" :disabled="authLoading" class="sign-in" @click="signIn">Sign in <ArrowUpRight :size="15"/></button><button v-else class="sign-in" @click="signOut()">Sign out <LogOut :size="15"/></button></div>
+   <div class="header-right"><span class="independent">Built for Penn State students</span><span class="header-divider"></span><span v-if="session==='restoring'" class="session-restoring" role="status"><LoaderCircle :size="14" class="spin"/> Checking session…</span><button v-if="session==='signed-in'" class="sign-in" @click="historyOpen=true;loadHistory()"><BookOpen :size="15"/> My reports</button><button v-if="session==='signed-out'" class="sign-in" @click="signIn">Sign in <ArrowUpRight :size="15"/></button><button v-else-if="session==='signed-in'" class="sign-in" @click="signOut()">Sign out <LogOut :size="15"/></button></div>
   </header>
   <div v-if="notice" class="notice" role="status">{{notice}}<button @click="notice=''" aria-label="Dismiss"><X :size="16"/></button></div>
   <div v-if="error && (report || historyOpen)" class="global-error error" role="alert">{{error}}<button @click="error=''" aria-label="Dismiss error"><X :size="16"/></button></div>

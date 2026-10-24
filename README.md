@@ -188,3 +188,21 @@ LIONPATHWAY_LIVE_TEST=1 ./mvnw -Dtest=LiveDatabaseTest test
 ### DeepSeek / 루미나리
 
 현재 설정 파일에 제공된 Gemini를 사용합니다. DeepSeek/루미나리의 API 주소·모델·키가 아직 제공되지 않아 연결하지 않았습니다. 스캔 페이지의 이미지 인식도 아직 지원하지 않습니다. 해당 제공자의 API 명세를 확인한 뒤 분석 서비스만 분리하고, 대화는 Gemini로 유지할 수 있습니다.
+
+
+## 새로고침 후 로그인 유지
+
+Auth0 SDK가 토큰을 `localstorage`에 저장하고 refresh token으로 갱신하도록 설정했습니다. 별도 `isLoggedIn` 플래그로 인증을 우회하지 않으며 API는 계속 JWT를 검증합니다. 초기 복원 중에는 `Checking session…`을 표시합니다.
+
+변경 적용 후 한 번 다시 로그인하세요. 이전 메모리 캐시는 새로고침을 견딜 수 없습니다. `http://localhost:5173`과 `http://127.0.0.1:5173`은 저장소가 서로 다르므로 같은 주소를 유지하세요.
+
+토큰 만료 이후에도 지속적으로 갱신하려면 Auth0에서 다음 설정을 확인하세요.
+
+- Applications → 해당 SPA → Settings → Refresh Token Rotation 켜기
+- Applications → 해당 SPA → Advanced Settings → Grant Types → Refresh Token 허용
+- APIs → 해당 API → Settings → Allow Offline Access 켜기
+- 해당 SPA의 Allowed Web Origins에 `http://localhost:5173` 등록
+
+로그아웃은 Auth0 SDK가 저장된 인증 캐시를 지우고 수행합니다. 로컬 저장소 토큰은 페이지 JavaScript에서 접근할 수 있으므로 외부 스크립트와 HTML 주입을 제한해야 합니다. 브라우저 저장소를 차단하거나 삭제한 경우에는 재로그인이 필요합니다.
+
+참고: https://support.auth0.com/center/s/article/Why-is-authentication-lost-after-refreshing-my-SPA

@@ -1,10 +1,11 @@
 import { createApp } from 'vue';
 import { createAuth0 } from '@auth0/auth0-vue';
 import App from './App.vue';
+import { createAuthOptions } from './auth-config.js';
 import './style.css';
 const app = createApp(App);
 const env = import.meta.env;
 export const authConfigured = Boolean(env.VITE_AUTH0_DOMAIN && env.VITE_AUTH0_CLIENT_ID && env.VITE_AUTH0_AUDIENCE);
-if (authConfigured) app.use(createAuth0({domain:env.VITE_AUTH0_DOMAIN,clientId:env.VITE_AUTH0_CLIENT_ID,authorizationParams:{redirect_uri:window.location.origin,audience:env.VITE_AUTH0_AUDIENCE},cacheLocation:'memory'}));
+if (authConfigured) app.use(createAuth0(createAuthOptions(env, window.location.origin)));
 app.provide('authConfigured', authConfigured);
 app.mount('#app');

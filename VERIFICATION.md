@@ -24,3 +24,13 @@
 ## 기존 화면 검증
 
 첫 화면, 샘플 대시보드, 완료 필터, Department List 상세, 원문 근거 모달, 요건별 샘플 채팅을 확인했습니다. 샘플 화면의 답변은 사전에 작성된 로컬 응답이며 실제 Gemini 응답과 구분됩니다.
+
+
+## 새로고침 인증 유지 수정
+
+- Auth0 SDK 캐시를 memory에서 localstorage로 변경하고 refresh token 사용 및 SSO fallback 설정
+- SDK 초기화 중에는 Checking session 표시, 인증 완료 후에만 보고서 목록 요청
+- 프런트 테스트 7개 및 production build 통과
+- 회귀 테스트: SDK 캐시 인스턴스를 재생성해도 가상 인증 항목 유지, 항목 제거 후 복원되지 않음, 세션 복원 중 signed-out UI 방지
+- 실제 계정의 로그인 → 새로고침 → 토큰 만료 후 갱신 전체 흐름은 이번 수정에서 자동 검증하지 않음. 사용자는 기존 Auth0 API 등록 문제를 해결했다고 알림
+- 수정 적용 후 재로그인 필요. 지속적인 토큰 갱신에는 Auth0 Refresh Token Rotation / Allow Offline Access 설정 필요
