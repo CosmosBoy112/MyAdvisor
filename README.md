@@ -2,7 +2,9 @@
 
 Penn State What-If Report를 학점 대시보드와 요건별 대화로 바꾸는 HackPSU MVP입니다.
 
-**Vue 3 + Spring Boot 3 / Java 21 + Gemini + TigerData PostgreSQL + Auth0**
+**Vue 3 + Spring Boot 3 / Java 21 + Gemini + Luminal + TigerData PostgreSQL + Auth0**
+
+> 팀 진행 상황은 [`PROGRESS.md`](PROGRESS.md)에 기록합니다. 작업 전에 최근 항목을 읽고, 푸시할 때 맨 위에 항목을 추가하세요. 규칙은 [`AGENTS.md`](AGENTS.md)를 참고하세요.
 
 ## 빠른 시작 — 계정 없이 샘플 보기
 
@@ -193,7 +195,7 @@ LIONPATHWAY_LIVE_TEST=1 ./mvnw -Dtest=LiveDatabaseTest test
 
 ### DeepSeek / 루미나리
 
-현재 설정 파일에 제공된 Gemini를 사용합니다. DeepSeek/루미나리의 API 주소·모델·키가 아직 제공되지 않아 연결하지 않았습니다. 스캔 페이지의 이미지 인식도 아직 지원하지 않습니다. 해당 제공자의 API 명세를 확인한 뒤 분석 서비스만 분리하고, 대화는 Gemini로 유지할 수 있습니다.
+계획·What-If·비교 같은 복잡한 채팅 질문은 Luminal의 `deepseek-ai/DeepSeek-V4.1-Flash`로 연결했습니다. 설정은 위의 "3-1. Luminal (선택)"을 참고하세요. PDF 요건 추출은 계속 Gemini가 처리합니다. 스캔 페이지의 이미지 인식은 아직 지원하지 않습니다.
 
 
 ## 새로고침 후 로그인 유지
