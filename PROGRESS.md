@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · WoosungLim01 · `advisor-catalog-db`
+- 한 일: Advisor 에이전트용 DB 스키마 초안(`docs/advisor-schema.sql`), 도구 명세(`docs/advisor-tools.md`), 2026-27 Bulletin 과목 302개·Data Sciences B.S./ETM 요건 시드(`data/catalog/2026-27/`), Bulletin 파서(`ingest/parse_bulletin_courses.py`) 추가. 앱 코드는 변경 없음. 자세한 내용은 `docs/CHANGES-advisor-catalog-db.md`
+- 상태: JSON 3개 파싱과 파서 `py_compile`만 확인. 스키마 실제 DB 실행, 시드 적재는 미검증. 아직 `DatabaseConfig`에 연결하지 않음
+- 막힌 것: `courses.json`의 `review` 137건은 사람이 확인해야 함 (TEXT로 남은 선수과목 등)
+- 다음: TigerData 개발 DB에서 스키마 실행, 시드 로더 작성, `check_prerequisites`·`run_audit` 도구 구현
+- 필요한 설정: 스키마 11절에 `timescaledb` 확장 필요 (Tiger Cloud 기본 설치). 새 `.env` 값 없음
+
 ## 2026-10-24 · CosmosBoy112 · `backend`
 - 한 일: 채팅 질문 라우팅 추가. 계획·What-If·비교·순서 질문(또는 400자 초과)은 Luminal(`deepseek-ai/DeepSeek-V4.1-Flash`), 나머지 질문과 PDF 요건 추출은 Gemini. Luminal 실패·미설정 시 Gemini로 자동 전환. `/chat` 응답에 `provider` 필드 추가. 동의 문구에 Luminal 명시
 - 상태: 백엔드 단위 테스트 20개 통과(`ModelRouterTest` 6개 포함), 프런트 빌드 통과, Luminal `/chat/completions` 직접 호출 200 확인. 로그인 후 브라우저에서 실제 질문 흐름과 `Live*Test`는 미검증

@@ -1,0 +1,2301 @@
+{
+  "program": {
+    "code": "DATSC_BS",
+    "name": "Data Sciences, B.S.",
+    "type": "major",
+    "college": "Intercollege (IST, Engineering, Science)"
+  },
+  "catalog_year": "2026-27",
+  "min_total_credits": 123,
+  "source_urls": [
+    "https://bulletins.psu.edu/undergraduate/colleges/information-sciences-technology/data-sciences-bs/",
+    "https://bulletins.psu.edu/undergraduate/colleges/engineering/data-sciences-bs/",
+    "https://bulletins.psu.edu/undergraduate/colleges/eberly-science/data-sciences-bs/"
+  ],
+  "notes": [
+    "Credits: General Education 45, Electives 3-12, Requirements for the Major 72-81.",
+    "6 of the 45 General Education credits (6 credits of GQ) are included in the Requirements for the Major; the remaining 39 must be distinct.",
+    "C-required courses follow Senate Policy 82-44.",
+    "Undergraduates who entered before Summer 2026 follow the Bulletin edition from their entry year, not this one."
+  ],
+  "options": [
+    {
+      "code": "APPLIED",
+      "name": "Applied Data Sciences",
+      "bulletin_codes": [
+        "DATSC_BS",
+        "DTSAB_BS"
+      ],
+      "credits": 47,
+      "offered_by": "College of Information Sciences and Technology, Penn State Abington"
+    },
+    {
+      "code": "COMPUTATIONAL",
+      "name": "Computational Data Sciences",
+      "bulletin_codes": [
+        "DTSCE_BS"
+      ],
+      "credits": 47,
+      "offered_by": "College of Engineering"
+    },
+    {
+      "code": "STATISTICAL",
+      "name": "Statistical Modeling Data Sciences",
+      "bulletin_codes": [
+        "DTSCS_BS",
+        "DTSAB_BS"
+      ],
+      "credits": 38,
+      "offered_by": "Eberly College of Science, Penn State Abington"
+    }
+  ],
+  "requirements": [
+    {
+      "label": "Common Requirements for the Major (All Options)",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "Prescribed Courses",
+          "type": "GROUP_ALL",
+          "children": [
+            {
+              "label": "DS 220",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 220"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 340W",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 340W"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 435",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 435"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "MATH 140",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 140"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "MATH 141",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 141"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "MATH 220",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 220"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 184",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 184"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 380",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 380"
+                }
+              ],
+              "min_grade": "C"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "Additional Courses",
+          "type": "GROUP_ALL",
+          "children": [
+            {
+              "label": "1 credit of First-Year Seminar",
+              "type": "POOL",
+              "min_credits": 1,
+              "min_grade": "C",
+              "rules": [
+                {
+                  "attribute": "FYS"
+                }
+              ],
+              "review": "Matches courses carrying the First-Year Seminar designation (e.g. PSU 16/17); which ones count is set by each college's First-Year Engagement Plan."
+            },
+            {
+              "label": "CMPSC 121 or CMPSC 131",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 121"
+                },
+                {
+                  "course": "CMPSC 131"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "CMPSC 122 or CMPSC 132",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 122"
+                },
+                {
+                  "course": "CMPSC 132"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 440 or DS 440W",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 440"
+                },
+                {
+                  "course": "DS 440W"
+                }
+              ],
+              "min_grade": "C"
+            }
+          ],
+          "min_grade": "C"
+        }
+      ]
+    },
+    {
+      "option": "APPLIED",
+      "label": "Applied Data Sciences: 47 credits",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "Prescribed Courses",
+          "type": "GROUP_ALL",
+          "children": [
+            {
+              "label": "DS 200",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 200"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 300",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 300"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 305",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 305"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 310",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 310"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 320",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 320"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 330",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 330"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 410",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 410"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "IST 495",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "IST 495"
+                }
+              ],
+              "min_grade": "C"
+            }
+          ],
+          "min_grade": "C",
+          "notes": [
+            "DS 410 is cross-listed as CMPSC 410.",
+            "IST 495: 1 credit is required and a grade of SA must be earned (suggested academic plan footnote)."
+          ]
+        },
+        {
+          "label": "Select 6 credits from any combination",
+          "type": "POOL",
+          "min_credits": 6,
+          "rules": [
+            {
+              "course": "DS 402"
+            },
+            {
+              "course": "DS 420"
+            },
+            {
+              "course": "DS 441"
+            },
+            {
+              "course": "DS 442"
+            },
+            {
+              "course": "DS 494"
+            },
+            {
+              "course": "IST 442"
+            },
+            {
+              "course": "SODA 308"
+            }
+          ],
+          "review": "The suggested academic plan also lists IST 445 and IST 494 for these slots; the requirements table does not. Confirm with the department."
+        },
+        {
+          "label": "Select 3 credits (discrete mathematics)",
+          "type": "POOL",
+          "min_credits": 3,
+          "rules": [
+            {
+              "course": "CMPSC 360"
+            },
+            {
+              "course": "IST 230"
+            },
+            {
+              "course": "MATH 311W"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "Select 3 credits (probability)",
+          "type": "POOL",
+          "min_credits": 3,
+          "rules": [
+            {
+              "course": "STAT 318"
+            },
+            {
+              "course": "STAT 414"
+            },
+            {
+              "course": "STAT 418"
+            }
+          ],
+          "min_grade": "C",
+          "notes": [
+            "Listed as STAT/MATH 318, 414, 418 (cross-listed)."
+          ]
+        },
+        {
+          "label": "Application Focus (Supporting Courses and Related Areas)",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "source_text": "Select 12 credits from the lists of Application Focus courses; 6 credits must at at the 300- or 400-levels.",
+          "notes": [
+            "Students may apply up to 3 credits of ROTC as option Application Focus list credits and 3 credits of ROTC as GHW credits.",
+            "Within an area, 'or' alternatives (e.g. BA 301 or FIN 100 or FIN 301) are listed as separate rules; the engine does not yet stop both alternatives from counting."
+          ],
+          "children": [
+            {
+              "label": "Astronomy",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "ASTRO 21"
+                    },
+                    {
+                      "course": "ASTRO 120"
+                    },
+                    {
+                      "course": "ASTRO 130"
+                    },
+                    {
+                      "course": "ASTRO 140"
+                    },
+                    {
+                      "course": "ASTRO 291"
+                    },
+                    {
+                      "course": "ASTRO 292"
+                    },
+                    {
+                      "course": "ASTRO 401"
+                    },
+                    {
+                      "course": "ASTRO 402W"
+                    },
+                    {
+                      "course": "ASTRO 496"
+                    },
+                    {
+                      "course": "BIOL 474"
+                    },
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "PHYS 211"
+                    },
+                    {
+                      "course": "PHYS 212"
+                    },
+                    {
+                      "course": "PHYS 250"
+                    },
+                    {
+                      "course": "PHYS 251"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "ASTRO 21",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 120",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 130",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 140",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 291",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 292",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 401",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 402W",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ASTRO 496",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BIOL 474",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PHYS 211",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PHYS 212",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PHYS 250",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PHYS 251",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Business Fundamentals",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "ACCTG 211"
+                    },
+                    {
+                      "course": "BA 301"
+                    },
+                    {
+                      "course": "FIN 100"
+                    },
+                    {
+                      "course": "FIN 301"
+                    },
+                    {
+                      "course": "BA 302"
+                    },
+                    {
+                      "course": "SCM 301"
+                    },
+                    {
+                      "course": "BA 303"
+                    },
+                    {
+                      "course": "MKTG 221W"
+                    },
+                    {
+                      "course": "MKTG 301"
+                    },
+                    {
+                      "course": "MKTG 301W"
+                    },
+                    {
+                      "course": "BA 304"
+                    },
+                    {
+                      "course": "MGMT 100"
+                    },
+                    {
+                      "course": "MGMT 100W"
+                    },
+                    {
+                      "course": "MGMT 301"
+                    },
+                    {
+                      "course": "MGMT 301W"
+                    },
+                    {
+                      "course": "BLAW 243"
+                    },
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "ECON 102"
+                    },
+                    {
+                      "course": "ECON 104"
+                    },
+                    {
+                      "course": "IB 303"
+                    },
+                    {
+                      "course": "SCM 200"
+                    },
+                    {
+                      "course": "STAT 200"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "ACCTG 211",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BA 301",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FIN 100",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FIN 301",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BA 302",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SCM 301",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BA 303",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MKTG 221W",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MKTG 301",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MKTG 301W",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BA 304",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MGMT 100",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MGMT 100W",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MGMT 301",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MGMT 301W",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BLAW 243",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 102",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 104",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IB 303",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SCM 200",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "STAT 200",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Economics",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "ECON 102"
+                    },
+                    {
+                      "course": "ECON 104"
+                    },
+                    {
+                      "course": "ECON 106"
+                    },
+                    {
+                      "course": "ECON 302"
+                    },
+                    {
+                      "course": "ECON 304"
+                    },
+                    {
+                      "course": "ECON 315"
+                    },
+                    {
+                      "course": "ECON 323"
+                    },
+                    {
+                      "course": "ECON 333"
+                    },
+                    {
+                      "course": "ECON 342"
+                    },
+                    {
+                      "course": "ECON 402"
+                    },
+                    {
+                      "course": "ECON 407"
+                    },
+                    {
+                      "course": "ECON 410"
+                    },
+                    {
+                      "course": "ECON 415"
+                    },
+                    {
+                      "course": "ECON 425"
+                    },
+                    {
+                      "course": "ECON 428"
+                    },
+                    {
+                      "course": "ECON 442"
+                    },
+                    {
+                      "course": "ECON 445"
+                    },
+                    {
+                      "course": "ECON 447"
+                    },
+                    {
+                      "course": "ECON 471"
+                    },
+                    {
+                      "course": "ECON 479"
+                    },
+                    {
+                      "course": "ECON 480"
+                    },
+                    {
+                      "course": "SCM 200"
+                    },
+                    {
+                      "course": "STAT 200"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 102",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 104",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 106",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 302",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 304",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 315",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 323",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 333",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 342",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 407",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 410",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 415",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 425",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 428",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 442",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 445",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 447",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 471",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 479",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "ECON 480",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SCM 200",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "STAT 200",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Food Science",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "BMB 211"
+                    },
+                    {
+                      "course": "BMB 212"
+                    },
+                    {
+                      "course": "CHEM 110"
+                    },
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "FDSC 105"
+                    },
+                    {
+                      "course": "FDSC 200"
+                    },
+                    {
+                      "course": "FDSC 201"
+                    },
+                    {
+                      "course": "FDSC 206"
+                    },
+                    {
+                      "course": "FDSC 400"
+                    },
+                    {
+                      "course": "FDSC 403"
+                    },
+                    {
+                      "course": "FDSC 404"
+                    },
+                    {
+                      "course": "FDSC 405"
+                    },
+                    {
+                      "course": "FDSC 406W"
+                    },
+                    {
+                      "course": "FDSC 408"
+                    },
+                    {
+                      "course": "FDSC 409"
+                    },
+                    {
+                      "course": "FDSC 410"
+                    },
+                    {
+                      "course": "FDSC 413"
+                    },
+                    {
+                      "course": "FDSC 414"
+                    },
+                    {
+                      "course": "FDSC 415"
+                    },
+                    {
+                      "course": "FDSC 430"
+                    },
+                    {
+                      "course": "FDSC 444"
+                    },
+                    {
+                      "course": "MICRB 201"
+                    },
+                    {
+                      "course": "MICRB 202"
+                    },
+                    {
+                      "course": "STAT 200"
+                    },
+                    {
+                      "course": "STAT 240"
+                    },
+                    {
+                      "course": "STAT 250"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "BMB 211",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BMB 212",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CHEM 110",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 105",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 200",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 201",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 206",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 400",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 403",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 404",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 405",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 406W",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 408",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 409",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 410",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 413",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 414",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 415",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 430",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "FDSC 444",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MICRB 201",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "MICRB 202",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "STAT 200",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "STAT 240",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "STAT 250",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Human-Centered Design and Development",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "HCDD 113"
+                    },
+                    {
+                      "course": "HCDD 113S"
+                    },
+                    {
+                      "course": "HCDD 264"
+                    },
+                    {
+                      "course": "HCDD 311"
+                    },
+                    {
+                      "course": "IST 311"
+                    },
+                    {
+                      "course": "HCDD 331"
+                    },
+                    {
+                      "course": "IST 331"
+                    },
+                    {
+                      "course": "HCDD 340"
+                    },
+                    {
+                      "course": "HCDD 364W"
+                    },
+                    {
+                      "course": "HCDD 411"
+                    },
+                    {
+                      "course": "IST 411"
+                    },
+                    {
+                      "course": "HCDD 412"
+                    },
+                    {
+                      "course": "IST 412"
+                    },
+                    {
+                      "course": "HCDD 413"
+                    },
+                    {
+                      "course": "IST 413"
+                    },
+                    {
+                      "course": "IST 140"
+                    },
+                    {
+                      "course": "IST 210"
+                    },
+                    {
+                      "course": "IST 220"
+                    },
+                    {
+                      "course": "IST 240"
+                    },
+                    {
+                      "course": "IST 242"
+                    },
+                    {
+                      "course": "IST 261"
+                    },
+                    {
+                      "course": "IST 402"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 113",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 113S",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 264",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 311",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 311",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 331",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 331",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 340",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 364W",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 411",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 411",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 412",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 412",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "HCDD 413",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 413",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 140",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 210",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 220",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 240",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 242",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 261",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 402",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Information and Cybersecurity Sciences",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "CYBER 100"
+                    },
+                    {
+                      "course": "CYBER 100S"
+                    },
+                    {
+                      "course": "CYBER 221"
+                    },
+                    {
+                      "course": "SRA 221"
+                    },
+                    {
+                      "course": "CYBER 262"
+                    },
+                    {
+                      "course": "CYBER 451"
+                    },
+                    {
+                      "course": "IST 451"
+                    },
+                    {
+                      "course": "CYBER 454"
+                    },
+                    {
+                      "course": "IST 454"
+                    },
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "IST 140"
+                    },
+                    {
+                      "course": "IST 210"
+                    },
+                    {
+                      "course": "IST 220"
+                    },
+                    {
+                      "course": "IST 240"
+                    },
+                    {
+                      "course": "IST 242"
+                    },
+                    {
+                      "course": "IST 261"
+                    },
+                    {
+                      "course": "IST 456"
+                    },
+                    {
+                      "course": "SRA 111"
+                    },
+                    {
+                      "course": "SRA 211"
+                    },
+                    {
+                      "course": "SRA 231"
+                    },
+                    {
+                      "course": "SRA 365"
+                    },
+                    {
+                      "course": "SRA 450"
+                    },
+                    {
+                      "course": "SRA 468"
+                    },
+                    {
+                      "course": "SRA 480"
+                    },
+                    {
+                      "course": "STAT 200"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "CYBER 100",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CYBER 100S",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CYBER 221",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 221",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CYBER 262",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CYBER 451",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 451",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CYBER 454",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 454",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 140",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 210",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 220",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 240",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 242",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 261",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "IST 456",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 111",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 211",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 231",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 365",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 450",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 468",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "SRA 480",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "STAT 200",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Nutrition",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "BIOL 141"
+                    },
+                    {
+                      "course": "BMB 211"
+                    },
+                    {
+                      "course": "CHEM 110"
+                    },
+                    {
+                      "course": "CHEM 112"
+                    },
+                    {
+                      "course": "CHEM 202"
+                    },
+                    {
+                      "course": "CHEM 210"
+                    },
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "NUTR 100"
+                    },
+                    {
+                      "course": "NUTR 175N"
+                    },
+                    {
+                      "course": "NUTR 211R"
+                    },
+                    {
+                      "course": "NUTR 251"
+                    },
+                    {
+                      "course": "NUTR 358"
+                    },
+                    {
+                      "course": "NUTR 360"
+                    },
+                    {
+                      "course": "NUTR 361"
+                    },
+                    {
+                      "course": "NUTR 390"
+                    },
+                    {
+                      "course": "NUTR 400"
+                    },
+                    {
+                      "course": "NUTR 407"
+                    },
+                    {
+                      "course": "NUTR 410"
+                    },
+                    {
+                      "course": "NUTR 421"
+                    },
+                    {
+                      "course": "NUTR 425"
+                    },
+                    {
+                      "course": "NUTR 445"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "BIOL 141",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "BMB 211",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CHEM 110",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CHEM 112",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CHEM 202",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "CHEM 210",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 100",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 175N",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 211R",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 251",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 358",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 360",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 361",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 390",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 400",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 407",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 410",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 421",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 425",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "NUTR 445",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Psychology",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "12 credits from the area",
+                  "type": "POOL",
+                  "min_credits": 12,
+                  "rules": [
+                    {
+                      "course": "DS 402"
+                    },
+                    {
+                      "course": "PSYCH 100"
+                    },
+                    {
+                      "course": "PSYCH 200"
+                    },
+                    {
+                      "course": "PSYCH 212"
+                    },
+                    {
+                      "course": "PSYCH 221"
+                    },
+                    {
+                      "course": "PSYCH 243"
+                    },
+                    {
+                      "course": "PSYCH 253"
+                    },
+                    {
+                      "course": "PSYCH 256"
+                    },
+                    {
+                      "course": "PSYCH 260"
+                    },
+                    {
+                      "course": "PSYCH 261"
+                    },
+                    {
+                      "course": "PSYCH 270"
+                    },
+                    {
+                      "course": "PSYCH 370"
+                    },
+                    {
+                      "course": "PSYCH 404"
+                    },
+                    {
+                      "course": "PSYCH 410"
+                    },
+                    {
+                      "course": "PSYCH 412"
+                    },
+                    {
+                      "course": "PSYCH 413"
+                    },
+                    {
+                      "course": "PSYCH 419"
+                    },
+                    {
+                      "course": "PSYCH 423"
+                    },
+                    {
+                      "course": "PSYCH 424"
+                    },
+                    {
+                      "course": "PSYCH 425"
+                    },
+                    {
+                      "course": "PSYCH 441"
+                    },
+                    {
+                      "course": "PSYCH 449"
+                    },
+                    {
+                      "course": "PSYCH 452"
+                    },
+                    {
+                      "course": "PSYCH 455"
+                    },
+                    {
+                      "course": "PSYCH 456"
+                    },
+                    {
+                      "course": "PSYCH 457"
+                    },
+                    {
+                      "course": "PSYCH 458"
+                    },
+                    {
+                      "course": "PSYCH 473"
+                    },
+                    {
+                      "course": "PSYCH 484"
+                    },
+                    {
+                      "course": "STAT 200"
+                    }
+                  ]
+                },
+                {
+                  "label": "At least 6 of those credits at the 300- or 400-level",
+                  "type": "POOL",
+                  "min_credits": 6,
+                  "exclusive": false,
+                  "rules": [
+                    {
+                      "course": "DS 402",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 100",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 200",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 212",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 221",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 243",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 253",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 256",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 260",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 261",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 270",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 370",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 404",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 410",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 412",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 413",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 419",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 423",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 424",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 425",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 441",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 449",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 452",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 455",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 456",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 457",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 458",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 473",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "PSYCH 484",
+                      "level_min": 300
+                    },
+                    {
+                      "course": "STAT 200",
+                      "level_min": 300
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "label": "Custom Application Focus (adviser approval)",
+              "type": "POOL",
+              "min_credits": 12,
+              "rules": [],
+              "source_text": "There is an option for a student to create a custom 4-course application focus sequence ... It must be selected in consultation with an academic adviser or the program coordinator for the Applied Option of the Data Sciences program.",
+              "notes": [
+                "No rules: satisfied only through student_exceptions recorded after adviser approval."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "option": "COMPUTATIONAL",
+      "label": "Computational Data Sciences: 47 credits",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "Prescribed Courses",
+          "type": "GROUP_ALL",
+          "children": [
+            {
+              "label": "CMPSC 221",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 221"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "CMPSC 360",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 360"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "CMPSC 442",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 442"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "CMPSC 448",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 448"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "CMPSC 461",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 461"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "CMPSC 465",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 465"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 410",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 410"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "MATH 230",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 230"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 414",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 414"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 415",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 415"
+                }
+              ],
+              "min_grade": "C"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "Additional Courses",
+          "type": "GROUP_ALL",
+          "children": [
+            {
+              "label": "DS 200 or STAT 200",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 200"
+                },
+                {
+                  "course": "STAT 200"
+                }
+              ],
+              "min_grade": "C"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "Computational Option List A",
+          "type": "POOL",
+          "min_credits": 6,
+          "rules": [
+            {
+              "course": "CMPEN 454"
+            },
+            {
+              "course": "CMPSC 450"
+            },
+            {
+              "course": "CMPSC 455"
+            },
+            {
+              "course": "CMPSC 456"
+            },
+            {
+              "course": "MATH 484"
+            },
+            {
+              "course": "MATH 452"
+            }
+          ],
+          "source_text": "OPTION A: CMPEN 454, CMPSC 450, CMPSC 455, CMPSC 456, MATH 484, or MATH 452",
+          "notes": [
+            "The requirements table points to Appendix C; this list is from the Engineering page College Notes."
+          ]
+        },
+        {
+          "label": "Computational Option List B",
+          "type": "POOL",
+          "min_credits": 6,
+          "rules": [
+            {
+              "course": "CMPSC 431W"
+            },
+            {
+              "course": "EE 456"
+            },
+            {
+              "course": "DS 441"
+            },
+            {
+              "course": "MATH 486"
+            },
+            {
+              "course": "MATH 448"
+            },
+            {
+              "course": "STAT 416"
+            },
+            {
+              "course": "STAT 440"
+            },
+            {
+              "course": "STAT 460"
+            },
+            {
+              "course": "STAT 461"
+            },
+            {
+              "course": "STAT 462"
+            }
+          ],
+          "source_text": "OPTION B: CMPSC 431W, EE 456, DS 441, MATH 486, MATH 448, STAT 416, STAT 440, STAT 460, STAT 461, or STAT 462",
+          "notes": [
+            "The requirements table points to Appendix C; this list is from the Engineering page College Notes."
+          ]
+        }
+      ],
+      "notes": [
+        "College of Engineering note: nine credits of Natural Science (GN) are required, with listed exclusions. Not modeled here (college requirement)."
+      ]
+    },
+    {
+      "option": "STATISTICAL",
+      "label": "Statistical Modeling Data Sciences: 38 credits",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "Prescribed Courses",
+          "type": "GROUP_ALL",
+          "children": [
+            {
+              "label": "MATH 230",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 230"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 414",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 414"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 415",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 415"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 440",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 440"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "STAT 462",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "STAT 462"
+                }
+              ],
+              "min_grade": "C"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "Additional Courses",
+          "type": "GROUP_ALL",
+          "children": [
+            {
+              "label": "DS 200 or STAT 200",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 200"
+                },
+                {
+                  "course": "STAT 200"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "DS 310 or CMPSC 448",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "DS 310"
+                },
+                {
+                  "course": "CMPSC 448"
+                }
+              ],
+              "min_grade": "C"
+            },
+            {
+              "label": "MATH 311W or CMPSC 360",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 311W"
+                },
+                {
+                  "course": "CMPSC 360"
+                }
+              ],
+              "min_grade": "C"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "Statistical Modeling Option List A",
+          "type": "POOL",
+          "min_credits": 6,
+          "rules": [
+            {
+              "course": "MATH 435"
+            },
+            {
+              "course": "MATH 436"
+            },
+            {
+              "course": "MATH 441"
+            },
+            {
+              "course": "MATH 451"
+            },
+            {
+              "course": "MATH 455"
+            },
+            {
+              "course": "MATH 484"
+            },
+            {
+              "course": "STAT 416"
+            },
+            {
+              "course": "STAT 461"
+            },
+            {
+              "course": "STAT 463"
+            },
+            {
+              "course": "STAT 466"
+            },
+            {
+              "course": "STAT 483"
+            }
+          ],
+          "source_text": "MATH 435; MATH 436 or MATH 441; MATH 451 or MATH 455; MATH 484; MATH 416/STAT 416; STAT 461; STAT 463; STAT 466; STAT 483",
+          "notes": [
+            "The requirements table points to Appendix D; this list is from the Science page Advising Notes."
+          ]
+        },
+        {
+          "label": "Statistical Modeling Option List B",
+          "type": "POOL",
+          "min_credits": 6,
+          "rules": [
+            {
+              "course": "DS 320"
+            },
+            {
+              "course": "DS 330"
+            },
+            {
+              "course": "DS 410"
+            },
+            {
+              "course": "DS 402"
+            },
+            {
+              "course": "IST 461"
+            },
+            {
+              "course": "CMPSC 442"
+            },
+            {
+              "course": "CMPSC 465"
+            }
+          ],
+          "source_text": "DS 320; DS 330; DS 410; DS 402; IST 461; CMPSC 442; CMPSC 465",
+          "notes": [
+            "The requirements table points to Appendix D; this list is from the Science page Advising Notes."
+          ],
+          "review": "The suggested plan also requires 'CMPSC 465 or DS 305' (C or better, prerequisite for DS 440); students who entered before the change may count it as List B. Not in the requirements table."
+        }
+      ]
+    },
+    {
+      "label": "Quality of Work: 2.00 GPA in degree program courses",
+      "type": "GPA_MIN",
+      "min_gpa": 2.0,
+      "rules": [],
+      "source_text": "Candidates must complete the degree requirements for their major and earn at least a 2.00 grade-point average for all courses completed within their degree program.",
+      "review": "University degree requirement. With no rules the engine averages all graded courses, which only approximates 'courses within the degree program'."
+    }
+  ]
+}
