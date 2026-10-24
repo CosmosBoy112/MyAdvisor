@@ -59,6 +59,10 @@ TIGER_DATABASE_PASSWORD=...
 
 Google AI Studio에서 API 키를 준비하고 해당 프로젝트에서 사용 가능한 모델 이름을 `GEMINI_MODEL`에 지정하세요. 예시 값은 `gemini-3.5-flash-lite`입니다. 현재 로컬 검증에서는 이 모델로 여러 페이지의 요건 추출과 채팅이 성공했습니다. Gemini 3 모델에는 `thinkingLevel: low`를 지정합니다. 모델 접근 권한과 가용성은 계정에서 확인해야 합니다.
 
+### 3-1. Luminal (선택)
+
+학기별 계획, What-If, 비교처럼 여러 단계 추론이 필요한 채팅 질문은 `LUMINAL_API_KEY`가 설정되어 있으면 Luminal로 보냅니다. 단순 조회 질문과 PDF 요건 추출은 계속 Gemini가 처리합니다. Luminal 호출이 실패하면 Gemini로 자동 전환합니다. 분류 규칙은 `ModelRouter.java`의 키워드와 길이(400자 초과) 기준입니다. OpenAI 호환 `/chat/completions` 엔드포인트를 가정하므로 계정에 맞게 `LUMINAL_BASE_URL`, `LUMINAL_MODEL`을 지정하세요.
+
 키는 백엔드에만 둡니다. PDF 텍스트는 Google Gemini로 전송되며 결과와 채팅은 TigerData에 저장됩니다. PDF 원본은 DB/디스크에 영구 저장하지 않습니다. 업로드 전 이름·학번 등 개인정보를 제거하세요. 자동 익명화를 보장하지 않습니다.
 
 ### 4. Spring Boot 실행
@@ -131,6 +135,8 @@ backend/src/main/java/dev/lionpathway/
   SecurityConfig.java          Auth0 JWT·CORS·접근 정책
   PdfReader.java               PDFBox 페이지별 추출
   GeminiService.java           구조화 분석·대화 API
+  LuminalService.java          복잡한 질문용 Luminal 대화 API
+  ModelRouter.java             질문 분류·Gemini/Luminal 선택·fallback
   AnalysisValidator.java       출력 검증·근거 대조
   ReportRepository.java        소유자 기준 DB 조회
   ReportController.java        업로드·조회·질문·삭제
