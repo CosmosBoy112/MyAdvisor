@@ -57,7 +57,7 @@ TIGER_DATABASE_PASSWORD=...
 
 ### 3. Gemini
 
-Google AI Studio에서 API 키를 준비하고 해당 프로젝트에서 사용 가능한 모델 이름을 `GEMINI_MODEL`에 지정하세요. 예시 값은 `gemini-3.8-flash`입니다. 모델 접근 권한과 가용성은 계정에서 확인해야 합니다.
+Google AI Studio에서 API 키를 준비하고 해당 프로젝트에서 사용 가능한 모델 이름을 `GEMINI_MODEL`에 지정하세요. 예시 값은 `gemini-3.5-flash-lite`입니다. 현재 로컬 검증에서는 이 모델로 여러 페이지의 요건 추출과 채팅이 성공했습니다. Gemini 3 모델에는 `thinkingLevel: low`를 지정합니다. 모델 접근 권한과 가용성은 계정에서 확인해야 합니다.
 
 키는 백엔드에만 둡니다. PDF 텍스트는 Google Gemini로 전송되며 결과와 채팅은 TigerData에 저장됩니다. PDF 원본은 DB/디스크에 영구 저장하지 않습니다. 업로드 전 이름·학번 등 개인정보를 제거하세요. 자동 익명화를 보장하지 않습니다.
 
