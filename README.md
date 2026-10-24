@@ -92,10 +92,10 @@ Auth0 issuer는 `https://YOUR-TENANT.us.auth0.com/`처럼 마지막 `/`를 포�
 Docker 사용 시:
 
 ```sh
-cd backend
-docker build -t lionpathway-api .
+# 저장소 루트에서 실행: 공식 카탈로그도 이미지에 포함됩니다.
+docker build -f backend/Dockerfile -t lionpathway-api .
 # .env는 사용자가 별도로 작성한 로컬 파일이며 Git에 포함하지 않습니다.
-docker run --rm --env-file .env -p 127.0.0.1:8080:8080 lionpathway-api
+docker run --rm --env-file backend/.env -p 127.0.0.1:8080:8080 lionpathway-api
 ```
 
 ## API
@@ -220,3 +220,9 @@ Auth0 SDK가 토큰을 `localstorage`에 저장하고 refresh token으로 갱신
 업로드 중에는 인증 확인 / 서버 분석 단계와 경과 시간을 표시합니다. 인증 확인은 최대 20초, AI의 전체 응답 수신은 최대 100초, 브라우저 요청 전체는 최대 140초로 제한됩니다. DB 연결·응답·쿼리·잠금 대기에도 제한을 적용했습니다. 분석 완료 후 보고서 목록 갱신은 결과 표시를 막지 않습니다.
 
 `Stop waiting`은 브라우저 대기를 종료합니다. 이미 서버에 도착한 작업은 완료되어 저장될 수 있으므로 다시 업로드하기 전에 My reports를 확인하세요. 서버 로그는 임의 요청 ID, 단계(pdf/ai/database/complete), 소요 시간, 오류 유형만 기록하고 PDF 내용·파일명·키를 기록하지 않습니다.
+
+## 공식 CMPSC 카탈로그 연결
+
+새 PDF 분석은 서버에 포함된 University Park · Computer Science B.S. · 2026–27 카탈로그와 비교합니다. 보고서 메타데이터와 PDF 텍스트에 해당 전공·캠퍼스·학년도가 확인되어야 합니다. 비교 결과는 기존 TigerData `reports.analysis` JSONB에 저장되며, 보고서를 다시 열거나 Gemini/Luminal에 질문할 때도 사용됩니다. 추가 환경변수나 DB 마이그레이션은 없습니다.
+
+화면의 Official catalog comparison과 각 항목의 Bulletin comparison에서 출처, 현재 요구 학점, 충돌과 확인 필요 사항을 볼 수 있습니다. 이전 저장 보고서는 PDF를 재업로드해야 범위를 확인할 수 있습니다. PDF 학점과 완료 상태는 덮어쓰지 않으며 자동 졸업 판정은 제공하지 않습니다. 자세한 범위는 [CMPSC 카탈로그 변경 내역](docs/CHANGES-cmpsc-catalog.md)을 참고하세요.

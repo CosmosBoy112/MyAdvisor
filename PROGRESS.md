@@ -15,6 +15,13 @@
 ---
 
 ## 2026-10-24 · Codex · `main`
+- 한 일: 공식 CMPSC 카탈로그를 PDF 업로드→검증→TigerData 저장→보고서 조회/내보내기→Gemini/Luminal 채팅에 연결. Vue에 공식 비교·학점 충돌·과목 출처 표시. 기존 보고서는 재업로드 전 범위 미확인 처리
+- 상태: 백엔드 일반 테스트 26개 통과(외부 서비스 4개 기본 제외), 프런트 테스트 11개·빌드 통과. 별도로 LiveDatabaseTest를 실행해 카탈로그 포함 JSON의 실제 TigerData 저장/조회·소유권·삭제 검증 후 롤백. 실제 사용자 PDF/로그인 브라우저와 유료 AI 생성, Docker 실행은 미검증
+- 막힌 것: 현재 Handbook 학년도 및 미확인 승인 목록 제약은 유지. 자동 졸업/수강 가능 판정 없음
+- 다음: 새 PDF를 업로드하여 해당 보고서의 학년도와 항목 매칭을 확인
+- 필요한 설정: 새 .env/DB 마이그레이션 없음. Docker 빌드는 저장소 루트에서 `docker build -f backend/Dockerfile -t lionpathway-api .`
+
+## 2026-10-24 · Codex · `main`
 - 한 일: University Park CMPSC_BS/ETM 2026–27 Bulletin 수집, 과목 75개 매칭, 2024–25 Handbook 교차표와 학년도 충돌 표시. 재수집 스크립트·보고서 항목 명칭 매칭 CLI 추가. 상세: `docs/CHANGES-cmpsc-catalog.md`
 - 상태: 카탈로그/매칭 테스트 12개 통과, 오프라인 재생성 동일성 및 관련 없는 기존 과목 보존 확인, diff 공백 검사 통과. 앱·DB 연결과 브라우저 동작은 이번 변경 범위 밖이며 미검증
 - 막힌 것: 공식 페이지에 2026–27 학부 Handbook 없음. Department List/승인 자연과학 목록과 선수과목 review 14건은 확인 필요

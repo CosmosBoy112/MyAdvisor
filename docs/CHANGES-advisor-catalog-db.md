@@ -106,4 +106,4 @@ python ingest/parse_bulletin_courses.py \
 
 ## CMPSC 추가 수집
 
-University Park 2026–27의 후속 수집·Handbook 학년도 충돌·명칭 매칭 범위는 [CMPSC 변경 내역](CHANGES-cmpsc-catalog.md)을 참고하세요. 앱/DB 연결은 아직 별도 작업입니다.
+University Park 2026–27의 후속 수집·Handbook 학년도 충돌·명칭 매칭 범위는 [CMPSC 변경 내역](CHANGES-cmpsc-catalog.md)을 참고하세요. CMPSC 비교는 이제 앱에 연결되어 기존 reports.analysis JSONB에 저장됩니다. Advisor 전용 DB 스키마/감사 엔진 구현은 별도 작업입니다.

@@ -50,7 +50,11 @@ python -m unittest discover -s ingest -p 'test_cmpsc_catalog.py' -v
 
 ## 앱 적용 범위
 
-이번 변경은 카탈로그 시드와 독립 Python 매칭 도구입니다. Spring Boot PDF 분석·Gemini/Luminal 프롬프트·TigerData·Vue 화면에 아직 연결하지 않았습니다. DB 스키마 초안도 변경하거나 실행하지 않았습니다. 따라서 현재 웹서비스 응답이 이 데이터를 사용한다고 가정하면 안 됩니다.
+카탈로그 시드와 Python 매칭 도구에 더해 Spring Boot `CatalogService`가 Maven 빌드 시 포함된 JSON을 읽습니다. 새 PDF는 Gemini 추출과 증거 검증 후 전공·캠퍼스·학년도를 비교합니다. 해당 메타데이터와 원문 텍스트의 표기가 확인되면 항목별 정확한 별칭으로 매칭합니다. 문서 내 표기의 존재 확인이며 복수 프로그램 문서 전체에 대한 학사 검증은 아닙니다. 다른 학년도/캠퍼스/미확인 값은 자동 적용하지 않습니다.
+
+비교 결과(`catalog`, `requirements[].catalogMatch`)는 기존 `reports.analysis` JSONB에 함께 저장됩니다. 별도 카탈로그 DB 테이블이나 스키마 초안 실행 없이 기존 소유권·삭제 정책을 그대로 따릅니다. 보고서 조회·내보내기·Gemini/Luminal 채팅에서 동일한 출처와 검토 정보를 사용합니다. 기존 저장 보고서는 원문이 없어 재업로드 전 scope_unverified 또는 scope_not_matched로 표시됩니다.
+
+Vue는 전체 비교 상태, 요구 학점 충돌, 공식 출처 링크, 목록이 명시된 선택 과목과 선수과목 검토 상태를 표시합니다. 보고서의 학점·완료 상태는 유지합니다. 자연과학의 승인 목록, 과거 Supporting Electives, 불명확한 List A/B는 자동 인정하지 않습니다. Docker는 저장소 루트에서 `docker build -f backend/Dockerfile -t lionpathway-api .`로 빌드합니다.
 
 후속 로더/감사 엔진은 미해결 목록, GenEd 중복/분배, 학점 출처, 최소 성적, 반복/동등 과목을 별도로 처리해야 합니다. 현재 스키마 초안에서 지원하지 않는 메타데이터를 버리고 졸업 가능으로 판정하면 안 됩니다. 보고서의 명시 학년도나 남은 학점을 이 명칭 매칭 결과로 덮어쓰지 마세요.
 

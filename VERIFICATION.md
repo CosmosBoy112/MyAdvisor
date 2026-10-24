@@ -83,3 +83,12 @@
 - 공식 과목 코드 75/75 매칭, 불일치 0. 선수과목 review가 있는 매칭 과목 14개는 수동 확인 필요.
 - 캐시 기반 재생성 전후 모든 카탈로그 JSON SHA-256 동일. CMPSC 대상이 아닌 기존 과목은 HEAD 대비 그대로 유지됨.
 - `git diff --check` 통과. 프런트/백엔드 런타임 코드 미변경으로 빌드 재실행하지 않음. DB 적재·실제 PDF 매칭·졸업 판정은 구현/검증하지 않음.
+
+## 2026-10-24 CMPSC 앱 연결
+
+- Maven 일반 테스트: 30개 중 26개 통과, Live* 4개 환경변수 조건으로 제외. 새 CatalogServiceTest 6개는 범위 거부, 원문 확인, 학점 보존/충돌, 미확인 목록, 27개 선택 코드, 업로드 저장 인자와 채팅 컨텍스트를 검증합니다.
+- 별도 `LIONPATHWAY_LIVE_TEST=1 ... -Dtest=LiveDatabaseTest test`: 실제 TigerData JSONB에 매칭 결과 저장/조회 검증, 소유권/대화/삭제 확인, 트랜잭션 롤백 완료.
+- 프런트 11개 테스트 통과 및 Vite production build 성공.
+- 실제 로그인 브라우저/PDF/AI 생성 및 Docker 컨테이너는 이번 검증에 포함하지 않았습니다.
+
+- 변경된 백엔드를 live 프로필로 재시작하고 `/api/health` 응답 확인.
