@@ -8,3 +8,5 @@
 .upload-hint{font-size:11px;color:#85917e;margin-top:6px}.cancel-upload{font-size:12px;text-decoration:underline;margin-top:10px;color:#617759}
 
 .report-heading-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}.saved-report-row{display:flex;align-items:center;gap:8px;margin-top:12px}.saved-report-row .saved-report{flex:1;min-width:0;margin-top:0}.saved-report-delete{display:flex;align-items:center;gap:5px;padding:10px 8px;border-radius:7px;font-size:11px;color:#a0523f}.saved-report-delete:hover{background:#fff1ed;color:#8a4233}.delete-target{margin:12px 0;overflow-wrap:anywhere;font-size:13px;font-weight:600}
+
+.success-toast{position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:10px;width:max-content;max-width:calc(100% - 32px);padding:14px 16px;border:1px solid #c8ddcf;border-radius:12px;background:#edf7ef;color:#24533e;box-shadow:0 8px 28px #16392a26;font-size:13px;line-height:1.5}.success-toast>svg{flex-shrink:0}.success-toast button{display:grid;place-items:center;padding:4px;margin-left:4px}
