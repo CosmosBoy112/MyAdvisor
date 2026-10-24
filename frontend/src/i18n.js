@@ -8,6 +8,11 @@ export function detectInputLanguage(text,current='en'){
 }
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
+'Upload your LionPATH What-If Report.':'LionPATH What-If 보고서를 업로드하세요.',
+'Sample data · no live AI analysis.':'샘플 데이터 · 실제 AI 분석 아님',
+'Gray assumes current courses are passed.':'회색 구간은 수강 과목 통과 후 기준입니다.',
+'In-progress credits are not earned yet. Requirements may overlap; course eligibility needs confirmation.':'수강 중 학점은 아직 이수 전입니다. 요건 간 학점은 중복될 수 있으며, 과목 인정 여부는 확인이 필요합니다.',
+
 'Built for Penn State students':'펜스테이트 학생을 위한 서비스','Checking session…':'로그인 확인 중…','My reports':'내 보고서','Sign in':'로그인','Sign out':'로그아웃',
 'LESS GUESSWORK. MORE POSSIBILITY.':'명확한 학업 계획, 더 넓은 가능성','Your next chapter,':'다음 학기를,','clearer.':'더 명확하게.','Your degree report has the details.':'졸업 요건 보고서의 복잡한 정보를','Let’s turn them into a direction.':'실행할 수 있는 계획으로 바꿔보세요.',
 'Your major and the minor you are considering':'전공과 고려 중인 부전공','Attach report':'보고서 첨부','Allow report text to be sent to Gemini (and Luminal for planning questions) for analysis. Remove personal identifiers before uploading.':'분석을 위해 보고서 내용을 Gemini 및 계획 질문 처리용 Luminal에 전송하는 데 동의합니다. 업로드 전 개인 식별 정보를 제거하세요.',

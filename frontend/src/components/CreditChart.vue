@@ -13,7 +13,7 @@ const description=computed(()=>chart.value?`${props.totals.completed} credits co
 </script>
 <template>
  <section class="credit-chart" :aria-label="t(&quot;Credit breakdown&quot;)">
-  <div class="chart-heading"><h2>{{t("Credit breakdown")}}</h2><span>{{t("AT A GLANCE")}}</span></div>
+  <div class="chart-heading"><h2>{{t("Credit breakdown")}}</h2></div>
   <div class="chart-body">
    <div class="donut-wrap" role="img" :aria-label="description">
     <svg viewBox="0 0 160 160" aria-hidden="true">
@@ -28,7 +28,7 @@ const description=computed(()=>chart.value?`${props.totals.completed} credits co
    <ul class="chart-legend"><li v-for="segment in segments" :key="segment.label"><span class="chart-dot" :style="{background:segment.color}"></span><span>{{t(segment.label)}}</span><strong>{{Number.isFinite(segment.value)?segment.value:'—'}}</strong></li></ul>
   </div>
   <p v-if="totals?.inProgressByTerm" class="term-note"><span v-for="(amount,term) in totals.inProgressByTerm" :key="term">{{term}}: {{amount}} {{t("credits ·")}} </span>{{t("As of the report date.")}}</p>
-  <p v-if="chart"><strong>{{chart.remaining}} {{t("credits still to earn")}}</strong>{{t(", including current courses.")}} {{chart.additional}} {{t("additional credits needed if current courses are passed.")}}</p><p v-else>{{t("Upload a report with complete credit totals to see the breakdown.")}}</p>
+  <p v-if="!chart">{{t("Upload a report with complete credit totals to see the breakdown.")}}</p>
  </section>
 </template>
 <style scoped>

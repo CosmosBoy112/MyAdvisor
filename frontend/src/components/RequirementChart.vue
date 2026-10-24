@@ -15,7 +15,7 @@ function label(row){const {item,chart}=row;return chart?`${item.title}: ${credit
 </script>
 <template>
  <section class="requirement-chart" aria-labelledby="requirement-chart-title">
-  <div class="chart-header"><div><h2 id="requirement-chart-title">{{view==='complete'?t('Completed requirements'):t('What’s left, by requirement')}}</h2><p>{{view==='complete'?t('Requirements marked complete in your report.'):t('Largest credit gaps first.')}} {{t("Select a row to see its details.")}}</p></div><div class="chart-filters" role="group" aria-label="Requirement chart filter"><button class="chart-toggle" type="button" :aria-pressed="view==='remaining'" @click="view='remaining'">{{t("To complete (")}}{{remainingCount}})</button><button class="chart-toggle" type="button" :aria-pressed="view==='complete'" @click="view='complete'">{{t("Completed (")}}{{completedCount}})</button></div></div>
+  <div class="chart-header"><div><h2 id="requirement-chart-title">{{view==='complete'?t('Completed requirements'):t('What’s left, by requirement')}}</h2></div><div class="chart-filters" role="group" aria-label="Requirement chart filter"><button class="chart-toggle" type="button" :aria-pressed="view==='remaining'" @click="view='remaining'">{{t("To complete (")}}{{remainingCount}})</button><button class="chart-toggle" type="button" :aria-pressed="view==='complete'" @click="view='complete'">{{t("Completed (")}}{{completedCount}})</button></div></div>
   <div class="chart-key" aria-label="Chart legend"><span><i class="earned"></i>{{t("Completed")}}</span><span><i class="current"></i>{{t("In progress")}}</span><span><i class="remaining"></i>{{t("After current courses")}}</span></div>
   <div v-if="rows.length" class="chart-rows">
    <button v-for="row in rows" :key="row.item.id" type="button" class="chart-row" :aria-label="label(row)+' Open requirement details.'" @click="emit('select',row.item)">
@@ -25,9 +25,9 @@ function label(row){const {item,chart}=row;return chart?`${item.title}: ${credit
     <span class="row-caption"><span>{{credits(row.item.completed)}} / {{credits(row.item.required)}} {{t("credits completed")}}<span v-if="Number.isFinite(row.item.inProgress) && row.item.inProgress>0"> · {{credits(row.item.inProgress)}} {{t("in progress")}}</span><span v-if="row.chart"> · {{credits(row.chart.additional)}} {{t("needed after current courses")}}</span></span><span>{{row.chart?t('View details →'):t('Credit totals need confirmation →')}}</span></span>
    </button>
   </div>
-  <p class="chart-count" role="status" aria-live="polite">{{t("Showing")}} {{rows.length}} {{view==='complete'?t('completed'):t('unfinished or unverified')}} {{t("requirements")}}</p>
+  <p class="sr-only" role="status" aria-live="polite">{{t("Showing")}} {{rows.length}} {{view==='complete'?t('completed'):t('unfinished or unverified')}} {{t("requirements")}}</p>
   <p v-if="!rows.length" class="chart-empty">{{!requirements.length?t('No requirements were identified in this report.'):view==='complete'?t('No requirements are marked complete in this report yet. In-progress and needs-review items are under “To complete”.'):t('All listed requirements are marked complete. Select “Completed” to view them.')}}</p>
-  <p class="chart-note">{{t("Each bar shows progress toward its own requirement. Still to earn = required minus completed. In-progress credits are not earned yet. The gray segment shows additional credits needed after current courses are passed. Requirements can overlap; do not add their credits together. Credit progress does not verify course eligibility.")}}</p>
+  <p class="chart-note">{{t("In-progress credits are not earned yet. Requirements may overlap; course eligibility needs confirmation.")}}</p>
  </section>
 </template>
 <style scoped>
