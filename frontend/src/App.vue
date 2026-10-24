@@ -4,6 +4,7 @@ import {useAuth0} from '@auth0/auth0-vue';
 import {ArrowUp,ArrowUpRight,ArrowRight,Plus,X,FileText,Check,ChevronDown,ChevronRight,BookOpen,GraduationCap,Compass,MessageCircle,ShieldCheck,LoaderCircle,LogOut,Download,Info,Search,RotateCcw,Trash2,Sun,Moon} from 'lucide-vue-next';
 import sample from './sample.json';
 import CatalogComparison from './components/CatalogComparison.vue';
+import CreditChart from './components/CreditChart.vue';
 import {apiRequest} from './api.js';
 import {sessionStatus} from './auth-config.js';
 import {progress,filterRequirements,validateFile} from './model.js';
@@ -120,7 +121,7 @@ function value(n){return Number.isFinite(n)?n:'—';}
      <div class="credit-legend"><div><span class="legend-dot legend-complete"></span><span>Completed<strong>{{value(report.totals?.completed)}}</strong></span></div><div><span class="legend-dot legend-progress"></span><span>In progress<strong>{{value(report.totals?.inProgress)}}</strong></span></div><div><span class="legend-dot gray"></span><span>Remaining<strong>{{value(totals?.remaining)}}</strong></span></div></div>
      <p class="panel-footnote">Remaining assumes current courses are completed successfully. Requirement totals may overlap.</p>
     </div>
-    <div class="next-panel"><div class="compass-icon"><Compass :size="24"/></div><div class="eyebrow">A GOOD PLACE TO START</div><h2>Credits tell one part<br>of your story.</h2><p>Check each requirement below. A full credit count doesn’t always mean every box is checked.</p><button @click="filter='remaining';expanded=report.requirements.find(r=>r.status!=='complete')?.id">See what needs attention <ArrowUpRight :size="16"/></button></div>
+    <CreditChart :totals="report.totals"/>
    </section>
    <div v-if="report.warnings?.length && !report.demo" class="warnings"><p v-for="w in report.warnings" :key="w"><Info :size="15"/>{{w}}</p></div>
    <CatalogComparison v-if="report.catalog && !report.demo" :catalog="report.catalog"/>
