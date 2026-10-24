@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · CosmosBoy112 · `backend`
+- 한 일: `AGENTS.md`에 "참고 문서" 섹션 추가. DB 스키마(`schema.sql`, `docs/advisor-schema.sql`), 도구 명세(`docs/advisor-tools.md`), 카탈로그 시드·파서, 카탈로그 변경 내역 위치 안내. `advisor-catalog-db` 브랜치 내용을 `backend`에 반영
+- 상태: 문서만 변경. 병합 상태에서 백엔드 테스트 24개 중 20개 통과, `Live*Test` 4개는 설정상 건너뜀, 프런트 빌드 통과
+- 막힌 것: 없음
+- 다음: `backend` → `main` PR
+- 필요한 설정: 없음
+
 ## 2026-10-24 · WoosungLim01 · `advisor-catalog-db`
 - 한 일: Advisor 에이전트용 DB 스키마 초안(`docs/advisor-schema.sql`), 도구 명세(`docs/advisor-tools.md`), 2026-27 Bulletin 과목 302개·Data Sciences B.S./ETM 요건 시드(`data/catalog/2026-27/`), Bulletin 파서(`ingest/parse_bulletin_courses.py`) 추가. 앱 코드는 변경 없음. 자세한 내용은 `docs/CHANGES-advisor-catalog-db.md`
 - 상태: JSON 3개 파싱과 파서 `py_compile`만 확인. 스키마 실제 DB 실행, 시드 적재는 미검증. 아직 `DatabaseConfig`에 연결하지 않음
