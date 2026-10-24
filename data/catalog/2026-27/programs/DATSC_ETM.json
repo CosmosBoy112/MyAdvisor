@@ -1,0 +1,91 @@
+{
+  "program": {
+    "code": "DATSC_ETM",
+    "name": "Data Sciences Entrance to Major",
+    "type": "entrance",
+    "college": "Intercollege",
+    "entrance_for": "DATSC_BS"
+  },
+  "catalog_year": "2026-27",
+  "source_urls": [
+    "https://bulletins.psu.edu/undergraduate/colleges/information-sciences-technology/data-sciences-bs/"
+  ],
+  "notes": [
+    "The degree candidate must be taking, or have taken, a program appropriate for entry to the major as shown in the bulletin.",
+    "These courses must be completed by the end of the semester during which the entrance to major process is carried out."
+  ],
+  "requirements": [
+    {
+      "label": "Entrance-to-major courses",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "CMPSC 121 or CMPSC 131",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "CMPSC 121"
+            },
+            {
+              "course": "CMPSC 131"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "CMPSC 122 or CMPSC 132",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "CMPSC 122"
+            },
+            {
+              "course": "CMPSC 132"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "MATH 140",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "MATH 140"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "MATH 141",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "MATH 141"
+            }
+          ],
+          "min_grade": "C"
+        },
+        {
+          "label": "STAT 200 or DS 200",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "STAT 200"
+            },
+            {
+              "course": "DS 200"
+            }
+          ],
+          "min_grade": "C"
+        }
+      ],
+      "min_grade": "C",
+      "source_text": "CMPSC 121* or CMPSC 131*, CMPSC 122* or CMPSC 132*, MATH 140*, MATH 141*, STAT 200* or DS 200*. *Course requires a grade of C or better."
+    }
+  ]
+}
