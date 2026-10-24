@@ -1,0 +1,441 @@
+{
+  "program_code": "DATSC_BS",
+  "catalog_year": "2026-27",
+  "scope": "program",
+  "rules": [
+    {
+      "key": "suggested_academic_plan.COMPUTATIONAL",
+      "value": {
+        "campus": "UP",
+        "total_credits": 123,
+        "terms": [
+          {
+            "year": 1,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CMPSC 121 or 131 (GQ)",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "MATH 140 (GQ)",
+                "credits": 4.0,
+                "c_required": true
+              },
+              {
+                "label": "DS 200 or STAT 200",
+                "credits": 4.0,
+                "c_required": true
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "First-Year Seminar",
+                "credits": 1.0,
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 1,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPSC 122 or 132",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "MATH 141 (GQ)",
+                "credits": 4.0,
+                "c_required": true
+              },
+              {
+                "label": "DS 220",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "ENGL 15 (GWS)",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.0
+          },
+          {
+            "year": 2,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CMPSC 221",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "STAT 184",
+                "credits": 2.0,
+                "c_required": true
+              },
+              {
+                "label": "MATH 230",
+                "credits": 4.0,
+                "c_required": true
+              },
+              {
+                "label": "MATH 220",
+                "credits": 2.0,
+                "c_required": true
+              },
+              {
+                "label": "CAS 100A or 100B (GWS)",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              }
+            ],
+            "total_credits": 17.0
+          },
+          {
+            "year": 2,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPSC 360",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "STAT 380",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "STAT 414",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 3,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CMPSC 442 or DS 442",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "CMPSC 465",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "DS 435",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "STAT 415",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 3,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPSC 410 or DS 410",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "CMPSC 448",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "CMPSC 461",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 4,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "DS 340W",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "List A Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "List B Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "ENGL 202C (GWS)",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "Department List (General Elective)",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "General Education Course (GHW)",
+                "credits": 1.5,
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.5
+          },
+          {
+            "year": 4,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "DS 440W",
+                "credits": 3.0,
+                "c_required": true
+              },
+              {
+                "label": "List A Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "List B Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "c_required": false
+              },
+              {
+                "label": "General Education Course (GHW)",
+                "credits": 1.5,
+                "c_required": false
+              }
+            ],
+            "total_credits": 13.5
+          }
+        ],
+        "symbols": {
+          "c_required": "Course requires a grade of C or better"
+        },
+        "list_a": [
+          "CMPEN 454",
+          "CMPSC 450",
+          "CMPSC 455",
+          "CMPSC 456",
+          "MATH 484",
+          "MATH 452"
+        ],
+        "list_b": [
+          "CMPSC 431W",
+          "EE 456",
+          "DS 441",
+          "MATH 486",
+          "MATH 448",
+          "STAT 416",
+          "STAT 440",
+          "STAT 460",
+          "STAT 461",
+          "STAT 462"
+        ]
+      },
+      "description": "Suggested academic plan for the Computational Data Sciences option at University Park, in effect for 2026-27. A suggested sequence, not a requirement; List A/B are from the plan's footnotes.",
+      "policy_ref": "Computational Data Sciences Option: Data Sciences, B.S. at University Park Campus",
+      "source_url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/data-sciences-bs/#suggestedacademicplantext"
+    },
+    {
+      "key": "natural_science_exclusions",
+      "value": {
+        "required_gn_credits": 9,
+        "excluded": [
+          "ASTRO 1",
+          "ASTRO 7N",
+          "ASTRO 10",
+          "ASTRO 11",
+          "ASTRO 120",
+          "ASTRO 140",
+          "BISC *",
+          "CHEM below 110 (except 3 credits of CHEM 106)",
+          "PHYS 250",
+          "PHYS 251",
+          "PHYS below 211",
+          "GEOSC 20"
+        ]
+      },
+      "description": "Nine credits of Natural Science (GN) are required; the listed courses do not count (2026-27 Bulletin college notes). The 2024-25 handbook additionally excluded ASTRO 6 and GAME 180N.",
+      "policy_ref": "Suggested Academic Plan, College Notes: Natural Sciences Elective",
+      "source_url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/data-sciences-bs/#suggestedacademicplantext"
+    },
+    {
+      "key": "department_list_rules",
+      "value": {
+        "credits": 6,
+        "caps": {
+          "ROTC": 3,
+          "music_performance": 6,
+          "additional_physical_education": 3,
+          "cooperative_education": 3,
+          "engineering_internship": 2,
+          "CHEM 106": 3
+        },
+        "excluded_courses": [
+          "ASTRO 1",
+          "ASTRO 6",
+          "ASTRO 7N",
+          "ASTRO 10",
+          "ASTRO 11",
+          "ASTRO 120",
+          "ASTRO 140",
+          "BISC 1",
+          "BISC 2",
+          "BISC 3",
+          "BISC 4",
+          "CHEM 1",
+          "CHEM 3",
+          "CHEM 101",
+          "CHEM 108",
+          "CMPSC 100",
+          "CMPSC 101",
+          "CMPSC 200",
+          "CMPSC 201",
+          "CMPSC 203",
+          "CYBER 100",
+          "EMSC 150",
+          "ESL 4",
+          "EE 465",
+          "IST 140",
+          "IST 220",
+          "IST 230",
+          "IST 240",
+          "IST 242",
+          "IST 261",
+          "IST 311",
+          "IST 361",
+          "LLED 5",
+          "LLED 10",
+          "MATH 200",
+          "MATH 201",
+          "PHIL 12",
+          "PHSC 7",
+          "PHYS 250",
+          "PHYS 251",
+          "S T S 150",
+          "CAS 126",
+          "CAS 283",
+          "STAT 401",
+          "STAT 487",
+          "STAT 318",
+          "STAT 319",
+          "STAT 414",
+          "STAT 415",
+          "STAT 418"
+        ],
+        "excluded_ranges": [
+          "MATH below 140",
+          "PHYS below 211",
+          "STAT below 318"
+        ],
+        "excluded_categories": [
+          "courses not satisfying minimum requirements for a baccalaureate degree program",
+          "courses described as intended for non-science or non-technical majors",
+          "courses similar or remedial to a required course or one already taken",
+          "ENGL 4, ENGL 5 or any other remedial English"
+        ],
+        "note": "US/IL courses that are not Arts, Humanities, or Social/Behavioral Sciences courses may count here. The handbook says to bring the total to at least 126 credits; the 2026-27 Bulletin minimum is 123."
+      },
+      "description": "Department List (general elective) restrictions. Source: DTSCE Handbook 2024-25, the latest handbook published on the EECS site as of 2026-10-24. No 2025-26 or 2026-27 edition was found; confirm with an adviser before relying on it for 2026-27.",
+      "policy_ref": "Department List (General Elective) Guidelines",
+      "source_url": "https://www.eecs.psu.edu/assets/docs/handbooks/DTSCE-handbook-2024-2025.pdf"
+    },
+    {
+      "key": "first_year_seminar_makeup",
+      "value": {
+        "credits": 1,
+        "petition_url": "https://coursesub.psu.edu/"
+      },
+      "description": "Students without a separate 1-credit first-year seminar take one extra Department List credit and petition to apply it to the first-year seminar requirement. Source: DTSCE Handbook 2024-25, the latest handbook published on the EECS site as of 2026-10-24. No 2025-26 or 2026-27 edition was found; confirm with an adviser before relying on it for 2026-27.",
+      "policy_ref": "First Year Seminar (1 credit)",
+      "source_url": "https://www.eecs.psu.edu/assets/docs/handbooks/DTSCE-handbook-2024-2025.pdf"
+    },
+    {
+      "key": "communications_substitutions",
+      "value": {
+        "ENGL 15": [
+          "ENGL 30",
+          "ESL 15"
+        ],
+        "ENGL 15 + CAS 100A/B": [
+          "ENGL 137 + ENGL 138",
+          "CAS 137 + CAS 138"
+        ],
+        "MATH 230": [
+          "MATH 231 + MATH 232"
+        ]
+      },
+      "description": "Accepted substitutions for communications and calculus courses. Source: DTSCE Handbook 2024-25, the latest handbook published on the EECS site as of 2026-10-24. No 2025-26 or 2026-27 edition was found; confirm with an adviser before relying on it for 2026-27.",
+      "policy_ref": "Communications / Quantification",
+      "source_url": "https://www.eecs.psu.edu/assets/docs/handbooks/DTSCE-handbook-2024-2025.pdf"
+    }
+  ]
+}

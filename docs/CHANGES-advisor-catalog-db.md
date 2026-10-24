@@ -1,5 +1,7 @@
 # 변경 가이드: Advisor 카탈로그 DB 초안 (`advisor-catalog-db`)
 
+> **TigerData에 실제로 적재된 카탈로그 DB의 현재 상태**(만든 테이블, 행 수, 출처, 재적재 방법, 확인 쿼리)는 맨 아래 [DB 적재 현황](#db-적재-현황-2026-10-24) 절을 보세요.
+
 이번 푸시에서 무엇이 추가·변경됐는지, 기존 코드와 어떻게 연결되는지 정리한 문서입니다.
 
 ## 한 줄 요약
@@ -96,14 +98,103 @@ python ingest/parse_bulletin_courses.py \
 
 - 확인함: JSON 3개 파싱, 파서 `py_compile` 통과, 비밀값 미포함 확인
 - 미검증: `advisor-schema.sql` 실제 DB 실행, 시드 데이터 적재, `review` 항목 수동 검토
+- 2026-10-24 갱신: 섹션 1–6 실행과 DATSC 시드 적재 완료 ([DB 적재 현황](#db-적재-현황-2026-10-24)). `review` 수동 검토와 섹션 7–12 실행은 여전히 미검증
 
 ## 다음 할 일
 
-1. TigerData 개발 DB에서 `advisor-schema.sql` 실행 확인
-2. `courses.json`의 `review` 137건 검토 후 시드 로더 작성 (`courses` / `course_versions` / `prereq_nodes`)
-3. `DATSC_BS.json` → `requirement_nodes` / `requirement_rules` 적재
+1. ~~TigerData 개발 DB에서 `advisor-schema.sql` 실행 확인~~ → 섹션 1–6만 실행 완료 (2026-10-24)
+2. `courses.json`의 `review` 137건 검토 후 시드 로더 작성 (`courses` / `course_versions` / `prereq_nodes`) → 로더 작성·적재 완료. **`review` 검토는 아직 안 함** (TEXT 노드 그대로 적재)
+3. ~~`DATSC_BS.json` → `requirement_nodes` / `requirement_rules` 적재~~ → 완료 (2026-10-24)
 4. 백엔드에 `check_prerequisites`, `run_audit`부터 도구 구현 후 Gemini function calling 연결
 
 ## CMPSC 추가 수집
 
 University Park 2026–27의 후속 수집·Handbook 학년도 충돌·명칭 매칭 범위는 [CMPSC 변경 내역](CHANGES-cmpsc-catalog.md)을 참고하세요. CMPSC 비교는 이제 앱에 연결되어 기존 reports.analysis JSONB에 저장됩니다. Advisor 전용 DB 스키마/감사 엔진 구현은 별도 작업입니다.
+
+## DB 적재 현황 (2026-10-24)
+
+Computational Data Sciences(DTSCE) 질문에 답할 수 있도록 카탈로그를 TigerData에 적재했습니다. **앱은 아직 이 테이블을 읽지 않습니다**(위 "다음 할 일" 4번). CMPSC는 별도 방식([CMPSC 변경 내역](CHANGES-cmpsc-catalog.md), JSON 기반 `CatalogService`)이며 DB에는 CMPSC 요건 트리를 넣지 않았습니다. 과목 정보(`courses.json`)에는 CMPSC 과목도 포함되어 함께 적재됩니다.
+
+### 만든 범위
+
+- `docs/advisor-schema.sql` **섹션 1–6만** 실행했습니다 (기준 데이터, 과목, 프로그램, 개설, 학점 인정, 규정). 모두 `CREATE ... IF NOT EXISTS`입니다.
+- 섹션 7–12(학생 기록, 계획, 감사 캐시, 대화, 실행 로그 hypertable, pgvector)는 **만들지 않았습니다**. 앱용 `app_users` / `reports` / `chat_messages`는 건드리지 않습니다.
+- 대상 DB: `backend/.env`의 `TIGER_DATABASE_URL` (앱과 같은 DB)
+
+### 적재 결과
+
+| 테이블 | 행 수 | 내용 |
+|---|---|---|
+| `catalog_years` | 1 | `2026-27` (시작·종료일은 Summer 2026 입학 기준의 근사값) |
+| `grades` | 12 | A ~ F 평점(Senate Policy 47-60), SA / UN / W |
+| `courses` | 357 | 과목 코드. 선수과목·교차개설·요건 규칙에만 등장하는 코드 포함 |
+| `course_versions` | 337 | 2026-27 제목·학점·설명·선수과목 원문. 제목/학점이 확인되지 않은 참조 과목 20개는 `courses`에만 있음 |
+| `course_attributes` | 122 | GenEd 등 속성 (GN, GQ, GS, WAC, GWS, ...) |
+| `course_crosslists` | 25 | 교차개설 쌍 |
+| `prereq_nodes` | 880 | 선수과목 트리. 파싱 못 한 33건은 `TEXT` 노드(`raw_text`에 원문) |
+| `programs` / `program_versions` | 2 / 2 | `DATSC_BS`, `DATSC_ETM` |
+| `program_options` | 3 | `APPLIED`, `COMPUTATIONAL`, `STATISTICAL` |
+| `requirement_nodes` / `requirement_rules` | 90 / 473 | 요건 트리와 규칙. JSON의 `notes`는 `source_text` 뒤에 `Note:`로 붙임 |
+| `policy_rules` | 5 | 아래 표 |
+| `terms`, `course_offerings`, `credit_*`, `academic_calendar`, `course_restrictions` | 0 | 테이블만 생성 |
+
+### 출처
+
+| 자료 | 판 | 쓰인 곳 |
+|---|---|---|
+| [Bulletin: Data Sciences, B.S. (Engineering)](https://bulletins.psu.edu/undergraduate/colleges/engineering/data-sciences-bs/) | 2026-27 | 전공 요건, List A/B(권장 계획 각주), 권장 학기 계획, 자연과학 제외 목록 |
+| [Bulletin 과목 설명](https://bulletins.psu.edu/university-course-descriptions/undergraduate/) | 2026-27 | 과목·선수과목. 2026-10-24에 43개 과목 페이지를 재수집해 기존 시드와 대조: 내용 동일, 제목이 비어 있던 참조 과목 14개만 채움 |
+| [DTSCE Handbook](https://www.eecs.psu.edu/assets/docs/handbooks/DTSCE-handbook-2024-2025.pdf) | **2024-25** | Department List 제외·상한, FYS 대체, 대체 인정 과목 |
+
+2026-10-24 기준 EECS 사이트에 공개된 DTSCE Handbook은 2024-25판이 최신입니다(2025-26 / 2026-27판 없음). Bulletin의 "LIST OF COMPUTATIONAL DATA SCIENCES COURSES" 링크도 이 페이지로 연결됩니다. Handbook에서 온 규칙은 `description`에 "2026-27 적용은 어드바이저 확인 필요"를 명시했습니다.
+
+Handbook과 Bulletin이 다른 부분:
+- 졸업 학점: Handbook "at least 126" / Bulletin 2026-27 **123** → 요건은 Bulletin 값 사용, Handbook 문구는 `department_list_rules.value.note`에 보존
+- List A/B: Handbook에만 있는 CMPSC/MATH 467, DS 300, MATH 436, MATH 465, IST 441은 넣지 않음. Bulletin 2026-27 목록(DS 441, MATH 486 포함) 사용
+- 자연과학 제외: Handbook에만 ASTRO 6, GAME 180N 있음 → Bulletin 목록 사용, 차이는 `description`에 기록
+
+### `policy_rules` 키 (`scope='program'`, `scope_code='DATSC_BS'`, `catalog_year='2026-27'`)
+
+| key | 출처 | value |
+|---|---|---|
+| `suggested_academic_plan.COMPUTATIONAL` | Bulletin 2026-27 | 8학기 과목·학점(합계 123, 학기별 합계 검산), `c_required`, `list_a`, `list_b` |
+| `natural_science_exclusions` | Bulletin 2026-27 | GN 9학점, 제외 과목 |
+| `department_list_rules` | Handbook 2024-25 | 6학점, 상한(ROTC 3 등), 제외 과목·범위·범주 |
+| `first_year_seminar_makeup` | Handbook 2024-25 | 별도 FYS가 없을 때 1학점 대체와 청원 URL |
+| `communications_substitutions` | Handbook 2024-25 | ENGL 15, CAS 100, MATH 230 대체 과목 |
+
+### 다시 적재하기
+
+```sh
+python -m pip install -r ingest/requirements.txt
+# backend/.env 의 TIGER_DATABASE_* 를 읽습니다 (환경변수가 있으면 우선)
+python ingest/load_catalog_db.py --data data/catalog/2026-27 --programs DATSC_BS DATSC_ETM --dry-run   # 넣어 보고 롤백
+python ingest/load_catalog_db.py --data data/catalog/2026-27 --programs DATSC_BS DATSC_ETM
+```
+
+- 한 트랜잭션으로 실행합니다. 다시 실행하면 해당 학년도의 과목 버전·선수과목 트리·요건 트리·규정을 교체합니다(`courses` 코드는 남김).
+- 규정 파일 재생성: Bulletin 페이지를 HTML로 저장한 뒤 `python ingest/build_datsc_policies.py PAGE.html data/catalog/2026-27/policies/DATSC_BS.json`. Handbook 규칙은 스크립트 안에 옮겨 적은 값이므로 새 Handbook이 나오면 직접 대조해 고쳐야 합니다.
+
+### TigerData 콘솔에서 확인
+
+[console.cloud.timescale.com](https://console.cloud.timescale.com) → 서비스(`.env` 호스트의 첫 부분이 서비스 ID) → SQL editor. 조회만 할 때는 `SELECT`만 사용하세요(앱 DB와 같음).
+
+```sql
+-- Computational 옵션 요건 트리
+WITH RECURSIVE t AS (
+  SELECT n.id, n.label, n.node_type, n.min_credits, 0 AS d
+  FROM requirement_nodes n JOIN program_options o ON o.id = n.option_id
+  WHERE o.code = 'COMPUTATIONAL' AND n.parent_id IS NULL
+  UNION ALL
+  SELECT c.id, c.label, c.node_type, c.min_credits, d + 1 FROM requirement_nodes c JOIN t ON c.parent_id = t.id)
+SELECT repeat('  ', d) || label, node_type, min_credits FROM t ORDER BY id;
+
+-- 선수과목: CMPSC 360 을 들으면 열리는 과목
+SELECT DISTINCT v.course_code, v.title
+FROM prereq_nodes p JOIN course_versions v ON v.id = p.course_version_id
+WHERE p.required_course = 'CMPSC 360';
+
+-- 권장 학기 계획 / 규정 출처
+SELECT jsonb_pretty(value -> 'terms') FROM policy_rules WHERE key = 'suggested_academic_plan.COMPUTATIONAL';
+SELECT key, description, source_url FROM policy_rules ORDER BY key;
+```

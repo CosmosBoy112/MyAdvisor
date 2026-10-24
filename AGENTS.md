@@ -8,10 +8,12 @@
 
 ## 참고 문서
 - DB 스키마: 실제 앱이 쓰는 테이블은 `backend/src/main/resources/schema.sql`(live 프로필에서 실행). Advisor 에이전트용 카탈로그·학생 상태 스키마 초안은 `docs/advisor-schema.sql`이며 아직 `DatabaseConfig`에 연결되지 않았습니다.
+- **카탈로그 DB 현재 상태**: `docs/advisor-schema.sql` 섹션 1–6이 TigerData(앱과 같은 DB)에 만들어져 있고 Data Sciences(DTSCE) 카탈로그가 적재되어 있습니다. 만든 테이블·행 수·출처(Bulletin/Handbook 판)·재적재 방법·확인 쿼리는 `docs/CHANGES-advisor-catalog-db.md`의 "DB 적재 현황" 절에 있습니다. 적재 스크립트는 `ingest/load_catalog_db.py`. 앱 코드는 아직 이 테이블을 읽지 않습니다.
 - 에이전트 도구 명세: `docs/advisor-tools.md` (도구별 입출력, 라우팅 규칙, Gemini function declaration 예시). 예시 값은 가상 데이터입니다.
 - 카탈로그 시드: `data/catalog/2026-27/` (과목 `courses.json`, 전공 요건 `programs/*.json`). 생성 스크립트는 `ingest/parse_bulletin_courses.py`
 - 카탈로그 작업 배경과 변경 내역: `docs/CHANGES-advisor-catalog-db.md`
 - 스키마나 도구 명세를 바꾸면 위 문서를 함께 갱신하세요.
+- DB에 테이블을 만들거나 데이터를 다시 적재·수정했다면 `docs/CHANGES-advisor-catalog-db.md`의 "DB 적재 현황"(범위, 행 수, 출처)을 같은 커밋에서 갱신하세요. 앱 DB와 같은 DB이므로 `DROP`/`DELETE`는 하지 말고, 적재 전 `--dry-run`으로 확인하세요.
 
 ## 커밋·푸시 전
 - `PROGRESS.md` 맨 위에 이번 작업 항목을 추가하고 같은 커밋에 포함하세요. 형식은 파일 상단 템플릿을 따릅니다.

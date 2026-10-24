@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · CosmosBoy112 · `catalog-db-load`
+- 한 일: TigerData에 Advisor 카탈로그 테이블(`advisor-schema.sql` 섹션 1–6) 생성, Data Sciences B.S.(Computational 옵션 포함)·ETM 요건, 과목 357개, 선수과목 트리, 규정 5건(권장 학기 계획, 자연과학·Department List 제외 등) 적재. 적재기 `ingest/load_catalog_db.py`, 규정 생성기 `ingest/build_datsc_policies.py`, `policies/DATSC_BS.json` 추가. **DB 구조·현황 문서: `docs/CHANGES-advisor-catalog-db.md` "DB 적재 현황" 절**
+- 상태: dry-run(트랜잭션 롤백) 후 적재. 백엔드 테스트 34개 중 29개 통과·5개 설정상 제외, ingest 테스트 12개 통과. 행 수가 JSON과 일치(prereq 880, 요건 노드 90, 규칙 473). Computational 요건·List A·CMPSC 465 선수과목·권장 계획을 쿼리로 Bulletin과 대조. Bulletin 과목 페이지 43개 재수집 결과 기존 시드와 동일(참조 과목 14개 제목만 보충). `review` 137건 수동 검토, 섹션 7–12 실행, 앱 연동은 미실시
+- 막힌 것: DTSCE Handbook 2025-26/2026-27판이 공개되지 않음 → Handbook 규칙은 2024-25판 기준으로 표시. 졸업 학점이 Handbook 126 / Bulletin 123으로 다름
+- 다음: 백엔드에서 카탈로그 테이블을 읽는 도구(`check_prerequisites`, `get_program`) 구현 후 채팅 연결
+- 필요한 설정: 적재 시 `pip install -r ingest/requirements.txt` (psycopg, beautifulsoup4 추가). 새 `.env` 값 없음
+
 ## 2026-10-24 · Codex · `main`
 - 한 일: 공통 글자 크기(본문16/보조14/제목22px) 적용. 기본 영어, 목표/질문 입력에 따라 영어·한국어 UI 자동 전환. 분석 language와 채팅 responseLanguage 전달, 원문 제목/근거 보존
 - 상태: 프런트 18개 테스트·빌드 통과, 백엔드 29개 통과·조건부 5개 제외. 브라우저에서 한국어→영어 전환, 한국어 샘플 대시보드·채팅 표시 확인. 실제 유료 AI 다국어 생성은 미검증
