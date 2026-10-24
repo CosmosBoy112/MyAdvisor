@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · Codex · `main`
+- 한 일: UP CMPSC_BS/CMPSC_ETM 2026–27을 기존 TigerData 카탈로그 테이블에 추가. 요건 노드 85개·규칙 94개·정책 메타데이터 5건. 스키마 변경/기존 행 삭제·갱신 없이 공용 과목 75개 참조. 전용 적재기 `ingest/load_cmpsc_db.py` 추가
+- 상태: dry-run 롤백 → 실제 커밋 → 새 연결에서 재실행(no-op) 확인. 요건 트리/정책 원본 왕복 대조, 스키마 지문·공용 및 DATSC 내용 해시 동일 확인. ingest 테스트 15개 통과. DB 현황 문서 갱신. 앱 런타임 코드는 변경하지 않아 프런트/백엔드 테스트 재실행하지 않음
+- 막힌 것: 승인 목록/구판 Handbook/선수과목 검토 표시 유지. DB 적재는 자동 졸업 판정이나 앱의 DB 카탈로그 조회 구현을 포함하지 않음
+- 다음: DB를 읽는 도구는 catalog_snapshot의 캠퍼스·학년도·requires_review·eligibility를 함께 해석
+- 필요한 설정: 기존 TIGER_DATABASE_* 및 psycopg 사용, 새 환경변수 없음
+
 ## 2026-10-24 · CosmosBoy112 · `catalog-db-load`
 - 한 일: TigerData에 Advisor 카탈로그 테이블(`advisor-schema.sql` 섹션 1–6) 생성, Data Sciences B.S.(Computational 옵션 포함)·ETM 요건, 과목 357개, 선수과목 트리, 규정 5건(권장 학기 계획, 자연과학·Department List 제외 등) 적재. 적재기 `ingest/load_catalog_db.py`, 규정 생성기 `ingest/build_datsc_policies.py`, `policies/DATSC_BS.json` 추가. **DB 구조·현황 문서: `docs/CHANGES-advisor-catalog-db.md` "DB 적재 현황" 절**
 - 상태: dry-run(트랜잭션 롤백) 후 적재. 백엔드 테스트 34개 중 29개 통과·5개 설정상 제외, ingest 테스트 12개 통과. 행 수가 JSON과 일치(prereq 880, 요건 노드 90, 규칙 473). Computational 요건·List A·CMPSC 465 선수과목·권장 계획을 쿼리로 Bulletin과 대조. Bulletin 과목 페이지 43개 재수집 결과 기존 시드와 동일(참조 과목 14개 제목만 보충). `review` 137건 수동 검토, 섹션 7–12 실행, 앱 연동은 미실시

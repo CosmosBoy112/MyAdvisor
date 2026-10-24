@@ -52,7 +52,7 @@ python -m unittest discover -s ingest -p 'test_cmpsc_catalog.py' -v
 
 카탈로그 시드와 Python 매칭 도구에 더해 Spring Boot `CatalogService`가 Maven 빌드 시 포함된 JSON을 읽습니다. 새 PDF는 Gemini 추출과 증거 검증 후 전공·캠퍼스·학년도를 비교합니다. 해당 메타데이터와 원문 텍스트의 표기가 확인되면 항목별 정확한 별칭으로 매칭합니다. 문서 내 표기의 존재 확인이며 복수 프로그램 문서 전체에 대한 학사 검증은 아닙니다. 다른 학년도/캠퍼스/미확인 값은 자동 적용하지 않습니다.
 
-비교 결과(`catalog`, `requirements[].catalogMatch`)는 기존 `reports.analysis` JSONB에 함께 저장됩니다. 별도 카탈로그 DB 테이블이나 스키마 초안 실행 없이 기존 소유권·삭제 정책을 그대로 따릅니다. 보고서 조회·내보내기·Gemini/Luminal 채팅에서 동일한 출처와 검토 정보를 사용합니다. 기존 저장 보고서는 원문이 없어 재업로드 전 scope_unverified 또는 scope_not_matched로 표시됩니다.
+비교 결과(`catalog`, `requirements[].catalogMatch`)는 기존 `reports.analysis` JSONB에 함께 저장됩니다. 사용자 분석 저장은 기존 소유권·삭제 정책을 그대로 따릅니다. 이후 CMPSC 원본 요건은 기존 Advisor 카탈로그 테이블에도 추가 적재했습니다. 스키마 변경 없이 넣었으며 상세 내용은 `CHANGES-advisor-catalog-db.md`의 CMPSC 추가 적재 절을 참고하세요. 앱 비교는 여전히 JSON을 읽습니다. 보고서 조회·내보내기·Gemini/Luminal 채팅에서 동일한 출처와 검토 정보를 사용합니다. 기존 저장 보고서는 원문이 없어 재업로드 전 scope_unverified 또는 scope_not_matched로 표시됩니다.
 
 Vue는 전체 비교 상태, 요구 학점 충돌, 공식 출처 링크, 목록이 명시된 선택 과목과 선수과목 검토 상태를 표시합니다. 보고서의 학점·완료 상태는 유지합니다. 자연과학의 승인 목록, 과거 Supporting Electives, 불명확한 List A/B는 자동 인정하지 않습니다. Docker는 저장소 루트에서 `docker build -f backend/Dockerfile -t lionpathway-api .`로 빌드합니다.
 

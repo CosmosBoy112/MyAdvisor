@@ -104,3 +104,11 @@
 - 프런트 18개 테스트 및 production build 통과. 영어 기본값, 한영 혼합, 빈/숫자 입력 유지, 실제 요건 차트 컴포넌트의 언어 변경을 검증.
 - 백엔드 29개 통과, 조건부 5개 제외. 선택한 언어가 분석 서비스와 저장 결과로 전달되는지 mock 기반 확인.
 - 브라우저에서 한국어 입력 후 랜딩·샘플 대시보드·채팅의 한국어 UI, 영어 재입력 시 영어 복귀 확인. 다크 모드 채팅 화면 시각 확인. 실제 Gemini/Luminal 생성 응답과 모바일 전체 화면은 이번 검증에 포함하지 않음.
+
+## 2026-10-24 CMPSC 카탈로그 DB 적재
+
+- `load_cmpsc_db.py --dry-run` 성공 후 실제 적재 커밋 완료. 다른 연결에서 동일 dry-run 재실행 시 inserted_programs=[]로 중복 없음 확인.
+- CMPSC_BS: 요건 노드 78/규칙 87, CMPSC_ETM: 7/7, policy_rules 추가 5. 과목 참조 75개 존재 확인.
+- 전체 DB: programs/program_versions 4/4, requirement_nodes 175, requirement_rules 567, policy_rules 10. 공용 courses 357, course_versions 337, prereq_nodes 880 유지.
+- 원본 요건 트리와 DB 왕복 결과 일치, 정책 JSON 일치. 열·제약·인덱스 스키마 지문 및 공용/DATSC 행 수·내용 해시 전후 동일. DDL/UPDATE/DELETE/DROP 미사용, 앱 사용자·보고서·대화 데이터 접근 없음.
+- `python -m unittest discover -s ingest -p 'test_*.py' -v`: 15개 통과. 앱의 JSON CatalogService를 DB 조회로 전환하지 않았으며 해당 통합 동작은 이번 작업 범위 밖.

@@ -8,7 +8,7 @@
 
 ## 참고 문서
 - DB 스키마: 실제 앱이 쓰는 테이블은 `backend/src/main/resources/schema.sql`(live 프로필에서 실행). Advisor 에이전트용 카탈로그·학생 상태 스키마 초안은 `docs/advisor-schema.sql`이며 아직 `DatabaseConfig`에 연결되지 않았습니다.
-- **카탈로그 DB 현재 상태**: `docs/advisor-schema.sql` 섹션 1–6이 TigerData(앱과 같은 DB)에 만들어져 있고 Data Sciences(DTSCE) 카탈로그가 적재되어 있습니다. 만든 테이블·행 수·출처(Bulletin/Handbook 판)·재적재 방법·확인 쿼리는 `docs/CHANGES-advisor-catalog-db.md`의 "DB 적재 현황" 절에 있습니다. 적재 스크립트는 `ingest/load_catalog_db.py`. 앱 코드는 아직 이 테이블을 읽지 않습니다.
+- **카탈로그 DB 현재 상태**: `docs/advisor-schema.sql` 섹션 1–6이 TigerData(앱과 같은 DB)에 만들어져 있고 Data Sciences(DTSCE) 및 University Park CMPSC_BS/CMPSC_ETM 2026–27 카탈로그가 적재되어 있습니다. CMPSC 추가 적재기는 `ingest/load_cmpsc_db.py`이며 DDL/UPDATE/DELETE 없이 동일 재실행을 검증합니다. 만든 테이블·행 수·출처(Bulletin/Handbook 판)·재적재 방법·확인 쿼리는 `docs/CHANGES-advisor-catalog-db.md`의 "DB 적재 현황" 절에 있습니다. 적재 스크립트는 `ingest/load_catalog_db.py`. 앱 코드는 아직 이 테이블을 읽지 않습니다.
 - 에이전트 도구 명세: `docs/advisor-tools.md` (도구별 입출력, 라우팅 규칙, Gemini function declaration 예시). 예시 값은 가상 데이터입니다.
 - 카탈로그 시드: `data/catalog/2026-27/` (과목 `courses.json`, 전공 요건 `programs/*.json`). 생성 스크립트는 `ingest/parse_bulletin_courses.py`
 - 카탈로그 작업 배경과 변경 내역: `docs/CHANGES-advisor-catalog-db.md`

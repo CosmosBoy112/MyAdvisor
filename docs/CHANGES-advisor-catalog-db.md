@@ -113,7 +113,7 @@ University Park 2026–27의 후속 수집·Handbook 학년도 충돌·명칭 �
 
 ## DB 적재 현황 (2026-10-24)
 
-Computational Data Sciences(DTSCE) 질문에 답할 수 있도록 카탈로그를 TigerData에 적재했습니다. **앱은 아직 이 테이블을 읽지 않습니다**(위 "다음 할 일" 4번). CMPSC는 별도 방식([CMPSC 변경 내역](CHANGES-cmpsc-catalog.md), JSON 기반 `CatalogService`)이며 DB에는 CMPSC 요건 트리를 넣지 않았습니다. 과목 정보(`courses.json`)에는 CMPSC 과목도 포함되어 함께 적재됩니다.
+Computational Data Sciences(DTSCE) 질문에 답할 수 있도록 카탈로그를 TigerData에 적재했습니다. **앱은 아직 이 테이블을 읽지 않습니다**(위 "다음 할 일" 4번). CMPSC_BS/CMPSC_ETM 요건도 기존 테이블에 추가 적재했습니다(아래 CMPSC 추가 적재 절). 앱의 CMPSC 비교는 여전히 JSON 기반 `CatalogService`를 사용하며 DB 조회로 바꾸지는 않았습니다. 공용 과목·선수과목 데이터와 기존 DATSC 행은 변경하지 않았습니다.
 
 ### 만든 범위
 
@@ -132,10 +132,10 @@ Computational Data Sciences(DTSCE) 질문에 답할 수 있도록 카탈로그�
 | `course_attributes` | 122 | GenEd 등 속성 (GN, GQ, GS, WAC, GWS, ...) |
 | `course_crosslists` | 25 | 교차개설 쌍 |
 | `prereq_nodes` | 880 | 선수과목 트리. 파싱 못 한 33건은 `TEXT` 노드(`raw_text`에 원문) |
-| `programs` / `program_versions` | 2 / 2 | `DATSC_BS`, `DATSC_ETM` |
+| `programs` / `program_versions` | 4 / 4 | `DATSC_BS`, `DATSC_ETM`, `CMPSC_BS`, `CMPSC_ETM` |
 | `program_options` | 3 | `APPLIED`, `COMPUTATIONAL`, `STATISTICAL` |
-| `requirement_nodes` / `requirement_rules` | 90 / 473 | 요건 트리와 규칙. JSON의 `notes`는 `source_text` 뒤에 `Note:`로 붙임 |
-| `policy_rules` | 5 | 아래 표 |
+| `requirement_nodes` / `requirement_rules` | 175 / 567 | DATSC 90/473 + CMPSC 85/94. CMPSC 노드 원본 메타데이터는 source_text에 JSON으로 보존 |
+| `policy_rules` | 10 | DATSC 5건 + CMPSC 5건(아래 각 키 설명) |
 | `terms`, `course_offerings`, `credit_*`, `academic_calendar`, `course_restrictions` | 0 | 테이블만 생성 |
 
 ### 출처
@@ -198,3 +198,43 @@ WHERE p.required_course = 'CMPSC 360';
 SELECT jsonb_pretty(value -> 'terms') FROM policy_rules WHERE key = 'suggested_academic_plan.COMPUTATIONAL';
 SELECT key, description, source_url FROM policy_rules ORDER BY key;
 ```
+
+### CMPSC 추가 적재 — 스키마 변경 없음
+
+University Park · 2026–27의 `CMPSC_BS`와 `CMPSC_ETM`을 `ingest/load_cmpsc_db.py`로 추가했습니다. 기존 `load_catalog_db.py`는 DDL 및 삭제 후 재적재를 수행하므로 이번 CMPSC 작업에는 사용하지 않았습니다.
+
+- DDL, UPDATE, DELETE, DROP 없이 INSERT와 조회만 사용합니다. 동일 데이터를 다시 실행하면 기존 트리·정책을 비교하여 새 행을 만들지 않습니다. 기존 CMPSC 데이터가 다르면 자동 교체하지 않고 롤백합니다.
+- CMPSC_BS: 최소 127학점, 요건 노드 78개·규칙 87개. CMPSC_ETM: 노드 7개·규칙 7개, GPA 3.20 및 C 이상 조건.
+- 연결된 75개 과목 버전은 이미 DB에 있어 재사용합니다. 공용 과목 357개, 과목 버전 337개, 선수과목 노드 880개 및 DATSC 요건/규정은 그대로 유지합니다.
+- 노드의 `source_text`에는 원문 인용이 아닌 **JSON 메타데이터**임을 표시한 뒤 `source`, `requires_review`, `review`, `credits_range` 등을 보존합니다. AND/OR 자식 구조와 교차개설 대안은 요건 트리에 그대로 저장합니다.
+- Department List와 승인 자연과학 목록 같은 빈 POOL은 아무 과목이나 인정한다는 뜻이 아닙니다. DB를 읽는 도구는 아래 snapshot의 검토 조건과 범위를 반드시 함께 읽어야 합니다. 이 적재가 자동 졸업 판정 엔진을 구현하는 것은 아닙니다.
+- 스키마의 열/제약조건/인덱스 지문과 공용·다른 전공 테이블의 행 수 및 내용 해시를 적재 전후 대조합니다. 앱 보고서·사용자·대화 테이블은 읽거나 쓰지 않습니다.
+
+추가한 `policy_rules` (`scope='program'`, `catalog_year='2026-27'`):
+
+| scope_code | key | 내용 |
+|---|---|---|
+| CMPSC_BS | catalog_snapshot | 원본 전공 JSON 전체, 출처 해시, `automatic_audit_allowed=false`. 캠퍼스/학년도/GenEd 중복/미확인 조건 보존 |
+| CMPSC_ETM | catalog_snapshot | 원본 ETM JSON 전체. 소속·graded PSU 29–55학점·AP/transfer 제외·입학 학기 보존 |
+| CMPSC_BS | handbook_crosswalk | 2024–25 Handbook과 2026–27 Bulletin의 차이. `automatic_application_allowed=false`, 과거 제한은 참고 전용 |
+| CMPSC_BS | course_matches | 75개 과목의 코드 매칭·출처·선수과목 검토 상태 |
+| CMPSC_BS | sources | 공식 URL·수집 시각·원문 SHA-256 |
+
+```sh
+# 기존 스키마와 공용 과목이 있어야 하며, 테이블을 생성하지 않습니다.
+python ingest/load_cmpsc_db.py --data data/catalog/2026-27 --dry-run
+python ingest/load_cmpsc_db.py --data data/catalog/2026-27
+python -m unittest discover -s ingest -p 'test_cmpsc_db.py' -v
+```
+
+```sql
+SELECT p.program_code, count(DISTINCT n.id) AS nodes, count(r.id) AS rules
+FROM program_versions p JOIN requirement_nodes n ON n.program_version_id=p.id
+LEFT JOIN requirement_rules r ON r.node_id=n.id
+WHERE p.program_code IN ('CMPSC_BS','CMPSC_ETM') AND p.catalog_year='2026-27'
+GROUP BY p.program_code;
+SELECT scope_code, key, value FROM policy_rules
+WHERE scope_code IN ('CMPSC_BS','CMPSC_ETM') AND catalog_year='2026-27';
+```
+
+원본은 [CMPSC Bulletin](https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-science-bs/) 2026–27과 [EECS Handbook 목록](https://www.eecs.psu.edu/Students/undergraduate/Computer-Science.aspx)의 2024–25 학부 Handbook입니다. 과거 Handbook을 현재 요건에 자동 적용하지 않습니다. 현재 앱의 JSON 기반 매칭 흐름은 변경하지 않았습니다.
