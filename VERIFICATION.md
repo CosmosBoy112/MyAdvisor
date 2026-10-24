@@ -76,3 +76,10 @@
 - 실제 학생 PDF/기존 사용자 보고서는 테스트에 사용하지 않음. DB 저장 없음
 - 재실행: backend 디렉터리에서 `LIONPATHWAY_LUMINAL_TEST=1 ./mvnw -Dtest=LiveLuminalTest test`
 - 이 테스트는 명시적으로 활성화해야 실행되며 API 사용량이 발생함
+
+## 2026-10-24 CMPSC 공식 카탈로그
+
+- `python -m unittest discover -s ingest -p 'test_cmpsc_catalog.py' -v`: 12/12 통과. 캠퍼스/학년도, ETM, 복합 대안, 교차개설, 출처, 미확인 목록과 과거 Handbook 격리 검증.
+- 공식 과목 코드 75/75 매칭, 불일치 0. 선수과목 review가 있는 매칭 과목 14개는 수동 확인 필요.
+- 캐시 기반 재생성 전후 모든 카탈로그 JSON SHA-256 동일. CMPSC 대상이 아닌 기존 과목은 HEAD 대비 그대로 유지됨.
+- `git diff --check` 통과. 프런트/백엔드 런타임 코드 미변경으로 빌드 재실행하지 않음. DB 적재·실제 PDF 매칭·졸업 판정은 구현/검증하지 않음.

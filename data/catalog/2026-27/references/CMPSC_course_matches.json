@@ -1,0 +1,562 @@
+{
+  "program_code": "CMPSC_BS",
+  "catalog_year": "2026-27",
+  "matches": [
+    {
+      "code": "CAS 100A",
+      "match_status": "exact_course_code",
+      "course_status": "no_prereq",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "review": []
+    },
+    {
+      "code": "CAS 100B",
+      "match_status": "exact_course_code",
+      "course_status": "no_prereq",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "review": []
+    },
+    {
+      "code": "CMPEN 270",
+      "match_status": "exact_course_code",
+      "course_status": "text_only",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "review": [
+        "Could not parse prerequisite (Enforced Concurrent at Enrollment for:); kept as TEXT."
+      ]
+    },
+    {
+      "code": "CMPEN 271",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "review": []
+    },
+    {
+      "code": "CMPEN 275",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "review": []
+    },
+    {
+      "code": "CMPEN 362",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "review": [
+        "Non-enforced concurrent/corequisite wording was modeled as COREQ."
+      ]
+    },
+    {
+      "code": "CMPEN 431",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "review": []
+    },
+    {
+      "code": "CMPEN 454",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "review": []
+    },
+    {
+      "code": "CMPEN 462",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 121",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": [
+        "A concurrent clause follows 'or'; check which courses it covers."
+      ]
+    },
+    {
+      "code": "CMPSC 122",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 131",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 132",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 150N",
+      "match_status": "exact_course_code",
+      "course_status": "no_prereq",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 221",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 222",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 315",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 316",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 320",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 360",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 431W",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 432",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 442",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 443",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 444",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 447",
+      "match_status": "exact_course_code",
+      "course_status": "text_only",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": [
+        "Could not parse prerequisite (Recommended preparation:); kept as TEXT."
+      ]
+    },
+    {
+      "code": "CMPSC 448",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 449",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 450",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 451",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 455",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 456",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 458",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 461",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 464",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 465",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 466",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 467",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 471",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 473",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 475",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 476",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": []
+    },
+    {
+      "code": "CMPSC 478",
+      "match_status": "exact_course_code",
+      "course_status": "text_only",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": [
+        "Could not parse prerequisite (Recommended Preparations: A grade of B); kept as TEXT."
+      ]
+    },
+    {
+      "code": "CMPSC 483W",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": [
+        "Recommended preparation is advisory and was not modeled."
+      ]
+    },
+    {
+      "code": "CMPSC 489",
+      "match_status": "exact_course_code",
+      "course_status": "text_only",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "review": [
+        "Could not parse prerequisite (Recommended Preparations: Machine learning); kept as TEXT."
+      ]
+    },
+    {
+      "code": "EE 456",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "review": []
+    },
+    {
+      "code": "ENGL 137H",
+      "match_status": "exact_course_code",
+      "course_status": "no_prereq",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "review": []
+    },
+    {
+      "code": "ENGL 138T",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "review": []
+    },
+    {
+      "code": "ENGL 15",
+      "match_status": "exact_course_code",
+      "course_status": "no_prereq",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "review": []
+    },
+    {
+      "code": "ENGL 202C",
+      "match_status": "exact_course_code",
+      "course_status": "text_only",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "review": [
+        "Could not parse prerequisite (4th Semester); kept as TEXT."
+      ]
+    },
+    {
+      "code": "ENGL 30H",
+      "match_status": "exact_course_code",
+      "course_status": "no_prereq",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "review": []
+    },
+    {
+      "code": "MATH 140",
+      "match_status": "exact_course_code",
+      "course_status": "text_only",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": [
+        "Could not parse prerequisite (satisfactory performance on the mathematics placement examination); kept as TEXT."
+      ]
+    },
+    {
+      "code": "MATH 140H",
+      "match_status": "exact_course_code",
+      "course_status": "text_only",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": [
+        "Could not parse prerequisite (satisfactory performance on the mathematics placement examination); kept as TEXT."
+      ]
+    },
+    {
+      "code": "MATH 141",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 141H",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 220",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 220H",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 230",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 230H",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 231",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 232",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 318",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 319",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 414",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": [
+        "A concurrent clause follows 'or'; check which courses it covers."
+      ]
+    },
+    {
+      "code": "MATH 415",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "MATH 418",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "review": []
+    },
+    {
+      "code": "PHYS 211",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "review": []
+    },
+    {
+      "code": "PHYS 212",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "review": [
+        "Non-enforced concurrent/corequisite wording was modeled as COREQ."
+      ]
+    },
+    {
+      "code": "PHYS 213",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "review": [
+        "Non-enforced concurrent/corequisite wording was modeled as COREQ."
+      ]
+    },
+    {
+      "code": "PHYS 214",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "review": []
+    },
+    {
+      "code": "STAT 318",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "review": []
+    },
+    {
+      "code": "STAT 319",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "review": []
+    },
+    {
+      "code": "STAT 414",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "review": [
+        "A concurrent clause follows 'or'; check which courses it covers."
+      ]
+    },
+    {
+      "code": "STAT 415",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "review": []
+    },
+    {
+      "code": "STAT 418",
+      "match_status": "exact_course_code",
+      "course_status": "auto_parsed",
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "review": []
+    }
+  ],
+  "notes": [
+    "Course existence is distinct from elective eligibility. Prerequisites with review flags need manual confirmation."
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "program_code": "CMPSC_BS",
+  "catalog_year": "2026-27",
+  "sources": [
+    {
+      "id": "bulletin_cmpsc_2026_27",
+      "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-science-bs/",
+      "cache_file": "bulletin.html",
+      "sha256": "aefbb8d8c5013385cef973f258ff0eb11fa79e92cb79cc2d10fc0d7706d80a4d",
+      "downloaded_at": "2026-10-24T21:44:03.057990+00:00"
+    },
+    {
+      "id": "handbook_index",
+      "url": "https://www.eecs.psu.edu/Students/undergraduate/Computer-Science.aspx",
+      "cache_file": "handbook-index.html",
+      "sha256": "250e6eae89981d720dce50189906b1bd59620a1f4fe658fc150b36d1b8750477",
+      "downloaded_at": "2026-10-24T21:44:03.277448+00:00"
+    },
+    {
+      "id": "handbook_2024_25",
+      "url": "https://www.eecs.psu.edu/assets/docs/handbooks/CMPSC-handbook-2024-2025.pdf",
+      "cache_file": "handbook.pdf",
+      "sha256": "1499de16c567dcf77bc427ec00cf37fce5be60d0655fbc7599dd011101754a0b",
+      "downloaded_at": "2026-10-24T21:44:04.386309+00:00"
+    },
+    {
+      "id": "course_cas_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "cache_file": "c_cas.html",
+      "sha256": "c19bfd7506df2cc6ab9bcade124ef78676024d6cba0fdbbf63cd3cfd35a45bc2",
+      "downloaded_at": "2026-10-24T21:46:50.893799+00:00"
+    },
+    {
+      "id": "course_cmpen_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "cache_file": "c_cmpen.html",
+      "sha256": "c22957cb80b56bf6c2c90a2746f7288a2deb4ad8f2e4a4f3521083783677b9a8",
+      "downloaded_at": "2026-10-24T21:46:51.440111+00:00"
+    },
+    {
+      "id": "course_cmpsc_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "cache_file": "c_cmpsc.html",
+      "sha256": "c89fa71271d692ad3d26b3b17b75089fba94a566c40c76eaa12ad116010defd2",
+      "downloaded_at": "2026-10-24T21:46:51.848856+00:00"
+    },
+    {
+      "id": "course_ee_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "cache_file": "c_ee.html",
+      "sha256": "2d07da34ef29cfdf977093610e2d787611bef12969d1ab97036eec7119628e20",
+      "downloaded_at": "2026-10-24T21:46:52.466047+00:00"
+    },
+    {
+      "id": "course_engl_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "cache_file": "c_engl.html",
+      "sha256": "3b45fd4114d00bf6a4a2d9bbcae443e62329548ef4bf81af3bdaad9920a914bb",
+      "downloaded_at": "2026-10-24T21:46:53.000358+00:00"
+    },
+    {
+      "id": "course_math_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "cache_file": "c_math.html",
+      "sha256": "1fadb6b4088dca810c717a12da8997e16ab71a9bac5b8f86310d3fab898957bf",
+      "downloaded_at": "2026-10-24T21:46:53.484604+00:00"
+    },
+    {
+      "id": "course_phys_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "cache_file": "c_phys.html",
+      "sha256": "b0b6f29e81ff006bc1b5ff48fd413ce3a7022f74e257aa991f24b0776b23244e",
+      "downloaded_at": "2026-10-24T21:46:53.925699+00:00"
+    },
+    {
+      "id": "course_stat_2026_27",
+      "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "cache_file": "c_stat.html",
+      "sha256": "46034f603d611af5a9456cc503752555d68586ef7c82a5477f23fedf06e07c9b",
+      "downloaded_at": "2026-10-24T21:46:54.598427+00:00"
+    }
+  ]
+}

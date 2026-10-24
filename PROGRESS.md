@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · Codex · `main`
+- 한 일: University Park CMPSC_BS/ETM 2026–27 Bulletin 수집, 과목 75개 매칭, 2024–25 Handbook 교차표와 학년도 충돌 표시. 재수집 스크립트·보고서 항목 명칭 매칭 CLI 추가. 상세: `docs/CHANGES-cmpsc-catalog.md`
+- 상태: 카탈로그/매칭 테스트 12개 통과, 오프라인 재생성 동일성 및 관련 없는 기존 과목 보존 확인, diff 공백 검사 통과. 앱·DB 연결과 브라우저 동작은 이번 변경 범위 밖이며 미검증
+- 막힌 것: 공식 페이지에 2026–27 학부 Handbook 없음. Department List/승인 자연과학 목록과 선수과목 review 14건은 확인 필요
+- 다음: 시드 로더와 감사 도구 구현 후 PDF 분석 흐름 연결. 미해결 조건을 자동 충족으로 처리하지 않기
+- 필요한 설정: Python lxml/pypdf (`ingest/requirements.txt`). 새 .env 값 없음
+
 ## 2026-10-24 · CosmosBoy112 · `backend`
 - 한 일: `AGENTS.md`에 "참고 문서" 섹션 추가. DB 스키마(`schema.sql`, `docs/advisor-schema.sql`), 도구 명세(`docs/advisor-tools.md`), 카탈로그 시드·파서, 카탈로그 변경 내역 위치 안내. `advisor-catalog-db` 브랜치 내용을 `backend`에 반영
 - 상태: 문서만 변경. 병합 상태에서 백엔드 테스트 24개 중 20개 통과, `Live*Test` 4개는 설정상 건너뜀, 프런트 빌드 통과

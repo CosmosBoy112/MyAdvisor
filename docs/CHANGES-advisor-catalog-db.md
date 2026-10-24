@@ -103,3 +103,7 @@ python ingest/parse_bulletin_courses.py \
 2. `courses.json`의 `review` 137건 검토 후 시드 로더 작성 (`courses` / `course_versions` / `prereq_nodes`)
 3. `DATSC_BS.json` → `requirement_nodes` / `requirement_rules` 적재
 4. 백엔드에 `check_prerequisites`, `run_audit`부터 도구 구현 후 Gemini function calling 연결
+
+## CMPSC 추가 수집
+
+University Park 2026–27의 후속 수집·Handbook 학년도 충돌·명칭 매칭 범위는 [CMPSC 변경 내역](CHANGES-cmpsc-catalog.md)을 참고하세요. 앱/DB 연결은 아직 별도 작업입니다.

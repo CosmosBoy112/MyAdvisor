@@ -742,7 +742,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Introduction to topics such as image formation, segmentation, feature extraction, matching, shape recovery, object recognition, and dynamic scene analysis. CMPEN 454CMPEN 454 Fundamentals of Computer Vision (3)CMPEN 454 is an introduction to computer vision. The goal of computer vision is to make computers understand and interpret visual information. Computer vision systems bring together imaging devices, computers, and sophisticated algorithms for solving problems in areas such as industrial inspection, medicine, document analysis, autonomous navigation, and remote sensing. The course involves both pedagogical written assignments and computer projects.The beginning of the course gives an overview of computer vision and introduces low level image analysis techniques for binary images. Binary vision systems are useful when the silhouette of imaged objects convey enough information to recognize them. Examples can be found in optical character recognition, chromosome analysis and recognition of industrial parts. Moreover, many techniques developed for binary systems can be applied to gray level or color images. Next, the course covers image segmentation and contours. These topics are the foundation of most computer vision techniques. For an image to be correctly interpreted, it must be partitioned into regions that correspond to distinct objects or parts of objects. First, region based techniques such as thresholding, split and merge, region growing and texture analysis are introduced. Next, edge based techniques using gradient and Laplacian operators are discussed. Finally, contour representations and curve approximations linking edges into region boundaries are studied.Next, depth from vision, with emphasis in stereo vision, is considered. Calculating distances to and among various points in the scene is important in many computer vision tasks such as inspection, robot manipulation, and autonomous navigation. In this part of the course the geometry of stereo systems and how to obtain depth maps from stereo image pairs is studied. Also, alternative 3D imaging sensors such as laser based range finders and radars are discussed.Following stereo, the topic of computer vision is broaden to understand sequences of images over time. In this section techniques using information on spatial and temporal changes are used to design computer vision systems capable of coping with moving and changing objects, changing illumination and changing viewpoints. Visual motion is important primarily for two reasons. First, motion is a very important cue to understand the scene structure. Second, biological systems do use motion to infer properties of the surrounding world with very little a priori knowledge.Finally, the topic of 3D object recognition is discussed. Object recognition entails two main issues: object identification and object localization. Identification determines the objects being imaged while localization determines their position in the world and with respect to the sensors. This topic builds upon all the different techniques discussed until this point.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "EE 454"
@@ -789,7 +789,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 121",
@@ -800,7 +805,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Design and implementation of algorithms. Structured programming. Problem solving techniques. Introduction to a high-level language, including arrays, procedures, and recursion.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: MATH 110 or Enforced Concurrent at Enrollment: MATH 140",
@@ -821,7 +826,12 @@
       "review": [
         "A concurrent clause follows 'or'; check which courses it covers."
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 122",
@@ -832,7 +842,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Object-oriented programming, recursion, fundamental data structures (including stacks, queues, linked lists, hash tables, trees, and graphs), the basics of algorithmic analysis, and an introduction to the principles of language translation.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 121",
@@ -842,7 +852,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 131",
@@ -853,7 +868,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "This course introduces the fundamental concepts and processes of solving computational problems through the design, implementation, testing and evaluation of efficient and robust computer programs. The concepts include basic computational constructs found in imperative, object-oriented and functional programming languages such as iteration, conditionals, functions, recursion, and datatypes. These provide the basic building blocks found in virtually all programming languages. The processes include the stepwise refinement of a problem description into individual components that can be implemented, tested, and integrated into an effective solution. A central theme to the course is computational thinking which includes a wide range of approaches to solving problems and designing systems that draw upon concepts fundamental to computer science. Computational thinking includes thinking recursively, considering parallel processing, thinking about types and type checking, judging a program not just for correctness and efficiency but also for its esthetics, and judging a system design for its simplicity and elegance. Computational thinking is applying principles of abstraction at multiple levels to focus on important details; it is applying problem decomposition to identify small problems that can be individually solved then combined to form a solution to the original problem. Computational thinking uses program invariants to describe a system's behavior succinctly and declaratively. Computational thinking considers multiple models of computation when designing an effective solution to a problem.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Concurrent at Enrollment: MATH 110 or MATH 140",
@@ -872,7 +887,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 132",
@@ -883,7 +903,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "This course builds upon the foundations of programming and computation by introducing and studying the data structures and programming language features that support the design and construction of large-scale software systems. It introduces the foundations of object-oriented programming, the design and analysis of efficient algorithms using important data structures, and programming techniques that support reusable and modular program components, including data abstraction, polymorphism, and higher-order functions. Topics from object-oriented programming include classes, objects, inheritance, methods, message passing, static and dynamic type checking. These topics form the core of most object-oriented languages and provide a foundation for learning more advanced language topics. Data structures capture the common organization of many kinds of data arising in the design of efficient solutions to computational problems. Specific data structures covered include stacks, queues, trees, graphs and linked lists. The design and analysis of efficient algorithms using these data structures provide a foundation for the study of computing, where understanding the complexity of a problem and the availability of efficient solutions are essential skills. Finally, topics including higher-order functional programming, data abstraction and parametric polymorphism, as well as principles from object-oriented programming, come together to support the design and implementation of modular, reusable and robust code.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 121 or CMPSC 131",
@@ -902,7 +922,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 221",
@@ -913,7 +938,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "The course covers advanced object-oriented principles and their application to web-based, net-centric computing. Major topics include virtual machines, intermediate code generation (Java-specific), graphical user interfaces (GUI) design, event handling, server-side programming with database queries, and security, permissions and file management concepts for client/server systems. Extensive programming assignments provide an understanding of the entire process of client/server development including interface prototyping, program design, implementation of both client and server programs, unit testing, and documentation. This course prepares students to meet immediate demands in solving complex computational problems.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 122 or CMPSC 132",
@@ -932,7 +957,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 360",
@@ -943,7 +973,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Discrete mathematics and foundations for modern computer science. Topics include sets, relations, logic, algorithms, graphs, finite state machines and regular expressions.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Concurrent at Enrollment: CMPSC 122 or CMPSC 132",
@@ -962,7 +992,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 431W",
@@ -973,7 +1008,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Topics include: conceptual data modeling, relational data model, relational query languages, schema normalization, database/Internet applications, and database system issues.",
+      "description": null,
       "attributes": [
         "WAC"
       ],
@@ -994,7 +1029,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 442",
@@ -1005,7 +1045,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "This course provides an overview of the foundations, problems, approaches, implementation, and applications of, artificial intelligence. Topics covered include problem solving, goal-based and adversarial search, logical, probabilistic, and decision theoretic knowledge representation and inference, decision making, and learning. Through programming assignments that sample these topics, students acquire an understanding of what it means to build rational agents of different sorts as well as applications of AI techniques in language processing, planning, vision.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "DS 442"
@@ -1026,7 +1066,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 448",
@@ -1037,7 +1082,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Evaluation and use of machine learning models; algorithmic elements of artificial intelligence.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: (STAT 319 or STAT 415) and (CMPSC 122 or CMPSC 132)",
@@ -1074,7 +1119,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 450",
@@ -1085,7 +1135,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Problems of synchronization, concurrent execution, and their solution techniques. Design and implementation of concurrent software in a distributed system.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: (CMPSC 121 or CMPSC 131 or CMPSC 201) and MATH 220 and (MATH 230 or MATH 231)",
@@ -1130,7 +1180,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 455",
@@ -1141,7 +1196,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Floating point computation, numerical rootfinding, interpolation, numerical quadrature, direct methods for linear systems. Students may take only one course for credit from MATH 451 and MATH 455.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "MATH 455"
@@ -1192,7 +1247,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 456",
@@ -1203,7 +1263,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Polynomial and piecewise polynomial approximation, matrix least squares problems, numerical solution of eigenvalue problems, numerical solution of ordinary differential equations.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "MATH 456"
@@ -1215,7 +1275,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 461",
@@ -1226,7 +1291,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Fundamental concepts of programming language design, specifications, and implementation; programming language paradigms and features; program verification.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 221 and CMPSC 360",
@@ -1245,7 +1310,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CMPSC 465",
@@ -1256,7 +1326,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Fundamental concepts of computer science: data structures, analysis of algorithms, recursion, trees, sets, graphs, sorting.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: (CMPSC 122 or CMPSC 132) and (CMPSC 360 or MATH 311W)",
@@ -1293,7 +1363,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "CYBER 100",
@@ -2814,7 +2889,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Artificial Neural Networks as a solving tool for difficult problems for which conventional methods are not applicable. E E (E SC/EGEE) 456 Introduction to Neural Networks (3) This course is in response to students needs to learn Artificial Neural Networks (ANN) as a solving tool for difficult problems for which conventional methods are not available. The objective of this course is to give students hands-on experiences in identifying the best types of ANN, plus developing and applying ANN to solve difficult problems. Students will be introduced to a variety of ANN and will use their training skills to solve their own applications. During this course the students will develop a final project, in which they will apply ANN to widely varied problems.Examples: I) students from E E may be interested in applying ANN to solve control problems; II ) students from Material Sciences may be interested in applying ANN to predict the pitting corrosion of components; III) students from Petroleum Engineering may be interested in applying ANN to characterize the life of a reservoir; IV ) students from Agricultural Engineering may be interested in applying ANN to sort apples automatically, etc.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "EGEE 456",
@@ -2849,7 +2924,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "FDSC 105",
@@ -4222,7 +4302,7 @@
       "credits_min": 4.0,
       "credits_max": 4.0,
       "repeatable": false,
-      "description": "Calculus is an important building block in the education of any professional who uses quantitative analysis. This course introduces and develops the mathematical skills required for analyzing change and creating mathematical models that replicate real-life phenomena. The goals of our calculus courses include to develop the students' knowledge of calculus techniques and to use the calculus environment to develop critical thinking and problem solving skills. The concept of limit is central to calculus; MATH 140 begins with a study of this concept. Differential calculus topics include derivatives and their applications to rates of change, related rates, linearization, optimization, and graphing techniques. The Fundamental Theorem of Calculus, relating differential and integral calculus begins the study of Integral Calculus. Antidifferentiation and the technique of substitution is used in integration applications of finding areas of plane figures and volumes of solids of revolution. Trigonometric functions are included in every topic. Students may only take one course for credit from MATH 110, 140, 140A, 140B, and 140H.",
+      "description": null,
       "attributes": [
         "GQ"
       ],
@@ -4236,7 +4316,12 @@
       "review": [
         "Could not parse prerequisite (satisfactory performance on the mathematics placement examination); kept as TEXT."
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 141",
@@ -4247,7 +4332,7 @@
       "credits_min": 4.0,
       "credits_max": 4.0,
       "repeatable": false,
-      "description": "MATH 141 is the second course in a two- or three-course calculus sequence for students in science, engineering and related fields. Calculus is an important building block in the education of any professional who uses quantitative analysis. This course further introduces and develops the mathematical skills required for analyzing growth and change and creating mathematical models that replicate reallife phenomena. The goals of our calculus courses include to develop the students' knowledge of calculus techniques and to use the calculus environment to develop critical thinking and problem solving skills. This course covers the following topics: logarithms, exponentials, and inverse trigonometric functions; applications of the definite integral and techniques of integration; sequences and series; power series and Taylor polynomials; parametric equations and polar functions. Students may take only one course for credit from MATH 141, 141B, and 141H.",
+      "description": null,
       "attributes": [
         "GQ"
       ],
@@ -4284,7 +4369,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 220",
@@ -4295,7 +4385,7 @@
       "credits_min": 2.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Systems of linear equations; matrix algebra; eigenvalues and eigenvectors; linear systems of differential equations. MATH 220 Matrices (2-3) (GQ) (BA) This course meets the Bachelor of Arts degree requirements.Systems of linear equations appear everywhere in mathematics and its applications. MATH 220 will give students the basic tools necessary to analyze and understand such systems. The initial portion of the course teaches the fundamentals of solving linear systems. This requires the language and notation of matrices and fundamental techniques for working with matrices such as row and column operations, echelon form, and invertibility. The determinant of a matrix is also introduced; it gives a test for invertibility. In the second part of the course the key ideas of eigenvector and eigenvalue are developed. These allow one to analyze a complicated matrix problem into simpler components and appear in many disguises in physical problems. The course also introduces the concept of a vector space, a crucial element in future linear algebra courses. This course is completed by a wide variety of students across the university, including students majoring in engineering programs, the sciences, and mathematics. (In case of many of these students, MATH 220 is a required course in their degree program.)",
+      "description": null,
       "attributes": [
         "GQ"
       ],
@@ -4332,7 +4422,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 230",
@@ -4343,7 +4438,7 @@
       "credits_min": 4.0,
       "credits_max": 4.0,
       "repeatable": false,
-      "description": "Three-dimensional analytic geometry; vectors in space; partial differentiation; double and triple integrals; integral vector calculus. Students who have passed either Math 231 or MATH 232 may not schedule Math 230 or MATH 230H for credit.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 or MATH 141B or MATH 141E or MATH 141G or MATH 141H",
@@ -4374,7 +4469,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 311W",
@@ -5420,7 +5520,7 @@
       "credits_min": 4.0,
       "credits_max": 4.0,
       "repeatable": false,
-      "description": "PHYS 211 General Physics: Mechanics (4) (GN)(BA) This course meets the Bachelor of Arts degree requirements. Calculus-based introduction to classical mechanics, including such topics as: measurement, dimensional analysis, motion in one-dimension, vectors, motion in 2 and 3 dimensions, relative and circular motion, force and dynamics, Newton's Laws, friction, kinetic energy, work, potential energy, energy conservation, systems of particles, center of mass and momentum, elastic and inelastic collisions, rotation (moments of inertia), rolling motion, torque, angular momentum, static equilibrium, gravitational force and Kepler's laws, gravitational potential energy, oscillations, waves (transverse and longitudinal, superposition of waves). This course is designed to provide students with a working knowledge of the elementary physics principles mentioned above, as well as their applications, and to enhance their conceptual understanding of physical laws. The exact model of instruction varies at different campuses due to different resources and class sizes. Students attend several class meetings including at least one lab or activity period per week. Use of a combination of computer-based and traditional lab exercises is expected and collaborative learning exercises will be used in both small class sessions. The introduction of data acquisition and analysis methods (often making use of modern computer tools) will be stressed in the laboratory/activity period. Course evaluation is based on a combination assessments such as homework, quizzes, lab reports, midterm and final exams, and other evaluative tools. The course is an important prerequisite for later work in many science and engineering disciplines.",
+      "description": null,
       "attributes": [
         "GN"
       ],
@@ -5432,7 +5532,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_phys_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "PHYS 212",
@@ -5443,7 +5548,7 @@
       "credits_min": 4.0,
       "credits_max": 4.0,
       "repeatable": false,
-      "description": "PHYS 212 General Physics: Electricity and Magnetism (4) (GN)(BA) This course meets the Bachelor of Arts degree requirements. Calculus-based introduction to classical electricity and magnetism, including such topics as, electric charge and electric fields, Gauss's law, electric potential, capacitance, current, resistance, and circuits, magnetic fields, and fields due to currents, induction and inductance, magnetism of matter, Maxwell's equations, and electromagnetic oscillations. This course is designed to provide students with a working knowledge of the elementary physics principles mentioned above, as well as their applications, and to enhance their conceptual understanding of physical laws. The exact model of instruction varies at different campuses due to different resources and class sizes. Students attend several class meetings including at least one lab or activity period per week. Use of a combination of computer-based and traditional lab exercises is expected and collaborative learning exercises will be used in both small class session. Use of a combination of computer-based and traditional lab exercises is expected and collaborative learning exercises will be used in both small class settings. The introduction of data acquisition and analysis methods (often making use of modern computer tools) will be stressed in the laboratory/activity period.Course evaluation is based on a combination assessments such as homework, quizzes, lab reports, midterm and final exams, and other evaluative tools.The course is an important prerequisite for later work in many science and engineering disciplines.",
+      "description": null,
       "attributes": [
         "GN"
       ],
@@ -5470,7 +5575,12 @@
       "review": [
         "Non-enforced concurrent/corequisite wording was modeled as COREQ."
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_phys_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "PHYS 250",
@@ -6771,7 +6881,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Combinatorial analysis, axioms of probability, conditional probability and independence, discrete and continuous random variables, expectation, limit theorems, additional topics. Students who have passed either MATH(STAT) 414 or 418 may not schedule this course for credit.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "MATH 318"
@@ -6783,7 +6893,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_stat_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "STAT 380",
@@ -6837,7 +6952,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "STAT(MATH) 414 is an introduction to the theory of probability for students in statistics, mathematics, engineering, computer science, and related fields. The course presents students with calculus-based probability concepts and those concepts can be used to describe the uncertainties present in real applications. Topics include probability spaces, discrete and continuous random variables, transformations, expectations, generating functions, conditional distributions, law of large numbers, central limit theorems. Students may take only one course from STAT(MATH) 414 and 418.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "MATH 414"
@@ -6873,7 +6988,12 @@
       "review": [
         "A concurrent clause follows 'or'; check which courses it covers."
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_stat_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "STAT 415",
@@ -6884,7 +7004,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "A theoretical treatment of statistical inference, including sufficiency, estimation, testing, regression, analysis of variance, and chi-square tests.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "MATH 415"
@@ -6905,7 +7025,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_stat_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "STAT 416",
@@ -6974,7 +7099,7 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Introduction to probability axioms, combinatorics, random variables, limit laws, and stochastic processes. Students may take only one course from MATH414 / STAT 414 and MATH 418 / STAT 418 for credit. STAT 418 / MATH 418 Introduction to Probability and Stochastic Processing for Engineering (3) This course gives an introduction to probability and random processes. The topics are not covered as deeply as in a semester-long course in probability only or in a semester-long course in stochastic processes only. It is intended as a service course primarily for engineering students, though no engineering background is required or assumed.The topics covered include probability axioms, conditional probability, and combinatorics; discrete random variables; random variables with continuous distributions; jointly distributed random variables and random vectors; sums of random variables and moment generating functions; and stochastic processes, including Poisson, Brownian motion, and Gaussian processes.",
+      "description": null,
       "attributes": [],
       "crosslists": [
         "MATH 418"
@@ -6995,7 +7120,12 @@
       },
       "status": "auto_parsed",
       "review": [],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_stat_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "STAT 440",
@@ -7808,16 +7938,63 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "ALGORITHMS FOR INTERPOLATION, APPROXIMATION, INTEGRATION, NONLINEAR EQUATIONS, LINEAR SYSTEMS, FAST FOURIER TRANSFORM, AND DIFFERENTIAL EQUATIONS EMPHASIZING COMPUTATIONAL PROPERTIES AND IMPLEMENTATION. STUDENTS MAY TAKE ONLY ONE COURSE FOR CREDIT FROM MATH 451 AND 455.",
+      "description": null,
       "attributes": [],
-      "crosslists": [],
-      "prereq_text": "Enforced Prerequisite at Enrollment: (CMPSC 101 or CMPSC 121 or CMPSC 131 or CMPSC 200 or CMPSC 201) and (MATH 230 or MATH 231)",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
+      "crosslists": [
+        "MATH 451"
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+      "prereq_text": "Enforced Prerequisite at Enrollment: (CMPSC 101 or CMPSC 121 or CMPSC 131 or CMPSC 200 or CMPSC 201) and (MATH 230 or MATH 231)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPSC 101"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 121"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 131"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 200"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 201"
+              }
+            ]
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 230"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 231"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "ECON 14",
@@ -7926,20 +8103,30 @@
       "subject": "ENGL",
       "number": "202C",
       "level": 200,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Effective Writing: Technical Writing",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
       "description": null,
-      "attributes": [],
-      "crosslists": [],
-      "prereq_text": null,
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+      "attributes": [
+        "GWS"
       ],
-      "source_url": null
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: ENGL 15 or ENGL 15A or ENGL 15S or ENGL 15E or ESL 15 or ENGL 30H or ENGL 30T or ENGL 137H or CAS 137H and 4th Semester",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Prerequisite at Enrollment: ENGL 15 or ENGL 15A or ENGL 15S or ENGL 15E or ESL 15 or ENGL 30H or ENGL 30T or ENGL 137H or CAS 137H and 4th Semester"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite (4th Semester); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_engl_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "ESC 456",
@@ -8260,18 +8447,26 @@
       "credits_min": 4.0,
       "credits_max": 4.0,
       "repeatable": false,
-      "description": "Calculus is an important building block in the education of any professional who uses quantitative analysis. This course introduces and develops the mathematical skills required for analyzing change and creating mathematical models that replicate real-life phenomena. The goals of our calculus courses include to develop the students' knowledge of calculus techniques and to use the calculus environment to develop critical thinking and problem solving skills. The concept of limit is central to calculus; MATH 140 begins with a study of this concept. Differential calculus topics include derivatives and their applications to rates of change, related rates, linearization, optimization, and graphing techniques. The Fundamental Theorem of Calculus, relating differential and integral calculus begins the study of Integral Calculus. Antidifferentiation and the technique of substitution is used in integration applications of finding areas of plane figures and volumes of solids of revolution. Trigonometric functions are included in every topic. Students may only take one course for credit from MATH 110, 140, 140A, 140B, and 140H.",
+      "description": null,
       "attributes": [
         "GQ"
       ],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: Math 22 and Math 26 or Math 26 and satisfactory performance on the mathematics placement examination or Math 40 or Math 41 or satisfactory performance on the mathematics placement examination.",
-      "prereq": null,
-      "status": "reference_only",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Prerequisite at Enrollment: Math 22 and Math 26 or Math 26 and satisfactory performance on the mathematics placement examination or Math 40 or Math 41 or satisfactory performance on the mathematics placement examination"
+      },
+      "status": "text_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
+        "Could not parse prerequisite (satisfactory performance on the mathematics placement examination); kept as TEXT."
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 141B",
@@ -8348,18 +8543,49 @@
       "credits_min": 4.0,
       "credits_max": 4.0,
       "repeatable": false,
-      "description": "MATH 141 is the second course in a two- or three-course calculus sequence for students in science, engineering and related fields. Calculus is an important building block in the education of any professional who uses quantitative analysis. This course further introduces and develops the mathematical skills required for analyzing growth and change and creating mathematical models that replicate reallife phenomena. The goals of our calculus courses include to develop the students' knowledge of calculus techniques and to use the calculus environment to develop critical thinking and problem solving skills. This course covers the following topics: logarithms, exponentials, and inverse trigonometric functions; applications of the definite integral and techniques of integration; sequences and series; power series and Taylor polynomials; parametric equations and polar functions. Students may take only one course for credit from MATH 141, 141B, and 141H.",
+      "description": null,
       "attributes": [
         "GQ"
       ],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: MATH 140 or MATH 140A or MATH 140B or MATH 140E or MATH 140G or MATH 140H.",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
-      ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 140"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140A"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140B"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140E"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140G"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 21",
@@ -8392,16 +8618,43 @@
       "credits_min": 2.0,
       "credits_max": 2.0,
       "repeatable": false,
-      "description": "Analytic geometry in space; partial differentiation and applications. Students who have passed MATH 230 or MATH 230H may not schedule this course.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 or MATH 141B or MATH 141E or MATH 141G or MATH 141H",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
-      ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 141"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141B"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141E"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141G"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 232",
@@ -8412,16 +8665,31 @@
       "credits_min": 2.0,
       "credits_max": 2.0,
       "repeatable": false,
-      "description": "Multidimensional analytic geometry, double and triple integrals; potential fields; flux; Green's, divergence and Stokes' theorems. Students who have passed MATH 230 may not schedule this course for credit.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: MATH 231 or MATH 231H",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
-      ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 231"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 231H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 315",
@@ -8452,16 +8720,24 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Combinatorial analysis, axioms of probability, conditional probability and independence, discrete and continuous random variables, expectation, limit theorems, additional topics. Students who have passed either MATH(STAT) 414 or 418 may not schedule this course for credit.",
+      "description": null,
       "attributes": [],
-      "crosslists": [],
-      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
+      "crosslists": [
+        "STAT 318"
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141",
+      "prereq": {
+        "type": "COURSE",
+        "course": "MATH 141"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 414",
@@ -8472,16 +8748,48 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "STAT(MATH) 414 is an introduction to the theory of probability for students in statistics, mathematics, engineering, computer science, and related fields. The course presents students with calculus-based probability concepts and those concepts can be used to describe the uncertainties present in real applications. Topics include probability spaces, discrete and continuous random variables, transformations, expectations, generating functions, conditional distributions, law of large numbers, central limit theorems. Students may take only one course from STAT(MATH) 414 and 418.",
+      "description": null,
       "attributes": [],
-      "crosslists": [],
-      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 230 or Concurrent: MATH 232 or (MATH 231 and RM 214)",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
+      "crosslists": [
+        "STAT 414"
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 230 or Concurrent: MATH 232 or (MATH 231 and RM 214)",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 230"
+          },
+          {
+            "type": "COREQ",
+            "course": "MATH 232"
+          },
+          {
+            "type": "ALL",
+            "children": [
+              {
+                "type": "COREQ",
+                "course": "MATH 231"
+              },
+              {
+                "type": "COREQ",
+                "course": "RM 214"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "A concurrent clause follows 'or'; check which courses it covers."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 415",
@@ -8492,16 +8800,33 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "A theoretical treatment of statistical inference, including sufficiency, estimation, testing, regression, analysis of variance, and chi-square tests.",
+      "description": null,
       "attributes": [],
-      "crosslists": [],
-      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 414 or STAT 414",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
+      "crosslists": [
+        "STAT 415"
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 414 or STAT 414",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 414"
+          },
+          {
+            "type": "COURSE",
+            "course": "STAT 414"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 416",
@@ -8532,16 +8857,33 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Introduction to probability axioms, combinatorics, random variables, limit laws, and stochastic processes. Students may take only one course from MATH414 / STAT 414 and MATH 418 / STAT 418 for credit. STAT 418 / MATH 418 Introduction to Probability and Stochastic Processing for Engineering (3) This course gives an introduction to probability and random processes. The topics are not covered as deeply as in a semester-long course in probability only or in a semester-long course in stochastic processes only. It is intended as a service course primarily for engineering students, though no engineering background is required or assumed.The topics covered include probability axioms, conditional probability, and combinatorics; discrete random variables; random variables with continuous distributions; jointly distributed random variables and random vectors; sums of random variables and moment generating functions; and stochastic processes, including Poisson, Brownian motion, and Gaussian processes.",
+      "description": null,
       "attributes": [],
-      "crosslists": [],
-      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 230 or MATH 231",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
+      "crosslists": [
+        "STAT 418"
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 230 or MATH 231",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 230"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 231"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "MATH 456",
@@ -8760,16 +9102,49 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Statistical inference: principles and methods, estimation and testing hypotheses, regression and correlation analysis, analysis of variance, computer analysis. Students who have passed STAT (MATH) 415 may not schedule this course for credit.",
+      "description": null,
       "attributes": [],
-      "crosslists": [],
-      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 318 or STAT 318 or MATH 414 or STAT 414 or STAT 418 or MATH 418",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
+      "crosslists": [
+        "MATH 319"
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/"
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 318 or STAT 318 or MATH 414 or STAT 414 or STAT 418 or MATH 418",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 318"
+          },
+          {
+            "type": "COURSE",
+            "course": "STAT 318"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 414"
+          },
+          {
+            "type": "COURSE",
+            "course": "STAT 414"
+          },
+          {
+            "type": "COURSE",
+            "course": "STAT 418"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 418"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_stat_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     },
     {
       "code": "STAT 401",
@@ -8810,6 +9185,1798 @@
         "Referenced by another course's prerequisite or cross-list; subject page not collected."
       ],
       "source_url": null
+    },
+    {
+      "code": "CAS 100A",
+      "subject": "CAS",
+      "number": "100A",
+      "level": 100,
+      "title": "Effective Speech",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cas_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CAS 100B",
+      "subject": "CAS",
+      "number": "100B",
+      "level": 100,
+      "title": "Effective Speech",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cas_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CAS 137H",
+      "subject": "CAS",
+      "number": "137H",
+      "level": 100,
+      "title": "Rhetoric and Civic Life I",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/"
+    },
+    {
+      "code": "CAS 138T",
+      "subject": "CAS",
+      "number": "138T",
+      "level": 100,
+      "title": "Rhetoric and Civic Life II",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "FYS",
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: ENGL 137H or CAS 137H",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/"
+    },
+    {
+      "code": "CMPEN 270",
+      "subject": "CMPEN",
+      "number": "270",
+      "level": 200,
+      "title": "Digital Design: Theory and Practice",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Concurrent at Enrollment for: PHYS 212",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Concurrent at Enrollment for: PHYS 212"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite (Enforced Concurrent at Enrollment for:); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPEN 271",
+      "subject": "CMPEN",
+      "number": "271",
+      "level": 200,
+      "title": "Introduction to Digital Systems",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Concurrent at Enrollment: PHYS 212",
+      "prereq": {
+        "type": "COREQ",
+        "course": "PHYS 212"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPEN 275",
+      "subject": "CMPEN",
+      "number": "275",
+      "level": 200,
+      "title": "Digital Design Laboratory",
+      "credits_min": 1.0,
+      "credits_max": 1.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Concurrent at Enrollment: CMPEN 271 and PHYS 212",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COREQ",
+            "course": "CMPEN 271"
+          },
+          {
+            "type": "COREQ",
+            "course": "PHYS 212"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPEN 331",
+      "subject": "CMPEN",
+      "number": "331",
+      "level": 300,
+      "title": "Computer Organization And Design",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (CMPEN 270 or CMPEN 271) and (CMPSC 121 or CMPSC 131 or CMPSC 201)",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/"
+    },
+    {
+      "code": "CMPEN 362",
+      "subject": "CMPEN",
+      "number": "362",
+      "level": 300,
+      "title": "Communication Networks",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [
+        "EE 362"
+      ],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 270 or CMPEN 271 Concurrent Courses: STAT 318 or STAT 401 or STAT 414 or MATH 414 or STAT 418 or MATH 418",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPEN 270"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPEN 271"
+              }
+            ]
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COREQ",
+                "course": "STAT 318"
+              },
+              {
+                "type": "COREQ",
+                "course": "STAT 401"
+              },
+              {
+                "type": "COREQ",
+                "course": "STAT 414"
+              },
+              {
+                "type": "COREQ",
+                "course": "MATH 414"
+              },
+              {
+                "type": "COREQ",
+                "course": "STAT 418"
+              },
+              {
+                "type": "COREQ",
+                "course": "MATH 418"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Non-enforced concurrent/corequisite wording was modeled as COREQ."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPEN 371",
+      "subject": "CMPEN",
+      "number": "371",
+      "level": 300,
+      "title": "Advanced Digital Design",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 271 and CMPEN 275 and (CMPSC 121 or CMPSC201) and (EE 210 or EE 211)",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/"
+    },
+    {
+      "code": "CMPEN 431",
+      "subject": "CMPEN",
+      "number": "431",
+      "level": 400,
+      "title": "Introduction to Computer Architecture",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 331 or CMPEN 371",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPEN 331"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPEN 371"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPEN 441",
+      "subject": "CMPEN",
+      "number": "441",
+      "level": 400,
+      "title": "Operating Systems",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 360",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/"
+    },
+    {
+      "code": "CMPEN 462",
+      "subject": "CMPEN",
+      "number": "462",
+      "level": 400,
+      "title": "Wireless Communications Systems and Security",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 362 or EE 362",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPEN 362"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 362"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 150N",
+      "subject": "CMPSC",
+      "number": "150N",
+      "level": 100,
+      "title": "Computing and Society",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GH",
+        "GS",
+        "INTER"
+      ],
+      "crosslists": [
+        "PHIL 150N"
+      ],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 222",
+      "subject": "CMPSC",
+      "number": "222",
+      "level": 200,
+      "title": "Advanced Data Structures and Algorithms in C",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 122 or CMPSC 132",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 122"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPSC 132"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 311",
+      "subject": "CMPSC",
+      "number": "311",
+      "level": 300,
+      "title": "Introduction to Systems Programming",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 221",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+    },
+    {
+      "code": "CMPSC 312",
+      "subject": "CMPSC",
+      "number": "312",
+      "level": 300,
+      "title": "Computer Organization and Architecture",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 121 or CMPSC 131",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+    },
+    {
+      "code": "CMPSC 315",
+      "subject": "CMPSC",
+      "number": "315",
+      "level": 300,
+      "title": "Computer Systems I",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (CMPEN 270 or (CMPEN 271 and CMPEN 275)) and CMPSC 222",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPEN 270"
+              },
+              {
+                "type": "ALL",
+                "children": [
+                  {
+                    "type": "COURSE",
+                    "course": "CMPEN 271"
+                  },
+                  {
+                    "type": "COURSE",
+                    "course": "CMPEN 275"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPSC 222"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 316",
+      "subject": "CMPSC",
+      "number": "316",
+      "level": 300,
+      "title": "Computer Systems II",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 315",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPSC 315"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 320",
+      "subject": "CMPSC",
+      "number": "320",
+      "level": 300,
+      "title": "Software Engineering Principles",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 221",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPSC 221"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 330",
+      "subject": "CMPSC",
+      "number": "330",
+      "level": 300,
+      "title": "Advanced Programming in C++",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: C or better in CMPSC 122 or C or better in CMPSC 132",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+    },
+    {
+      "code": "CMPSC 432",
+      "subject": "CMPSC",
+      "number": "432",
+      "level": 400,
+      "title": "Exploratory Data Mining",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 221 and (CMPSC 465 or CMPSC 463) and (STAT 318 or STAT 414 or STAT 418)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 221"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPSC 465"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 463"
+              }
+            ]
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "STAT 318"
+              },
+              {
+                "type": "COURSE",
+                "course": "STAT 414"
+              },
+              {
+                "type": "COURSE",
+                "course": "STAT 418"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 443",
+      "subject": "CMPSC",
+      "number": "443",
+      "level": 400,
+      "title": "Introduction to Computer and Network Security",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 362 Enforced Concurrent at Enrollment: CMPSC 473",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPEN 362"
+          },
+          {
+            "type": "COREQ",
+            "course": "CMPSC 473"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 444",
+      "subject": "CMPSC",
+      "number": "444",
+      "level": 400,
+      "title": "Secure Programming",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 221 or CMPSC 330",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 221"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPSC 330"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 447",
+      "subject": "CMPSC",
+      "number": "447",
+      "level": 400,
+      "title": "Software Security",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 443 Recommended preparation: CMPSC 360",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Prerequisite at Enrollment: CMPSC 443 Recommended preparation: CMPSC 360"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite (Recommended preparation:); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 449",
+      "subject": "CMPSC",
+      "number": "449",
+      "level": 400,
+      "title": "Foundations of Natural Language Processing",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (STAT 318 or STAT 414 or STAT 418 or EE 465) and MATH 220 and CMPSC 221",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "STAT 318"
+              },
+              {
+                "type": "COURSE",
+                "course": "STAT 414"
+              },
+              {
+                "type": "COURSE",
+                "course": "STAT 418"
+              },
+              {
+                "type": "COURSE",
+                "course": "EE 465"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 220"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPSC 221"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 458",
+      "subject": "CMPSC",
+      "number": "458",
+      "level": 400,
+      "title": "Fundamentals of Computer Graphics",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 311 and MATH 220 and (MATH 230 or MATH 231)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 311"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 220"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 230"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 231"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 462",
+      "subject": "CMPSC",
+      "number": "462",
+      "level": 400,
+      "title": "Data Structures",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: C or better in MATH 141 and (C or better in CMPSC 122 or C or better in CMPSC 132) and C or better in CMPSC 360 and CMPSC 330",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+    },
+    {
+      "code": "CMPSC 463",
+      "subject": "CMPSC",
+      "number": "463",
+      "level": 400,
+      "title": "Design and Analysis of Algorithms",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Concurrent at Enrollment: MATH 318 or STAT 318 or STAT 414 or MATH 414 Enforced Prerequisite at Enrollment: CMPSC 462",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+    },
+    {
+      "code": "CMPSC 464",
+      "subject": "CMPSC",
+      "number": "464",
+      "level": 400,
+      "title": "Introduction to the Theory of Computation",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 465",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPSC 465"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 466",
+      "subject": "CMPSC",
+      "number": "466",
+      "level": 400,
+      "title": "Introduction to Quantum Computation",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 220 and (MATH 318 or STAT 318 or MATH 414 or STAT 414 or MATH 418 or STAT 418)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 220"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 318"
+              },
+              {
+                "type": "COURSE",
+                "course": "STAT 318"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 414"
+              },
+              {
+                "type": "COURSE",
+                "course": "STAT 414"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 418"
+              },
+              {
+                "type": "COURSE",
+                "course": "STAT 418"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 467",
+      "subject": "CMPSC",
+      "number": "467",
+      "level": 400,
+      "title": "Factorization and Primality Testing",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [
+        "MATH 467"
+      ],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 360 or MATH 311W",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 360"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 311W"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 471",
+      "subject": "CMPSC",
+      "number": "471",
+      "level": 400,
+      "title": "Introduction to Compiler Construction",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 461",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPSC 461"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 472",
+      "subject": "CMPSC",
+      "number": "472",
+      "level": 400,
+      "title": "Operating System Concepts",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 312 and (C or better in CMPSC 330) and CMPSC 462 and CMPSC 469",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+    },
+    {
+      "code": "CMPSC 473",
+      "subject": "CMPSC",
+      "number": "473",
+      "level": 400,
+      "title": "Operating Systems Design & Construction",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 311 and CMPEN 331",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 311"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPEN 331"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 474",
+      "subject": "CMPSC",
+      "number": "474",
+      "level": 400,
+      "title": "Operating System & Systems Programming",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 122 and CMPSC 312",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/"
+    },
+    {
+      "code": "CMPSC 475",
+      "subject": "CMPSC",
+      "number": "475",
+      "level": 400,
+      "title": "Applications Programming",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 221 and (CMPSC 311 or CMPSC 312) and (CMPSC 462 or CMPSC 465)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 221"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPSC 311"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 312"
+              }
+            ]
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPSC 462"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 465"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 476",
+      "subject": "CMPSC",
+      "number": "476",
+      "level": 400,
+      "title": "Systems Debugging",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite At Enrollment: CMPSC 311 or CMPSC 472 or CMPSC 474 or CMPEN 441",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 311"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPSC 472"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPSC 474"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPEN 441"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 478",
+      "subject": "CMPSC",
+      "number": "478",
+      "level": 400,
+      "title": "Advanced Algorithms",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 465 Recommended Preparations: A grade of B or higher in CMPSC 465",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Prerequisite at Enrollment: CMPSC 465 Recommended Preparations: A grade of B or higher in CMPSC 465"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite (Recommended Preparations: A grade of B); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 483W",
+      "subject": "CMPSC",
+      "number": "483W",
+      "level": 400,
+      "title": "Software Design Methods",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "WAC"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 311 and CMPSC 465; Recommended Preparation: ENGL 202C",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 311"
+          },
+          {
+            "type": "COURSE",
+            "course": "CMPSC 465"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Recommended preparation is advisory and was not modeled."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "CMPSC 489",
+      "subject": "CMPSC",
+      "number": "489",
+      "level": 400,
+      "title": "Deep Learning for Computer Vision",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 and (MATH 220 or MATH 430 or MATH 436) and (STAT 318 or STAT 319 or STAT 414 or STAT 415 or STAT 418 or EE 465) Recommended Preparations: Machine learning and Python programming language",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Prerequisite at Enrollment: MATH 141 and (MATH 220 or MATH 430 or MATH 436) and (STAT 318 or STAT 319 or STAT 414 or STAT 415 or STAT 418 or EE 465) Recommended Preparations: Machine learning and Python programming language"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite (Recommended Preparations: Machine learning); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpsc_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "EE 362",
+      "subject": "EE",
+      "number": "362",
+      "level": 300,
+      "title": "Communication Networks",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 270 or CMPEN 271 Concurrent Courses: STAT 318 or STAT 401 or STAT 414 or MATH 414 or STAT 418 or MATH 418",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "EE 465",
+      "subject": "EE",
+      "number": "465",
+      "level": 400,
+      "title": "Probability for Electrical and Computer Engineers",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: EE 350 or EE 352 or EE 353",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "ENGL 137H",
+      "subject": "ENGL",
+      "number": "137H",
+      "level": 100,
+      "title": "Rhetoric and Civic Life I",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [
+        "CAS 137H"
+      ],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_engl_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "ENGL 138T",
+      "subject": "ENGL",
+      "number": "138T",
+      "level": 100,
+      "title": "Rhetoric and Civic Life II",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "FYS",
+        "GWS"
+      ],
+      "crosslists": [
+        "CAS 138T"
+      ],
+      "prereq_text": "Enforced Prerequisite at Enrollment: ENGL 137H or CAS 137H",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "ENGL 137H"
+          },
+          {
+            "type": "COURSE",
+            "course": "CAS 137H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_engl_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "ENGL 15",
+      "subject": "ENGL",
+      "number": "15",
+      "level": 0,
+      "title": "Rhetoric and Composition",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_engl_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "ENGL 30H",
+      "subject": "ENGL",
+      "number": "30H",
+      "level": 0,
+      "title": "Honors Rhetoric and Composition",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_engl_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "MATH 220H",
+      "subject": "MATH",
+      "number": "220H",
+      "level": 200,
+      "title": "Honors Matrices",
+      "credits_min": 2.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GQ"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 110 or MATH 140 or MATH 140B or MATH 140E or MATH 140G or MATH 140H",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 110"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140B"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140E"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140G"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 140H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "MATH 230H",
+      "subject": "MATH",
+      "number": "230H",
+      "level": 200,
+      "title": "Honors Calculus and Vector Analysis",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 or MATH 141B or MATH 141E or MATH 141G or MATH 141H",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 141"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141B"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141E"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141G"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "MATH 231H",
+      "subject": "MATH",
+      "number": "231H",
+      "level": 200,
+      "title": null,
+      "credits_min": null,
+      "credits_max": null,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Referenced course page not collected."
+      ],
+      "source_url": null
+    },
+    {
+      "code": "MATH 319",
+      "subject": "MATH",
+      "number": "319",
+      "level": 300,
+      "title": "Elementary Mathematical Statistics",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [
+        "STAT 319"
+      ],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 318 or STAT 318 or MATH 414 or STAT 414 or STAT 418 or MATH 418",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 318"
+          },
+          {
+            "type": "COURSE",
+            "course": "STAT 318"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 414"
+          },
+          {
+            "type": "COURSE",
+            "course": "STAT 414"
+          },
+          {
+            "type": "COURSE",
+            "course": "STAT 418"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 418"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "MATH 467",
+      "subject": "MATH",
+      "number": "467",
+      "level": 400,
+      "title": "Factorization and Primality Testing",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 360 or MATH 311W",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+    },
+    {
+      "code": "PHIL 150N",
+      "subject": "PHIL",
+      "number": "150N",
+      "level": 100,
+      "title": null,
+      "credits_min": null,
+      "credits_max": null,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Referenced course page not collected."
+      ],
+      "source_url": null
+    },
+    {
+      "code": "PHYS 213",
+      "subject": "PHYS",
+      "number": "213",
+      "level": 200,
+      "title": "General Physics: Fluids and Thermal Physics",
+      "credits_min": 2.0,
+      "credits_max": 2.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GN"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 140 and PHYS 211 Concurrent Courses: MATH 141",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 140"
+          },
+          {
+            "type": "COURSE",
+            "course": "PHYS 211"
+          },
+          {
+            "type": "COREQ",
+            "course": "MATH 141"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Non-enforced concurrent/corequisite wording was modeled as COREQ."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_phys_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "PHYS 214",
+      "subject": "PHYS",
+      "number": "214",
+      "level": 200,
+      "title": "General Physics: Wave Motion and Quantum Physics",
+      "credits_min": 2.0,
+      "credits_max": 2.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GN"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 and PHYS 211 and PHYS 212",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 141"
+          },
+          {
+            "type": "COURSE",
+            "course": "PHYS 211"
+          },
+          {
+            "type": "COURSE",
+            "course": "PHYS 212"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_phys_2026_27",
+        "collected_for": "CMPSC_BS"
+      }
     }
   ]
 }

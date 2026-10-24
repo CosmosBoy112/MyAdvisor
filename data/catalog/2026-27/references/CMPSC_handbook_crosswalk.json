@@ -1,0 +1,263 @@
+{
+  "program_code": "CMPSC_BS",
+  "campus": "UP",
+  "target_catalog_year": "2026-27",
+  "handbook_year": "2024-25",
+  "handbook_url": "https://www.eecs.psu.edu/assets/docs/handbooks/CMPSC-handbook-2024-2025.pdf",
+  "status": "reference_only_year_mismatch",
+  "automatic_application_allowed": false,
+  "warnings": [
+    "Cover/link says 2024-25, but page 18 describes entry in Summer 2021 through Spring 2022. Cohort applicability needs confirmation.",
+    "No 2026-27 undergraduate handbook was linked on the official EECS page when collected.",
+    "Bulletin suggested-plan footnotes still refer to a handbook; do not import old totals or exclusions as current rules."
+  ],
+  "historical_core_courses": [
+    "CMPEN 270",
+    "CMPEN 331",
+    "CMPSC 121",
+    "CMPSC 122",
+    "CMPSC 131",
+    "CMPSC 132",
+    "CMPSC 221",
+    "CMPSC 311",
+    "CMPSC 360",
+    "CMPSC 461",
+    "CMPSC 464",
+    "CMPSC 465",
+    "CMPSC 473"
+  ],
+  "mappings": [
+    {
+      "id": "department_list",
+      "report_aliases": [
+        "Department List",
+        "General Elective",
+        "General Electives",
+        "Approved Free Electives"
+      ],
+      "bulletin_requirement_id": "department_list",
+      "bulletin_credits": 6,
+      "handbook_credits_range": [
+        10,
+        14
+      ],
+      "handbook_pages": [
+        17,
+        18
+      ],
+      "match_status": "concept_match_credit_conflict",
+      "requires_review": true,
+      "summary": "Same category name, different required credits; current course eligibility remains unresolved."
+    },
+    {
+      "id": "legacy_supporting",
+      "report_aliases": [
+        "Supporting Courses",
+        "Supporting Electives",
+        "Supportive Electives",
+        "Supportive elective"
+      ],
+      "bulletin_requirement_id": null,
+      "handbook_credits": 6,
+      "handbook_pages": [
+        15,
+        16
+      ],
+      "match_status": "no_current_equivalent",
+      "requires_review": true,
+      "summary": "Older thematic advanced electives are not the current natural-science choice or Department List."
+    },
+    {
+      "id": "technical_electives",
+      "report_aliases": [
+        "Computer Science Electives",
+        "CMPSC Elective",
+        "CMPSC/CMPEN 400-Level Elective",
+        "Technical Electives"
+      ],
+      "bulletin_requirement_id": "technical_electives",
+      "bulletin_credits": 18,
+      "handbook_credits": 12,
+      "handbook_pages": [
+        12,
+        13
+      ],
+      "match_status": "structure_changed",
+      "requires_review": true,
+      "summary": "Use the current enumerated 18-credit pool; the older writing/elective split is not interchangeable."
+    },
+    {
+      "id": "writing",
+      "report_aliases": [
+        "Writing requirement",
+        "Writing Across the Curriculum"
+      ],
+      "bulletin_requirement_id": "wac",
+      "handbook_pages": [
+        12
+      ],
+      "match_status": "course_choice_changed",
+      "requires_review": true,
+      "summary": "The current prescribed list includes CMPSC 483W. Older writing-course choices do not imply an automatic substitution."
+    },
+    {
+      "id": "natural_science",
+      "report_aliases": [
+        "Natural Science Elective",
+        "Natural Science (GN) Elective"
+      ],
+      "bulletin_requirement_id": "natural_science",
+      "bulletin_credits_range": [
+        2,
+        3
+      ],
+      "handbook_pages": [
+        14
+      ],
+      "match_status": "current_bulletin_only",
+      "requires_review": true,
+      "summary": "PHYS 213 or PHYS 214 are explicit choices; the other approved-list branch needs confirmation."
+    },
+    {
+      "id": "language",
+      "report_aliases": [
+        "Foreign Language Proficiency",
+        "Language Proficiency"
+      ],
+      "bulletin_requirement_id": null,
+      "handbook_credits": 4,
+      "handbook_pages": [
+        16
+      ],
+      "match_status": "no_current_equivalent",
+      "requires_review": true,
+      "summary": "Do not add the old separate four-credit language requirement to the current program."
+    }
+  ],
+  "historical_department_restrictions": {
+    "applies_to_target_catalog": false,
+    "source_pages": [
+      17,
+      18
+    ],
+    "excluded_courses": [
+      "ASTRO 1",
+      "ASTRO 6",
+      "ASTRO 7N",
+      "ASTRO 10",
+      "ASTRO 11",
+      "ASTRO 120",
+      "ASTRO 140",
+      "BISC 1",
+      "BISC 2",
+      "BISC 3",
+      "BISC 4",
+      "CHEM 1",
+      "CHEM 3",
+      "CHEM 101",
+      "CHEM 108",
+      "CAS 126",
+      "CAS 283",
+      "CMPSC 100",
+      "CMPSC 101",
+      "CMPSC 200",
+      "CMPSC 201",
+      "CMPSC 203",
+      "CYBER 100",
+      "EMSC 150",
+      "EE 465",
+      "ESL 4",
+      "IST 140",
+      "IST 210",
+      "IST 220",
+      "IST 230",
+      "IST 240",
+      "IST 242",
+      "IST 261",
+      "IST 311",
+      "IST 361",
+      "LLED 5",
+      "LLED 10",
+      "MATH 200",
+      "MATH 201",
+      "PHIL 12",
+      "PHSC 7",
+      "PHYS 250",
+      "PHYS 251",
+      "STS 150",
+      "STAT 401",
+      "STAT 487",
+      "STAT 318",
+      "STAT 319",
+      "STAT 414",
+      "STAT 415",
+      "STAT 418",
+      "MATH 318",
+      "MATH 319",
+      "MATH 414",
+      "MATH 415",
+      "MATH 418"
+    ],
+    "excluded_ranges": [
+      {
+        "subject": "MATH",
+        "below": 140
+      },
+      {
+        "subject": "PHYS",
+        "below": 211
+      },
+      {
+        "subject": "STAT",
+        "below": 318,
+        "except": [
+          "STAT 200"
+        ]
+      }
+    ],
+    "credit_caps": {
+      "additional_physical_education": 3,
+      "cooperative_education": 3,
+      "engineering_internship": 2,
+      "CHEM 106": 3
+    },
+    "manual_checks": [
+      "Degree applicability",
+      "Course intended exclusively for non-science/non-technical students",
+      "Remedial content or duplication of prior courses",
+      "Two-credit MATH 140A/CHEM 106 exclusion; CHEM 106 cap is not blanket approval"
+    ]
+  },
+  "historical_supporting_restrictions": {
+    "applies_to_target_catalog": false,
+    "source_pages": [
+      15,
+      16
+    ],
+    "min_credits": 6,
+    "level_min": 400,
+    "level_max": 499,
+    "excluded_subjects": [
+      "CMPSC",
+      "CMPEN",
+      "DS"
+    ],
+    "manual_checks": [
+      "A coherent theme supporting CS is required; matching subject alone is insufficient.",
+      "Independent study is excluded. Nonautomatic audit placement needs a petition.",
+      "STAT/MATH 414,415,418 and CMPSC-crosslisted MATH 451,455,456,467 are excluded.",
+      "Special-topic or independent-course ranges require individual review; no blanket eligibility."
+    ]
+  },
+  "historical_core_not_current_prescribed": [
+    "CMPEN 270",
+    "CMPEN 331",
+    "CMPSC 121",
+    "CMPSC 122",
+    "CMPSC 131",
+    "CMPSC 132",
+    "CMPSC 311",
+    "CMPSC 464",
+    "CMPSC 473"
+  ]
+}
