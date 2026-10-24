@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile,unlink} from 'node:fs/promises';
 import {parse,compileScript} from '@vue/compiler-sfc';
 import {createRenderer,nextTick} from 'vue';
+import {locale} from './i18n.js';
 
 // Mount the actual SFC with a small in-memory renderer, so event handlers and
 // reactive updates are tested without a browser or an additional DOM package.
@@ -44,7 +45,10 @@ test('chart buttons switch completed rows and explain a zero-result view',async(
    else assert.match(text(root),/No requirements are marked complete/);
    buttons()[0].props.onClick();await nextTick();
    assert.equal(rows().length,2);assert.equal(buttons()[0].props['aria-pressed'],true);
-   app.unmount();
+   locale.value='ko';await nextTick();
+   assert.match(text(root),/요건별 남은 학점/);assert.match(text(buttons()[1]),/완료/);
+   assert.match(text(root),/Pending course group/); // Official source title stays original.
+   locale.value='en';await nextTick();app.unmount();
   }
  }finally{await unlink(generated);}
 });

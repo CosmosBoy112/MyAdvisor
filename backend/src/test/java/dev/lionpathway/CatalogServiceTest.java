@@ -49,7 +49,7 @@ class CatalogServiceTest {
   var pdf=mock(PdfReader.class);var gemini=mock(GeminiService.class);var router=mock(ModelRouter.class);var repo=mock(ReportRepository.class);
   var controller=new ReportController(pdf,gemini,router,new AnalysisValidator(),repo,catalog);
   var jwt=Jwt.withTokenValue("test").header("alg","RS256").subject("owner").build();
-  when(pdf.read(any())).thenReturn(pages);when(gemini.analyze(any(),any())).thenReturn(report());
+  when(pdf.read(any())).thenReturn(pages);when(gemini.analyze(any(),any(),any())).thenReturn(report());
   var result=controller.upload(jwt,new MockMultipartFile("file","test.pdf","application/pdf",new byte[]{1}),"");
   var id=UUID.fromString(result.path("id").asText());verify(repo).save(eq(id),eq("owner"),eq("test.pdf"),argThat(r->r.at("/catalog/status").asText().equals("matched_with_review")));
   when(repo.get(id,"owner")).thenReturn(result);assertEquals(result,controller.get(jwt,id));
@@ -58,4 +58,13 @@ class CatalogServiceTest {
   verify(router).chat(argThat(r->r.at("/requirements/0/catalogMatch/requiredCredits").asInt()==6),eq("Explain Department List"),eq(List.of()));
   var input=GeminiService.chatInput(controller.get(jwt,id),"Explain Department List",List.of());assertTrue(input.contains("concept_match_credit_conflict"));assertTrue(input.contains("bulletins.psu.edu"));
  }
+ @Test void uploadForwardsSelectedLanguageAndPersistsIt()throws Exception{
+  var pdf=mock(PdfReader.class);var gemini=mock(GeminiService.class);var repo=mock(ReportRepository.class);
+  var controller=new ReportController(pdf,gemini,mock(ModelRouter.class),new AnalysisValidator(),repo,catalog);
+  when(pdf.read(any())).thenReturn(pages);when(gemini.analyze(pages,"한국어 설명", "ko")).thenReturn(report());
+  var jwt=Jwt.withTokenValue("test").header("alg","RS256").subject("owner").build();
+  var output=controller.upload(jwt,new MockMultipartFile("file","test.pdf","application/pdf",new byte[]{1}),"한국어 설명","ko");
+  assertEquals("ko",output.path("responseLanguage").asText());verify(gemini).analyze(pages,"한국어 설명","ko");
+ }
+
 }
