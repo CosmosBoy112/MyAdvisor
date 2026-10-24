@@ -58,3 +58,13 @@
 - 짧은 보고서 분석 약 1.3초, 챗봇 약 1초, TigerData 저장/조회/소유권 격리/대화 저장 통과. 테스트 데이터 rollback
 - 사용자 실제 PDF는 재업로드 후 성공 여부와 추출 정확도 확인 필요. 위 시간은 가상 입력에 대한 측정이며 보장값이 아님
 - 모델 추론 설정 참고: https://ai.google.dev/gemini-api/docs/generate-content/thinking
+
+
+## Luminal 실제 연결 검증
+
+- 로컬 backend/.env의 설정으로 가상 보고서와 학기별 계획 비교 질문을 전송
+- 설정 모델 deepseek-ai/DeepSeek-V4.1-Flash: HTTP 200, 실제 답변 수신, 약 3.5초
+- ModelRouter 결과 provider=luminal 확인. Gemini fallback이 호출되지 않았는지도 검증
+- 실제 학생 PDF/기존 사용자 보고서는 테스트에 사용하지 않음. DB 저장 없음
+- 재실행: backend 디렉터리에서 `LIONPATHWAY_LUMINAL_TEST=1 ./mvnw -Dtest=LiveLuminalTest test`
+- 이 테스트는 명시적으로 활성화해야 실행되며 API 사용량이 발생함
