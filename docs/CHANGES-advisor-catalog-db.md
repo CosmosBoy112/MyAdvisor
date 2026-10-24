@@ -105,7 +105,7 @@ python ingest/parse_bulletin_courses.py \
 1. ~~TigerData 개발 DB에서 `advisor-schema.sql` 실행 확인~~ → 섹션 1–6만 실행 완료 (2026-10-24)
 2. `courses.json`의 `review` 137건 검토 후 시드 로더 작성 (`courses` / `course_versions` / `prereq_nodes`) → 로더 작성·적재 완료. **`review` 검토는 아직 안 함** (TEXT 노드 그대로 적재)
 3. ~~`DATSC_BS.json` → `requirement_nodes` / `requirement_rules` 적재~~ → 완료 (2026-10-24)
-4. 백엔드에 `check_prerequisites`, `run_audit`부터 도구 구현 후 Gemini function calling 연결
+4. (일부 완료: 채팅에 카탈로그 문맥 연결, 아래 "채팅 연결" 절) 백엔드에 `check_prerequisites`, `run_audit`부터 도구 구현 후 Gemini function calling 연결
 
 ## CMPSC 추가 수집
 
@@ -113,7 +113,7 @@ University Park 2026–27의 후속 수집·Handbook 학년도 충돌·명칭 �
 
 ## DB 적재 현황 (2026-10-24)
 
-Computational Data Sciences(DTSCE) 질문에 답할 수 있도록 카탈로그를 TigerData에 적재했습니다. **앱은 아직 이 테이블을 읽지 않습니다**(위 "다음 할 일" 4번). CMPSC_BS/CMPSC_ETM 요건도 기존 테이블에 추가 적재했습니다(아래 CMPSC 추가 적재 절). 앱의 CMPSC 비교는 여전히 JSON 기반 `CatalogService`를 사용하며 DB 조회로 바꾸지는 않았습니다. 공용 과목·선수과목 데이터와 기존 DATSC 행은 변경하지 않았습니다.
+Computational Data Sciences(DTSCE) 질문에 답할 수 있도록 카탈로그를 TigerData에 적재했습니다. 채팅은 이 테이블을 읽습니다: 아래 [채팅 연결](#채팅-연결-catalogdbservice) 절을 보세요. CMPSC_BS/CMPSC_ETM 요건도 기존 테이블에 추가 적재했습니다(아래 CMPSC 추가 적재 절). 앱의 CMPSC 비교는 여전히 JSON 기반 `CatalogService`를 사용하며 DB 조회로 바꾸지는 않았습니다. 공용 과목·선수과목 데이터와 기존 DATSC 행은 변경하지 않았습니다.
 
 ### 만든 범위
 
@@ -238,3 +238,16 @@ WHERE scope_code IN ('CMPSC_BS','CMPSC_ETM') AND catalog_year='2026-27';
 ```
 
 원본은 [CMPSC Bulletin](https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-science-bs/) 2026–27과 [EECS Handbook 목록](https://www.eecs.psu.edu/Students/undergraduate/Computer-Science.aspx)의 2024–25 학부 Handbook입니다. 과거 Handbook을 현재 요건에 자동 적용하지 않습니다. 현재 앱의 JSON 기반 매칭 흐름은 변경하지 않았습니다.
+
+### 채팅 연결 (`CatalogDbService`)
+
+채팅 요청마다 `ReportController`가 `CatalogDbService.context(report, question)` 결과를 `report.catalogDb`로 붙여 Gemini/Luminal에 보냅니다. 업로드·저장된 리포트는 바꾸지 않습니다.
+
+- **전공 일치 조건**: 리포트 `major`가 `programs`(program_type `major`)의 이름 단어를 모두 포함하고, 나머지는 학위·캠퍼스·단과대·옵션 단어뿐일 때만 일치. 프로그램 이름의 괄호(예: `(Engineering)`)는 무시. 예: `Data Sciences (BS)` → DATSC_BS, `Computer Science (BS)` → CMPSC_BS / `Comp Sci - Univ Park (BS)`(약칭), `Computer Engineering (BS)`, `Data Sciences Minor` 불일치. 새 전공을 적재하면 코드 수정 없이 대상이 됩니다. 캠퍼스는 확인하지 않습니다(CMPSC_BS는 University Park 기준 데이터).
+- **status**: `matched`(학년도 일치), `matched_year_differs`(예: 리포트 Fall 2024 → 2024-25, DB 2026-27. 답변에 차이를 반드시 명시), `matched_year_unknown`, `major_not_in_catalog`(카탈로그 질문에 일반 지식으로 답하지 않음), `catalog_unavailable`(DB 오류 시 리포트만으로 답변)
+- **옵션**: 전공명에 옵션 단어가 있거나, 리포트 요건 제목에 옵션 하나만 등장하면(예: "Computational Option List A") 그 옵션 요건만 포함. 모르면 전체 옵션 포함하고 옵션을 가정하지 않음
+- **포함 내용**: 공통·옵션 요건 트리(과목 제목·학점), 전공 진입 요건, `policy_rules`(Handbook 출처 규칙은 판을 밝히고 어드바이저 확인 권고), 질문에 나온 과목 최대 8개의 학점·속성·교차개설·선수과목 트리·열리는 과목
+- **CMPSC 적재 형식 처리**: `source_text`가 "catalog metadata (not a verbatim quote)"이면 Bulletin 원문(`bulletin_text`)으로 넘기지 않고 `requires_review`·`review`·`credits_range`·(검토 노드의) `source_url`만 전달. 규칙 없는 POOL은 `course_list: not_listed_in_database`(아무 과목이나 인정 아님). 8,000자 넘는 정책 값(`catalog_snapshot` 등)은 `value_omitted`로 표시하고 제외
+- **문맥 크기**(실측): Data Sciences 약 17KB, CMPSC 약 26KB
+- **규칙**(`GeminiService.CHAT_SYSTEM`): 출처 URL 인용, `unparsed_text` 선수과목은 해석하지 않고 인용, 리포트의 이수 상태·학점은 바꾸지 않음. `report.catalog`(JSON 기반 CMPSC 비교)의 기존 규칙은 그대로 유지
+- 테스트: `CatalogDbServiceTest`(전공·학년도·과목 코드·DB 오류), `LiveCatalogDbTest`(`LIONPATHWAY_LIVE_TEST=1`, 실제 DB 조회 전용)

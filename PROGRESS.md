@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · CosmosBoy112 · `main`
+- 한 일: 채팅이 TigerData 카탈로그(Bulletin 2026-27, Handbook 2024-25)를 근거로 답하도록 `CatalogDbService` 추가. 리포트 전공이 DB의 전공(DATSC_BS, CMPSC_BS)과 일치할 때만 요건 트리·전공 진입 요건·규정·질문 속 과목의 선수과목/열리는 과목을 `report.catalogDb`로 붙임. CMPSC 적재 메타데이터는 원문으로 넘기지 않고 검토 표시만 전달, 빈 목록은 미확인으로 표시. 학년도가 다르면 답변에 명시, 일치하지 않는 전공은 카탈로그 질문에 일반 지식으로 답하지 않음. 문서: `docs/CHANGES-advisor-catalog-db.md` "채팅 연결" 절
+- 상태: 백엔드 테스트 41개 중 35개 통과·6개 설정상 제외(`CatalogDbServiceTest` 6개 추가). `LiveCatalogDbTest`로 실제 DB 확인(문맥 DS 약 17KB / CMPSC 약 26KB, 약칭 `Comp Sci - Univ Park (BS)`는 major_not_in_catalog). 임시 테스트로 실제 Luminal 답변 확인: DS 리포트는 CMPSC 465 선수과목·List A를 출처와 함께 답하고 2026-27/2024-25 차이를 명시, CMPSC 리포트는 빈 승인 자연과학 목록을 "아무 GN"으로 해석하지 않고 requires_review를 명시. 이 컴퓨터의 Gemini 키는 404라 Gemini 답변과 브라우저 전체 흐름은 미검증
+- 막힌 것: 실제 Data Sciences 리포트의 요건 학년도는 Fall 2024(2024-25)인데 DB는 2026-27판만 있음. 실제 CMPSC 리포트 전공 표기가 약칭(`Comp Sci - Univ Park (BS)`)이라 매칭 안 됨
+- 다음: 2024-25 Bulletin(archive) 적재 검토, 전공 약칭 별칭 테이블 검토, 실제 화면에서 질문 확인
+- 필요한 설정: 없음
+
 ## 2026-10-24 · Codex · `main`
 - 한 일: 영어 Inter·한국어 Noto Sans KR로 글꼴 통일. 제목 굵기/자간 완화, 학점 숫자 폭 정렬, 한국어 제목 줄바꿈 조정
 - 상태: Vite 빌드 및 diff 공백 검사 통과. CSS만 변경, 동작 테스트 재실행 및 브라우저 시각 검증 미실시

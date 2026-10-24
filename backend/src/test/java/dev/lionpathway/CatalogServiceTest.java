@@ -47,7 +47,7 @@ class CatalogServiceTest {
  }
  @Test void uploadPersistsEnrichmentAndChatReceivesIt()throws Exception{
   var pdf=mock(PdfReader.class);var gemini=mock(GeminiService.class);var router=mock(ModelRouter.class);var repo=mock(ReportRepository.class);
-  var controller=new ReportController(pdf,gemini,router,new AnalysisValidator(),repo,catalog);
+  var controller=new ReportController(pdf,gemini,router,new AnalysisValidator(),repo,catalog,mock(CatalogDbService.class));
   var jwt=Jwt.withTokenValue("test").header("alg","RS256").subject("owner").build();
   when(pdf.read(any())).thenReturn(pages);when(gemini.analyze(any(),any(),any())).thenReturn(report());
   var result=controller.upload(jwt,new MockMultipartFile("file","test.pdf","application/pdf",new byte[]{1}),"");
@@ -60,7 +60,7 @@ class CatalogServiceTest {
  }
  @Test void uploadForwardsSelectedLanguageAndPersistsIt()throws Exception{
   var pdf=mock(PdfReader.class);var gemini=mock(GeminiService.class);var repo=mock(ReportRepository.class);
-  var controller=new ReportController(pdf,gemini,mock(ModelRouter.class),new AnalysisValidator(),repo,catalog);
+  var controller=new ReportController(pdf,gemini,mock(ModelRouter.class),new AnalysisValidator(),repo,catalog,mock(CatalogDbService.class));
   when(pdf.read(any())).thenReturn(pages);when(gemini.analyze(pages,"한국어 설명", "ko")).thenReturn(report());
   var jwt=Jwt.withTokenValue("test").header("alg","RS256").subject("owner").build();
   var output=controller.upload(jwt,new MockMultipartFile("file","test.pdf","application/pdf",new byte[]{1}),"한국어 설명","ko");

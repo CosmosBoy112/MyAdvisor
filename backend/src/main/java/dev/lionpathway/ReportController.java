@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 @RestController @Profile("live") @RequestMapping("/api/reports") public class ReportController {
  private static final org.slf4j.Logger log=org.slf4j.LoggerFactory.getLogger(ReportController.class);
- private final CatalogService catalog;private final PdfReader pdf;private final GeminiService gemini;private final ModelRouter router;private final AnalysisValidator validator;private final ReportRepository repository;
- public ReportController(PdfReader pdf,GeminiService gemini,ModelRouter router,AnalysisValidator validator,ReportRepository repository,CatalogService catalog){this.catalog=catalog;this.pdf=pdf;this.gemini=gemini;this.router=router;this.validator=validator;this.repository=repository;}
+ private final CatalogService catalog;private final CatalogDbService catalogDb;private final PdfReader pdf;private final GeminiService gemini;private final ModelRouter router;private final AnalysisValidator validator;private final ReportRepository repository;
+ public ReportController(PdfReader pdf,GeminiService gemini,ModelRouter router,AnalysisValidator validator,ReportRepository repository,CatalogService catalog,CatalogDbService catalogDb){this.catalog=catalog;this.catalogDb=catalogDb;this.pdf=pdf;this.gemini=gemini;this.router=router;this.validator=validator;this.repository=repository;}
  @PostMapping(consumes="multipart/form-data") public JsonNode upload(@AuthenticationPrincipal Jwt jwt,@RequestParam("file")MultipartFile file,@RequestParam(defaultValue="")String intent,@RequestParam(defaultValue="en")String language)throws java.io.IOException{
   if(!Set.of("en","ko").contains(language))throw new IllegalArgumentException("Unsupported display language.");
   if(file.isEmpty()||file.getSize()>10*1024*1024)throw new IllegalArgumentException("Please upload a non-empty PDF of at most 10 MB.");
@@ -29,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
  @GetMapping public List<Map<String,Object>> list(@AuthenticationPrincipal Jwt jwt){return repository.list(jwt.getSubject());}
  @GetMapping("/{id}/messages")public List<Map<String,Object>> messages(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){repository.get(id,jwt.getSubject());return repository.history(id);}
  @GetMapping("/{id}")public JsonNode get(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){return catalog.forRead(repository.get(id,jwt.getSubject()));}
- @PostMapping("/{id}/chat")public Map<String,String> chat(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id,@Valid @RequestBody Question body){var report=catalog.forRead(repository.get(id,jwt.getSubject()));((com.fasterxml.jackson.databind.node.ObjectNode)report).put("responseLanguage",body.language()==null?"en":body.language());var answer=router.chat(report,body.question(),repository.history(id));repository.conversation(id,body.question(),answer.text());return Map.of("answer",answer.text(),"provider",answer.provider());}
+ @PostMapping("/{id}/chat")public Map<String,String> chat(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id,@Valid @RequestBody Question body){var report=catalog.forRead(repository.get(id,jwt.getSubject()));((com.fasterxml.jackson.databind.node.ObjectNode)report).put("responseLanguage",body.language()==null?"en":body.language());((com.fasterxml.jackson.databind.node.ObjectNode)report).set("catalogDb",catalogDb.context(report,body.question()));var answer=router.chat(report,body.question(),repository.history(id));repository.conversation(id,body.question(),answer.text());return Map.of("answer",answer.text(),"provider",answer.provider());}
  @DeleteMapping("/{id}")public void delete(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){repository.delete(id,jwt.getSubject());}
  public record Question(@NotBlank @Size(max=2000)String question,@Pattern(regexp="en|ko")String language){public Question(String question){this(question,"en");}}
 }
