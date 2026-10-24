@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
   for(String field:List.of("major","minor","campus","catalogYear"))if(!out.path(field).isTextual())out.putNull(field);
   if(out.path("major").isNull())warnings.add("The major was not identified. Confirm that this is an academic requirements report.");
   sanitizeCredits((ObjectNode)out.path("totals"),warnings);
+  DegreeCreditReconciler.reconcile(out,pages,warnings);
   if(out.path("requirements").size()>150)throw new IllegalArgumentException("Too many requirements were returned. Please use a shorter report.");
   int index=0;
   for(JsonNode value:out.path("requirements")){

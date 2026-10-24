@@ -5,7 +5,7 @@ const props=defineProps({totals:Object});
 const chart=computed(()=>progress(props.totals));
 const segments=computed(()=>[
  {label:'Completed',value:props.totals?.completed,color:'var(--chart-completed)'},
- {label:'In progress',value:props.totals?.inProgress,color:'var(--chart-progress)'},
+ {label:props.totals?.includesPlannedTerms?'In progress / planned':'In progress',value:props.totals?.inProgress,color:'var(--chart-progress)'},
  {label:'After current courses',value:chart.value?.additional,color:'var(--chart-remaining)'}
 ]);
 const description=computed(()=>chart.value?`${props.totals.completed} credits completed, ${props.totals.inProgress} in progress, ${chart.value.remaining} still to earn; ${chart.value.additional} additional credits needed after current courses. ${chart.value.percent}% completed.`:'Credit breakdown unavailable: some totals are missing.');
@@ -26,6 +26,7 @@ const description=computed(()=>chart.value?`${props.totals.completed} credits co
    </div>
    <ul class="chart-legend"><li v-for="segment in segments" :key="segment.label"><span class="chart-dot" :style="{background:segment.color}"></span><span>{{segment.label}}</span><strong>{{Number.isFinite(segment.value)?segment.value:'—'}}</strong></li></ul>
   </div>
+  <p v-if="totals?.inProgressByTerm" class="term-note"><span v-for="(amount,term) in totals.inProgressByTerm" :key="term">{{term}}: {{amount}} credits · </span>As of the report date.</p>
   <p v-if="chart"><strong>{{chart.remaining}} credits still to earn</strong>, including current courses. {{chart.additional}} additional credits needed if current courses are passed.</p><p v-else>Upload a report with complete credit totals to see the breakdown.</p>
  </section>
 </template>
