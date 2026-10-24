@@ -10,7 +10,7 @@ const theme=ref(document.documentElement.dataset.theme||'light');
 function toggleTheme(){
  theme.value=theme.value==='dark'?'light':'dark';
  document.documentElement.dataset.theme=theme.value;
- document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme.value==='dark'?'#091525':'#ffffff');
+ document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme.value==='dark'?'#111214':'#ffffff');
  try{localStorage.setItem('lionpathway-theme',theme.value);}catch{}
 }
 const configured=inject('authConfigured');
