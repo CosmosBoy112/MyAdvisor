@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: lionpathway-api
+  profiles:
+    default: demo
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 11MB
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${PORT:8080}
+  error:
+    include-message: never
+app:
+  frontend-origin: ${FRONTEND_ORIGIN:http://localhost:5173}

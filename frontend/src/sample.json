@@ -1,0 +1,114 @@
+{
+  "id": "sample",
+  "demo": true,
+  "fileName": "sample-what-if-report.pdf",
+  "major": "Computer Science, B.S.",
+  "minor": null,
+  "campus": "University Park",
+  "catalogYear": "Illustrative sample",
+  "intent": "Computer Science with a Mathematics minor",
+  "totals": {
+    "required": 120,
+    "completed": 72,
+    "inProgress": 15
+  },
+  "warnings": [
+    "Illustrative data only. This sample is not an official Penn State degree audit.",
+    "Mathematics minor is an exploration goal; it is not included in this sample report."
+  ],
+  "requirements": [
+    {
+      "id": "major",
+      "title": "Major requirements",
+      "required": 45,
+      "completed": 27,
+      "inProgress": 9,
+      "status": "in_progress",
+      "description": "Complete the remaining prescribed major requirements.",
+      "courses": [
+        "Example major course \u2022 3 credits",
+        "Example capstone \u2022 3 credits"
+      ],
+      "evidence": {
+        "page": 1,
+        "quote": "Complete the remaining prescribed major requirements.",
+        "verified": true
+      }
+    },
+    {
+      "id": "department",
+      "title": "Department List",
+      "required": 12,
+      "completed": 6,
+      "inProgress": 0,
+      "status": "remaining",
+      "description": "Select 6 additional credits from the approved department list. The eligible course list is not included in this sample.",
+      "courses": [],
+      "evidence": {
+        "page": 1,
+        "quote": "Select 6 additional credits from the approved department list. The eligible course list is not included in this sample.",
+        "verified": true
+      }
+    },
+    {
+      "id": "supportive",
+      "title": "Supportive Electives",
+      "required": 9,
+      "completed": 3,
+      "inProgress": 3,
+      "status": "in_progress",
+      "description": "3 credits remain after the current in-progress course. Confirm approved selections with your adviser.",
+      "courses": [],
+      "evidence": {
+        "page": 1,
+        "quote": "3 credits remain after the current in-progress course. Confirm approved selections with your adviser.",
+        "verified": true
+      }
+    },
+    {
+      "id": "gened",
+      "title": "General Education",
+      "required": 45,
+      "completed": 36,
+      "inProgress": 3,
+      "status": "in_progress",
+      "description": "Review the remaining distribution requirements, not just the total credits.",
+      "courses": [],
+      "evidence": {
+        "page": 1,
+        "quote": "Review the remaining distribution requirements, not just the total credits.",
+        "verified": true
+      }
+    },
+    {
+      "id": "writing",
+      "title": "Writing requirement",
+      "required": 3,
+      "completed": 3,
+      "inProgress": 0,
+      "status": "complete",
+      "description": "The writing requirement is marked satisfied in this illustrative report.",
+      "courses": [],
+      "evidence": {
+        "page": 1,
+        "quote": "The writing requirement is marked satisfied in this illustrative report.",
+        "verified": true
+      }
+    },
+    {
+      "id": "minor",
+      "title": "Mathematics minor",
+      "required": null,
+      "completed": null,
+      "inProgress": null,
+      "status": "review",
+      "description": "This minor is not covered by the report. Upload a What-If Report that includes it to evaluate its requirements.",
+      "courses": [],
+      "evidence": {
+        "page": 1,
+        "quote": "This minor is not covered by the report. Upload a What-If Report that includes it to evaluate its requirements.",
+        "verified": true
+      }
+    }
+  ]
+}

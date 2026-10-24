@@ -1,0 +1,13 @@
+{
+ "type":"object", "required":["major","minor","campus","catalogYear","totals","requirements","warnings"],
+ "properties":{
+  "major":{"type":["string","null"]},"minor":{"type":["string","null"]},"campus":{"type":["string","null"]},"catalogYear":{"type":["string","null"]},
+  "totals":{"type":"object","required":["required","completed","inProgress"],"properties":{"required":{"type":["number","null"]},"completed":{"type":["number","null"]},"inProgress":{"type":["number","null"]}}},
+  "warnings":{"type":"array","items":{"type":"string"}},
+  "requirements":{"type":"array","items":{"type":"object","required":["title","required","completed","inProgress","status","description","courses","evidence"],"properties":{
+   "title":{"type":"string"},"required":{"type":["number","null"]},"completed":{"type":["number","null"]},"inProgress":{"type":["number","null"]},
+   "status":{"type":"string","enum":["complete","in_progress","remaining","review"]},"description":{"type":"string"},"courses":{"type":"array","items":{"type":"string"}},
+   "evidence":{"type":"object","required":["page","quote"],"properties":{"page":{"type":["integer","null"]},"quote":{"type":"string"}}}
+  }}}
+ }
+}

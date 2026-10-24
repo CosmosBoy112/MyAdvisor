@@ -1,0 +1,85 @@
+<script setup>
+import {computed,inject,nextTick,ref} from 'vue';
+import {useAuth0} from '@auth0/auth0-vue';
+import {ArrowUp,ArrowUpRight,ArrowRight,Plus,X,FileText,Check,ChevronDown,ChevronRight,BookOpen,GraduationCap,Compass,MessageCircle,ShieldCheck,LoaderCircle,LogOut,Download,Info,Search,RotateCcw} from 'lucide-vue-next';
+import sample from './sample.json';
+import {progress,filterRequirements,validateFile} from './model.js';
+const configured=inject('authConfigured');
+const auth=configured?useAuth0():null;
+const report=ref(null),intent=ref(''),file=ref(null),fileInput=ref(null),busy=ref(false),error=ref(''),notice=ref(''),dragging=ref(false),filter=ref('all'),expanded=ref(null),source=ref(null),chatOpen=ref(false),question=ref(''),messages=ref([]),chatBusy=ref(false),chatBody=ref(null),consent=ref(false);
+const base=import.meta.env.VITE_API_BASE_URL||'';
+const totals=computed(()=>progress(report.value?.totals));
+const visible=computed(()=>filterRequirements(report.value?.requirements||[],filter.value));
+const completedCount=computed(()=>report.value?.requirements.filter(x=>x.status==='complete').length||0);
+const statuses={complete:'Complete',in_progress:'In progress',remaining:'Remaining',review:'Needs review'};
+const greeting=computed(()=>auth?.user.value?.given_name||'there');
+async function headers(){if(!configured||!auth.isAuthenticated.value)throw Error('Sign in to analyze your personal report.');return {Authorization:`Bearer ${await auth.getAccessTokenSilently()}`};}
+async function request(path,options={}){const response=await fetch(base+path,{...options,headers:{...await headers(),...options.headers}});const data=await response.json().catch(()=>({message:'The server returned an unreadable response.'}));if(!response.ok)throw Error(data.message||'The request could not be completed.');return data;}
+function pick(f){error.value='';const problem=validateFile(f);if(problem){error.value=problem;return;}file.value=f;}
+function drop(event){dragging.value=false;if(event.dataTransfer.files.length)pick(event.dataTransfer.files[0]);}
+async function signIn(){error.value='';if(!configured){notice.value='Live sign-in needs Auth0 configuration. You can explore the sample without an account.';return;}try{await auth.loginWithRedirect();}catch(e){error.value=e.message;}}
+function signOut(){auth?.logout({logoutParams:{returnTo:window.location.origin}});}
+function demo(){report.value=structuredClone(sample);messages.value=[];filter.value='all';error.value='';notice.value='';window.scrollTo(0,0);}
+function reset(){report.value=null;messages.value=[];chatOpen.value=false;source.value=null;error.value='';expanded.value=null;}
+async function analyze(){error.value='';if(!file.value){fileInput.value.click();return;}if(!configured){error.value='Live PDF analysis requires Auth0, Gemini, and the backend. Use “Explore a sample” to preview the experience.';return;}if(!auth.isAuthenticated.value){await signIn();return;}if(!consent.value){error.value='Please allow your report text to be sent to Gemini for analysis.';return;}busy.value=true;try{const form=new FormData();form.append('file',file.value);form.append('intent',intent.value);report.value=await request('/api/reports',{method:'POST',body:form});messages.value=[];filter.value='all';}catch(e){error.value=e.message;}finally{busy.value=false;}}
+function askAbout(item){chatOpen.value=true;question.value=`What does “${item.title}” mean, and what is left to complete?`;}
+function demoAnswer(q){let item=report.value.requirements.find(r=>q.toLowerCase().includes(r.title.toLowerCase()));if(!item&&/minor|math/i.test(q))item=report.value.requirements.find(r=>r.id==='minor');if(item)return `${item.description}\n\nSample source: page ${item.evidence.page}. This is an illustrative answer, not a live Gemini response.`;if(/credit|left|remaining/i.test(q))return 'In this sample, 72 of 120 credits are completed, 15 are in progress, and 33 remain beyond current courses. Finishing the credit total does not automatically satisfy every requirement.\n\nThis is an illustrative answer, not a live Gemini response.';return 'This is sample mode. Try asking about Department List, Supportive Electives, the Mathematics minor, or remaining credits. Live Gemini answers become available when the services are configured.';}
+async function send(){const q=question.value.trim();if(!q||chatBusy.value)return;question.value='';messages.value.push({role:'user',text:q});chatBusy.value=true;try{const answer=report.value.demo?demoAnswer(q):(await request(`/api/reports/${report.value.id}/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})})).answer;messages.value.push({role:'assistant',text:answer});}catch(e){messages.value.push({role:'error',text:e.message});}finally{chatBusy.value=false;await nextTick();chatBody.value?.scrollTo({top:chatBody.value.scrollHeight,behavior:'smooth'});}}
+function download(){const blob=new Blob([JSON.stringify(report.value,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='lionpathway-analysis.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function value(n){return Number.isFinite(n)?n:'—';}
+</script>
+
+<template>
+ <div class="app-shell" @keydown.esc="source=null;chatOpen=false">
+  <header class="topbar">
+   <button class="brand" @click="reset" aria-label="LionPathway home"><span class="brand-icon"><GraduationCap :size="23"/></span><span>Lion<span class="brand-light">Pathway</span><span class="brand-dot">.</span></span></button>
+   <div class="header-right"><span class="independent">Built for Penn State students</span><span class="header-divider"></span><button v-if="!auth?.isAuthenticated.value" class="sign-in" @click="signIn">Sign in <ArrowUpRight :size="15"/></button><button v-else class="sign-in" @click="signOut()">Sign out <LogOut :size="15"/></button></div>
+  </header>
+  <div v-if="notice" class="notice" role="status">{{notice}}<button @click="notice=''" aria-label="Dismiss"><X :size="16"/></button></div>
+  <main v-if="!report" class="landing">
+   <div class="hero-decoration" aria-hidden="true"><span></span><span></span><span></span></div>
+   <section class="hero">
+    <div class="eyebrow"><span class="tiny-dot"></span> LESS GUESSWORK. MORE POSSIBILITY.</div>
+    <h1>Your next chapter,<br><span>clearer.</span></h1>
+    <p class="hero-description">Your degree report has the details.<br>Let’s turn them into a direction.</p>
+    <form class="search-card" :class="{dragging}" @submit.prevent="analyze" @dragover.prevent="dragging=true" @dragleave.prevent="dragging=false" @drop.prevent="drop">
+     <label class="sr-only" for="intent">Your major and the minor you are considering</label>
+     <textarea id="intent" v-model="intent" maxlength="1000" placeholder="I’m majoring in Computer Science, considering a Math minor…" :disabled="busy" rows="2"></textarea>
+     <div v-if="file" class="file-chip"><FileText :size="15"/><span>{{file.name}}</span><button type="button" @click="file=null" aria-label="Remove PDF"><X :size="14"/></button></div>
+     <div class="search-toolbar"><button type="button" class="attach-button" @click="fileInput.click()" :disabled="busy"><Plus :size="18"/> Attach report <span>PDF</span></button><button type="submit" class="submit-button" :disabled="busy" aria-label="Analyze report"><LoaderCircle v-if="busy" class="spin" :size="21"/><ArrowUp v-else :size="22"/></button></div>
+     <input ref="fileInput" type="file" accept=".pdf,application/pdf" class="sr-only" @change="e=>{if(e.target.files[0])pick(e.target.files[0]);e.target.value=''}">
+    </form>
+    <label v-if="file" class="consent"><input type="checkbox" v-model="consent"> Allow report text to be sent to Gemini for analysis. Remove personal identifiers before uploading.</label>
+    <p v-if="busy" class="loading-message" role="status">Reading your report and checking the requirements…</p>
+    <p v-if="error" class="error" role="alert">{{error}}</p>
+    <div class="hero-actions"><span>Start with your LionPATH What-If Report</span><span class="action-dot">·</span><button @click="demo">Explore a sample <ArrowRight :size="14"/></button></div>
+    <div class="value-strip"><span><BookOpen :size="16"/> Understand your requirements</span><span><Compass :size="16"/> See what’s left</span><span><MessageCircle :size="16"/> Ask better questions</span></div>
+   </section>
+   <div class="landing-bottom"><span class="little-line"></span><p>A little clarity for a big decision.</p><span class="little-line"></span></div>
+  </main>
+  <main v-else class="dashboard">
+   <div class="breadcrumb"><button @click="reset">Home</button><ChevronRight :size="13"/><span>Your degree overview</span><span v-if="report.demo" class="sample-badge">SAMPLE REPORT</span></div>
+   <div class="page-heading"><div><div class="eyebrow">YOUR BIG PICTURE</div><h1>A clearer path forward<span>.</span></h1><p>{{report.major||'Major needs confirmation'}} <span>·</span> {{report.campus||'Campus not specified'}}</p></div><button class="outline-button" @click="reset"><Plus :size="16"/> New report</button></div>
+   <div v-if="report.demo" class="sample-notice"><Info :size="17"/><span>You’re exploring an illustrative report. No personal data or live AI is used.</span></div>
+   <section class="overview-grid">
+    <div class="progress-panel panel"><div class="panel-heading"><span>Degree progress</span><span class="subtle-pill">{{report.catalogYear||'Requirement year unknown'}}</span></div>
+     <div class="credit-headline"><strong>{{value(report.totals?.completed)}}</strong><span>/ {{value(report.totals?.required)}} credits completed</span><span v-if="totals" class="percent">{{totals.percent}}%</span></div>
+     <div v-if="totals" class="credit-bar" role="img" :aria-label="`${report.totals.completed} completed, ${report.totals.inProgress} in progress, ${totals.remaining} remaining credits`"><span class="bar-complete" :style="{width:totals.completeWidth+'%'}"></span><span class="bar-progress" :style="{width:totals.progressWidth+'%'}"></span></div>
+     <p v-else class="unknown-note">Some credit totals need confirmation. We haven’t filled in missing values.</p>
+     <div class="credit-legend"><div><span class="legend-dot green"></span><span>Completed<strong>{{value(report.totals?.completed)}}</strong></span></div><div><span class="legend-dot mint"></span><span>In progress<strong>{{value(report.totals?.inProgress)}}</strong></span></div><div><span class="legend-dot gray"></span><span>Remaining<strong>{{value(totals?.remaining)}}</strong></span></div></div>
+     <p class="panel-footnote">Remaining assumes current courses are completed successfully. Requirement totals may overlap.</p>
+    </div>
+    <div class="next-panel"><div class="compass-icon"><Compass :size="24"/></div><div class="eyebrow">A GOOD PLACE TO START</div><h2>Credits tell one part<br>of your story.</h2><p>Check each requirement below. A full credit count doesn’t always mean every box is checked.</p><button @click="filter='remaining';expanded=report.requirements.find(r=>r.status!=='complete')?.id">See what needs attention <ArrowUpRight :size="16"/></button></div>
+   </section>
+   <div v-if="report.warnings?.length && !report.demo" class="warnings"><p v-for="w in report.warnings" :key="w"><Info :size="15"/>{{w}}</p></div>
+   <section class="requirements-section"><div class="section-heading"><div><h2>Your requirements</h2><p>{{completedCount}} of {{report.requirements.length}} listed requirements complete</p></div><div class="filters" aria-label="Filter requirements"><button v-for="(label,key) in {all:'All',remaining:'To complete',complete:'Completed'}" :key="key" :class="{active:filter===key}" @click="filter=key" :aria-pressed="filter===key">{{label}}</button></div></div>
+    <div class="requirements-list"><article v-for="item in visible" :key="item.id" class="requirement" :class="{expanded:expanded===item.id}"><button class="requirement-summary" @click="expanded=expanded===item.id?null:item.id" :aria-expanded="expanded===item.id"><span class="requirement-icon" :class="item.status"><Check v-if="item.status==='complete'" :size="19"/><Info v-else-if="item.status==='review'" :size="19"/><BookOpen v-else :size="19"/></span><span class="requirement-title">{{item.title}}<span v-if="item.required!=null">{{value(item.completed)}} of {{item.required}} credits completed<span v-if="item.inProgress"> · {{item.inProgress}} in progress</span></span><span v-else>More information needed</span></span><span class="status" :class="item.status">{{statuses[item.status]||'Needs review'}}</span><ChevronDown class="expand-chevron" :size="18"/></button><div v-if="expanded===item.id" class="requirement-detail"><p>{{item.description}}</p><ul v-if="item.courses?.length"><li v-for="course in item.courses" :key="course">{{course}}</li></ul><p v-else class="muted">No eligible course list was extracted for this item.</p><div class="requirement-actions"><button v-if="item.evidence?.quote" @click="source=item"><FileText :size="14"/> {{item.evidence.verified?'View source':'Review unverified source'}} · p. {{item.evidence.page||'?'}}</button><button @click="askAbout(item)"><MessageCircle :size="14"/> Ask about this</button></div></div></article><div v-if="!visible.length" class="empty-state">No requirements in this view.</div></div>
+   </section>
+   <div class="report-footer"><span><FileText :size="15"/> {{report.fileName}}</span><button @click="download"><Download :size="15"/> Export analysis</button></div>
+   <button class="chat-launcher" @click="chatOpen=!chatOpen"><MessageCircle :size="19"/> Ask your report <span>✧</span></button>
+  </main>
+  <footer class="site-footer"><span>LionPathway <span class="footer-dot">•</span> A student-built project</span><span>Independent of Penn State. Confirm academic decisions with your adviser.</span></footer>
+  <div v-if="source" class="modal-backdrop" @click.self="source=null"><section class="source-modal" role="dialog" aria-modal="true" aria-label="Report evidence"><div class="panel-heading"><span><FileText :size="18"/> Report evidence</span><button @click="source=null" aria-label="Close evidence"><X :size="20"/></button></div><h2>{{source.title}}</h2><p class="muted">{{report.demo?'Illustrative source':'Extracted source'}} · Page {{source.evidence.page||'unknown'}}</p><blockquote>{{source.evidence.quote}}</blockquote><p class="panel-footnote">{{report.demo?'Illustrative sample evidence; no personal PDF was analyzed.':source.evidence.verified?'This text matches the extracted report page. This does not independently verify the academic interpretation.':'This citation could not be matched to the extracted page. Please check the original PDF.'}}</p></section></div>
+  <aside v-if="chatOpen && report" class="chat-panel" role="dialog" aria-label="Ask your report"><div class="chat-header"><span class="chat-symbol">✧</span><div><strong>A little guidance</strong><span>{{report.demo?'Sample conversation':'Powered by Gemini · grounded in your report'}}</span></div><button @click="chatOpen=false" aria-label="Close chat"><X :size="20"/></button></div><div ref="chatBody" class="chat-body"><div class="assistant-message">Hi {{greeting}}. Let’s make sense of your report. What would you like to understand?</div><div v-if="!messages.length" class="suggestions"><button v-for="q in ['How many credits are left?','Explain Department List','Is my minor included?']" :key="q" @click="question=q;send()">{{q}}<ArrowUpRight :size="14"/></button></div><div v-for="(msg,i) in messages" :key="i" :class="['chat-message',msg.role]">{{msg.text}}</div><div v-if="chatBusy" class="chat-thinking" role="status"><LoaderCircle :size="16" class="spin"/> Reading your report…</div></div><form class="chat-form" @submit.prevent="send"><label for="chat-question" class="sr-only">Question about your report</label><input id="chat-question" v-model="question" maxlength="2000" placeholder="Ask about a requirement…"><button :disabled="chatBusy||!question.trim()" aria-label="Send question"><ArrowUp :size="19"/></button></form><p class="chat-disclaimer">A starting point for your next adviser conversation.</p></aside>
+ </div>
+</template>
