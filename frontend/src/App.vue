@@ -1,11 +1,18 @@
 <script setup>
 import {computed,inject,nextTick,ref,watch,onMounted,onUnmounted} from 'vue';
 import {useAuth0} from '@auth0/auth0-vue';
-import {ArrowUp,ArrowUpRight,ArrowRight,Plus,X,FileText,Check,ChevronDown,ChevronRight,BookOpen,GraduationCap,Compass,MessageCircle,ShieldCheck,LoaderCircle,LogOut,Download,Info,Search,RotateCcw,Trash2} from 'lucide-vue-next';
+import {ArrowUp,ArrowUpRight,ArrowRight,Plus,X,FileText,Check,ChevronDown,ChevronRight,BookOpen,GraduationCap,Compass,MessageCircle,ShieldCheck,LoaderCircle,LogOut,Download,Info,Search,RotateCcw,Trash2,Sun,Moon} from 'lucide-vue-next';
 import sample from './sample.json';
 import {apiRequest} from './api.js';
 import {sessionStatus} from './auth-config.js';
 import {progress,filterRequirements,validateFile} from './model.js';
+const theme=ref(document.documentElement.dataset.theme||'light');
+function toggleTheme(){
+ theme.value=theme.value==='dark'?'light':'dark';
+ document.documentElement.dataset.theme=theme.value;
+ document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme.value==='dark'?'#091525':'#ffffff');
+ try{localStorage.setItem('lionpathway-theme',theme.value);}catch{}
+}
 const configured=inject('authConfigured');
 const auth=configured?useAuth0():null;
 const report=ref(null),intent=ref(''),file=ref(null),fileInput=ref(null),busy=ref(false),error=ref(''),notice=ref(''),dragging=ref(false),filter=ref('all'),expanded=ref(null),source=ref(null),chatOpen=ref(false),question=ref(''),messages=ref([]),chatBusy=ref(false),chatBody=ref(null),consent=ref(false);
@@ -73,7 +80,7 @@ function value(n){return Number.isFinite(n)?n:'—';}
  <div class="app-shell" @keydown.esc="source=null;chatOpen=false;historyOpen=false;deleteConfirm=false">
   <header class="topbar">
    <button class="brand" @click="reset" aria-label="LionPathway home"><span class="brand-icon"><GraduationCap :size="23"/></span><span>Lion<span class="brand-light">Pathway</span><span class="brand-dot">.</span></span></button>
-   <div class="header-right"><span class="independent">Built for Penn State students</span><span class="header-divider"></span><span v-if="session==='restoring'" class="session-restoring" role="status"><LoaderCircle :size="14" class="spin"/> Checking session…</span><button v-if="session==='signed-in'" class="sign-in" @click="historyOpen=true;loadHistory()"><BookOpen :size="15"/> My reports</button><button v-if="session==='signed-out'" class="sign-in" @click="signIn">Sign in <ArrowUpRight :size="15"/></button><button v-else-if="session==='signed-in'" class="sign-in" @click="signOut()">Sign out <LogOut :size="15"/></button></div>
+   <div class="header-right"><button type="button" class="theme-toggle" :aria-label="theme==='dark'?'Switch to light mode':'Switch to dark mode'" :title="theme==='dark'?'Switch to light mode':'Switch to dark mode'" @click="toggleTheme"><Sun v-if="theme==='dark'" :size="18"/><Moon v-else :size="18"/></button><span class="independent">Built for Penn State students</span><span class="header-divider"></span><span v-if="session==='restoring'" class="session-restoring" role="status"><LoaderCircle :size="14" class="spin"/> Checking session…</span><button v-if="session==='signed-in'" class="sign-in" @click="historyOpen=true;loadHistory()"><BookOpen :size="15"/> My reports</button><button v-if="session==='signed-out'" class="sign-in" @click="signIn">Sign in <ArrowUpRight :size="15"/></button><button v-else-if="session==='signed-in'" class="sign-in" @click="signOut()">Sign out <LogOut :size="15"/></button></div>
   </header>
   <div v-if="deletionNotice" class="success-toast" role="status" aria-live="polite" aria-atomic="true"><Check :size="18"/><span>{{deletionNotice}}</span><button type="button" @click="dismissDeletionNotice" aria-label="Dismiss deletion notification"><X :size="16"/></button></div>
   <div v-if="notice" class="notice" role="status">{{notice}}<button @click="notice=''" aria-label="Dismiss"><X :size="16"/></button></div>
