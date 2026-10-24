@@ -7526,20 +7526,20 @@
       "subject": "BBH",
       "number": "203",
       "level": 200,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Neurological Bases of Human Behavior",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "An introduction to biopsychology, emphasizing the structure and function of the human brain. BB H (PSYCH 260) 203 Neurological Bases of Human Behavior (3) The nervous system provides the biological underpinning of behavior, and several scientific fields are concerned with the relationship between the nervous system and behavior. The goal of this course is to introduce the principle methods, findings, and theories of these scientific fields. Topics include (a) the anatomy and physiology of the nervous system, (b) how the nervous system gives rise to perception, action, language, memory, emotion and reproductive behavior, and (c) how drugs and mental illnesses affect the nervous system and alter normalperceptual, cognitive, and emotional behavior. The course prepares students for a number of more advanced courses in Psychology and Biobehavioral Health that address specialized topics in neuroscience, and may satisfy a requirement of these majors.",
       "attributes": [],
       "crosslists": [],
       "prereq_text": null,
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/bbh/"
     },
     {
       "code": "BIOL 110",
@@ -8043,20 +8043,20 @@
       "subject": "EDPSY",
       "number": "450",
       "level": 400,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Principles of Measurement",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "This is an introductory course about properties of test scores such as reliability and validity. In addition, the course focuses on the construction and evaluation of measurement instruments used in educational and psychological settings and may include topics such as test development, score reporting, and interpretation. Basic statistics are introduced throughout the course to interpret the psychometric properties of scores.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: PSYCH 100 or STAT 200 or PSYCH 200 or EDPSY 101 or Graduate Status",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edpsy/"
     },
     {
       "code": "EE 454",
@@ -8083,20 +8083,20 @@
       "subject": "EGEE",
       "number": "456",
       "level": 400,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Introduction to Neural Networks",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "Artificial Neural Networks as a solving tool for difficult problems for which conventional methods are not applicable. E E (E SC/EGEE) 456 Introduction to Neural Networks (3) This course is in response to students needs to learn Artificial Neural Networks (ANN) as a solving tool for difficult problems for which conventional methods are not available. The objective of this course is to give students hands-on experiences in identifying the best types of ANN, plus developing and applying ANN to solve difficult problems. Students will be introduced to a variety of ANN and will use their training skills to solve their own applications. During this course the students will develop a final project, in which they will apply ANN to widely varied problems.Examples: I) students from E E may be interested in applying ANN to solve control problems; II ) students from Material Sciences may be interested in applying ANN to predict the pitting corrosion of components; III) students from Petroleum Engineering may be interested in applying ANN to characterize the life of a reservoir; IV ) students from Agricultural Engineering may be interested in applying ANN to sort apples automatically, etc.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: (CMPSC 201 or CMPSC 121 or CMPSC 131) and MATH 220",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/egee/"
     },
     {
       "code": "ENGL 202C",
@@ -8133,120 +8133,120 @@
       "subject": "ESC",
       "number": "456",
       "level": 400,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Introduction to Neural Networks",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "Artificial Neural Networks as a solving tool for difficult problems for which conventional methods are not applicable. E E (E SC/EGEE) 456 Introduction to Neural Networks (3) This course is in response to students needs to learn Artificial Neural Networks (ANN) as a solving tool for difficult problems for which conventional methods are not available. The objective of this course is to give students hands-on experiences in identifying the best types of ANN, plus developing and applying ANN to solve difficult problems. Students will be introduced to a variety of ANN and will use their training skills to solve their own applications. During this course the students will develop a final project, in which they will apply ANN to widely varied problems.Examples: I) students from E E may be interested in applying ANN to solve control problems; II ) students from Material Sciences may be interested in applying ANN to predict the pitting corrosion of components; III) students from Petroleum Engineering may be interested in applying ANN to characterize the life of a reservoir; IV ) students from Agricultural Engineering may be interested in applying ANN to sort apples automatically, etc.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: (CMPSC 201 or CMPSC 121 or CMPSC 131) and MATH 220",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/esc/"
     },
     {
       "code": "ETI 100",
       "subject": "ETI",
       "number": "100",
       "level": 100,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Introduction to Enterprise Technology Integration",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "ETI 100 explores the essential relationship between IT and business, introducing students to core concepts that enable IT to support and enhance business operations. Artificial intelligence (AI) concepts are studied and applied as they apply to key course topics. Students study data management to understand how organizations leverage data as a valuable business asset, automate processes, and drive decision-making. The course covers cloud computing, enterprise systems, and AI-driven analytics, emphasizing their role in modern business strategies. Additionally, students will explore systems integration, learning how IT ecosystems leverage APIs and AI-driven automation to improve efficiency and scalability. Project management principles will be introduced, focusing on IT initiatives that integrate AI and digital transformation. Communication and teamwork skills will be developed, ensuring students can collaborate effectively across business and IT functions. By the end of the course, students will understand how IT and AI work together to optimize business operations, enhance decision-making, and support long-term strategic goals.",
       "attributes": [],
       "crosslists": [],
       "prereq_text": null,
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/eti/"
     },
     {
       "code": "GEOSC 474",
       "subject": "GEOSC",
       "number": "474",
       "level": 400,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Astrobiology",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "Astrobiology is the study of life in the universe. Astrobiology has become a major focus of scientific research in the United States and a topic often discussed in popular science literature. The recent interest in astrobiology has resulted in the formation of an Astrobiology Institute at Penn State University. This advanced undergraduate course in astrobiology will cover many topics in the field including, biochemical evolution, the origin and evolution of life on Earth, microbial diversity, protein evolution, and the distribution of life in the universe. This course is intended to provide students of the natural sciences with the opportunity to prepare for a research career in the rapidly expanding field of astrobiology. The course will also present astrobiology as a cross-disciplinary framework that ties together the diverse courses the students have already taken. The students will learn new concepts while having, to draw on their previous knowledge of chemistry, biology, and the geosciences. In summary, this course has the following objectives: (1) to develop the student's literacy in astrobiology so that they can critically evaluate claims that they encounter well after the course has ended; (2) to present a scientific question that requires the sum of the student's previous education to solve; (3) to provide a deep background to some of the astrobiological concepts that are often only briefly mentioned in other classes or in the media; (4) to develop research and communication skills required for a young scientist through a class term paper and short oral presentation; and (5) to prepare the students for graduate research in astrobiology by giving them a broad background of the field and by demonstrating many of the outstanding problems yet to be solved.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: (BIOL 110 or BIOL 110H) and (CHEM 110 or CHEM 110H)",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/geosc/"
     },
     {
       "code": "HPA 445",
       "subject": "HPA",
       "number": "445",
       "level": 400,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Health Economics",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "Economic analysis of U.S. health care system; planning, organization, and financing; current public policy issues and alternatives.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: ECON 302 or ECON 315 or ECON 323",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hpa/"
     },
     {
       "code": "IE 424",
       "subject": "IE",
       "number": "424",
       "level": 400,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Process Quality Engineering",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "Statistical methods for engineering process characterization and improvement. For non-Industrial Engineering majors. I E 424 Process Quality Engineering (3) This course will provide students with probabilistic and statistical methods required to improve the quality of products and processes. It will start with the introduction to quality culture and the key elements of quality improvement. Then the methods for data presentation and interpretation are discussed. Next, the basic probability concepts and commonly used probability distributions are taught followed by statistical concepts, such as sampling distributions, point and interval estimation, and hypotheses testing. The concepts and methods of statistical tools required for process selection and improvement such as process capability indexes and control charts are discussed next. The course ends with the coverage of simple and multiple regression models.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 Enforced Concurrent at Enrollment: MATH 220 or BE 301",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ie/"
     },
     {
       "code": "IEC 200",
       "subject": "IEC",
       "number": "200",
       "level": 200,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "A Critical Theory Perspective on Information Technology and Design",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "This course introduces students to critical perspectives on design in order to promote a more just and equitable society. Students learn about the roles designers play in shaping the systems that ameliorate and exacerbate inequality and environmental degradation, as well as ways to navigate ethical conflicts in design. By learning about critical design theories, students will develop a personal sense of the role of design in society. Critical design theories address issues of inequality based on gender, race, ethnicity, ability, nationality and culture. Students will then apply the theories to analyses of complex technical systems. Students will learn to analyze complex technical systems as layered architectures, with deep interdependencies. Understanding this complexity highlights the multitude of design decisions and policies needed to promote systems of equity and social justice. Students will also learn how organizational, industry and public policies shape these systems. While much attention is typically paid to public policy and law, in IT many decisions are made by private firms. In this way, firm and industry self-regulatory policies play an important role in design. The understanding of critical design theory, layered architectures, and policy is then applied to devise strategies to impact design.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: IEC 100",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/iec/"
     },
     {
       "code": "IST 110",
@@ -8295,40 +8295,44 @@
       "subject": "LING",
       "number": "100",
       "level": 100,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Foundations of Linguistics",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
-      "attributes": [],
+      "description": "The course consists of a general survey of language and linguistics. A number of topics relating to human knowledge and use of language are systematically and scientifically investigated. The focus of the course is not on any specific language or languages; rather, it is on properties common to all languages and on ways in which languages may differ. The focus is on examination of speakers' knowledge of language and the idea of language as a system of human communication; the course provides students with the tools needed for the recording, investigation, and close analysis of language. Areas of study include phonetics and phonology (the details of sound analysis), morphology (word structure), syntax (sentence structure), and semantics and pragmatics (the deep investigation of meaning). Another part of the course teaches the students about aspects of language in society through topics such as sociolinguistics and/or historical linguistics. This aspect of the course is crucial to students' understanding of how language and culture reflect and affect each other. The course uses examples from English and from non-English languages and cultures in order to investigate these topics, though no previous knowledge of any language other than English is presumed. A knowledge of basic linguistics is, however, generally very helpful in the learning of foreign languages.",
+      "attributes": [
+        "IL",
+        "US",
+        "GS"
+      ],
       "crosslists": [],
       "prereq_text": null,
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ling/"
     },
     {
       "code": "LING 457",
       "subject": "LING",
       "number": "457",
       "level": 400,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Psychology of Language",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "Overview of psychological research and theory on language processes, including speech perception, word recognition, meaning representation, comprehension, and language acquisition. LING (PSYCH) 457 Psychology of Language (3)(BA) This course meets the Bachelor of Arts degree requirements. How do we process language? Why do we easily adjust to a speaker with a foreign accent? How do young children come to speak the language to which they are exposed? Why is it difficult to learn a second language as an adult? This course focuses on the cognitive processes engaged by language use. Topics to be covered include speech perception, word recognition, representation of word meaning, comprehension of sentences, spoken production of words and sentences, and first and second language acquisition. In addition, the role of language in the study of thought and the role of biological mechanisms in theories of language learning will be discussed, as well as ways in which research on the language of special populations (e.g., deaf signers, dyslexics, aphasics) can inform theories of language processing and representation.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: PSYCH 100 or LING 100",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ling/"
     },
     {
       "code": "MATH 110",
@@ -8950,20 +8954,20 @@
       "subject": "PLSC",
       "number": "309",
       "level": 300,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Quantitative Political Analysis",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
+      "description": "Data analysis and statistical applications in political research, including data processing; inferential statistics; contingency analysis; correlation and regression; multivariate analysis. PL SC 309 Quantitative Political Analysis (3)This course introduces students to the basic statistical techniques used to study politics quantitatively. It can be taken by itself or as the second course in a two course sequence with PL SC 308. It is required for all Liberal Arts Fellows. Students in 309 learn about developing questions suited to empirical research; constructing hypotheses; measuring political concepts; and conducting basic univariate and multivariate analyses. The course includes sections on the basic principles of probability, sampling, and statistical inference so that students can understand and implement statistical techniques for describing and explaining political phenomena. There is also extensive coverage of the use and application of various statistical techniques. Exercises both in and out of class will require students to engage with and apply various social science concepts, and to undertake quantitative analyses of political and policy-relevant data.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Prerequisite: any 3 credits in political science",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/plsc/"
     },
     {
       "code": "PSYCH 232",
@@ -9038,20 +9042,20 @@
       "subject": "RM",
       "number": "214",
       "level": 200,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Applications of Probability Theory to Actuarial Science",
+      "credits_min": 1.5,
+      "credits_max": 1.5,
       "repeatable": false,
-      "description": null,
+      "description": "This course introduces students to actuarial science topics and the actuarial profession. To become an actuary, individuals must pass a series of professional examinations that accredit them as professionals in the field. This course provides an introduction to the material on the earlier exams such as applications of probability theory to insurance, financial mathematics (compound interest and annuities), and provides instruction on spreadsheets, so that students can perform their homework using them. Topics covered include applications of the following to insurance and actuarial science: conditional probability, independence, combinatorial principles, Bayes Theorem, and random variables. Specific probability distributions used include the binomial, uniform, Poisson, geometric, negative binomial, hyper-geometric, and multinomial discrete distributions, as well as the exponential, normal, uniform, and gamma continuous distributions. Expectations, distribution parameters, means, medians, modes, variances, skewness, and moment generating functions are also covered. The more advanced topics of joint, marginal, and conditional distributions are used, along with functions and transformations of random variables. The application of probability theory to risk management is addressed. Throughout the course, sample problems will be reviewed to help prepare students for the actuarial professional exams.",
       "attributes": [],
       "crosslists": [],
-      "prereq_text": null,
+      "prereq_text": "Enforced Prerequisite at Enrollment: C or better in MATH 141 Corequisite: STAT 414 or MATH 414 Concurrent Courses: MATH 230 or MATH 231",
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rm/"
     },
     {
       "code": "STAT 300",
@@ -9171,20 +9175,22 @@
       "subject": "STS",
       "number": "105",
       "level": 100,
-      "title": null,
-      "credits_min": null,
-      "credits_max": null,
+      "title": "Food Facts and Fads",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
       "repeatable": false,
-      "description": null,
-      "attributes": [],
+      "description": "This course is an introduction to the central role of food and food production in all areas of human life. The social and technological bases of various food systems are examined from the hunter-gatherer to the agrarian to the modern industrial system and its discontents. The course also considers how different types of food (e.g., meat, milk, cereals, chocolate) are preserved and distributed, examining both the effects of the development of the science and technology on society and vice versa. The roles of various food components (e.g., proteins, carbohydrates, fats, and vitamins) are examined both within the foods as determinants of quality, and also in terms of human nutrition and health. Finally, various other ways food may be considered appropriate or inappropriate will be studied including scientifically based reasons (e.g., safety, taste, adulteration) and non-scientifically based reasons (e.g., ethical, legal, religious).",
+      "attributes": [
+        "GHW"
+      ],
       "crosslists": [],
       "prereq_text": null,
       "prereq": null,
       "status": "reference_only",
       "review": [
-        "Referenced by another course's prerequisite or cross-list; subject page not collected."
+        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
       ],
-      "source_url": null
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sts/"
     },
     {
       "code": "CAS 100A",
