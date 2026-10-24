@@ -15,7 +15,7 @@
 - 브라우저에서 Auth0 로그인: `Service not found: https://lionpathway-api`로 차단. Auth0 Dashboard에 해당 API Identifier 등록 필요
 - 로그인 후 실제 사용자 PDF 업로드: 위 Auth0 설정이 해결되기 전까지 브라우저 전체 흐름 미검증
 - 실제 학생 LionPATH PDF 정확도: 보고서 미제공으로 미검증
-- DeepSeek/루미나리: API 명세 및 연결 설정 미제공으로 미연결
+- DeepSeek/루미나리: Luminal `flash.luminal.cloud/v1`의 `deepseek-ai/DeepSeek-V4.1-Flash` 연결. 직접 호출 200 확인, 앱 화면에서의 전체 흐름은 미검증 (아래 "Luminal 라우팅" 참고)
 
 ## 모델 설정 변경
 
@@ -58,3 +58,12 @@
 - 짧은 보고서 분석 약 1.3초, 챗봇 약 1초, TigerData 저장/조회/소유권 격리/대화 저장 통과. 테스트 데이터 rollback
 - 사용자 실제 PDF는 재업로드 후 성공 여부와 추출 정확도 확인 필요. 위 시간은 가상 입력에 대한 측정이며 보장값이 아님
 - 모델 추론 설정 참고: https://ai.google.dev/gemini-api/docs/generate-content/thinking
+
+
+## Luminal 라우팅 추가
+
+- 계획·What-If·비교·순서 질문과 400자 초과 질문은 Luminal, 나머지 채팅과 PDF 분석은 Gemini
+- `ModelRouterTest` 6개: 질문 분류, 제공자 선택, Luminal 실패 시 Gemini 전환, 키 미설정 시 Luminal 생략 확인
+- 백엔드 일반 JUnit tests 20개, 프런트 production build 통과
+- Luminal `/chat/completions` 직접 호출: HTTP 200, OpenAI 호환 응답 형식 확인
+- 로그인 후 브라우저에서 Luminal 응답 확인: 미검증
