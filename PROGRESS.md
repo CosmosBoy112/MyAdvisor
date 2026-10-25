@@ -15,6 +15,13 @@
 ---
 
 ## 2026-10-24 · Claude Code · `main`
+- 한 일: 소개 페이지 큰 제목을 "Your degree. Your questions. A clearer plan."에서 "Your only plan for what’s next."로 변경("only"를 블루로 강조해 OnlyPlans 이름과 연결)
+- 상태: 프런트 45개 테스트 통과. 라이트 모드 첫 화면 캡처로 확인. 다크 모드·모바일 폭은 이번 문구로는 미확인
+- 막힌 것: 없음
+- 다음: 없음
+- 필요한 설정: 없음
+
+## 2026-10-24 · Claude Code · `main`
 - 한 일: 채팅 입력창 아래 "Enter to send · Shift+Enter…" 문구를 지우고 그 자리에 "Confirm academic decisions with your adviser." 표시. 푸터는 "Independent of Penn State."만 남김(새 키, ko 포함 9개 언어 번역 추가). 입력창 툴팁의 Enter 안내는 유지. Clear chat 줄 아래 여백 복원, 전송 버튼 원형으로
 - 상태: 프런트 45개 테스트(사전 키 일치 포함)·빌드 통과. 샘플 채팅 화면 캡처로 문구 위치·여백·원형 버튼 확인. 다크 모드·모바일 폭은 이번에 미확인
 - 막힌 것: 없음

@@ -14,7 +14,7 @@ onUnmounted(()=>observer?.disconnect());
  <main ref="root" class="welcome">
   <section class="welcome-hero">
    <p class="welcome-eyebrow">LESS GUESSWORK. BETTER SEMESTERS.</p>
-   <h1>Your degree.<br>Your questions.<br><span>A clearer plan.</span></h1>
+   <h1>Your <span>only</span> plan<br>for what’s next.</h1>
    <p class="welcome-intro">Turn your LionPATH report into a conversation.<br>Find courses, explore minors, and see what’s left to graduate.</p>
    <div class="welcome-actions"><button class="welcome-primary" @click="emit('signin')">Find my next step <ArrowUpRight :size="20"/></button><button class="welcome-secondary" @click="emit('sample')">Explore a sample <ArrowRight :size="18"/></button></div>
    <a class="welcome-scroll" href="#course-discovery" @click.prevent="root.querySelector('#course-discovery').scrollIntoView({behavior:'auto'})">A few questions we can help with <ArrowDown :size="16"/></a>
