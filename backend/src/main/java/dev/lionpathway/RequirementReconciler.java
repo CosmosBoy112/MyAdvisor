@@ -14,9 +14,9 @@ final class RequirementReconciler {
  private record Section(String title,String state,int start,int end,int page,String quote){}
  static int reconcile(ObjectNode report,Map<Integer,String> pages){
   if(!(report.path("requirements") instanceof ArrayNode requirements))return 0;
-  var text=new StringBuilder();var sections=new ArrayList<Section>();
+  var text=new StringBuilder();var sections=new ArrayList<Section>();var pageOffsets=new TreeMap<Integer,Integer>();
   for(var entry:new TreeMap<>(pages).entrySet()){
-   int offset=text.length();String page=entry.getValue();var matcher=SECTION.matcher(page);
+   int offset=text.length();pageOffsets.put(offset,entry.getKey());String page=entry.getValue();var matcher=SECTION.matcher(page);
    while(matcher.find())sections.add(new Section(matcher.group(1).strip(),matcher.group(2),offset+matcher.start(),offset+matcher.end(),entry.getKey(),matcher.group()));
    text.append(page).append('\n');
   }
@@ -36,17 +36,23 @@ final class RequirementReconciler {
    if(target==null){if(requirements.size()>=150)break;target=requirements.addObject();target.put("title",section.title);target.putArray("courses");restored++;}
    target.put("reportedStatus","satisfied");target.put("description","The PDF marks this section satisfied. In-progress courses are shown separately from earned credits.");
    target.putNull("required");target.putNull("completed");target.putNull("inProgress");
+   target.putArray("appliedCourses");target.put("appliedCoursesVerified",false);
    String state=gpa?"complete":"review";
    if(hasUnits){
     target.put("required",required);var rows=ROW.matcher(block.substring(units.end()));
+    ArrayNode applied=target.arrayNode();
     BigDecimal sum=BigDecimal.ZERO,ip=BigDecimal.ZERO;var seen=new HashSet<String>();boolean valid=true;int count=0;
     while(rows.find()){
      var grade=GRADE.matcher(rows.group(5));String key=rows.group(1)+rows.group(2)+rows.group(3)+rows.group(4);
      if(!grade.find()||!seen.add(key)){valid=false;break;}
      BigDecimal credit=new BigDecimal(grade.group(1));sum=sum.add(credit);count++;
      if("IP".equals(grade.group(2)))ip=ip.add(credit);
+     ObjectNode course=applied.addObject();course.put("code",rows.group(3)+" "+rows.group(4));course.put("term",rows.group(1)+" "+rows.group(2));course.put("credits",credit);course.put("grade",grade.group(2));course.put("status","IP".equals(grade.group(2))?"in_progress":"completed");
+     String title=rows.group(5).substring(0,grade.start()).replaceAll("\\s+"," ").trim();
+     if(title.length()<=160&&!title.contains(":")&&!title.contains("Report Generated"))course.put("title",title);else course.putNull("title");
+     course.put("page",pageOffsets.floorEntry(section.end+units.end()+rows.start()).getValue());
     }
-    if(valid&&count>0&&sum.compareTo(used)==0&&used.compareTo(required)>=0){target.put("completed",used.subtract(ip));target.put("inProgress",ip);state=ip.signum()>0?"in_progress":"complete";}
+    if(valid&&count>0&&sum.compareTo(used)==0&&used.compareTo(required)>=0){target.set("appliedCourses",applied);target.put("appliedCoursesVerified",true);target.put("completed",used.subtract(ip));target.put("inProgress",ip);state=ip.signum()>0?"in_progress":"complete";}
    }
    target.put("status",state);var evidence=target.putObject("evidence");evidence.put("page",section.page);evidence.put("quote",section.quote);evidence.put("verified",true);evidence.put("method","lionpath_satisfied_section");
   }

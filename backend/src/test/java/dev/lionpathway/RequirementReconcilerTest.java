@@ -28,6 +28,7 @@ class RequirementReconcilerTest {
   var r=report();assertEquals(2,RequirementReconciler.reconcile(r,Map.of(1,page())));
   assertEquals("complete",r.at("/requirements/0/status").asText());assertEquals(3,r.at("/requirements/0/completed").asInt());
   assertEquals("in_progress",r.at("/requirements/1/status").asText());assertEquals(0,r.at("/requirements/1/completed").asInt());assertEquals(3,r.at("/requirements/1/inProgress").asInt());
+  assertEquals("CMPSC 131",r.at("/requirements/0/appliedCourses/0/code").asText());assertEquals("Programming",r.at("/requirements/0/appliedCourses/0/title").asText());assertEquals("SP 2025",r.at("/requirements/0/appliedCourses/0/term").asText());assertEquals("A",r.at("/requirements/0/appliedCourses/0/grade").asText());assertEquals("in_progress",r.at("/requirements/1/appliedCourses/0/status").asText());
   assertEquals(0,RequirementReconciler.reconcile(r,Map.of(1,page())));assertEquals(2,r.path("requirements").size());
  }
  @Test void sameTitleOnDifferentPagesKeepsDistinctRequirementCredits(){
@@ -36,14 +37,14 @@ class RequirementReconcilerTest {
  }
  @Test void incompleteOrDuplicatedTablesNeedReview(){
   for(String text:List.of(page().replace("Programming 3.00 A","Programming 2.00 A"),page().replace("Programming 3.00 A","Programming 3.00 A\nSP 2025 CMPSC 131 Programming 3.00 A"))){
-   var r=report();RequirementReconciler.reconcile(r,Map.of(1,text));assertEquals("review",r.at("/requirements/0/status").asText());assertTrue(r.at("/requirements/0/completed").isNull());
+   var r=report();RequirementReconciler.reconcile(r,Map.of(1,text));assertEquals("review",r.at("/requirements/0/status").asText());assertTrue(r.at("/requirements/0/completed").isNull());assertTrue(r.at("/requirements/0/appliedCourses").isEmpty());assertFalse(r.at("/requirements/0/appliedCoursesVerified").asBoolean());
   }
  }
  @Test void nonAuditTextAndNotSatisfiedNeverBecomeComplete(){
   var r=report();assertEquals(0,RequirementReconciler.reconcile(r,Map.of(1,"Review\nSatisfied\nJust a review",2,"Writing\nNot Satisfied: Complete 3 units\nUnits: 3.00 required, 0.00 used")));
  }
  @Test void sectionCanContinueOnNextPage(){
-  var r=report();RequirementReconciler.reconcile(r,Map.of(1,"Programming\nSatisfied\n",2,"Page header\nUnits: 3.00 required, 3.00 used\nSP 2025 CMPSC 131 Programming 3.00 A\n"));assertEquals("complete",r.at("/requirements/0/status").asText());assertEquals(1,r.at("/requirements/0/evidence/page").asInt());
+  var r=report();RequirementReconciler.reconcile(r,Map.of(1,"Programming\nSatisfied\n",2,"Page header\nUnits: 3.00 required, 3.00 used\nSP 2025 CMPSC 131 Programming 3.00 A\n"));assertEquals("complete",r.at("/requirements/0/status").asText());assertEquals(1,r.at("/requirements/0/evidence/page").asInt());assertEquals(2,r.at("/requirements/0/appliedCourses/0/page").asInt());
  }
  @Test @EnabledIfSystemProperty(named="auditPdf",matches=".+") void realPdfCoverage()throws Exception{
   var pages=new PdfReader().read(Files.readAllBytes(Path.of(System.getProperty("auditPdf"))));var r=report();RequirementReconciler.reconcile(r,pages);

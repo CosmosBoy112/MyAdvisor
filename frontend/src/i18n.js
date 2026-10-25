@@ -8,6 +8,11 @@ export function detectInputLanguage(text,current='en'){
 }
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
+'Courses counted toward this requirement':'이 요건에 인정된 과목',
+'Course':'과목', 'Term':'수강 학기', 'Credits':'학점', 'Grade / status':'성적 / 상태', 'PDF page':'PDF 페이지',
+'These courses appear in this requirement’s PDF table. IP courses are not earned credits yet.':'이 요건의 PDF 과목표에 기재된 내역입니다. 수강 중·예정(IP) 과목은 아직 이수 완료가 아닙니다.',
+'No verified course-level table is available for this requirement. GPA and residency requirements may not list individual courses.':'확인된 과목별 내역이 없습니다. GPA·재학 요건에는 개별 과목이 표시되지 않을 수 있습니다.',
+
 'The PDF marks this section satisfied. In-progress courses are shown separately from earned credits.':'PDF에서 충족으로 표시된 항목입니다. 수강 중인 과목은 이수 완료 학점과 구분합니다.',
 'Web search quota is exhausted. This answer could not be verified online.':'검색 API 사용량 한도를 초과해 이 답변을 인터넷에서 검증하지 못했습니다.',
 'Web findings may be outdated or subjective. Confirm course eligibility and academic decisions with your adviser.':'인터넷 정보는 오래되었거나 주관적일 수 있습니다. 과목 인정 여부와 학업 결정은 어드바이저와 상담 후 확정하세요.',
