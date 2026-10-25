@@ -18,3 +18,9 @@ export function validateFile(file) {
  if (!file.size) return 'This file is empty.';
  return '';
 }
+
+export function hasMathMinorInterest(report) {
+ const math=/\bmath(?:ematics)?\b|MATH_UMNR|수학|数学|數學|matem[aá]tica|mathématique|mathematik|математ|गणित/iu;
+ const minor=/\bminor\b|부전공|마이너|辅修|輔修|副専攻|副修|nebenfach|дополнительн|माइनर/iu;
+ return math.test(report?.minor||'') || (math.test(report?.intent||'') && minor.test(report?.intent||''));
+}

@@ -103,4 +103,76 @@ button,input,textarea{letter-spacing:inherit}
 .requirement-courses .outline-button{margin-top:14px}.course-gap{color:var(--ink)}
 
 .chat-web-toggle{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px 20px 0;font-size:var(--text-small);color:var(--muted)}.chat-web-toggle input{accent-color:var(--psu-blue)}.chat-web-toggle span{display:block;flex-basis:100%;font-size:var(--text-small);line-height:1.5}
+
+/* Conversation is the workspace; report details are an optional companion. */
+.conversation-main{display:flex;flex-direction:column;width:min(940px,100%);height:calc(100dvh - 150px);min-height:480px;margin:0 auto;padding:12px 28px 0;transition:width .18s ease}
+.conversation-main .chat-header{border:0;padding:16px 0;align-items:center}
+.conversation-main .chat-header .report-toggle{display:flex;gap:8px;font-size:var(--text-small);white-space:normal;max-width:180px}
+.conversation-context{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:var(--text-small);margin:0;padding:0 0 15px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.conversation-main .chat-body{flex:1;padding:24px 0;overflow-y:auto;min-height:0;gap:24px}
+.conversation-main .chat-message.assistant{background:transparent;padding:4px 4px;max-width:100%;width:100%;line-height:1.85}
+.conversation-main .chat-message.user{max-width:85%;align-self:flex-end}
+.conversation-main .chat-form{margin:8px 0 0;padding:14px 16px;border:1px solid var(--line);box-shadow:0 4px 20px #001e4408}
+.conversation-main .chat-form textarea{min-height:62px;max-height:160px}
+.conversation-main .chat-web-toggle{padding:8px 0}
+.conversation-main .chat-disclaimer{margin:8px 0 0;text-align:center}
+.conversation-welcome{margin:auto 0 24px;padding:32px 0 12px}
+.conversation-welcome h1{font-size:clamp(26px,3vw,36px);font-weight:500;line-height:1.3;letter-spacing:-.025em;margin:0 0 14px}
+.conversation-welcome p{color:var(--muted);line-height:1.7;margin:0}
+.conversation-main .suggestions{display:flex;flex-direction:row;flex-wrap:wrap;margin-bottom:auto}
+.conversation-main .suggestions button{flex:1 1 160px;text-align:left;background:var(--surface-subtle);border:1px solid var(--line)}
+.report-sidebar.dashboard{position:fixed;top:94px;right:0;bottom:0;width:min(560px,46vw);max-width:none;margin:0;padding:22px;overflow-y:auto;overscroll-behavior:contain;border-left:1px solid var(--line);background:var(--surface);z-index:35;box-shadow:-12px 0 36px #001e4408}
+.report-sidebar-heading{display:flex;align-items:flex-start;gap:12px;margin-bottom:22px}
+.report-sidebar-heading>div{flex:1;min-width:0}
+.report-sidebar-heading h2{font-size:var(--text-heading);margin:0 0 8px;font-weight:600}
+.report-sidebar-heading p{font-size:var(--text-small);color:var(--muted);line-height:1.6;margin:0}
+.report-sidebar-heading>button{position:sticky;top:0;background:var(--surface);flex-shrink:0}
+.report-sidebar .overview-grid{grid-template-columns:1fr;gap:16px}
+.report-sidebar .section-heading{flex-direction:column;align-items:flex-start;gap:12px}
+.report-sidebar .panel{padding:20px}.report-sidebar .requirement-summary{padding:16px 12px;gap:10px;flex-wrap:wrap}
+.report-sidebar .requirement-title{flex:1;min-width:140px}.report-sidebar .requirement-detail{padding:0 16px 20px}
+.report-sidebar .report-footer{flex-direction:column;align-items:flex-start;gap:14px}
+.report-visible .conversation-main{width:calc(100% - min(560px,46vw));max-width:none;margin-left:0;padding-left:clamp(20px,5vw,72px);padding-right:clamp(20px,4vw,56px)}
+.report-visible .site-footer{margin-right:min(560px,46vw)}
+.profile-identity{display:flex;align-items:center;gap:14px;margin:24px 0;overflow-wrap:anywhere}
+.profile-avatar{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--surface-subtle);flex-shrink:0}
+.profile-identity p{margin:5px 0 0;color:var(--muted);font-size:var(--text-small)}
+.profile-report-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 12px}.profile-report-heading h3{font-size:var(--text-body);margin:0}
+.upload-close{position:absolute;top:14px;right:14px;display:grid;place-items:center;width:40px;height:40px}
+@media(max-width:1000px){
+ .report-sidebar.dashboard{width:min(620px,100%);max-width:100%;z-index:45}
+ .report-visible .conversation-main{width:100%;max-width:940px;margin:auto;padding:12px 24px 0}
+ .report-visible .site-footer{margin-right:0}
+}
+@media(max-width:600px){
+ .conversation-main{padding:8px 16px 0;min-height:420px;height:calc(100dvh - 145px)}
+ .conversation-main .chat-header{gap:8px}.conversation-main .chat-header strong{font-size:18px}
+ .conversation-main .chat-header .report-toggle{font-size:14px;padding:8px;max-width:138px}
+ .conversation-main .chat-body{padding:18px 0}.conversation-main .chat-web-toggle span{font-size:12px}
+ .conversation-welcome{padding-top:12px}.conversation-main .chat-form textarea{min-height:50px}
+ .report-sidebar.dashboard{padding:20px 16px}
+}
+
+@media(max-width:750px){.report-sidebar.dashboard{top:76px}}
+.report-sidebar-heading{position:sticky;top:-22px;z-index:5;background:var(--surface);padding:16px 0;margin-top:-16px;border-bottom:1px solid var(--line)}
+@media(max-width:600px){.report-sidebar-heading{top:-20px}}
+.empty-report-card{width:min(620px,100%);margin:28px auto;padding:36px 24px;border:1px dashed var(--line);border-radius:16px;background:var(--surface-subtle);display:flex;flex-direction:column;align-items:center;gap:16px}
+.empty-report-card p{margin:0;color:var(--muted);line-height:1.7}.add-new-report{background:var(--ink);color:var(--surface);padding:12px 22px}.analyze-save{margin:18px auto 0;padding:12px 22px}.analyze-save:disabled{opacity:.5;cursor:not-allowed}
+
+/* Profile is a navigable page; setup remains inline until a report is saved. */
+.profile-page{width:min(880px,100%);margin:36px auto 64px;padding:0 24px;min-height:calc(100dvh - 240px)}
+.profile-page-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}
+.profile-page-heading h1{font-size:32px;margin:0}
+.profile-upload{margin-top:28px;padding-top:28px;border-top:1px solid var(--line)}
+.profile-upload .hero{position:relative;width:100%;max-width:none;padding:12px 0;margin:0}
+.profile-upload .hero h1{font-size:28px;padding-right:42px}
+.profile-upload .hero-description{margin-bottom:24px}
+@media(max-width:600px){.profile-page{padding:0 18px;margin-top:24px}.profile-page-heading{align-items:flex-start}.profile-page-heading h1{font-size:28px}}
+
+.first-report-upload{display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin:24px 0}.upload-button-row{display:flex;gap:12px}.first-report-upload .outline-button{min-height:48px;padding:12px 20px}.first-report-upload .file-chip{max-width:100%;margin:0}
+
+.profile-report.dashboard{width:100%;max-width:none;margin:32px 0 0;padding:24px 0;min-height:0;border-top:1px solid var(--line)}.profile-report .report-sidebar-heading{position:static;margin-top:0;padding-top:0}.profile-report .overview-grid{grid-template-columns:1fr}.saved-report[aria-expanded="true"]{background:var(--surface-subtle)}
+
+.back-to-reports{margin:0 0 24px;min-height:44px;padding:10px 16px}.back-to-reports .back-arrow{transform:rotate(180deg)}
+
 .brand-accent{color:var(--logo-main);font-weight:500}

@@ -117,3 +117,9 @@ export function displayLanguage(hasReport){return hasReport?locale.value:'en';}
 export function pageText(text,hasReport){return hasReport?t(text):text;}
 
 Object.assign(ko,{"What does “{title}” mean, and what is left to complete?": "“{title}”의 의미와 남은 요건을 설명해 주세요.", "Which courses can satisfy “{title}”? Explain course options, prerequisites, remaining credits and any uncertain approvals using my report and catalog.": "“{title}” 요건을 충족하는 과목, 선수과목, 남은 학점과 불확실한 승인 조건을 보고서와 카탈로그를 근거로 설명해 주세요.", "Based on my completed and planned courses, what would I need for the Mathematics minor? Explain additional credits, course options, prerequisites and overlap with my major.": "이수·예정 과목으로 수학 부전공을 하려면 무엇이 더 필요한가요? 추가 학점, 과목 선택지, 선수과목과 전공 중복 조건을 설명해 주세요.", "This sample has 72 completed credits, 15 in progress and 33 additional credits needed out of 120. Meeting the credit total does not satisfy every requirement. This is a sample answer, not a live AI response.": "샘플은 총 120학점 중 72학점 이수, 15학점 수강 중이며 추가 33학점이 필요합니다. 전체 학점만으로 모든 요건이 충족되지는 않습니다. 실제 AI 응답이 아닌 예시 답변입니다."});
+
+Object.assign(ko,{"Profile": "프로필", "View report": "리포트 보기", "Hide report": "리포트 닫기", "Your academic assistant": "나의 학업 도우미", "Add your report to start a conversation.": "리포트를 등록하고 대화를 시작하세요.", "Sign in to connect your report and start a conversation.": "로그인하여 리포트를 연결하고 대화를 시작하세요.", "What would you like to plan?": "어떤 계획을 세워볼까요?", "Your report is ready. Ask about courses, credits or a minor.": "리포트가 준비되었습니다. 과목, 학점 또는 부전공을 질문하세요."});
+
+Object.assign(ko,{"Add new": "새로 추가", "Analyze and save": "분석 후 저장", "Report saved to your profile.": "리포트가 프로필에 저장되었습니다."});
+
+Object.assign(ko,{"Set up your profile": "프로필 설정", "Add your first report": "첫 리포트 등록", "Complete your account setup by adding a LionPATH PDF.": "LionPATH PDF를 등록해 계정 설정을 완료하세요.", "Keep at least one report. Add another report before deleting this one.": "리포트는 최소 1개를 유지해야 합니다. 다른 리포트를 등록한 뒤 삭제하세요."});

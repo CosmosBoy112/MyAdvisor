@@ -265,3 +265,8 @@ Filled in the per-requirement `appliedCourses`/`appliedCoursesVerified` fields f
 Added via INSERT one `MATH_UMNR` minor program, one 2026–27 version (minimum 26 credits), and one `minor_audit_rules_v1` policy snapshot. The 4 requirement groups, grades, overlap and individual credit limits, and source conflicts are kept in the policy JSON and not duplicated into `requirement_nodes`. No existing tables, schema, or catalog rows were modified. Using the dedicated `ingest/load_math_minor_db.py`: `--dry-run` rollback → real load → rerun no-op and identical schema fingerprint confirmed. `MathMinorService` reads the DB snapshot to compute the Math minor comparison; see `docs/MATH-MINOR.md` for scope.
 
 Added a `courseInventory` extracted from the provided PDF (37 courses / per-term enrollment history, with repeated requirement entries deduplicated) to one existing user CS report. Overall credits, 30 requirements, and conversation history were kept. Original backed up privately outside Git, conditionally UPDATEd, then compared from a new connection. This PDF uses 2023 requirements, so the 2026–27 minor comparison is for reference only.
+
+
+### 2026-10-24: Last-report deletion protection verification
+
+The app now requires each account to retain at least one report. No schema or catalog changes. Account-row locking, ownership checks, and report counting run in one transaction. LiveDatabaseTest created a synthetic account and two reports, verified last-report HTTP 409 protection, rejected another user's deletion, and checked deletion of one of two reports with cascading conversation removal. All test rows were rolled back. No real user reports were modified or deleted.

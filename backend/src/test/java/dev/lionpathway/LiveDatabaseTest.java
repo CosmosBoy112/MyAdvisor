@@ -23,7 +23,9 @@ class LiveDatabaseTest {
     assertThrows(org.springframework.web.server.ResponseStatusException.class,()->repository.get(id,owner+"other"));
     repository.conversation(id,"Synthetic question","Synthetic answer");assertEquals(2,repository.history(id).size());
     repository.delete(id,owner+"other");assertEquals(report,repository.get(id,owner));
-    repository.delete(id,owner);assertTrue(repository.history(id).isEmpty());assertTrue(repository.list(owner).isEmpty());
+    var blocked=assertThrows(org.springframework.web.server.ResponseStatusException.class,()->repository.delete(id,owner));assertEquals(409,blocked.getStatusCode().value());assertEquals(2,repository.history(id).size());
+    var second=UUID.randomUUID();repository.save(second,owner,"second-synthetic.pdf",report);
+    repository.delete(id,owner);assertTrue(repository.history(id).isEmpty());assertEquals(1,repository.list(owner).size());assertEquals(report,repository.get(second,owner));
     System.out.println("LIVE_CHECK: TigerData CRUD, chat history, ownership and cascade deletion passed; rollback scheduled");
    }finally{status.setRollbackOnly();}});
   }
