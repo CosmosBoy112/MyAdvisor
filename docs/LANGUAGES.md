@@ -1,6 +1,6 @@
 # Input and display languages
 
-English is the default. The landing page, including its navigation, upload controls and errors, stays English even while another language is entered. The detected language is sent to the report analysis endpoint; report UI labels and subsequent chatbot responses follow input language.
+English is the default. The landing page, including its navigation, upload controls and errors, stays English even while another language is entered. Language detection runs on submission (Enter or the submit button), never while typing; Shift+Enter only inserts a newline. The detected language is sent to the report analysis endpoint; report UI labels and subsequent chatbot responses follow input language.
 
 Supported codes: `en`, `ko`, `zh` (Simplified Chinese UI), `ja`, `es`, `fr`, `de`, `pt`, `ru`, `hi`. This is the product's supported set, not a global language-popularity ranking.
 

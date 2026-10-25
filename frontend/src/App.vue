@@ -24,8 +24,6 @@ const configured=inject('authConfigured');
 const auth=configured?useAuth0():null;
 const report=ref(null),intent=ref(''),file=ref(null),fileInput=ref(null),busy=ref(false),error=ref(''),notice=ref(''),dragging=ref(false),filter=ref('all'),expanded=ref(null),source=ref(null),chatOpen=ref(false),question=ref(''),messages=ref([]),chatBusy=ref(false),chatBody=ref(null),consent=ref(false);
 const t=text=>pageText(text,Boolean(report.value));
-watch(intent,value=>useInputLanguage(value));
-watch(question,value=>useInputLanguage(value));
 watch([locale,report],()=>{document.documentElement.lang=displayLanguage(Boolean(report.value));},{immediate:true});
 const webSearch=ref(true);
 const base=import.meta.env.VITE_API_BASE_URL||'';
