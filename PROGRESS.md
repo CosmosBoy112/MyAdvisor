@@ -15,6 +15,13 @@
 ---
 
 ## 2026-10-24 · Claude Code · `main`
+- 한 일: 프론트 브랜드를 LionPathway → OnlyPlans로 변경(헤더·푸터·페이지 제목). OnlyFans 스타일을 오마주한 오리지널 로고(O 링 + 학사모, Penn State 네이비 계열·다크 모드 색 분리, `src/components/BrandMark.vue`)와 같은 모양의 `public/favicon.svg` 추가. 원본 로고 파일은 쓰지 않음
+- 상태: `npm ci` 후 프런트 33개 테스트·빌드 통과. 하늘색 초안을 headless Chrome 다크 모드로 캡처 확인. 네이비 색상 변경 후 화면·라이트 모드·모바일 폭은 미확인
+- 막힌 것: 없음
+- 다음: README·docs의 LionPathway 표기와 localStorage 키(`lionpathway-*`)는 그대로 둠. 필요하면 별도 정리
+- 필요한 설정: 없음. 팀원 로컬은 `franc-min` 추가분 때문에 `npm ci` 필요
+
+## 2026-10-24 · Claude Code · `main`
 - 한 일: CORS 설정 빈 이름을 `cors` → `corsConfigurationSource`로 변경. Spring Security 6.4는 이 이름으로만 찾기 때문에 기존 설정이 무시되어, 배포 환경(Vercel→Render)에서 모든 교차 출처 preflight가 403이던 문제 수정. 로컬은 Vite 프록시로 같은 출처라 드러나지 않았음
 - 상태: 수정 전 jar를 demo 프로필로 로컬 실행 시 허용 Origin preflight도 403 재현. 수정 후 `FRONTEND_ORIGIN` Origin → 200 + `Access-Control-Allow-Origin`, 다른 Origin → 403 확인. `mvn package` 테스트 전체 통과. Render 재배포 후 실제 브라우저 로그인·채팅은 미검증
 - 막힌 것: 없음

@@ -103,3 +103,4 @@ button,input,textarea{letter-spacing:inherit}
 .requirement-courses .outline-button{margin-top:14px}.course-gap{color:var(--ink)}
 
 .chat-web-toggle{display:flex;align-items:center;gap:7px;flex-wrap:wrap;padding:10px 20px 0;font-size:var(--text-small);color:var(--muted)}.chat-web-toggle input{accent-color:var(--psu-blue)}.chat-web-toggle span{display:block;flex-basis:100%;font-size:var(--text-small);line-height:1.5}
+.brand-accent{color:var(--logo-main);font-weight:500}
