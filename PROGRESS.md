@@ -15,6 +15,13 @@
 ---
 
 ## 2026-10-24 · Claude Code · `main`
+- 한 일: README 제목을 OnlyPlans로 바꾸고 배포 주소(https://www.onlyplans.courses, 프론트 Vercel·백엔드 Render) 한 줄 추가. Auth0 audience·Java 패키지·Docker 태그·`LIONPATHWAY_LIVE_TEST` 등 실제 설정값/식별자의 `lionpathway`는 그대로 둠
+- 상태: 문서 변경만. 배포 주소는 curl로 OnlyPlans 페이지·Render API 연결 확인
+- 막힌 것: 없음
+- 다음: 없음
+- 필요한 설정: 없음
+
+## 2026-10-24 · Claude Code · `main`
 - 한 일: 프론트 브랜드를 LionPathway → OnlyPlans로 변경(헤더·푸터·페이지 제목). OnlyFans 스타일을 오마주한 오리지널 로고(O 링 + 학사모, Penn State 네이비 계열·다크 모드 색 분리, `src/components/BrandMark.vue`)와 같은 모양의 `public/favicon.svg` 추가. 원본 로고 파일은 쓰지 않음
 - 상태: `npm ci` 후 프런트 33개 테스트·빌드 통과. 하늘색 초안을 headless Chrome 다크 모드로 캡처 확인. 네이비 색상 변경 후 화면·라이트 모드·모바일 폭은 미확인
 - 막힌 것: 없음

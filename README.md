@@ -1,6 +1,8 @@
-# LionPathway
+# OnlyPlans
 
 Penn State What-If Report를 학점 대시보드와 요건별 대화로 바꾸는 HackPSU MVP입니다.
+
+배포: https://www.onlyplans.courses (프론트 Vercel, 백엔드 Render)
 
 **Vue 3 + Spring Boot 3 / Java 21 + Gemini + Luminal + TigerData PostgreSQL + Auth0**
 
