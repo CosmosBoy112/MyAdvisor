@@ -123,6 +123,8 @@ The catalog was loaded into TigerData so the app can answer Computational Data S
 
 ### Load results
 
+Counts as of the 2026-10-24 DATSC/CMPSC loads. Later loads are listed in the dated sections below; after the 2026-10-25 GenEd load the totals are courses 3,681, course_versions 3,379, course_attributes 5,094, prereq_nodes 3,617, programs 6, policy_rules 14.
+
 | Table | Rows | Contents |
 |---|---|---|
 | `catalog_years` | 1 | `2026-27` (start/end dates approximate, based on Summer 2026 admission) |
@@ -287,6 +289,31 @@ No schema changes and no rows written: both loaders were run only with `--dry-ru
 - `ingest/load_calendar_db.py --data data/calendar/2026-27.json`: 3 terms (FA26, SP27, SU27) and 59 Regular Session events; a second load in the same transaction updated 3 + 59 and inserted 0. Source: Registrar 2026-27 academic calendar (retrieved 2026-10-25, one request; the site has no robots.txt). Details in `docs/notes/academic-calendar.md`.
 - Earlier catalog editions (2024-25, 2025-26) are not loaded: `bulletins.psu.edu/robots.txt` disallows `/archive/` for all crawlers, so they are not collected automatically. The backend already picks the report's edition when it is loaded.
 - Update the row counts above and in "Load results" when the real loads run.
+
+### 2026-10-25 · General Education course list and GENED requirements
+
+Loaded with `ingest/load_gened_db.py` (insert-only: no DDL, UPDATE or DELETE). Source: 2026-27 Bulletin, all 274 undergraduate course-description subject pages, plus the [baccalaureate GenEd requirements](https://bulletins.psu.edu/undergraduate/general-education/baccalaureate-degree-general-education-program/) and the 12 GenEd/University-requirement course lists (fetched 2026-10-25, 1 s apart, robots.txt-allowed paths only; page hashes in `data/catalog/2026-27/references/GENED_sources.json`).
+
+- `ingest/crawl_gened_courses.py` scanned 9,529 courses and kept the 3,151 carrying GA/GH/GN/GQ/GS/GWS/GHW, INTER (Inter-Domain), US, IL, WAC or FYS → `data/catalog/2026-27/gened_courses.json`. Two placeholder registrations without a course number (`EDAB TEMPH`, `EDAB TEMPI`) are skipped.
+- Attributes come from the course pages. The Bulletin course lists differ by 0–11 codes per attribute (lists are "updated periodically"; the IL list also includes graduate 599 courses). The differences are stored as `policy_rules` key `course_list_check`, not merged.
+- Rows added: 3,324 `courses`, 3,042 `course_versions`, 4,972 `course_attributes`, 998 prerequisite trees (25 for existing reference-only versions that had none), 543 cross-lists, program `GENED` (`program_type='gened'`, 45 credits, 18 nodes / 25 rules) and 3 `policy_rules` (`catalog_snapshot`, `course_list_check`, `sources`, scope_code `GENED`). The 109 GenEd courses already in the DB matched the crawl exactly (title, credits, attributes).
+- Totals after the load: courses 3,681, course_versions 3,379, course_attributes 5,094, course_crosslists 568, prereq_nodes 3,617, programs 6, requirement_nodes 193, requirement_rules 592, policy_rules 14.
+- The GENED tree does not model the own-major exclusion for Knowledge Domains/Exploration, flexibility substitutions, the GQ math/CS split or campus first-year rules; those nodes carry `requires_review` and the snapshot sets `automatic_audit_allowed=false`. It applies to students who entered in Summer 2023 or later.
+- **Do not rerun `load_catalog_db.py`** for 2026-27: it replaces that year's course versions and would drop these rows.
+- The pending EECS load (above) still works after this one: it reuses matching existing course versions, so its insert counts will be lower than the dry-run numbers listed there.
+
+```sh
+python ingest/crawl_gened_courses.py --cache /tmp/gened-pages --out data/catalog/2026-27   # ~6 min live, seconds with --offline
+python ingest/load_gened_db.py --data data/catalog/2026-27 --dry-run
+python ingest/load_gened_db.py --data data/catalog/2026-27
+```
+
+```sql
+SELECT a.attribute, count(*) FROM course_attributes a JOIN course_versions v ON v.id=a.course_version_id
+WHERE v.catalog_year='2026-27' GROUP BY 1 ORDER BY 1;
+SELECT v.course_code, v.title FROM course_versions v JOIN course_attributes a ON a.course_version_id=v.id
+WHERE a.attribute='GA' ORDER BY 1 LIMIT 20;
+```
 
 ### 2026-10-24: Last-report deletion protection verification
 

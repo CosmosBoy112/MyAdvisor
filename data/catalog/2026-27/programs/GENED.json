@@ -1,0 +1,111 @@
+{
+  "program": {
+    "code": "GENED",
+    "name": "General Education (Baccalaureate Degree)",
+    "type": "gened"
+  },
+  "campus": "ALL",
+  "catalog_year": "2026-27",
+  "min_total_credits": 45,
+  "source_urls": [
+    "https://bulletins.psu.edu/undergraduate/general-education/baccalaureate-degree-general-education-program/",
+    "https://bulletins.psu.edu/undergraduate/general-education/integrative-studies/"
+  ],
+  "status": "partial_requires_review",
+  "options": [],
+  "notes": [
+    "Applies to baccalaureate students who enrolled in Summer 2023 or later; earlier entrants follow the archived requirements, which are not collected.",
+    "Breadth in Knowledge Domains and Exploration may not be met with courses in the student's own major department or cross-listed with it. Integrative Studies is exempt. The tree cannot express this; check it against the student's major.",
+    "Flexibility rules (substituting a 200-499 level course in a GenEd area, or 3 units of World Language at the 12th credit level for GWS/GQ) need adviser approval and are not modeled.",
+    "Additional University Requirements (US, IL, WAC, first-year engagement) may be met by courses that also count elsewhere, so their nodes are non-exclusive."
+  ],
+  "credit_summary": {
+    "foundations": 15,
+    "knowledge_domains": 15,
+    "integrative_studies": 6,
+    "exploration": 9,
+    "total": 45,
+    "additional_university_requirements": "9-12, overlapping"
+  },
+  "requirements": [
+    {
+      "id": "foundations",
+      "label": "Foundations",
+      "type": "GROUP_ALL",
+      "min_credits": 15,
+      "children": [
+        {
+          "label": "Writing/Speaking (GWS)",
+          "type": "POOL",
+          "min_credits": 9,
+          "min_grade": "C",
+          "rules": [{"attribute": "GWS"}, {"attribute": "INTER", "include": false}],
+          "note": "C or better required. Inter-Domain courses may not be used."
+        },
+        {
+          "label": "Quantification (GQ)",
+          "type": "POOL",
+          "min_credits": 6,
+          "min_grade": "C",
+          "rules": [{"attribute": "GQ"}, {"attribute": "INTER", "include": false}],
+          "requires_review": true,
+          "note": "C or better required. Inter-Domain courses may not be used. 3-6 credits from mathematics, applied mathematics and statistics; at most 3 from computer science or symbolic logic (not modeled)."
+        }
+      ]
+    },
+    {
+      "id": "knowledge_domains",
+      "label": "Knowledge Domains",
+      "type": "GROUP_ALL",
+      "min_credits": 15,
+      "children": [
+        {"label": "Health and Wellness (GHW)", "type": "POOL", "min_credits": 3, "rules": [{"attribute": "GHW"}, {"attribute": "INTER", "include": false}]},
+        {"label": "Natural Sciences (GN)", "type": "POOL", "min_credits": 3, "rules": [{"attribute": "GN"}, {"attribute": "INTER", "include": false}]},
+        {"label": "Arts (GA)", "type": "POOL", "min_credits": 3, "rules": [{"attribute": "GA"}, {"attribute": "INTER", "include": false}]},
+        {"label": "Humanities (GH)", "type": "POOL", "min_credits": 3, "rules": [{"attribute": "GH"}, {"attribute": "INTER", "include": false}]},
+        {"label": "Social and Behavioral Sciences (GS)", "type": "POOL", "min_credits": 3, "rules": [{"attribute": "GS"}, {"attribute": "INTER", "include": false}]}
+      ]
+    },
+    {
+      "id": "integrative_studies",
+      "label": "Integrative Studies (Inter-Domain)",
+      "type": "POOL",
+      "min_credits": 6,
+      "rules": [{"attribute": "INTER"}],
+      "note": "Inter-Domain courses are each approved for two GenEd areas. Not subject to the own-major exclusion."
+    },
+    {
+      "id": "exploration",
+      "label": "Exploration",
+      "type": "GROUP_ALL",
+      "min_credits": 9,
+      "children": [
+        {"label": "Natural Sciences (GN, may be Inter-Domain)", "type": "POOL", "min_credits": 3, "rules": [{"attribute": "GN"}]},
+        {
+          "label": "GA, GH, GN, GS or Inter-Domain",
+          "type": "POOL",
+          "min_credits": 6,
+          "rules": [{"attribute": "GA"}, {"attribute": "GH"}, {"attribute": "GN"}, {"attribute": "GS"}, {"attribute": "INTER"}],
+          "requires_review": true,
+          "note": "May include 3 credits of World Language beyond the degree requirement or the 12th credit level, whichever is higher (not modeled)."
+        }
+      ]
+    },
+    {
+      "id": "additional_university",
+      "label": "Additional University Requirements",
+      "type": "GROUP_ALL",
+      "exclusive": false,
+      "children": [
+        {"label": "United States Cultures (US)", "type": "POOL", "min_credits": 3, "exclusive": false, "rules": [{"attribute": "US"}],
+         "note": "May also be met by an approved experiential learning program with adviser and dean's representative permission."},
+        {"label": "International Cultures (IL)", "type": "POOL", "min_credits": 3, "exclusive": false, "rules": [{"attribute": "IL"}],
+         "note": "Approved Education Abroad programs may also satisfy IL."},
+        {"label": "Writing Across the Curriculum (WAC)", "type": "POOL", "min_credits": 3, "exclusive": false, "rules": [{"attribute": "WAC"}]},
+        {"label": "First-Year Seminar (University Park)", "type": "POOL", "min_credits": 1, "exclusive": false, "rules": [{"attribute": "FYS"}],
+         "requires_review": true,
+         "note": "First-Year Engagement is 0-3 credits and depends on the campus; University Park requires at least 1 credit of first-year seminar plus any home-college requirement."}
+      ]
+    }
+  ]
+}

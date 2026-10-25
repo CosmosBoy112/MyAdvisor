@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-25 · Claude Code · `main` (로컬 변경)
+- 한 일: 2026-27 GenEd 전체 과목을 TigerData에 적재. `ingest/crawl_gened_courses.py`가 Bulletin 과목 페이지 274개(9,529과목)를 1초 간격으로 수집해 GenEd·US/IL/WAC/FYS 과목 3,151개를 `data/catalog/2026-27/gened_courses.json`으로 저장하고 Bulletin 공식 속성별 목록 12개와 대조(차이는 속성별 0–11개, `course_list_check`에 보존). GenEd 요건 트리 `programs/GENED.json`(45학점, program_type `gened`). insert-only 적재기 `ingest/load_gened_db.py`. 공용 파서의 괄호 미닫힘 선수과목 크래시 수정(TEXT로 남김)
+- 상태: 실제 적재 완료(커밋). 추가 행: courses 3,324, course_versions 3,042, 속성 4,972, 선수과목 트리 998(기존 참조용 버전 25개에 트리 추가 포함), 교차 등록 543, GENED 노드 18/규칙 25, policy_rules 3. 스키마·기존 행 지문 동일, 기존 GenEd 과목 109개는 크롤링과 완전히 일치. 적재 전 dry-run과 같은 트랜잭션 2회 실행(2회차 신규 0) 확인. ingest 테스트 27개, 백엔드 단위 151개(live 17 제외) 통과. 적재 후 `LiveCatalogDbTest`, `LiveCalendarTest` 통과(`LiveMathMinorTest`는 환경변수 조건으로 건너뜀). 채팅에서 GenEd 질문 실사용, 브라우저 확인은 미실행
+- 막힌 것: 없음. 공식 목록은 "주기적 갱신"이라 과목 페이지와 몇 개씩 다름(과목 페이지 기준 적재)
+- 다음: 에이전트 도구 설명에 `GENED` 프로그램 코드 안내 추가 검토, 본인 전공 제외 규칙 등 트리로 표현 못한 GenEd 규칙 처리. EECS 적재기는 기존 과목 버전을 재사용하므로 GenEd 적재와 충돌 없음(EECS가 아직 미적재라면 삽입 수가 dry-run 값보다 적어짐). **`load_catalog_db.py`는 2026-27 과목 버전을 지우므로 재실행 금지**
+- 필요한 설정: 새 환경변수 없음. 크롤러는 `lxml`, 적재기는 `psycopg` 필요(`ingest/requirements.txt`에 있음)
+
 ## 2026-10-25 · Claude Code · `main`
 - 한 일: 카탈로그 DB 범위를 UP EECS 주전공 전체로 확대(2026-27만, 부전공 제외). Computer Engineering(CMPEN_BS/ETM)·Electrical Engineering(EE_BS/ETM) 요건·전공 진입 요건·권장 학기 계획·과목을 Bulletin에서 크롤링(`ingest/crawl_eecs_catalog.py`), insert-only 적재기(`ingest/load_eecs_db.py`). 백엔드: 전공 매칭이 이름이 구(phrase)로 들어있는 전공을 우선(“Computer Science (Engineering)”이 CMPEN으로 잡히지 않게), "technology"를 중립 단어에서 제외(EET≠EE), 옵션 없는 전공의 권장 계획(`suggested_academic_plan.DEFAULT`)
 - 상태: 백엔드 151개 실행·실패 0(live 17개 제외), ingest 테스트 25개 통과. TigerData dry-run(롤백) 통과: 과목 36·버전 33·선수과목 트리 26·전공 4개·policy 10, 기존 행 지문 동일. 실제 적재는 이 커밋 배포 후 진행 예정. 브라우저 확인 미실시

@@ -88,6 +88,8 @@ def parse_prereq(text, review):
 
     def take():
         nonlocal i
+        if i >= len(tokens):
+            raise Unparsed("unexpected end of text")
         i += 1
         return tokens[i - 1]
 

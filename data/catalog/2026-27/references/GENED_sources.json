@@ -1,0 +1,2011 @@
+[
+  {
+    "id": "bulletin_ucd_index_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/",
+    "cache_file": "index.html",
+    "sha256": "c37355873c89bea21be342dfacc1dc13cff0c6fae6c7a58f5ea666a7f236a7be",
+    "downloaded_at": "2026-10-25T04:47:35.540089+00:00"
+  },
+  {
+    "id": "bulletin_ucd_a-i_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/a-i/",
+    "cache_file": "c_a-i.html",
+    "sha256": "2d0ffa14d786f35c8c2deb4c809134af455a41f583ee5351b5b4a3d83b4a43d2",
+    "downloaded_at": "2026-10-25T04:54:58.499050+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aa_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aa/",
+    "cache_file": "c_aa.html",
+    "sha256": "490588025e6824dab9c5df3e879cc3e0c3db3af03de3b1d23db2d135aa940fac",
+    "downloaded_at": "2026-10-25T04:47:36.813099+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aas_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aas/",
+    "cache_file": "c_aas.html",
+    "sha256": "c7f01125925fa28720e6c5b712d89ab7994df2d544456a44ef7e139203689f75",
+    "downloaded_at": "2026-10-25T04:47:38.039176+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aba_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aba/",
+    "cache_file": "c_aba.html",
+    "sha256": "a3e9aef431b1fc2f40c9ed8081ef943afaa126ae97f33f73c7b506b5734aae21",
+    "downloaded_at": "2026-10-25T04:47:39.260040+00:00"
+  },
+  {
+    "id": "bulletin_ucd_absm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/absm/",
+    "cache_file": "c_absm.html",
+    "sha256": "f4e039bfdc16bca338bdf984c9e39828f9d03b305972c23b5f7366004f55deb4",
+    "downloaded_at": "2026-10-25T04:47:40.553543+00:00"
+  },
+  {
+    "id": "bulletin_ucd_acctg_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/acctg/",
+    "cache_file": "c_acctg.html",
+    "sha256": "5acf2d0a2b7ceb51c127fbc8e3a50ae2722c7dda33f02c7edbd2ab277acdcee5",
+    "downloaded_at": "2026-10-25T04:47:41.836629+00:00"
+  },
+  {
+    "id": "bulletin_ucd_acs_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/acs/",
+    "cache_file": "c_acs.html",
+    "sha256": "1097cd49e3f690da071f0115577d021f573b02ab219cf8dd6610199035920e2c",
+    "downloaded_at": "2026-10-25T04:47:43.078670+00:00"
+  },
+  {
+    "id": "bulletin_ucd_adted_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/adted/",
+    "cache_file": "c_adted.html",
+    "sha256": "b4a2f37e919b58bedea0b118330419af4592a3e27cdff2b65e90fe30d311b8a9",
+    "downloaded_at": "2026-10-25T04:47:44.295034+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ae_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ae/",
+    "cache_file": "c_ae.html",
+    "sha256": "c2d4a22847b14513b3e995ec2360166810f2e6fd8578e07a54e9a34a809d4930",
+    "downloaded_at": "2026-10-25T04:47:45.628870+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aed_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aed/",
+    "cache_file": "c_aed.html",
+    "sha256": "d199b22419cdd8544f6e9b52747a36de6f7d37f2f70a0ea24dcff0d84f537546",
+    "downloaded_at": "2026-10-25T04:47:46.896920+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aee_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aee/",
+    "cache_file": "c_aee.html",
+    "sha256": "35be24ece1a23184a82b91f2c0ae32fe7097b516e8093eee9c8846d78a48788e",
+    "downloaded_at": "2026-10-25T04:47:48.186542+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aersp_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aersp/",
+    "cache_file": "c_aersp.html",
+    "sha256": "22928a5eea4d3279404ce8b6ef4a058378490149a18aa301a87b2d72cd0dfac4",
+    "downloaded_at": "2026-10-25T04:47:49.475234+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aet/",
+    "cache_file": "c_aet.html",
+    "sha256": "997a6f257f5b8328b3b398d2c9e08c674066bc2b0701c2f41969ed4ca3aa7a0e",
+    "downloaded_at": "2026-10-25T04:47:50.706582+00:00"
+  },
+  {
+    "id": "bulletin_ucd_afam_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/afam/",
+    "cache_file": "c_afam.html",
+    "sha256": "4428bc381d569dd0bed32bce16ec96aee06599224074dc515d3564894a0071b6",
+    "downloaded_at": "2026-10-25T04:47:52.016307+00:00"
+  },
+  {
+    "id": "bulletin_ucd_afr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/afr/",
+    "cache_file": "c_afr.html",
+    "sha256": "d876d0061c140f37383094536680bb186bec462ff6770fe69687021a11530078",
+    "downloaded_at": "2026-10-25T04:47:53.322170+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ag_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ag/",
+    "cache_file": "c_ag.html",
+    "sha256": "1f605d79bc15319f04994a5eef984a8e72bb07109d17b5a66b35f62569a488f0",
+    "downloaded_at": "2026-10-25T04:47:54.563965+00:00"
+  },
+  {
+    "id": "bulletin_ucd_agbm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/agbm/",
+    "cache_file": "c_agbm.html",
+    "sha256": "3c3dc9e354837b7c76fc79092e055139e1d10bf0127dfb8dbde2f5ace8e2fa96",
+    "downloaded_at": "2026-10-25T04:47:55.818585+00:00"
+  },
+  {
+    "id": "bulletin_ucd_agcom_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/agcom/",
+    "cache_file": "c_agcom.html",
+    "sha256": "1fb4314410a386e2879c27c55857fc88980e8a598563a48a42c57101bbc5972a",
+    "downloaded_at": "2026-10-25T04:47:57.173427+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ageco_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ageco/",
+    "cache_file": "c_ageco.html",
+    "sha256": "e3ad51a991b286916bed44e632070ddf8448bb82369f28d3a37b1a9b884bcd86",
+    "downloaded_at": "2026-10-25T04:47:58.654270+00:00"
+  },
+  {
+    "id": "bulletin_ucd_agro_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/agro/",
+    "cache_file": "c_agro.html",
+    "sha256": "e5a6add3854fc140b2abd2cf3f0ffc8e2ce32bed66ebf124fec2946af8fe93e4",
+    "downloaded_at": "2026-10-25T04:47:59.897390+00:00"
+  },
+  {
+    "id": "bulletin_ucd_agsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/agsc/",
+    "cache_file": "c_agsc.html",
+    "sha256": "3a46f900f897f53ae3b6e94bfd7cec4b417d846979cb241045c0a37dcbcfbd76",
+    "downloaded_at": "2026-10-25T04:48:01.421630+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aie_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aie/",
+    "cache_file": "c_aie.html",
+    "sha256": "67aa7eefdbce373274a23812e8276a04c68ffb1107654090a4af89c702f23a6c",
+    "downloaded_at": "2026-10-25T04:48:02.828583+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aima_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aima/",
+    "cache_file": "c_aima.html",
+    "sha256": "10ba7cce556d484d206b69aca882c428eae2909e940131fbb75edcf4574e1f85",
+    "downloaded_at": "2026-10-25T04:48:04.131206+00:00"
+  },
+  {
+    "id": "bulletin_ucd_air_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/air/",
+    "cache_file": "c_air.html",
+    "sha256": "c043a02dfc8a7adddbd65d3500154fd4ca1cda0676ca93353c6d329dcc004bce",
+    "downloaded_at": "2026-10-25T04:48:05.461137+00:00"
+  },
+  {
+    "id": "bulletin_ucd_amst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/amst/",
+    "cache_file": "c_amst.html",
+    "sha256": "933572bcb2d78aaab36d3b5b0a7129a6462843381dd70000522697dd1e49ddec",
+    "downloaded_at": "2026-10-25T04:48:06.826215+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ansc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ansc/",
+    "cache_file": "c_ansc.html",
+    "sha256": "c03a74c430ed5f98d224acb58c627991bed16d506c8c105b97a5a4b9fcc1c63f",
+    "downloaded_at": "2026-10-25T04:48:08.307344+00:00"
+  },
+  {
+    "id": "bulletin_ucd_anth_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/anth/",
+    "cache_file": "c_anth.html",
+    "sha256": "c5a87f429e90829fecb3f3787c08514a78504d54804830b9f24eb45c2fb3a77e",
+    "downloaded_at": "2026-10-25T04:48:09.758945+00:00"
+  },
+  {
+    "id": "bulletin_ucd_aplng_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/aplng/",
+    "cache_file": "c_aplng.html",
+    "sha256": "ab204fbae6cf73d6d941c70647dd14fb043937835bf92986b2f8fa34e3e27c03",
+    "downloaded_at": "2026-10-25T04:48:11.132636+00:00"
+  },
+  {
+    "id": "bulletin_ucd_arab_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/arab/",
+    "cache_file": "c_arab.html",
+    "sha256": "08ed28b018bc7114487ddcf915101aa29a2fdd0ff44e0a8c479c26fc8970d658",
+    "downloaded_at": "2026-10-25T04:48:12.503179+00:00"
+  },
+  {
+    "id": "bulletin_ucd_arch_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/arch/",
+    "cache_file": "c_arch.html",
+    "sha256": "d453c2f47022295f902de40723af8e7299e33667b8f854f5b8d4600e155b3073",
+    "downloaded_at": "2026-10-25T04:48:13.843710+00:00"
+  },
+  {
+    "id": "bulletin_ucd_army_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/army/",
+    "cache_file": "c_army.html",
+    "sha256": "6b8d2565479051927ecdee9585254f2d89b1b44fd41d7595fb7105dacc5c2bd6",
+    "downloaded_at": "2026-10-25T04:48:15.138774+00:00"
+  },
+  {
+    "id": "bulletin_ucd_art_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/art/",
+    "cache_file": "c_art.html",
+    "sha256": "c4edf2d7488e1102159270006862b85e701a7e9c269514eed5c8d89fa9c39f68",
+    "downloaded_at": "2026-10-25T04:48:16.624130+00:00"
+  },
+  {
+    "id": "bulletin_ucd_arth_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/arth/",
+    "cache_file": "c_arth.html",
+    "sha256": "74d935f11ffa0980fc8774d998bfcfca0630c278e0b139a50a4dc82a799ca252",
+    "downloaded_at": "2026-10-25T04:48:18.044954+00:00"
+  },
+  {
+    "id": "bulletin_ucd_artsa_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/artsa/",
+    "cache_file": "c_artsa.html",
+    "sha256": "e7aaa3130de86dce211251316793e500ee8ff4ed108ce39021434b195bff2ddb",
+    "downloaded_at": "2026-10-25T04:48:19.359956+00:00"
+  },
+  {
+    "id": "bulletin_ucd_asia_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/asia/",
+    "cache_file": "c_asia.html",
+    "sha256": "73cd3e5805e229a872b4098ad56ddb7f1cf16cc5f0a0040b8d326bb02e0270cb",
+    "downloaded_at": "2026-10-25T04:48:20.817863+00:00"
+  },
+  {
+    "id": "bulletin_ucd_astro_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/astro/",
+    "cache_file": "c_astro.html",
+    "sha256": "d79f460be3f6d5bfc41743ce86c354ddc422d0d8d34948176a1038012896dd93",
+    "downloaded_at": "2026-10-25T04:48:22.192829+00:00"
+  },
+  {
+    "id": "bulletin_ucd_athtr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/athtr/",
+    "cache_file": "c_athtr.html",
+    "sha256": "891053b26cb6c08cc7eb539d2fcd3ac528ebe71b94a674302686f4a05a661ffa",
+    "downloaded_at": "2026-10-25T04:48:23.522285+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ayfce_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ayfce/",
+    "cache_file": "c_ayfce.html",
+    "sha256": "efd420a41b20bcc5fecafb1968eb07a8babde32634df807f745526408694e404",
+    "downloaded_at": "2026-10-25T04:48:24.859862+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ba_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ba/",
+    "cache_file": "c_ba.html",
+    "sha256": "c5354e129b2ff0aac4fe0725673f3249c8f1aaf6aa7e2f4d0d3d11f15644f264",
+    "downloaded_at": "2026-10-25T04:48:26.228607+00:00"
+  },
+  {
+    "id": "bulletin_ucd_bbh_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/bbh/",
+    "cache_file": "c_bbh.html",
+    "sha256": "98198229d22ef95654399bbd6edf3fb20e3f66040b3654c849df6a24633f5b09",
+    "downloaded_at": "2026-10-25T04:48:27.662322+00:00"
+  },
+  {
+    "id": "bulletin_ucd_be_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/be/",
+    "cache_file": "c_be.html",
+    "sha256": "ef53bdff5f834cb1ef6e5cab7725c1a1de7a21e07af1414c534321d39fd9d14f",
+    "downloaded_at": "2026-10-25T04:48:29.002523+00:00"
+  },
+  {
+    "id": "bulletin_ucd_be_t_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/be_t/",
+    "cache_file": "c_be_t.html",
+    "sha256": "9079818d20d85193cc3f413586c90248977f4ed0412cebdd2429bf881f18a246",
+    "downloaded_at": "2026-10-25T04:48:30.309887+00:00"
+  },
+  {
+    "id": "bulletin_ucd_besc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/besc/",
+    "cache_file": "c_besc.html",
+    "sha256": "d4bb95e1adccfc7656b185c68e1d86a5e4d9299b3b9a45bd526d0e9180b01e16",
+    "downloaded_at": "2026-10-25T04:48:31.581025+00:00"
+  },
+  {
+    "id": "bulletin_ucd_bioet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/bioet/",
+    "cache_file": "c_bioet.html",
+    "sha256": "39805a393f9aca5a110aa566424b595e27cea89ed6b77666e27894d2bf6e39b4",
+    "downloaded_at": "2026-10-25T04:48:32.916349+00:00"
+  },
+  {
+    "id": "bulletin_ucd_biol_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/biol/",
+    "cache_file": "c_biol.html",
+    "sha256": "202518e0b37dc44ecc906f13eaa60c9664b758fc9c3c0786363ade634c6507e1",
+    "downloaded_at": "2026-10-25T04:48:34.445348+00:00"
+  },
+  {
+    "id": "bulletin_ucd_biotc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/biotc/",
+    "cache_file": "c_biotc.html",
+    "sha256": "f2fc63a960734c858edbc3417d31e558d8c880db601888805399a5cb483ebdb1",
+    "downloaded_at": "2026-10-25T04:48:52.911426+00:00"
+  },
+  {
+    "id": "bulletin_ucd_bisc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/bisc/",
+    "cache_file": "c_bisc.html",
+    "sha256": "8eea4779953e6fbd71538c6a5a796972a602c21446fb0adf8503e1b5a293a910",
+    "downloaded_at": "2026-10-25T04:48:54.209617+00:00"
+  },
+  {
+    "id": "bulletin_ucd_blaw_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/blaw/",
+    "cache_file": "c_blaw.html",
+    "sha256": "479032cf76311c9cc79cfcba63b4ea0eeb0df5903c95001e65ca1f0c46f28f17",
+    "downloaded_at": "2026-10-25T04:48:55.475966+00:00"
+  },
+  {
+    "id": "bulletin_ucd_bmb_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/bmb/",
+    "cache_file": "c_bmb.html",
+    "sha256": "6ad63d524df0a15bf80c1073b9f78ccba5f4da3fbe488a59e0779fd06517bde7",
+    "downloaded_at": "2026-10-25T04:48:56.868027+00:00"
+  },
+  {
+    "id": "bulletin_ucd_bme_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/bme/",
+    "cache_file": "c_bme.html",
+    "sha256": "d1b188f36957f7c6ba76ca037aafb7aa0ffc2c567f9183ff32d594c6418127f4",
+    "downloaded_at": "2026-10-25T04:48:58.138468+00:00"
+  },
+  {
+    "id": "bulletin_ucd_bmh_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/bmh/",
+    "cache_file": "c_bmh.html",
+    "sha256": "0de78a3c619f123d9110ed780ffa066857baf0f6b388d78721d71c1beccf02b9",
+    "downloaded_at": "2026-10-25T04:48:59.459080+00:00"
+  },
+  {
+    "id": "bulletin_ucd_brass_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/brass/",
+    "cache_file": "c_brass.html",
+    "sha256": "2c0213b9c9e5bf4a0f6f32fccf8bb81c9b1ece6bc0042d97e9f1933b7f2b233c",
+    "downloaded_at": "2026-10-25T04:49:00.746914+00:00"
+  },
+  {
+    "id": "bulletin_ucd_brs_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/brs/",
+    "cache_file": "c_brs.html",
+    "sha256": "d4a36e049c899c60fd247a76a31c5c821cbaa1f7a86c9ba50ea93615ee87fde8",
+    "downloaded_at": "2026-10-25T04:49:02.029081+00:00"
+  },
+  {
+    "id": "bulletin_ucd_c-s_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/c-s/",
+    "cache_file": "c_c-s.html",
+    "sha256": "9a77ea6af63e9710b0a3f2e4633c2a205bfa75f4aebcf7d22e37c790fdd652c7",
+    "downloaded_at": "2026-10-25T04:54:59.753850+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cams_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cams/",
+    "cache_file": "c_cams.html",
+    "sha256": "1298b25450ecd8168392e811975c69bba9b5362e7a8201a13da1113d0d8a1eda",
+    "downloaded_at": "2026-10-25T04:49:03.370591+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cap_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cap/",
+    "cache_file": "c_cap.html",
+    "sha256": "16296ccb2fdb69281befeedd781d50f63618f96e91a66531bbdf6d5a2063f2e2",
+    "downloaded_at": "2026-10-25T04:49:04.649678+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cas_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+    "cache_file": "c_cas.html",
+    "sha256": "c19bfd7506df2cc6ab9bcade124ef78676024d6cba0fdbbf63cd3cfd35a45bc2",
+    "downloaded_at": "2026-10-25T04:49:05.988140+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cc/",
+    "cache_file": "c_cc.html",
+    "sha256": "b97298df47d5119a43b0fcf5487732e5db5e0f410ecfedd5f85c6f9c1c5f4035",
+    "downloaded_at": "2026-10-25T04:49:07.274768+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ce_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ce/",
+    "cache_file": "c_ce.html",
+    "sha256": "cfccbf3bc90eee7ab635e3241426b5bd751677f193207572aec571942c0e7810",
+    "downloaded_at": "2026-10-25T04:49:08.802534+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ced_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ced/",
+    "cache_file": "c_ced.html",
+    "sha256": "c9fb7e4969924129a328987e28824882b35bec6e5682201d7025cbdf93b19016",
+    "downloaded_at": "2026-10-25T04:49:10.169603+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cedev_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cedev/",
+    "cache_file": "c_cedev.html",
+    "sha256": "7454b04c6929392c4c41cca04df1b767e2d6c29c876ffc6c54709a2b69b0bbb9",
+    "downloaded_at": "2026-10-25T04:49:11.468462+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cet/",
+    "cache_file": "c_cet.html",
+    "sha256": "aa64d4d16b7b73ee813f2aace2146e177206e51993c44546ff3727781affceca",
+    "downloaded_at": "2026-10-25T04:49:12.708877+00:00"
+  },
+  {
+    "id": "bulletin_ucd_che_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/che/",
+    "cache_file": "c_che.html",
+    "sha256": "41fc411afa9e8ba7f8863dbd10f6366088c129702d2ba2d92dbc317d2a84c5f4",
+    "downloaded_at": "2026-10-25T04:49:14.049832+00:00"
+  },
+  {
+    "id": "bulletin_ucd_chem_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/chem/",
+    "cache_file": "c_chem.html",
+    "sha256": "960862e437ee7249ab18218594a6080054e64090b9ed1f4cf6a071b88e4e43fb",
+    "downloaded_at": "2026-10-25T04:49:15.386733+00:00"
+  },
+  {
+    "id": "bulletin_ucd_chns_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/chns/",
+    "cache_file": "c_chns.html",
+    "sha256": "6e55cfaeeab8c17063436c45849678063f584eb1ac5a79bb74cf52a8f3901855",
+    "downloaded_at": "2026-10-25T04:49:16.757783+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ci_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ci/",
+    "cache_file": "c_ci.html",
+    "sha256": "a7bd3d74d39107ea4d00c0d5af0d8dda037521480efb08b79b0ac9fcb2a06c37",
+    "downloaded_at": "2026-10-25T04:49:18.048828+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cied_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cied/",
+    "cache_file": "c_cied.html",
+    "sha256": "cb558082ddc6641f29e1f74d9699c4b7aabf14987c274dc19cc6635786dacc65",
+    "downloaded_at": "2026-10-25T04:49:19.379770+00:00"
+  },
+  {
+    "id": "bulletin_ucd_civcm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/civcm/",
+    "cache_file": "c_civcm.html",
+    "sha256": "30767d8968a7054d74b8bb74991d2445d9890eba6a48dff54d9824b02ea32f19",
+    "downloaded_at": "2026-10-25T04:49:20.603934+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cmas_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmas/",
+    "cache_file": "c_cmas.html",
+    "sha256": "81e8a9e274597064ded7666d8f2c19a41abc5fe32079b476254e7689210589fd",
+    "downloaded_at": "2026-10-25T04:49:21.913364+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cmlit_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmlit/",
+    "cache_file": "c_cmlit.html",
+    "sha256": "30f5702b990456f184c1682100afa54c713d52044946070287d375dde0508602",
+    "downloaded_at": "2026-10-25T04:49:23.291388+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cmpen_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+    "cache_file": "c_cmpen.html",
+    "sha256": "c22957cb80b56bf6c2c90a2746f7288a2deb4ad8f2e4a4f3521083783677b9a8",
+    "downloaded_at": "2026-10-25T04:49:24.659589+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cmpet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpet/",
+    "cache_file": "c_cmpet.html",
+    "sha256": "5cb0af264c37194c2f7a2cc79f24869430fe0a376b28a13ae6ec6ba144a4f566",
+    "downloaded_at": "2026-10-25T04:49:25.945822+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cmpmt_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpmt/",
+    "cache_file": "c_cmpmt.html",
+    "sha256": "f5b23e59bca37694ea9cd62162ccf64ff7edfe202b77a55b62a13252f0e24370",
+    "downloaded_at": "2026-10-25T04:49:27.245196+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cmpsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpsc/",
+    "cache_file": "c_cmpsc.html",
+    "sha256": "c89fa71271d692ad3d26b3b17b75089fba94a566c40c76eaa12ad116010defd2",
+    "downloaded_at": "2026-10-25T04:49:28.592138+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cned_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cned/",
+    "cache_file": "c_cned.html",
+    "sha256": "c84dc5e23c7152e8c43f301dfe90fac269988754b21bc13f81d201af0c6fe5af",
+    "downloaded_at": "2026-10-25T04:49:29.944816+00:00"
+  },
+  {
+    "id": "bulletin_ucd_comm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/comm/",
+    "cache_file": "c_comm.html",
+    "sha256": "571553aab0441380784cc7db85622fb894c14679db05e6fe0048bbab75da21f3",
+    "downloaded_at": "2026-10-25T04:49:31.401712+00:00"
+  },
+  {
+    "id": "bulletin_ucd_crim_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/crim/",
+    "cache_file": "c_crim.html",
+    "sha256": "0094d35c6336c5e4d7a1d9f119bf443eeed20aad523da85db45ad71e1e657d56",
+    "downloaded_at": "2026-10-25T04:49:32.700539+00:00"
+  },
+  {
+    "id": "bulletin_ucd_crimj_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/crimj/",
+    "cache_file": "c_crimj.html",
+    "sha256": "eec8f718a7b76d169692eff51368e5f592b3539a040c11a48a94e146b0ac85b7",
+    "downloaded_at": "2026-10-25T04:49:34.111670+00:00"
+  },
+  {
+    "id": "bulletin_ucd_csd_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/csd/",
+    "cache_file": "c_csd.html",
+    "sha256": "7bc420c02e1e4ca593e8c3b64a2d75a60b5934ce1e084d8d1eebc577ceecb7a7",
+    "downloaded_at": "2026-10-25T04:49:35.398805+00:00"
+  },
+  {
+    "id": "bulletin_ucd_cyber_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cyber/",
+    "cache_file": "c_cyber.html",
+    "sha256": "81a424fb8c671fc6d14657a4e620bd741f62845f7cb2bde2d1f3a0bbb772f52b",
+    "downloaded_at": "2026-10-25T04:49:36.772300+00:00"
+  },
+  {
+    "id": "bulletin_ucd_da_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/da/",
+    "cache_file": "c_da.html",
+    "sha256": "82c9f15486a16fb85ca3cf9d534301768575fbb67932907b06c78615e68a3904",
+    "downloaded_at": "2026-10-25T04:49:38.017967+00:00"
+  },
+  {
+    "id": "bulletin_ucd_dance_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/dance/",
+    "cache_file": "c_dance.html",
+    "sha256": "e1d1f2738ef96f9ee6be26c7b5a21bc6e4226870c41e52c9072890b5bbd3a22e",
+    "downloaded_at": "2026-10-25T04:49:39.434695+00:00"
+  },
+  {
+    "id": "bulletin_ucd_dart_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/dart/",
+    "cache_file": "c_dart.html",
+    "sha256": "5a9fd61c8f596e8eaddc443bfdf23258116af355f5c44641552809ad47af559e",
+    "downloaded_at": "2026-10-25T04:49:40.789497+00:00"
+  },
+  {
+    "id": "bulletin_ucd_digit_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/digit/",
+    "cache_file": "c_digit.html",
+    "sha256": "26fdd4cfe9a17182144ea1f074e0795f29b581da514af1597a69ddfbe8c9e6c1",
+    "downloaded_at": "2026-10-25T04:49:42.036892+00:00"
+  },
+  {
+    "id": "bulletin_ucd_dmd_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/dmd/",
+    "cache_file": "c_dmd.html",
+    "sha256": "773a29260761edd64848e828817d86fa8d02dd5d3113e2fe6a2059959f719245",
+    "downloaded_at": "2026-10-25T04:49:43.261258+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ds_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ds/",
+    "cache_file": "c_ds.html",
+    "sha256": "6dc0b0d5c16f614502b20c990d0ee48aa1faa3fb57f2176fc5c9baac53ba8d59",
+    "downloaded_at": "2026-10-25T04:49:44.623624+00:00"
+  },
+  {
+    "id": "bulletin_ucd_earth_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/earth/",
+    "cache_file": "c_earth.html",
+    "sha256": "190b82f613d084df413e845523b3b836ee49b93cec340f2247b68c4b7c5b7028",
+    "downloaded_at": "2026-10-25T04:49:45.895658+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ebf_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ebf/",
+    "cache_file": "c_ebf.html",
+    "sha256": "fd6cb2a81f372f38b953fd5e1ecfb520af12190eae640fc5bf805e0953740bd1",
+    "downloaded_at": "2026-10-25T04:49:47.202734+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ece_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ece/",
+    "cache_file": "c_ece.html",
+    "sha256": "b3113cbcb1663cd692c5a4ea3136675414b65fc7675a3b7e85a4fbe8e4ddf209",
+    "downloaded_at": "2026-10-25T04:49:48.431381+00:00"
+  },
+  {
+    "id": "bulletin_ucd_econ_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/econ/",
+    "cache_file": "c_econ.html",
+    "sha256": "1906445719769b7b3e44e35247a6cc1c7611f83de28c3a547345dc0fed8c6e6b",
+    "downloaded_at": "2026-10-25T04:49:49.829985+00:00"
+  },
+  {
+    "id": "bulletin_ucd_edab_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edab/",
+    "cache_file": "c_edab.html",
+    "sha256": "aa5f7b4f4c9792da667ce2c626e27d1ceebad627e5a9ecfc1fdb3382406298d5",
+    "downloaded_at": "2026-10-25T04:49:51.050384+00:00"
+  },
+  {
+    "id": "bulletin_ucd_edldr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edldr/",
+    "cache_file": "c_edldr.html",
+    "sha256": "95ba53d984d546ec4694a0e3f8e2693a85d5f8105bbae6bc62192ec2d1fe6815",
+    "downloaded_at": "2026-10-25T04:49:52.357494+00:00"
+  },
+  {
+    "id": "bulletin_ucd_edmth_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edmth/",
+    "cache_file": "c_edmth.html",
+    "sha256": "77e8ffca8ce931150ff5a5d038399c2efc803448008c5c9215120e34d3ae66cf",
+    "downloaded_at": "2026-10-25T04:49:53.610014+00:00"
+  },
+  {
+    "id": "bulletin_ucd_edpsy_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edpsy/",
+    "cache_file": "c_edpsy.html",
+    "sha256": "265c4fed1281e3a85cbba77824c5549be13b6ddf23d009e86332491f3c9b3b37",
+    "downloaded_at": "2026-10-25T04:49:54.937339+00:00"
+  },
+  {
+    "id": "bulletin_ucd_edsgn_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edsgn/",
+    "cache_file": "c_edsgn.html",
+    "sha256": "c1083b1a62b9cf1e9a5df168509f3a800c9bc177a8a648a50c399c2f3ac02e95",
+    "downloaded_at": "2026-10-25T04:49:56.261854+00:00"
+  },
+  {
+    "id": "bulletin_ucd_edtec_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edtec/",
+    "cache_file": "c_edtec.html",
+    "sha256": "9abab07e8435697a61a255fb6552c50a8a2b0606d49c48dbee53481ed0930050",
+    "downloaded_at": "2026-10-25T04:49:57.559956+00:00"
+  },
+  {
+    "id": "bulletin_ucd_edthp_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edthp/",
+    "cache_file": "c_edthp.html",
+    "sha256": "6e9860b904c6a09224a3761bc21e3394e0b039a00d183ae0635d15b8650909d5",
+    "downloaded_at": "2026-10-25T04:49:58.854305+00:00"
+  },
+  {
+    "id": "bulletin_ucd_educ_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/educ/",
+    "cache_file": "c_educ.html",
+    "sha256": "f63f9893422fa4d1b7d15b0ab6bf4a86813f7215553d5957c6cb8e9a6c3239d4",
+    "downloaded_at": "2026-10-25T04:50:00.265912+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ee_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+    "cache_file": "c_ee.html",
+    "sha256": "2d07da34ef29cfdf977093610e2d787611bef12969d1ab97036eec7119628e20",
+    "downloaded_at": "2026-10-25T04:50:01.578647+00:00"
+  },
+  {
+    "id": "bulletin_ucd_eet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/eet/",
+    "cache_file": "c_eet.html",
+    "sha256": "d209a6049241553598c8212f9505b20c6fa275a60a4f8c98f494eea8dbd62107",
+    "downloaded_at": "2026-10-25T04:50:02.938160+00:00"
+  },
+  {
+    "id": "bulletin_ucd_egee_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/egee/",
+    "cache_file": "c_egee.html",
+    "sha256": "30caa4db42365fa858c81f6d14eb2b9a2c61265ad569754d7c4a3ef50888cb97",
+    "downloaded_at": "2026-10-25T04:50:04.210194+00:00"
+  },
+  {
+    "id": "bulletin_ucd_egt_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/egt/",
+    "cache_file": "c_egt.html",
+    "sha256": "0e14d7e348f611358296a256d9cf5a8074e23a3f657b856aba53b13ec5f239c1",
+    "downloaded_at": "2026-10-25T04:50:05.516515+00:00"
+  },
+  {
+    "id": "bulletin_ucd_eledm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/eledm/",
+    "cache_file": "c_eledm.html",
+    "sha256": "a96fb13864e57a1e16beeb8f42eaffc54f3acb9918ed6780b48dd69976721c71",
+    "downloaded_at": "2026-10-25T04:50:06.757910+00:00"
+  },
+  {
+    "id": "bulletin_ucd_emch_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/emch/",
+    "cache_file": "c_emch.html",
+    "sha256": "f01a6e58ad98cc6d923bd61bf47335ef8e59bd5a88bd82e23e13b46e3f6ccdeb",
+    "downloaded_at": "2026-10-25T04:50:08.136119+00:00"
+  },
+  {
+    "id": "bulletin_ucd_eme_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/eme/",
+    "cache_file": "c_eme.html",
+    "sha256": "5b3b0b6c330e830396f57344d71e1c3e66e4334a26768a089ac2f903958f49da",
+    "downloaded_at": "2026-10-25T04:50:09.387774+00:00"
+  },
+  {
+    "id": "bulletin_ucd_emet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/emet/",
+    "cache_file": "c_emet.html",
+    "sha256": "6a3582ccf43359dab9c2bfc61515dc77571739ad8d269f9b029c9fdc7f839938",
+    "downloaded_at": "2026-10-25T04:50:10.755015+00:00"
+  },
+  {
+    "id": "bulletin_ucd_emsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/emsc/",
+    "cache_file": "c_emsc.html",
+    "sha256": "440bc8703c47c5d891cef607b89701b92ce573532c8a9e4cc58465488b2509f8",
+    "downloaded_at": "2026-10-25T04:50:12.048895+00:00"
+  },
+  {
+    "id": "bulletin_ucd_engl_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+    "cache_file": "c_engl.html",
+    "sha256": "3b45fd4114d00bf6a4a2d9bbcae443e62329548ef4bf81af3bdaad9920a914bb",
+    "downloaded_at": "2026-10-25T04:50:13.548985+00:00"
+  },
+  {
+    "id": "bulletin_ucd_engr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engr/",
+    "cache_file": "c_engr.html",
+    "sha256": "a9dcc903a1a19995a6d9a57bf4ef24e79d9355f8f11cea0140e7f7df24421ed4",
+    "downloaded_at": "2026-10-25T04:50:14.958189+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ennec_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ennec/",
+    "cache_file": "c_ennec.html",
+    "sha256": "af9fa74149dfe8acf8a1eaba47f9a1531ddc44ce210c50c86cc29de6db2a6a63",
+    "downloaded_at": "2026-10-25T04:50:16.188357+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ent_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ent/",
+    "cache_file": "c_ent.html",
+    "sha256": "904375b99445c8ba478e332734533ab62057bc6a1e52c2281819db1209ec6281",
+    "downloaded_at": "2026-10-25T04:50:17.521256+00:00"
+  },
+  {
+    "id": "bulletin_ucd_entr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/entr/",
+    "cache_file": "c_entr.html",
+    "sha256": "074960c9c0c7d294054466b4440755af6b3b31c5b76026f086a786f8a3619828",
+    "downloaded_at": "2026-10-25T04:50:18.762794+00:00"
+  },
+  {
+    "id": "bulletin_ucd_enve_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/enve/",
+    "cache_file": "c_enve.html",
+    "sha256": "cc22015a5a56322884a4b77097608c4838511852c9fe9700e6c1cd843850c96f",
+    "downloaded_at": "2026-10-25T04:50:20.102936+00:00"
+  },
+  {
+    "id": "bulletin_ucd_envsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/envsc/",
+    "cache_file": "c_envsc.html",
+    "sha256": "3b4b4a5c6fd990d4d771bbe6332289c12e2775a3dec34b9c357291378a207948",
+    "downloaded_at": "2026-10-25T04:50:21.384286+00:00"
+  },
+  {
+    "id": "bulletin_ucd_envse_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/envse/",
+    "cache_file": "c_envse.html",
+    "sha256": "6caff36a6269b12fae0f99464657abdd222254692104d26f29fbb4f2790cbda2",
+    "downloaded_at": "2026-10-25T04:50:22.721634+00:00"
+  },
+  {
+    "id": "bulletin_ucd_envst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/envst/",
+    "cache_file": "c_envst.html",
+    "sha256": "93bfe089413d6f7a743ca5d17b08026dda8882931a4fb522d63ed026c5cbfcd3",
+    "downloaded_at": "2026-10-25T04:50:23.982981+00:00"
+  },
+  {
+    "id": "bulletin_ucd_erm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/erm/",
+    "cache_file": "c_erm.html",
+    "sha256": "218d2d03427f1a7f965d2178fa3d094716da81a4ea38ce4752f9ddffe73738e2",
+    "downloaded_at": "2026-10-25T04:50:25.251120+00:00"
+  },
+  {
+    "id": "bulletin_ucd_esc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/esc/",
+    "cache_file": "c_esc.html",
+    "sha256": "8918215f4521674d6d0ed3433f6b05dfd63a1bc9c4f1008b1ea83cd3bcebc53e",
+    "downloaded_at": "2026-10-25T04:50:26.610601+00:00"
+  },
+  {
+    "id": "bulletin_ucd_esl_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/esl/",
+    "cache_file": "c_esl.html",
+    "sha256": "be88b859eca822278493afc6a918a47b1f15b3b40ebcdbef311a86fc2a725228",
+    "downloaded_at": "2026-10-25T04:50:27.856564+00:00"
+  },
+  {
+    "id": "bulletin_ucd_et_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/et/",
+    "cache_file": "c_et.html",
+    "sha256": "d63149300322b803314c719f226d325a7f672822bca3ca52be2e95fc15732de5",
+    "downloaded_at": "2026-10-25T04:50:29.158870+00:00"
+  },
+  {
+    "id": "bulletin_ucd_eti_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/eti/",
+    "cache_file": "c_eti.html",
+    "sha256": "252dfaa1676340d19067b0a41a37306e1696a0f0e32a82d58e81b77afa447524",
+    "downloaded_at": "2026-10-25T04:50:30.446905+00:00"
+  },
+  {
+    "id": "bulletin_ucd_fdsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/fdsc/",
+    "cache_file": "c_fdsc.html",
+    "sha256": "2821d8450164da23a8035513c0d186e0da3aacf254c7221f9ac67b036a5789fa",
+    "downloaded_at": "2026-10-25T04:50:31.808080+00:00"
+  },
+  {
+    "id": "bulletin_ucd_fdsys_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/fdsys/",
+    "cache_file": "c_fdsys.html",
+    "sha256": "4264d6487f6b215ca7209765b2808ec7826610393a7b7bc7c829e4931eba64bc",
+    "downloaded_at": "2026-10-25T04:50:33.035986+00:00"
+  },
+  {
+    "id": "bulletin_ucd_fin_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/fin/",
+    "cache_file": "c_fin.html",
+    "sha256": "24f07f7590ebda261196942191ca947aa56451488f0662053dbb011990f73009",
+    "downloaded_at": "2026-10-25T04:50:34.422062+00:00"
+  },
+  {
+    "id": "bulletin_ucd_for_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/for/",
+    "cache_file": "c_for.html",
+    "sha256": "ce3bd30aa0999997e525c1dba7ec7c29f568bbdc65e72265d928b6875b4e2f33",
+    "downloaded_at": "2026-10-25T04:50:35.696756+00:00"
+  },
+  {
+    "id": "bulletin_ucd_fort_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/fort/",
+    "cache_file": "c_fort.html",
+    "sha256": "ea3ae9f3a7a25de614ed318d454e0894f4acd0e0ab028052615ae700d948797a",
+    "downloaded_at": "2026-10-25T04:50:37.060865+00:00"
+  },
+  {
+    "id": "bulletin_ucd_fr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/fr/",
+    "cache_file": "c_fr.html",
+    "sha256": "15d95759a1d334ebe759bf922179d90774609566628ff21c702a410f584bc2dd",
+    "downloaded_at": "2026-10-25T04:50:38.334984+00:00"
+  },
+  {
+    "id": "bulletin_ucd_frnar_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/frnar/",
+    "cache_file": "c_frnar.html",
+    "sha256": "c45662eb01d5f1617f34c7b5d60f67f1eddee4336ff5b4ffc1304a1273250226",
+    "downloaded_at": "2026-10-25T04:50:39.686237+00:00"
+  },
+  {
+    "id": "bulletin_ucd_frnsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/frnsc/",
+    "cache_file": "c_frnsc.html",
+    "sha256": "6b8a2d1376b0027f7e4ab5e5f95c5280ef289e642d702c31f1c05e0cc85eea8d",
+    "downloaded_at": "2026-10-25T04:50:40.956212+00:00"
+  },
+  {
+    "id": "bulletin_ucd_fsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/fsc/",
+    "cache_file": "c_fsc.html",
+    "sha256": "cbb4f13e1c2c5a5357c3eee8ba733b2ceb95f319a3e605ba58612016e06a1f2b",
+    "downloaded_at": "2026-10-25T04:50:42.256262+00:00"
+  },
+  {
+    "id": "bulletin_ucd_game_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/game/",
+    "cache_file": "c_game.html",
+    "sha256": "108864500fcc65476a0abb6855b4e485810ffc13a9500f6ac687bb5c7eaadaa1",
+    "downloaded_at": "2026-10-25T04:50:43.528201+00:00"
+  },
+  {
+    "id": "bulletin_ucd_gd_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/gd/",
+    "cache_file": "c_gd.html",
+    "sha256": "3ced9f1d489f09cde70ef49451c895e37e39aed5a2ebde2270e696bb2dfe54a3",
+    "downloaded_at": "2026-10-25T04:50:44.883504+00:00"
+  },
+  {
+    "id": "bulletin_ucd_geog_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/geog/",
+    "cache_file": "c_geog.html",
+    "sha256": "da251d4071740f3ffdd5e3e38de22737d380b1023f349f139fa10855e489b6b4",
+    "downloaded_at": "2026-10-25T04:50:46.200119+00:00"
+  },
+  {
+    "id": "bulletin_ucd_geosc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/geosc/",
+    "cache_file": "c_geosc.html",
+    "sha256": "73e66a085fe7147695dfb5711613f3d9657fe9bb1ecd5e84473aed38d8706766",
+    "downloaded_at": "2026-10-25T04:50:47.578132+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ger_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ger/",
+    "cache_file": "c_ger.html",
+    "sha256": "62ff68a5820644e8ac58c24d9e28ab54786681c5e4e5a116bb11d67955f8a4e0",
+    "downloaded_at": "2026-10-25T04:50:48.939350+00:00"
+  },
+  {
+    "id": "bulletin_ucd_glis_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/glis/",
+    "cache_file": "c_glis.html",
+    "sha256": "fa9d99745b0f0a5cf49b1c6ab0709cb2ac53036c5ad949cc4f0fbfd58c42183e",
+    "downloaded_at": "2026-10-25T04:50:50.190881+00:00"
+  },
+  {
+    "id": "bulletin_ucd_greek_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/greek/",
+    "cache_file": "c_greek.html",
+    "sha256": "71f82904cfd612ff0cde6f858f53fef81ab1152381aa0b64e34d74e1ff3c18a9",
+    "downloaded_at": "2026-10-25T04:50:51.420228+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hcdd_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hcdd/",
+    "cache_file": "c_hcdd.html",
+    "sha256": "0a0553a80e2b29fc1aaaeae6a336bbdf35c78210158f690138b47981998aaec2",
+    "downloaded_at": "2026-10-25T04:50:52.793250+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hdfs_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hdfs/",
+    "cache_file": "c_hdfs.html",
+    "sha256": "f525d0aff69245b425ac30ea304e8812f7bf88b5492b7fb7c2e7fbd605f2654d",
+    "downloaded_at": "2026-10-25T04:50:54.180791+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hebr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hebr/",
+    "cache_file": "c_hebr.html",
+    "sha256": "c0902de88710044ec3c9791a31573704b887f4c8ce6c7293c7cb48b0d6e8cfcc",
+    "downloaded_at": "2026-10-25T04:50:55.479479+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hhd_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hhd/",
+    "cache_file": "c_hhd.html",
+    "sha256": "10ff03bf8550dfda5a89099d2cec2dd542d0ab09e484ae59946b8b44762c1643",
+    "downloaded_at": "2026-10-25T04:50:56.802232+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hhum_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hhum/",
+    "cache_file": "c_hhum.html",
+    "sha256": "d365526314ac0161fdddafbefe0b212feda496f6bd772fcbd6f0fa9c24c88850",
+    "downloaded_at": "2026-10-25T04:50:58.076925+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hied_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hied/",
+    "cache_file": "c_hied.html",
+    "sha256": "41b09cf613acc16b1d6925b82c6cfb06dea91a3ff6f645fef00a577a077503c6",
+    "downloaded_at": "2026-10-25T04:50:59.296070+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hindi_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hindi/",
+    "cache_file": "c_hindi.html",
+    "sha256": "7fbdd031e0072cc78c0aef2be1a1adadb16d1022b623f3a585e34bc57714f840",
+    "downloaded_at": "2026-10-25T04:51:00.604229+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hist_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hist/",
+    "cache_file": "c_hist.html",
+    "sha256": "16deb5bf7dddef53100619cc005d6500190d74d0525aab89ce70753c3867aecb",
+    "downloaded_at": "2026-10-25T04:51:02.047034+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hlhed_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hlhed/",
+    "cache_file": "c_hlhed.html",
+    "sha256": "e0825008488e1437a91dae695dc5346289b6ea569b985a21c2ef20878aba0708",
+    "downloaded_at": "2026-10-25T04:51:03.325320+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hls_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hls/",
+    "cache_file": "c_hls.html",
+    "sha256": "cb75ab31dc0e383959f20ddc4cab5dae6d3a8e676107136602b0d52032bddb6d",
+    "downloaded_at": "2026-10-25T04:51:04.554928+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hm/",
+    "cache_file": "c_hm.html",
+    "sha256": "5be6f5d211c646057d045eb81fe05c31c8aa61855c4b6bbacf5b9484a2e5e0cb",
+    "downloaded_at": "2026-10-25T04:51:05.922249+00:00"
+  },
+  {
+    "id": "bulletin_ucd_honor_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/honor/",
+    "cache_file": "c_honor.html",
+    "sha256": "f04d8cb3705fccb71875086f7723d9baeeb579a97b31228b543f1a252c7ef5b5",
+    "downloaded_at": "2026-10-25T04:51:07.146106+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hort_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hort/",
+    "cache_file": "c_hort.html",
+    "sha256": "d36be648efb0b84299f063570c3b042d48db0feff8045c4e759967b7edaf1f9e",
+    "downloaded_at": "2026-10-25T04:51:08.518952+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hpa_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hpa/",
+    "cache_file": "c_hpa.html",
+    "sha256": "7935a93c2c8dca5af8a13879df90223796bdefb653b9eaa4a0e006ca8ab2e7bf",
+    "downloaded_at": "2026-10-25T04:51:09.909441+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hrm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hrm/",
+    "cache_file": "c_hrm.html",
+    "sha256": "2f9d15154d1d3664b5742b019ccb2f9254e6fe94db25bfdba59788cf6d4349a7",
+    "downloaded_at": "2026-10-25T04:51:11.168892+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hss_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hss/",
+    "cache_file": "c_hss.html",
+    "sha256": "23653f8051576840fda57da1556b3ce100a85df544dad0e1cbfc201e58a0298c",
+    "downloaded_at": "2026-10-25T04:51:12.411959+00:00"
+  },
+  {
+    "id": "bulletin_ucd_hum_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/hum/",
+    "cache_file": "c_hum.html",
+    "sha256": "cc8614960cb364ba90e551f9ad6435434475006f76ba8f2d7e9cc8de12b1858d",
+    "downloaded_at": "2026-10-25T04:51:13.746711+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ib_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ib/",
+    "cache_file": "c_ib.html",
+    "sha256": "aaabc8309027903069d7da57ed44edb16b49dddb43395779b49fffb59c91bb92",
+    "downloaded_at": "2026-10-25T04:51:15.018976+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ie_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ie/",
+    "cache_file": "c_ie.html",
+    "sha256": "60284ab8d601502b9b0fe54720e18fb8dc06664a147eabcaf24111c632d97054",
+    "downloaded_at": "2026-10-25T04:51:16.375090+00:00"
+  },
+  {
+    "id": "bulletin_ucd_iec_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/iec/",
+    "cache_file": "c_iec.html",
+    "sha256": "48a7214d100b3dc6b39c45bd13f5e24fb97a3baf5b6b0fef31c5fea3c8976e66",
+    "downloaded_at": "2026-10-25T04:51:17.621629+00:00"
+  },
+  {
+    "id": "bulletin_ucd_iet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/iet/",
+    "cache_file": "c_iet.html",
+    "sha256": "bc376ddc13c82c1c6e8df15695bc840b422fff227ec0cdae7405367cb9aa18d8",
+    "downloaded_at": "2026-10-25T04:51:18.961731+00:00"
+  },
+  {
+    "id": "bulletin_ucd_inart_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/inart/",
+    "cache_file": "c_inart.html",
+    "sha256": "e5f8d03f26543a677ecb596d56409b6e77cd264fc42307d9814da6eadaba692e",
+    "downloaded_at": "2026-10-25T04:51:20.226193+00:00"
+  },
+  {
+    "id": "bulletin_ucd_insc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/insc/",
+    "cache_file": "c_insc.html",
+    "sha256": "a55694e8ca44fe417e9c880c6a133647549f12295925eb660de6d2199d9c81d6",
+    "downloaded_at": "2026-10-25T04:51:21.529412+00:00"
+  },
+  {
+    "id": "bulletin_ucd_insys_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/insys/",
+    "cache_file": "c_insys.html",
+    "sha256": "668e2eb60e1aa3f2b0bdd9767a12d65fe8b6552e92f5ad72e044edee36ef1ff9",
+    "downloaded_at": "2026-10-25T04:51:22.765251+00:00"
+  },
+  {
+    "id": "bulletin_ucd_intag_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/intag/",
+    "cache_file": "c_intag.html",
+    "sha256": "7fb4dd7e2d72eb637322a0c927a3c67f0f6b33adcd8b57bbd16ea75c4cb37664",
+    "downloaded_at": "2026-10-25T04:51:24.100794+00:00"
+  },
+  {
+    "id": "bulletin_ucd_intsp_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/intsp/",
+    "cache_file": "c_intsp.html",
+    "sha256": "14cad57dafb389bc5d5ec941e9be7cf387682c3b40b452a9f74642a89250ce06",
+    "downloaded_at": "2026-10-25T04:51:25.338617+00:00"
+  },
+  {
+    "id": "bulletin_ucd_intst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/intst/",
+    "cache_file": "c_intst.html",
+    "sha256": "3136015017dd085ec01dfad4e0f080cfef13b8937cf31e6794fafb42872caf88",
+    "downloaded_at": "2026-10-25T04:51:26.559646+00:00"
+  },
+  {
+    "id": "bulletin_ucd_isb_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/isb/",
+    "cache_file": "c_isb.html",
+    "sha256": "e2d22ccc1af799e126ab12d2e40b34a5118bd39a5b0e47ed219569f185e6b53b",
+    "downloaded_at": "2026-10-25T04:51:27.870415+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ist_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ist/",
+    "cache_file": "c_ist.html",
+    "sha256": "86370c7995ac4d08ba7539adb7ea5a119ad0a02adae57b30d2c3b695fc20162e",
+    "downloaded_at": "2026-10-25T04:51:29.210500+00:00"
+  },
+  {
+    "id": "bulletin_ucd_it_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/it/",
+    "cache_file": "c_it.html",
+    "sha256": "762d24a6c8b45d61e555b6779659beaa4641d29037c9072539407bc97ee74e72",
+    "downloaded_at": "2026-10-25T04:51:30.587897+00:00"
+  },
+  {
+    "id": "bulletin_ucd_itech_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/itech/",
+    "cache_file": "c_itech.html",
+    "sha256": "a0f8d9ba08e80e9aa7d391b18ba5332b585f72b6142655194ac442cb7982f1d5",
+    "downloaded_at": "2026-10-25T04:51:31.814721+00:00"
+  },
+  {
+    "id": "bulletin_ucd_japns_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/japns/",
+    "cache_file": "c_japns.html",
+    "sha256": "6f0aabb527eab385f96068d30502a1a4ebafbca514503b5008112fbbc39f48db",
+    "downloaded_at": "2026-10-25T04:51:33.165781+00:00"
+  },
+  {
+    "id": "bulletin_ucd_jazz_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/jazz/",
+    "cache_file": "c_jazz.html",
+    "sha256": "3e49ec8304ad231a19e76ed858c03afc61448d06fc9501be8a15145ff3b8424f",
+    "downloaded_at": "2026-10-25T04:51:34.395888+00:00"
+  },
+  {
+    "id": "bulletin_ucd_jst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/jst/",
+    "cache_file": "c_jst.html",
+    "sha256": "5cc17856d6d777d007cd10c07e276f0bfdb8057af5ce41638a12b2d5ac2d6231",
+    "downloaded_at": "2026-10-25T04:51:35.787007+00:00"
+  },
+  {
+    "id": "bulletin_ucd_keybd_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/keybd/",
+    "cache_file": "c_keybd.html",
+    "sha256": "c041ba78b7751516a5684237f4de9a545cc1f67f9c6ecd6b631c41c6fe285d9b",
+    "downloaded_at": "2026-10-25T04:51:37.049723+00:00"
+  },
+  {
+    "id": "bulletin_ucd_kines_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/kines/",
+    "cache_file": "c_kines.html",
+    "sha256": "33cc8ed620b4e15333daababba23f2411edbcb8410e6539a6ab7633d6ae2cd63",
+    "downloaded_at": "2026-10-25T04:51:38.475393+00:00"
+  },
+  {
+    "id": "bulletin_ucd_kor_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/kor/",
+    "cache_file": "c_kor.html",
+    "sha256": "dcabcfed1bd0fa1a856a78fd7d2f1d211f670e16c29fcd2fb29f2913b12bb41f",
+    "downloaded_at": "2026-10-25T04:51:39.834792+00:00"
+  },
+  {
+    "id": "bulletin_ucd_la_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/la/",
+    "cache_file": "c_la.html",
+    "sha256": "1c897ff43879c91e2e0139e0cb38575036a79bc6ae99c8ff8310f55a821df1b2",
+    "downloaded_at": "2026-10-25T04:51:41.091140+00:00"
+  },
+  {
+    "id": "bulletin_ucd_lang_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/lang/",
+    "cache_file": "c_lang.html",
+    "sha256": "258f32b8dfa6a0bb41cad39d9de45184b8b207fa8e322305b8a3e1cee78db49d",
+    "downloaded_at": "2026-10-25T04:51:42.412246+00:00"
+  },
+  {
+    "id": "bulletin_ucd_larch_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/larch/",
+    "cache_file": "c_larch.html",
+    "sha256": "4b808f94d1dc01b4ce93bfa25b5698f78868282c903cd1814168ed6dd425947a",
+    "downloaded_at": "2026-10-25T04:51:43.714231+00:00"
+  },
+  {
+    "id": "bulletin_ucd_latam_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/latam/",
+    "cache_file": "c_latam.html",
+    "sha256": "114492075b62b09f6d56a636dc04afe497713533b53cfad68ef1656f927dd993",
+    "downloaded_at": "2026-10-25T04:51:44.933920+00:00"
+  },
+  {
+    "id": "bulletin_ucd_latin_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/latin/",
+    "cache_file": "c_latin.html",
+    "sha256": "df73ffcacbf5fed159a74d44b7400cb48e89f05afb121455128a76d721db2071",
+    "downloaded_at": "2026-10-25T04:51:46.266595+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ldt_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ldt/",
+    "cache_file": "c_ldt.html",
+    "sha256": "5202d2b54e925e7a578b2af1ac833f0f0466a2fed71a5243f5cf852b21f09c7d",
+    "downloaded_at": "2026-10-25T04:51:47.557781+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ler_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ler/",
+    "cache_file": "c_ler.html",
+    "sha256": "497dfcdb6425fe77462c8fee63f82a03a0cf68b763825f5348285d566a605d89",
+    "downloaded_at": "2026-10-25T04:51:48.892627+00:00"
+  },
+  {
+    "id": "bulletin_ucd_lhr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/lhr/",
+    "cache_file": "c_lhr.html",
+    "sha256": "4b34659d850d21c936fe0b6a940278eb3acb0cfc32d993e05e59598509f00dba",
+    "downloaded_at": "2026-10-25T04:51:50.184858+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ling_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ling/",
+    "cache_file": "c_ling.html",
+    "sha256": "89469aacd03978227884c585f64f3da37d56c16c477f55f1fb16b8eab80d92b1",
+    "downloaded_at": "2026-10-25T04:51:51.557896+00:00"
+  },
+  {
+    "id": "bulletin_ucd_lled_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/lled/",
+    "cache_file": "c_lled.html",
+    "sha256": "440dc124188515581f27bde1c0cd5a87ad2588dba1f3131b96d587172ed8fe71",
+    "downloaded_at": "2026-10-25T04:51:52.894861+00:00"
+  },
+  {
+    "id": "bulletin_ucd_lpe_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/lpe/",
+    "cache_file": "c_lpe.html",
+    "sha256": "27af368e1b4314a197a5f44ebbe43f2883df935672c5f2d45a967cdb5800f2d8",
+    "downloaded_at": "2026-10-25T04:51:54.160165+00:00"
+  },
+  {
+    "id": "bulletin_ucd_lst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/lst/",
+    "cache_file": "c_lst.html",
+    "sha256": "a414369d8ad6d278d1de15dd33ceb0ea418ac0e7bda9782b79ec09dc5dfb99e1",
+    "downloaded_at": "2026-10-25T04:51:55.397565+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ltnst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ltnst/",
+    "cache_file": "c_ltnst.html",
+    "sha256": "5a8130af56777a130bb7e77e9a6891c1af22f28b6be9b01b46bbb49222b5b901",
+    "downloaded_at": "2026-10-25T04:51:56.755355+00:00"
+  },
+  {
+    "id": "bulletin_ucd_maet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/maet/",
+    "cache_file": "c_maet.html",
+    "sha256": "29a8b721f4be2eef6e51125b3d098324dbd1ba9361176db4ef35e472145ce132",
+    "downloaded_at": "2026-10-25T04:51:58.005298+00:00"
+  },
+  {
+    "id": "bulletin_ucd_math_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+    "cache_file": "c_math.html",
+    "sha256": "1fadb6b4088dca810c717a12da8997e16ab71a9bac5b8f86310d3fab898957bf",
+    "downloaded_at": "2026-10-25T04:51:59.412719+00:00"
+  },
+  {
+    "id": "bulletin_ucd_matse_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/matse/",
+    "cache_file": "c_matse.html",
+    "sha256": "82c902e6dfe07918fce8c5156781b1dfbada6d9d727e89a3dfddc7f170127eba",
+    "downloaded_at": "2026-10-25T04:52:00.804996+00:00"
+  },
+  {
+    "id": "bulletin_ucd_me_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/me/",
+    "cache_file": "c_me.html",
+    "sha256": "f5732b0234834b690553d034418374970bd77ba1296de6e49bd1b4a3f8a3cc32",
+    "downloaded_at": "2026-10-25T04:52:02.119530+00:00"
+  },
+  {
+    "id": "bulletin_ucd_medvl_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/medvl/",
+    "cache_file": "c_medvl.html",
+    "sha256": "038f97ff05cdbb858887c0d82e39332ea6f1fe0db668dfc6447e331a111b08fc",
+    "downloaded_at": "2026-10-25T04:52:03.427687+00:00"
+  },
+  {
+    "id": "bulletin_ucd_met_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/met/",
+    "cache_file": "c_met.html",
+    "sha256": "555194baf557076971db0fca06d30b9efa2206481974d85884862c36f7106aa3",
+    "downloaded_at": "2026-10-25T04:52:04.721787+00:00"
+  },
+  {
+    "id": "bulletin_ucd_meteo_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/meteo/",
+    "cache_file": "c_meteo.html",
+    "sha256": "c63b137a51ace0d26bf939accc54bfde4fb05f425d2a9fbce3e8605524bb0b6f",
+    "downloaded_at": "2026-10-25T04:52:06.090771+00:00"
+  },
+  {
+    "id": "bulletin_ucd_mgmt_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/mgmt/",
+    "cache_file": "c_mgmt.html",
+    "sha256": "57c0ff0267b5de89450d0a2ed6256f6bf4780383a7249358a73eccdaa35b1bdf",
+    "downloaded_at": "2026-10-25T04:52:07.407295+00:00"
+  },
+  {
+    "id": "bulletin_ucd_micrb_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/micrb/",
+    "cache_file": "c_micrb.html",
+    "sha256": "4844682aa2b33dbfe1b843b01e87dd0adb1e3e4d32961c7973245532996f9431",
+    "downloaded_at": "2026-10-25T04:52:08.762863+00:00"
+  },
+  {
+    "id": "bulletin_ucd_mis_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/mis/",
+    "cache_file": "c_mis.html",
+    "sha256": "d8a0f89eb726c44b0ee13a7615e212f78d0f8d53cc4d5fd2e0249e3508b6de82",
+    "downloaded_at": "2026-10-25T04:52:10.048931+00:00"
+  },
+  {
+    "id": "bulletin_ucd_mktg_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/mktg/",
+    "cache_file": "c_mktg.html",
+    "sha256": "18f082111518cd781262007aedfb104f9662fd079a07e10ce118e032be1ae03e",
+    "downloaded_at": "2026-10-25T04:52:11.373846+00:00"
+  },
+  {
+    "id": "bulletin_ucd_mng_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/mng/",
+    "cache_file": "c_mng.html",
+    "sha256": "60cc5577e235c3391d158710ac8d7a94d4dbc2a4fec3dfdcb8bd449a85b92264",
+    "downloaded_at": "2026-10-25T04:52:12.632637+00:00"
+  },
+  {
+    "id": "bulletin_ucd_mngt_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/mngt/",
+    "cache_file": "c_mngt.html",
+    "sha256": "bba4954896938ec1b8c0cb910cfd6c3cdb907e10e26bedbffd3ed3082f22fa0a",
+    "downloaded_at": "2026-10-25T04:52:13.956943+00:00"
+  },
+  {
+    "id": "bulletin_ucd_mnpr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/mnpr/",
+    "cache_file": "c_mnpr.html",
+    "sha256": "6744bf53d1f069eec4f415adfbe8f21bba00950091eb773cb991dd8bfdb07737",
+    "downloaded_at": "2026-10-25T04:52:15.179077+00:00"
+  },
+  {
+    "id": "bulletin_ucd_mthed_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/mthed/",
+    "cache_file": "c_mthed.html",
+    "sha256": "84a1285f8498ec8899eabc7b29f078f221a1dd8cd0f073d32a54292546927ff3",
+    "downloaded_at": "2026-10-25T04:52:16.528620+00:00"
+  },
+  {
+    "id": "bulletin_ucd_music_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/music/",
+    "cache_file": "c_music.html",
+    "sha256": "c2c8a5e3a1f3c2428a184cb13571cee0199c1863c00792dda091c48cb9eee49b",
+    "downloaded_at": "2026-10-25T04:52:17.923494+00:00"
+  },
+  {
+    "id": "bulletin_ucd_navsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/navsc/",
+    "cache_file": "c_navsc.html",
+    "sha256": "5f6691af788e14644611ec1ab0b3c49a7a0da2b59291e985c40d835f7e763171",
+    "downloaded_at": "2026-10-25T04:52:19.245976+00:00"
+  },
+  {
+    "id": "bulletin_ucd_nuce_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/nuce/",
+    "cache_file": "c_nuce.html",
+    "sha256": "29a72cb14aefc126409cef9c0d5ac32d87a36c86548e232b13debe7302847403",
+    "downloaded_at": "2026-10-25T04:52:20.504194+00:00"
+  },
+  {
+    "id": "bulletin_ucd_nurs_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/nurs/",
+    "cache_file": "c_nurs.html",
+    "sha256": "f8ff661759cee7369d255ba9a2eb65cfd408acd0554dafa68f120a384f689da0",
+    "downloaded_at": "2026-10-25T04:52:21.914237+00:00"
+  },
+  {
+    "id": "bulletin_ucd_nutr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/nutr/",
+    "cache_file": "c_nutr.html",
+    "sha256": "8b383d00f28711f6c84640c75b69a58cce27e38d5ad703b81c7a90792183d88d",
+    "downloaded_at": "2026-10-25T04:52:23.185833+00:00"
+  },
+  {
+    "id": "bulletin_ucd_olead_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/olead/",
+    "cache_file": "c_olead.html",
+    "sha256": "f32f2b4df80c76368912d77aea5700ed8801c1a465ff43fc41dc53902ad120b8",
+    "downloaded_at": "2026-10-25T04:52:24.520466+00:00"
+  },
+  {
+    "id": "bulletin_ucd_os_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/os/",
+    "cache_file": "c_os.html",
+    "sha256": "acc944e128a6de840a635ce5672da61431fe6d41f3d825142941cee67167d57c",
+    "downloaded_at": "2026-10-25T04:52:25.743221+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ot_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ot/",
+    "cache_file": "c_ot.html",
+    "sha256": "b59fbafbb9fa4a618d83dd7bdb2eca0f81b37cc7fc6087abb1a56e6ec945b1de",
+    "downloaded_at": "2026-10-25T04:52:27.099481+00:00"
+  },
+  {
+    "id": "bulletin_ucd_percn_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/percn/",
+    "cache_file": "c_percn.html",
+    "sha256": "d6e5bca4f251335fbaf907b48629178d1d0ef0249d80ce07bf5ef860e41fd225",
+    "downloaded_at": "2026-10-25T04:52:28.322999+00:00"
+  },
+  {
+    "id": "bulletin_ucd_pes_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/pes/",
+    "cache_file": "c_pes.html",
+    "sha256": "1a6d25403ccba64431408a0614d477396fbffcb47ca3638bc2c23d7e5523e014",
+    "downloaded_at": "2026-10-25T04:52:29.675292+00:00"
+  },
+  {
+    "id": "bulletin_ucd_phil_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phil/",
+    "cache_file": "c_phil.html",
+    "sha256": "56d3ac1ba53326b661eb5080067091eb1bbf94603bebf5c8301435bee19c737c",
+    "downloaded_at": "2026-10-25T04:52:31.050350+00:00"
+  },
+  {
+    "id": "bulletin_ucd_photo_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/photo/",
+    "cache_file": "c_photo.html",
+    "sha256": "c123b75fa63ae333bb7b4e51c940d1eeb89650f8807887bc0960b1b52ba204e9",
+    "downloaded_at": "2026-10-25T04:52:32.406178+00:00"
+  },
+  {
+    "id": "bulletin_ucd_php_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/php/",
+    "cache_file": "c_php.html",
+    "sha256": "3e628edb942c57166bc9f8fac09104fc4f49398c279383f2fb6a54daf296e337",
+    "downloaded_at": "2026-10-25T04:52:33.628201+00:00"
+  },
+  {
+    "id": "bulletin_ucd_phys_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/phys/",
+    "cache_file": "c_phys.html",
+    "sha256": "b0b6f29e81ff006bc1b5ff48fd413ce3a7022f74e257aa991f24b0776b23244e",
+    "downloaded_at": "2026-10-25T04:52:34.967505+00:00"
+  },
+  {
+    "id": "bulletin_ucd_plant_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/plant/",
+    "cache_file": "c_plant.html",
+    "sha256": "f6ce020ac221d3f5e5b2bfb00fbcd7d1a493b6495c21c28f4a4e39b1afcfcefe",
+    "downloaded_at": "2026-10-25T04:52:36.254596+00:00"
+  },
+  {
+    "id": "bulletin_ucd_plet_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/plet/",
+    "cache_file": "c_plet.html",
+    "sha256": "be1b0c3034f0f941a0f8211e6fb51d424046d7b092ed6afc0b494c6484cd6659",
+    "downloaded_at": "2026-10-25T04:52:37.585892+00:00"
+  },
+  {
+    "id": "bulletin_ucd_plsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/plsc/",
+    "cache_file": "c_plsc.html",
+    "sha256": "957e1504d5e017c9654f10cd84ae4252f12e47cc2de2c91897479974405ae4ee",
+    "downloaded_at": "2026-10-25T04:52:38.933594+00:00"
+  },
+  {
+    "id": "bulletin_ucd_png_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/png/",
+    "cache_file": "c_png.html",
+    "sha256": "ccbdd04c24821540e7872b0ea30c22446fff7afdd22614d189d31d0b7c034a58",
+    "downloaded_at": "2026-10-25T04:52:40.288465+00:00"
+  },
+  {
+    "id": "bulletin_ucd_pol_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/pol/",
+    "cache_file": "c_pol.html",
+    "sha256": "3bbc8a95964fa6babee9176562426dbb1261ad670ca24335fd294343a450663a",
+    "downloaded_at": "2026-10-25T04:52:41.532534+00:00"
+  },
+  {
+    "id": "bulletin_ucd_port_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/port/",
+    "cache_file": "c_port.html",
+    "sha256": "94704b601a18126455660c959ee1b397f5760fdc1981c09fa3bdbba4bb438c07",
+    "downloaded_at": "2026-10-25T04:52:42.892343+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ppem_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ppem/",
+    "cache_file": "c_ppem.html",
+    "sha256": "2e8ac4c9af88698848c4bb2c18987fb8bd37303959611964058b044ca473b51a",
+    "downloaded_at": "2026-10-25T04:52:44.184757+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ppol_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ppol/",
+    "cache_file": "c_ppol.html",
+    "sha256": "85420a9c3e920643668becc7df5b1b6b5c7ec7d085b584f1981a051545ad1a1d",
+    "downloaded_at": "2026-10-25T04:52:45.510689+00:00"
+  },
+  {
+    "id": "bulletin_ucd_psu_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/psu/",
+    "cache_file": "c_psu.html",
+    "sha256": "a8b0c87fbd9457e5fe1db10192a0b1fe567fe13943ae409c9a2c9d2fb33165cd",
+    "downloaded_at": "2026-10-25T04:52:46.760258+00:00"
+  },
+  {
+    "id": "bulletin_ucd_psych_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/psych/",
+    "cache_file": "c_psych.html",
+    "sha256": "ae09eea094d92fdc0cf59ffda5d8807171f5385344dd4d9afe39b93acf03cffe",
+    "downloaded_at": "2026-10-25T04:52:48.180706+00:00"
+  },
+  {
+    "id": "bulletin_ucd_pt_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/pt/",
+    "cache_file": "c_pt.html",
+    "sha256": "0c8cd395b398ae7a2e10bc5d00c7f9b7cbddf1a04abf99e827c23f54ea7b5249",
+    "downloaded_at": "2026-10-25T04:52:49.514464+00:00"
+  },
+  {
+    "id": "bulletin_ucd_pubh_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/pubh/",
+    "cache_file": "c_pubh.html",
+    "sha256": "4c08c5adee398cd4799d32f3e025292ff1986b44a59066ac3771860829ad83fa",
+    "downloaded_at": "2026-10-25T04:52:50.778458+00:00"
+  },
+  {
+    "id": "bulletin_ucd_pubpl_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/pubpl/",
+    "cache_file": "c_pubpl.html",
+    "sha256": "c0392ed7cde962b364443af7a38efaaea0a76e0b1ad3466ddcd1ab9b1bec58ad",
+    "downloaded_at": "2026-10-25T04:52:52.139765+00:00"
+  },
+  {
+    "id": "bulletin_ucd_qc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/qc/",
+    "cache_file": "c_qc.html",
+    "sha256": "c54f1cec939d3139aa243fdf40ab3ff5819b1c67ebc37c963ab1e2721935bd11",
+    "downloaded_at": "2026-10-25T04:52:53.400728+00:00"
+  },
+  {
+    "id": "bulletin_ucd_qmm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/qmm/",
+    "cache_file": "c_qmm.html",
+    "sha256": "be97fd129899d79d1246474a1fc80b07efdb8e75a0a1cbc4bcea1a96f7b7e257",
+    "downloaded_at": "2026-10-25T04:52:54.632234+00:00"
+  },
+  {
+    "id": "bulletin_ucd_radsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/radsc/",
+    "cache_file": "c_radsc.html",
+    "sha256": "e9af24f3800ea30c86664b2a0287751a719b10c67254bf95ac74a9419ee8ccbb",
+    "downloaded_at": "2026-10-25T04:52:55.943512+00:00"
+  },
+  {
+    "id": "bulletin_ucd_reths_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/reths/",
+    "cache_file": "c_reths.html",
+    "sha256": "907f860df01c35301e7656e6a17970c543a94a81d3ba5965833182cce8cc6c29",
+    "downloaded_at": "2026-10-25T04:52:57.180089+00:00"
+  },
+  {
+    "id": "bulletin_ucd_rhs_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rhs/",
+    "cache_file": "c_rhs.html",
+    "sha256": "9a794fec41cf7cd3cf4577dbb28958cfc600b01d5ca12fef2d1a6f9fea0fe2fc",
+    "downloaded_at": "2026-10-25T04:52:58.514844+00:00"
+  },
+  {
+    "id": "bulletin_ucd_rlst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rlst/",
+    "cache_file": "c_rlst.html",
+    "sha256": "641b5cb57c0ff3ee0c11048e536d9fb14dc92d0ddbbf267b47bac363f4e22098",
+    "downloaded_at": "2026-10-25T04:52:59.863705+00:00"
+  },
+  {
+    "id": "bulletin_ucd_rm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rm/",
+    "cache_file": "c_rm.html",
+    "sha256": "824088ce70f1fb49057ac53f2f759ce4294d8a2f59b0cb6af2c730df254861f9",
+    "downloaded_at": "2026-10-25T04:53:01.220474+00:00"
+  },
+  {
+    "id": "bulletin_ucd_rptm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rptm/",
+    "cache_file": "c_rptm.html",
+    "sha256": "d1d1e996b7fe425794b25daa2c293ae9909e672e39fd85e4f5bfa52d729d5cf3",
+    "downloaded_at": "2026-10-25T04:53:02.629828+00:00"
+  },
+  {
+    "id": "bulletin_ucd_rsoc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rsoc/",
+    "cache_file": "c_rsoc.html",
+    "sha256": "5112bf9ec68f9aa9f73bd3299a08225adb4921136f77c47ca7b249ebc7d121e9",
+    "downloaded_at": "2026-10-25T04:53:03.902520+00:00"
+  },
+  {
+    "id": "bulletin_ucd_rte_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rte/",
+    "cache_file": "c_rte.html",
+    "sha256": "c05ae87afa06e77fd6fb45f9dc611f1a9796d82e4586293749c422c306277a4d",
+    "downloaded_at": "2026-10-25T04:53:05.122405+00:00"
+  },
+  {
+    "id": "bulletin_ucd_rus_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/rus/",
+    "cache_file": "c_rus.html",
+    "sha256": "42dfd31cc1a521c43e1b88f1c02f4e47208cde0ee552ed7304dce300e4636196",
+    "downloaded_at": "2026-10-25T04:53:06.476687+00:00"
+  },
+  {
+    "id": "bulletin_ucd_sc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sc/",
+    "cache_file": "c_sc.html",
+    "sha256": "8c41db2c26f1fd6553f679108d9504b0c6cfd56e6c10b2ea30b2acf3b716c5b5",
+    "downloaded_at": "2026-10-25T04:53:07.739138+00:00"
+  },
+  {
+    "id": "bulletin_ucd_scied_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/scied/",
+    "cache_file": "c_scied.html",
+    "sha256": "d60e1bad7a4c2510151433fe67b456d654345453d83c92f77971de5d88c669b1",
+    "downloaded_at": "2026-10-25T04:53:09.099463+00:00"
+  },
+  {
+    "id": "bulletin_ucd_scm_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/scm/",
+    "cache_file": "c_scm.html",
+    "sha256": "4f18cb4b72a95f82b3f92bc359769805a28da5820cbbe3dd2fd9f3e7e9b40661",
+    "downloaded_at": "2026-10-25T04:53:10.490877+00:00"
+  },
+  {
+    "id": "bulletin_ucd_slav_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/slav/",
+    "cache_file": "c_slav.html",
+    "sha256": "472607007a8544748c41a61675ed013e5a9ae1a47525c0c4d16c240530d0ed7e",
+    "downloaded_at": "2026-10-25T04:53:11.777209+00:00"
+  },
+  {
+    "id": "bulletin_ucd_soc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/soc/",
+    "cache_file": "c_soc.html",
+    "sha256": "0af2b7e5bbddbe550b0d82cf0546f86950b394f9f474574585bd98006182b2d8",
+    "downloaded_at": "2026-10-25T04:53:13.198895+00:00"
+  },
+  {
+    "id": "bulletin_ucd_socw_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/socw/",
+    "cache_file": "c_socw.html",
+    "sha256": "604e7291861afb38c274b74f2bebe29bff8112431fffe37ee3724fe5557a26ac",
+    "downloaded_at": "2026-10-25T04:53:14.470254+00:00"
+  },
+  {
+    "id": "bulletin_ucd_soda_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/soda/",
+    "cache_file": "c_soda.html",
+    "sha256": "0ae506c61715042ab654988ae03a3e7d291c6380c9b9e6f6d6cfcba7cb6726bc",
+    "downloaded_at": "2026-10-25T04:53:15.780346+00:00"
+  },
+  {
+    "id": "bulletin_ucd_soils_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/soils/",
+    "cache_file": "c_soils.html",
+    "sha256": "34b2f80f4642553f20c54d888f60b1f308be83700411209e65627147dfd0e530",
+    "downloaded_at": "2026-10-25T04:53:17.067510+00:00"
+  },
+  {
+    "id": "bulletin_ucd_span_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/span/",
+    "cache_file": "c_span.html",
+    "sha256": "4ed1433b2f1789f079bd5c54c6c4710ce091127e6d33dc1c8ea92f82b25635e5",
+    "downloaded_at": "2026-10-25T04:53:18.433831+00:00"
+  },
+  {
+    "id": "bulletin_ucd_spled_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/spled/",
+    "cache_file": "c_spled.html",
+    "sha256": "e9c1161a4c54990562a2eb9e2c89ec4bb4e5d4d9e62d77bc6aebdda7b52d922a",
+    "downloaded_at": "2026-10-25T04:53:19.715646+00:00"
+  },
+  {
+    "id": "bulletin_ucd_spsy_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/spsy/",
+    "cache_file": "c_spsy.html",
+    "sha256": "99d0d0f42b81e1e774d860964e06c2bcb34d87db9f3209ba6344484539805703",
+    "downloaded_at": "2026-10-25T04:53:21.020837+00:00"
+  },
+  {
+    "id": "bulletin_ucd_sra_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sra/",
+    "cache_file": "c_sra.html",
+    "sha256": "d764aac4b23e444edf979d83e7fb943f9408355fdce4194bf1ce07f815f136b2",
+    "downloaded_at": "2026-10-25T04:53:22.290967+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ssed_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ssed/",
+    "cache_file": "c_ssed.html",
+    "sha256": "0f2bc899297772031cb9e81b67177c9d0556d428cf2bbf5f0602c1e62d90f8e7",
+    "downloaded_at": "2026-10-25T04:53:23.608641+00:00"
+  },
+  {
+    "id": "bulletin_ucd_sset_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sset/",
+    "cache_file": "c_sset.html",
+    "sha256": "092b4796197a5fc042732ebc769f41ae637b4394a63c1b091acc7430c3a59f48",
+    "downloaded_at": "2026-10-25T04:53:24.859354+00:00"
+  },
+  {
+    "id": "bulletin_ucd_stat_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+    "cache_file": "c_stat.html",
+    "sha256": "46034f603d611af5a9456cc503752555d68586ef7c82a5477f23fedf06e07c9b",
+    "downloaded_at": "2026-10-25T04:53:26.220665+00:00"
+  },
+  {
+    "id": "bulletin_ucd_strng_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/strng/",
+    "cache_file": "c_strng.html",
+    "sha256": "62af37cc7349d5c5cc48ba920304b4dee0d45ef2355e7bef75494b28b19443e7",
+    "downloaded_at": "2026-10-25T04:53:27.549744+00:00"
+  },
+  {
+    "id": "bulletin_ucd_sts_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sts/",
+    "cache_file": "c_sts.html",
+    "sha256": "ba8d5b00e0edbfabb149eef101cf0fa8a3b6c422da92cbae5c323e820e0cfb18",
+    "downloaded_at": "2026-10-25T04:53:28.924950+00:00"
+  },
+  {
+    "id": "bulletin_ucd_sur_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sur/",
+    "cache_file": "c_sur.html",
+    "sha256": "e191092bb3d433e27abb1e26641e95766cf682761194a5fcaf798ca8c667768c",
+    "downloaded_at": "2026-10-25T04:53:30.192584+00:00"
+  },
+  {
+    "id": "bulletin_ucd_sust_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sust/",
+    "cache_file": "c_sust.html",
+    "sha256": "c2affc3ec0db2f213781eddf635d5f1a06838f5f3cae0c21091051fc24311876",
+    "downloaded_at": "2026-10-25T04:53:31.508408+00:00"
+  },
+  {
+    "id": "bulletin_ucd_swa_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/swa/",
+    "cache_file": "c_swa.html",
+    "sha256": "2815ca719a5f8ad5fc7edc4b85df20165f37501fe40e2ab03e2c3848170ff6ce",
+    "downloaded_at": "2026-10-25T04:53:32.757148+00:00"
+  },
+  {
+    "id": "bulletin_ucd_sweng_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/sweng/",
+    "cache_file": "c_sweng.html",
+    "sha256": "7d8b97f37ee8af78f0f4b098b3748e563ea276903e5978ecab2d738f55249906",
+    "downloaded_at": "2026-10-25T04:53:34.088048+00:00"
+  },
+  {
+    "id": "bulletin_ucd_thea_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/thea/",
+    "cache_file": "c_thea.html",
+    "sha256": "8b88d73fc276bcf7b18606effde932b1d7750f0de02b8c5fc604374128e96afe",
+    "downloaded_at": "2026-10-25T04:53:35.507503+00:00"
+  },
+  {
+    "id": "bulletin_ucd_turf_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/turf/",
+    "cache_file": "c_turf.html",
+    "sha256": "f4ae20363cbfcb284bad662232ba8e88ab1efbfff9f1213575311fd3ba854ef7",
+    "downloaded_at": "2026-10-25T04:53:36.868225+00:00"
+  },
+  {
+    "id": "bulletin_ucd_ukr_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ukr/",
+    "cache_file": "c_ukr.html",
+    "sha256": "622fab745e2b81da9326de7ca3f8b5b598daab7d56eab87d448c10f6c446e176",
+    "downloaded_at": "2026-10-25T04:53:38.118683+00:00"
+  },
+  {
+    "id": "bulletin_ucd_vbsc_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/vbsc/",
+    "cache_file": "c_vbsc.html",
+    "sha256": "587fceb88228245ee2927eb17c8b6e76c7f6ec6630775b79e74d26f34c858f32",
+    "downloaded_at": "2026-10-25T04:53:39.481643+00:00"
+  },
+  {
+    "id": "bulletin_ucd_voice_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/voice/",
+    "cache_file": "c_voice.html",
+    "sha256": "795ad233a1feb76b8828e9b232a149d6b81a0b379e5d4176c3fb92f67bf55e68",
+    "downloaded_at": "2026-10-25T04:53:40.720171+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wfed_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wfed/",
+    "cache_file": "c_wfed.html",
+    "sha256": "9cafb381527cd473e36b5813925378f4d5663cbd67ab9d788bd35a5a8cfee4fe",
+    "downloaded_at": "2026-10-25T04:53:42.089836+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wfs_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wfs/",
+    "cache_file": "c_wfs.html",
+    "sha256": "9722b10d79627bbd100e0dd48e670407607f75f6b252c34659204c926d44414a",
+    "downloaded_at": "2026-10-25T04:53:43.375691+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wgss_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wgss/",
+    "cache_file": "c_wgss.html",
+    "sha256": "95663536fb40f0a9e8cc58b3bf06aee14e9295ea221b8becf32733f1ece7c711",
+    "downloaded_at": "2026-10-25T04:53:44.719915+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wildl_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wildl/",
+    "cache_file": "c_wildl.html",
+    "sha256": "6aba90e026510bc2e4c67239628d4766b7e196cf567520ed6e79be5a4d797691",
+    "downloaded_at": "2026-10-25T04:53:45.959603+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wled_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wled/",
+    "cache_file": "c_wled.html",
+    "sha256": "ae522ab59d90b90b446e0a9567b5e3526f9a7648eadd1aeab6133d85941b62d7",
+    "downloaded_at": "2026-10-25T04:53:47.287345+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wmnst_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wmnst/",
+    "cache_file": "c_wmnst.html",
+    "sha256": "bbdb3cdeece1dc75baf0307e701f54f27a8f4b7263814714831d8265856f4317",
+    "downloaded_at": "2026-10-25T04:53:48.609795+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wp_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wp/",
+    "cache_file": "c_wp.html",
+    "sha256": "59f7223484bfbef625cce6af4e36ea2e9a90f4ca047e54e01c8f5affab1201fd",
+    "downloaded_at": "2026-10-25T04:53:49.900384+00:00"
+  },
+  {
+    "id": "bulletin_ucd_wwnds_2026_27",
+    "url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/wwnds/",
+    "cache_file": "c_wwnds.html",
+    "sha256": "8fce9cbfa05481f1c002f49e56be95688b4cd0f2bf2e057db221648950f41631",
+    "downloaded_at": "2026-10-25T04:53:51.204221+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_arts_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/arts/",
+    "cache_file": "l_arts.html",
+    "sha256": "0413d1f5b4b9c0832d0f5372b3e51d2d2ebf280a9343f26eb2f28bc939e65d00",
+    "downloaded_at": "2026-10-25T04:54:17.915342+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_humanities_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/humanities/",
+    "cache_file": "l_humanities.html",
+    "sha256": "bc02d64edc99c2e6c8a6f392a651971dacc58530f69afa8562bfecd22802ea7a",
+    "downloaded_at": "2026-10-25T04:54:19.359616+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_natural-sciences_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/natural-sciences/",
+    "cache_file": "l_natural-sciences.html",
+    "sha256": "3fd21310c037a94ef21dff63c6f10b312ba2e91969639daba76e67f69bc74af6",
+    "downloaded_at": "2026-10-25T04:54:21.377697+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_quantification_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/quantification/",
+    "cache_file": "l_quantification.html",
+    "sha256": "ad98edd74724c2c1474a5106715844baa92e0b3afa0914eb955d97a7e4e520a9",
+    "downloaded_at": "2026-10-25T04:54:22.602374+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_social-behavioral-sciences_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/social-behavioral-sciences/",
+    "cache_file": "l_social-behavioral-sciences.html",
+    "sha256": "6d099c9c011bdc6cb9ea4ff46bdd26bbbedf20cc091056148cc8220d7e1a6fb7",
+    "downloaded_at": "2026-10-25T04:54:24.039337+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_writing-speaking_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/writing-speaking/",
+    "cache_file": "l_writing-speaking.html",
+    "sha256": "c0a0a9015f597d56ff60a512691436630a62831ca74fbd0c7275fe58a8b80393",
+    "downloaded_at": "2026-10-25T04:54:26.542059+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_health-wellness_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/health-wellness/",
+    "cache_file": "l_health-wellness.html",
+    "sha256": "c9322c912cbc0009ec04debffa00a1fae9f7a92804a47ef28a0119fab1e64e2f",
+    "downloaded_at": "2026-10-25T04:54:27.802254+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_inter-domain_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/inter-domain/",
+    "cache_file": "l_inter-domain.html",
+    "sha256": "dcf42e5782dd5510f47c707a52c57110bc74e17bb926d14865ea2a6d101039d1",
+    "downloaded_at": "2026-10-25T04:54:29.188642+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_united-states-cultures_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/united-states-cultures/",
+    "cache_file": "l_united-states-cultures.html",
+    "sha256": "89411125877862dfa0b0e1a981eb5b80a71f56fce663c5ca7c42149b4953c5a9",
+    "downloaded_at": "2026-10-25T04:54:30.522613+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_international-cultures_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/international-cultures/",
+    "cache_file": "l_international-cultures.html",
+    "sha256": "7452514587dc64c91d9698534a5964e77bd73d0759395ef9da4549015f05060f",
+    "downloaded_at": "2026-10-25T04:54:31.947836+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_writing-across-curriculum_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/writing-across-curriculum/",
+    "cache_file": "l_writing-across-curriculum.html",
+    "sha256": "fd0bf6329b62751f82da1ce6a04bd222d47e63e0cc916838b04b8a2834993bef",
+    "downloaded_at": "2026-10-25T04:54:33.243046+00:00"
+  },
+  {
+    "id": "bulletin_gened_list_first-year-seminar_2026_27",
+    "url": "https://bulletins.psu.edu/undergraduate/general-education/course-lists/first-year-seminar/",
+    "cache_file": "l_first-year-seminar.html",
+    "sha256": "693248cbcdc2ba02534cb7676bfc6ebe98b594b9c83d2958be8504da60571dd8",
+    "downloaded_at": "2026-10-25T04:54:34.568362+00:00"
+  }
+]
