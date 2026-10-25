@@ -1,0 +1,132 @@
+{
+  "program": {
+    "code": "CMPEN_ETM",
+    "name": "Computer Engineering Entrance to Major (University Park)",
+    "type": "entrance",
+    "college": "Engineering",
+    "entrance_for": "CMPEN_BS"
+  },
+  "campus": "UP",
+  "catalog_year": "2026-27",
+  "source_urls": [
+    "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#howtogetintext"
+  ],
+  "eligibility": {
+    "college_any_of": [
+      "Engineering",
+      "Division of Undergraduate Studies"
+    ],
+    "administrative_enrollment_controls": true,
+    "graded_penn_state_credits_min": 29,
+    "graded_penn_state_credits_max": 55,
+    "excluded_credit_sources": [
+      "transfer",
+      "AP"
+    ]
+  },
+  "requirements": [
+    {
+      "label": "Entrance courses",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "CMPSC 121 or CMPSC 131",
+          "type": "POOL",
+          "min_count": 1,
+          "min_grade": "C",
+          "rules": [
+            {
+              "course": "CMPSC 121"
+            },
+            {
+              "course": "CMPSC 131"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_cmpen_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#howtogetintext",
+            "catalog_year": "2026-27"
+          }
+        },
+        {
+          "label": "CHEM 110",
+          "type": "POOL",
+          "min_count": 1,
+          "min_grade": "C",
+          "rules": [
+            {
+              "course": "CHEM 110"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_cmpen_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#howtogetintext",
+            "catalog_year": "2026-27"
+          }
+        },
+        {
+          "label": "MATH 140",
+          "type": "POOL",
+          "min_count": 1,
+          "min_grade": "C",
+          "rules": [
+            {
+              "course": "MATH 140"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_cmpen_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#howtogetintext",
+            "catalog_year": "2026-27"
+          }
+        },
+        {
+          "label": "MATH 141",
+          "type": "POOL",
+          "min_count": 1,
+          "min_grade": "C",
+          "rules": [
+            {
+              "course": "MATH 141"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_cmpen_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#howtogetintext",
+            "catalog_year": "2026-27"
+          }
+        },
+        {
+          "label": "PHYS 211",
+          "type": "POOL",
+          "min_count": 1,
+          "min_grade": "C",
+          "rules": [
+            {
+              "course": "PHYS 211"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_cmpen_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#howtogetintext",
+            "catalog_year": "2026-27"
+          }
+        }
+      ]
+    },
+    {
+      "label": "Entrance cumulative GPA",
+      "type": "GPA_MIN",
+      "min_gpa": 3.2,
+      "source": {
+        "source_id": "bulletin_cmpen_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#howtogetintext",
+        "catalog_year": "2026-27"
+      }
+    }
+  ],
+  "requires_review": true,
+  "notes": [
+    "The requirement tree cannot enforce graded-credit origin or current college; evaluate eligibility fields separately."
+  ]
+}

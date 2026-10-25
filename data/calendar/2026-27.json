@@ -1,0 +1,623 @@
+{
+ "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+ "retrieved_on": "2026-10-25",
+ "terms": [
+  {
+   "code": "FA26",
+   "season": "FA",
+   "year": 2026,
+   "starts_on": "2026-08-24",
+   "ends_on": "2026-12-18",
+   "catalog_year": "2026-27"
+  },
+  {
+   "code": "SP27",
+   "season": "SP",
+   "year": 2027,
+   "starts_on": "2027-01-11",
+   "ends_on": "2027-05-07",
+   "catalog_year": "2026-27"
+  },
+  {
+   "code": "SU27",
+   "season": "SU",
+   "year": 2027,
+   "starts_on": "2027-05-17",
+   "ends_on": "2027-08-13",
+   "catalog_year": "2026-27"
+  }
+ ],
+ "events": [
+  {
+   "term_code": "FA26",
+   "event_key": "intent_to_graduate",
+   "label": "Intent to Graduate - Activation Period",
+   "starts_on": "2026-08-17",
+   "ends_on": "2026-09-15",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "leave_of_absence",
+   "label": "Leave of Absence - Deadline",
+   "starts_on": null,
+   "ends_on": "2026-08-21",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "registration",
+   "label": "Registration - Deadline",
+   "starts_on": null,
+   "ends_on": "2026-08-23",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "classes_begin",
+   "label": "Classes Begin",
+   "starts_on": null,
+   "ends_on": "2026-08-24",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "regular_drop",
+   "label": "Regular Drop - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2026-08-29",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "regular_add",
+   "label": "Regular Add - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2026-08-30",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "late_drop_begins",
+   "label": "Late Drop Begins (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2026-08-30",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "late_registration_begins",
+   "label": "Late Registration Begins (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2026-08-31",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "labor_day_holiday_no_classes",
+   "label": "Labor Day Holiday - No Classes",
+   "starts_on": null,
+   "ends_on": "2026-09-07",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "final_exam_conflict_filing",
+   "label": "Final Exam Conflict - Filing Period",
+   "starts_on": "2026-09-28",
+   "ends_on": "2026-10-25",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "late_registration",
+   "label": "Late Registration - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2026-11-13",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "late_add",
+   "label": "Late Add - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2026-11-13",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "late_drop",
+   "label": "Late Drop - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2026-11-13",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "declare_concurrent_majors",
+   "label": "Declare Concurrent Majors, Minors, or Certificates - Deadline (Graduating Students)",
+   "starts_on": null,
+   "ends_on": "2026-11-13",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "thanksgiving_holiday_no_classes",
+   "label": "Thanksgiving Holiday - No Classes",
+   "starts_on": "2026-11-22",
+   "ends_on": "2026-11-28",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "withdrawal",
+   "label": "Withdrawal - Deadline, 5:00 p.m. ET",
+   "starts_on": null,
+   "ends_on": "2026-12-11",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "classes_end",
+   "label": "Classes End",
+   "starts_on": null,
+   "ends_on": "2026-12-11",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "study_days",
+   "label": "Study Days",
+   "starts_on": "2026-12-12",
+   "ends_on": "2026-12-13",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "final_exams",
+   "label": "Final Exams",
+   "starts_on": "2026-12-14",
+   "ends_on": "2026-12-18",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "FA26",
+   "event_key": "commencement",
+   "label": "Commencement",
+   "starts_on": null,
+   "ends_on": "2026-12-20",
+   "campus": "UP",
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "intent_to_graduate",
+   "label": "Intent to Graduate - Activation Period",
+   "starts_on": "2027-01-02",
+   "ends_on": "2027-01-25",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "leave_of_absence",
+   "label": "Leave of Absence - Deadline",
+   "starts_on": null,
+   "ends_on": "2027-01-08",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "registration",
+   "label": "Registration - Deadline",
+   "starts_on": null,
+   "ends_on": "2027-01-10",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "classes_begin",
+   "label": "Classes Begin",
+   "starts_on": null,
+   "ends_on": "2027-01-11",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "regular_drop",
+   "label": "Regular Drop - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-01-16",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "regular_add",
+   "label": "Regular Add - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-01-17",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "late_drop_begins",
+   "label": "Late Drop Begins (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-01-17",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "late_registration_begins",
+   "label": "Late Registration Begins (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-01-18",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "martin_luther_king_jr_day_holiday_no_classes",
+   "label": "Martin Luther King Jr. Day Holiday - No Classes",
+   "starts_on": null,
+   "ends_on": "2027-01-18",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "final_exam_conflict_filing",
+   "label": "Final Exam Conflict - Filing Period",
+   "starts_on": "2027-02-15",
+   "ends_on": "2027-03-07",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "spring_break_no_classes",
+   "label": "Spring Break - No Classes",
+   "starts_on": "2027-03-07",
+   "ends_on": "2027-03-13",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "late_registration",
+   "label": "Late Registration - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-04-09",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "late_add",
+   "label": "Late Add - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-04-09",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "late_drop",
+   "label": "Late Drop - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-04-09",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "declare_concurrent_majors",
+   "label": "Declare Concurrent Majors, Minors, or Certificates - Deadline (Graduating Students)",
+   "starts_on": null,
+   "ends_on": "2027-04-09",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "withdrawal",
+   "label": "Withdrawal - Deadline, 5:00 p.m. ET",
+   "starts_on": null,
+   "ends_on": "2027-04-30",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "classes_end",
+   "label": "Classes End",
+   "starts_on": null,
+   "ends_on": "2027-04-30",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "study_days",
+   "label": "Study Days",
+   "starts_on": "2027-05-01",
+   "ends_on": "2027-05-02",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "final_exams",
+   "label": "Final Exams",
+   "starts_on": "2027-05-03",
+   "ends_on": "2027-05-07",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SP27",
+   "event_key": "commencement",
+   "label": "Commencement",
+   "starts_on": "2027-05-07",
+   "ends_on": "2027-05-09",
+   "campus": "UP",
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "intent_to_graduate",
+   "label": "Intent to Graduate - Activation Period",
+   "starts_on": "2027-05-10",
+   "ends_on": "2027-06-18",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "registration",
+   "label": "Registration - Deadline",
+   "starts_on": null,
+   "ends_on": "2027-05-16",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "classes_begin",
+   "label": "Classes Begin",
+   "starts_on": null,
+   "ends_on": "2027-05-17",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "regular_drop",
+   "label": "Regular Drop - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-05-21",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "regular_add",
+   "label": "Regular Add - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-05-22",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "late_drop_begins",
+   "label": "Late Drop Begins (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-05-22",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "late_registration_begins",
+   "label": "Late Registration Begins (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-05-23",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "memorial_day_holiday_no_classes",
+   "label": "Memorial Day Holiday - No Classes",
+   "starts_on": null,
+   "ends_on": "2027-05-31",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "juneteenth_holiday_no_classes",
+   "label": "Juneteenth Holiday - No Classes",
+   "starts_on": null,
+   "ends_on": "2027-06-18",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "independence_day_holiday_no_classes",
+   "label": "Independence Day Holiday - No Classes",
+   "starts_on": null,
+   "ends_on": "2027-07-05",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "late_registration",
+   "label": "Late Registration - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-07-23",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "late_add",
+   "label": "Late Add - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-07-23",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "late_drop",
+   "label": "Late Drop - Deadline, 11:59 p.m. ET (full-semester courses)",
+   "starts_on": null,
+   "ends_on": "2027-07-23",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "declare_concurrent_majors",
+   "label": "Declare Concurrent Majors, Minors, or Certificates - Deadline (Graduating Students)",
+   "starts_on": null,
+   "ends_on": "2027-08-02",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "withdrawal",
+   "label": "Withdrawal - Deadline, 5:00 p.m. ET",
+   "starts_on": null,
+   "ends_on": "2027-08-11",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "classes_end",
+   "label": "Classes End",
+   "starts_on": null,
+   "ends_on": "2027-08-11",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "study_days",
+   "label": "Study Days",
+   "starts_on": null,
+   "ends_on": "2027-08-12",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "final_exams",
+   "label": "Final Exams",
+   "starts_on": null,
+   "ends_on": "2027-08-13",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  },
+  {
+   "term_code": "SU27",
+   "event_key": "commencement",
+   "label": "Commencement",
+   "starts_on": null,
+   "ends_on": "2027-08-14",
+   "campus": null,
+   "source_url": "https://www.registrar.psu.edu/academic-calendars/2026-27.cfm",
+   "retrieved_on": "2026-10-25"
+  }
+ ],
+ "catalog_year": "2026-27"
+}

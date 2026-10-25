@@ -82,4 +82,45 @@ class AdvisorToolsTest {
   assertEquals("met",r.get(0).path("status").asText());assertEquals("NOT_FOUND",r.get(1).at("/error/code").asText());assertEquals("INVALID_ARGUMENT",r.get(2).at("/error/code").asText());
   assertEquals(1,result.path("warnings").toString().split("Enrollment restrictions",-1).length-1,"shared warnings appear once");
  }
+
+ private void stubCourse(String tree)throws Exception{
+  when(catalog.courseBasics("FDSC 404","2026-27")).thenReturn(Optional.of(Map.of("id",44L,"prereq_text","STAT 250 and Junior standing","source_url","https://bulletins.psu.edu/fdsc")));
+  when(catalog.prereqTree(44L)).thenReturn(tree==null?null:mapper.readTree(tree));when(catalog.crosslists(any())).thenReturn(Map.of());
+ }
+ private Map<String,Object> restriction(String type,Object min,String raw){var m=new HashMap<String,Object>();m.put("restriction_type",type);m.put("include",true);m.put("min_semester",min);m.put("raw_text",raw);return m;}
+ @Test void unmetStandingRestrictionKeepsTheResultFromReadingAsMet()throws Exception{
+  stubCourse("{\"type\":\"COURSE\",\"course\":\"CMPSC 360\"}");
+  // 60 completed credits = semester 5; senior standing (7) is not met even though the course prerequisite is.
+  when(catalog.restrictions(44L)).thenReturn(List.of(restriction("min_semester",7,"Senior standing")));
+  var result=tools.call("check_prerequisites",args("{\"code\":\"FDSC 404\"}"),turn());
+  assertEquals("met",result.at("/data/prerequisiteStatus").asText());assertEquals("not_met",result.at("/data/status").asText());
+  assertEquals("not_met",result.at("/data/restrictions/0/result").asText());assertTrue(result.at("/data/restrictions/0/reason").asText().contains("estimated semester 5"));
+  assertTrue(result.path("warnings").toString().contains("Classification of Students by Semester"));
+ }
+ @Test void standingReachedOnlyWithCurrentCoursesIsInProgress()throws Exception{
+  stubCourse(null);when(catalog.restrictions(44L)).thenReturn(List.of(restriction("min_semester",6,"sixth-semester standing")));
+  var result=tools.call("check_prerequisites",args("{\"code\":\"FDSC 404\"}"),turn());
+  assertEquals("in_progress",result.at("/data/status").asText(),"60 + 15 in progress credits reach semester 6");
+ }
+ @Test void uncheckableRestrictionsAreUnknownAndQuoted()throws Exception{
+  stubCourse("{\"type\":\"COURSE\",\"course\":\"CMPSC 360\"}");when(catalog.restrictions(44L)).thenReturn(List.of(restriction("text",null,"Prior approval of proposed assignment by instructor")));
+  var result=tools.call("check_prerequisites",args("{\"code\":\"FDSC 404\"}"),turn());
+  assertEquals("unknown",result.at("/data/status").asText());assertEquals("Prior approval of proposed assignment by instructor",result.at("/data/restrictions/0/text").asText());
+  assertFalse(result.path("warnings").toString().contains("Classification of Students"),"standing source only when standing was used");
+ }
+ @Test void programAndCampusRestrictionsCompareWithTheReport()throws Exception{
+  stubCourse(null);
+  var program=restriction("program",null,null);program.put("program_code","DATSC_BS");
+  var other=restriction("program",null,null);other.put("program_code","CMPSC_BS");other.put("include",false);
+  var campus=restriction("campus",null,null);campus.put("campus","Abington");
+  when(catalog.restrictions(44L)).thenReturn(List.of(program,other,campus));
+  var r=tools.call("check_prerequisites",args("{\"code\":\"FDSC 404\"}"),turn()).at("/data/restrictions");
+  assertEquals("met",r.get(0).path("result").asText());assertEquals("met",r.get(1).path("result").asText(),"an exclusion of another program is met");
+  assertEquals("unknown",r.get(2).path("result").asText(),"the synthetic report names no campus");
+ }
+ @Test void restrictionLookupFailureDoesNotBreakThePrerequisiteCheck()throws Exception{
+  stubCourse("{\"type\":\"COURSE\",\"course\":\"CMPSC 360\"}");when(catalog.restrictions(44L)).thenThrow(new org.springframework.dao.DataAccessResourceFailureException("down"));
+  var result=tools.call("check_prerequisites",args("{\"code\":\"FDSC 404\"}"),turn());
+  assertTrue(result.path("ok").asBoolean());assertEquals("met",result.at("/data/status").asText());assertTrue(result.path("warnings").toString().contains("could not be read"));
+ }
 }

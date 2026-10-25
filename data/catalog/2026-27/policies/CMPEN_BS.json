@@ -1,0 +1,329 @@
+{
+  "program_code": "CMPEN_BS",
+  "catalog_year": "2026-27",
+  "scope": "program",
+  "rules": [
+    {
+      "key": "suggested_academic_plan.DEFAULT",
+      "value": {
+        "campus": "UP",
+        "total_credits": 128.0,
+        "terms": [
+          {
+            "year": 1,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "MATH 140 (GQ)",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "PHYS 211 (GN, PHYSICS 211L & PHYSICS 211R)",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "CHEM 110 (GN)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "ENGL 15 (GWS)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "First Year Seminar",
+                "credits": 1.0,
+                "credits_text": "1",
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 1,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPSC 121 or 131",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "MATH 141 (GQ)",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "PHYS 212 (GN, PHYSICS 212L & PHYSICS 212R)",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "CAS 100A or 100B",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course (GHW)",
+                "credits": 1.5,
+                "credits_text": "1.5",
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.5
+          },
+          {
+            "year": 2,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CMPSC 122 or 132",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPEN 270",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "MATH 250",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "MATH 220",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC 150N",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.0
+          },
+          {
+            "year": 2,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPSC 222",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC 221",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE 210",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "MATH 231",
+                "credits": 2.0,
+                "credits_text": "2",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "2",
+                "credits": null,
+                "credits_text": "",
+                "c_required": false
+              }
+            ],
+            "total_credits": 17.0
+          },
+          {
+            "year": 3,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CMPSC 315",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC 360",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE 310",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "STAT 418",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              }
+            ],
+            "total_credits": 17.0
+          },
+          {
+            "year": 3,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPEN 362",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC 465",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC 316",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "EE 353",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "ENGL 202C (GWS)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.0
+          },
+          {
+            "year": 4,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CMPEN 482W (Capstone Design)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC/EE 400-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPEN 431",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 4,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPSC/EE 400-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC/CMPEN 400-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC/CMPEN 400-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "1.5",
+                "credits": null,
+                "credits_text": "",
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.5
+          }
+        ],
+        "symbols": {
+          "c_required": "Course requires a grade of C or better"
+        }
+      },
+      "description": "Suggested academic plan for Computer Engineering, B.S. at University Park, in effect for 2026-27. A suggested sequence, not a requirement.",
+      "source_url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-engineering-bs/#suggestedacademicplantext"
+    }
+  ]
+}

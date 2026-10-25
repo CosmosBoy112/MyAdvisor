@@ -1,0 +1,1272 @@
+{
+  "program": {
+    "code": "EE_BS",
+    "name": "Electrical Engineering, B.S.",
+    "type": "major",
+    "college": "Engineering"
+  },
+  "campus": "UP",
+  "catalog_year": "2026-27",
+  "min_total_credits": 127,
+  "source_urls": [
+    "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/"
+  ],
+  "status": "partial_requires_review",
+  "options": [],
+  "notes": [
+    "Applies to University Park, entry year 2026-27. Other campuses are not interchangeable.",
+    "27 GenEd credits overlap major requirements; 18 GenEd credits must be distinct. Never sum all nodes as independent credits.",
+    "Credit totals do not prove graduation eligibility. Unresolved pools and extra constraints must block a fully satisfied audit."
+  ],
+  "credit_summary": {
+    "general_education": 45,
+    "major_min": 109.0,
+    "major_max": 111.0,
+    "gened_major_overlap": 27,
+    "distinct_gened": 18
+  },
+  "requirements": [
+    {
+      "id": "prescribed",
+      "label": "Prescribed Courses",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "EE 200",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 200"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 2
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "EE 300W",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 300W"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 3
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "EE 403W",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 403W"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 4
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "MATH 220",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "MATH 220"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 5
+          },
+          "credits_range": [
+            2.0,
+            3.0
+          ]
+        },
+        {
+          "label": "PHYS 214",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "PHYS 214"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 6
+          },
+          "credits_range": [
+            2.0,
+            2.0
+          ]
+        },
+        {
+          "label": "CHEM 110",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "CHEM 110"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 8
+          },
+          "min_grade": "C",
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "EDSGN 100",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EDSGN 100"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 9
+          },
+          "min_grade": "C",
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "EE 210",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 210"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 10
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "EE 310",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 310"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 11
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "EE 330",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 330"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 12
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "EE 340",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 340"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 13
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "EE 350",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "EE 350"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 14
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "ENGL 202C",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "ENGL 202C"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 15
+          },
+          "min_grade": "C",
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "MATH 140",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "MATH 140"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 16
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "MATH 141",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "MATH 141"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 17
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "PHYS 211",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "PHYS 211"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 18
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "PHYS 212",
+          "type": "POOL",
+          "min_count": 1,
+          "rules": [
+            {
+              "course": "PHYS 212"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 19
+          },
+          "min_grade": "C",
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        }
+      ],
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27",
+        "table_row": 1
+      }
+    },
+    {
+      "id": "additional",
+      "label": "Additional Courses",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "id": "first_year_seminar",
+          "label": "First-Year Seminar",
+          "type": "POOL",
+          "min_credits": 1.0,
+          "rules": [
+            {
+              "attribute": "FYS"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 21
+          }
+        },
+        {
+          "label": "CMPSC 122 alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "CMPSC 122",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 122"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 22
+              }
+            },
+            {
+              "label": "CMPSC 132",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 132"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 23
+              }
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 22
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "ECON 102 alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "ECON 102",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "ECON 102"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 24
+              }
+            },
+            {
+              "label": "ECON 104",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "ECON 104"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 25
+              }
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 24
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "MATH 231 + MATH 232 alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "MATH 231 + MATH 232",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "MATH 231",
+                  "type": "POOL",
+                  "min_count": 1,
+                  "rules": [
+                    {
+                      "course": "MATH 231"
+                    }
+                  ],
+                  "source": {
+                    "source_id": "bulletin_ee_bs_2026_27",
+                    "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                    "catalog_year": "2026-27",
+                    "table_row": 26
+                  }
+                },
+                {
+                  "label": "MATH 232",
+                  "type": "POOL",
+                  "min_count": 1,
+                  "rules": [
+                    {
+                      "course": "MATH 232"
+                    }
+                  ],
+                  "source": {
+                    "source_id": "bulletin_ee_bs_2026_27",
+                    "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                    "catalog_year": "2026-27",
+                    "table_row": 26
+                  }
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 26
+              }
+            },
+            {
+              "label": "MATH 230",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 230"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 27
+              }
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 26
+          },
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "Select 3 credits",
+          "min_credits": 3.0,
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 28
+          },
+          "type": "POOL",
+          "rules": [
+            {
+              "course": "IE 424"
+            },
+            {
+              "course": "STAT 401"
+            },
+            {
+              "course": "STAT 414"
+            },
+            {
+              "course": "MATH 414"
+            },
+            {
+              "course": "STAT 418"
+            },
+            {
+              "course": "MATH 418"
+            }
+          ]
+        },
+        {
+          "label": "CAS 100A alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "CAS 100A",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CAS 100A"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 34
+              },
+              "min_grade": "C"
+            },
+            {
+              "label": "CAS 100B",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CAS 100B"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 35
+              },
+              "min_grade": "C"
+            },
+            {
+              "label": "ENGL 138T",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "ENGL 138T"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 36
+              },
+              "min_grade": "C"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 34
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "CMPEN 271 + CMPEN 275 alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "CMPEN 271 + CMPEN 275",
+              "type": "GROUP_ALL",
+              "children": [
+                {
+                  "label": "CMPEN 271",
+                  "type": "POOL",
+                  "min_count": 1,
+                  "rules": [
+                    {
+                      "course": "CMPEN 271"
+                    }
+                  ],
+                  "source": {
+                    "source_id": "bulletin_ee_bs_2026_27",
+                    "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                    "catalog_year": "2026-27",
+                    "table_row": 37
+                  },
+                  "min_grade": "C"
+                },
+                {
+                  "label": "CMPEN 275",
+                  "type": "POOL",
+                  "min_count": 1,
+                  "rules": [
+                    {
+                      "course": "CMPEN 275"
+                    }
+                  ],
+                  "source": {
+                    "source_id": "bulletin_ee_bs_2026_27",
+                    "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                    "catalog_year": "2026-27",
+                    "table_row": 37
+                  }
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 37
+              }
+            },
+            {
+              "label": "CMPEN 270",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPEN 270"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 38
+              },
+              "min_grade": "C"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 37
+          },
+          "credits_range": [
+            4.0,
+            4.0
+          ]
+        },
+        {
+          "label": "CMPSC 121 alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "CMPSC 121",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 121"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 39
+              },
+              "min_grade": "C"
+            },
+            {
+              "label": "CMPSC 131",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "CMPSC 131"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 40
+              },
+              "min_grade": "C"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 39
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "ENGL 15 alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "ENGL 15",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "ENGL 15"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 41
+              },
+              "min_grade": "C"
+            },
+            {
+              "label": "ENGL 30H",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "ENGL 30H"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 42
+              },
+              "min_grade": "C"
+            },
+            {
+              "label": "ENGL 137H",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "ENGL 137H"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 43
+              },
+              "min_grade": "C"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 41
+          },
+          "credits_range": [
+            3.0,
+            3.0
+          ]
+        },
+        {
+          "label": "MATH 250 alternatives",
+          "type": "GROUP_ANY",
+          "min_count": 1,
+          "children": [
+            {
+              "label": "MATH 250",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 250"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 44
+              },
+              "min_grade": "C"
+            },
+            {
+              "label": "MATH 251",
+              "type": "POOL",
+              "min_count": 1,
+              "rules": [
+                {
+                  "course": "MATH 251"
+                }
+              ],
+              "source": {
+                "source_id": "bulletin_ee_bs_2026_27",
+                "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+                "catalog_year": "2026-27",
+                "table_row": 45
+              },
+              "min_grade": "C"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 44
+          },
+          "credits_range": [
+            3.0,
+            4.0
+          ]
+        }
+      ],
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27",
+        "table_row": 20
+      }
+    },
+    {
+      "id": "supporting_and_related",
+      "label": "Supporting Courses and Related Areas",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "6 credits from the program-approved list of 300-level courses",
+          "type": "POOL",
+          "min_credits": 6.0,
+          "rules": [],
+          "requires_review": true,
+          "review": [
+            "The Bulletin names a program-approved list but does not enumerate it. Do not treat an empty list as any course; confirm with the department."
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 47
+          }
+        },
+        {
+          "label": "3 credits from the program-approved list of 300-level or 400-level courses",
+          "type": "POOL",
+          "min_credits": 3.0,
+          "rules": [],
+          "requires_review": true,
+          "review": [
+            "The Bulletin names a program-approved list but does not enumerate it. Do not treat an empty list as any course; confirm with the department."
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 48
+          }
+        },
+        {
+          "label": "6 credits from the program-approved list of 400-level courses",
+          "type": "POOL",
+          "min_credits": 6.0,
+          "rules": [],
+          "requires_review": true,
+          "review": [
+            "The Bulletin names a program-approved list but does not enumerate it. Do not treat an empty list as any course; confirm with the department."
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 49
+          }
+        },
+        {
+          "label": "6 additional credits",
+          "type": "POOL",
+          "min_credits": 6.0,
+          "rules": [],
+          "requires_review": true,
+          "review": [
+            "Bulletin wording: which may include up to 6 credits of ROTC, up to 6 co-op credits, and others from a program-approved list. Eligible courses are not enumerated; confirm with the department."
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27",
+            "table_row": 50
+          }
+        }
+      ],
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27",
+        "table_row": 46
+      }
+    },
+    {
+      "id": "graduation_gpa",
+      "label": "Graduation GPA",
+      "type": "GPA_MIN",
+      "min_gpa": 2.0,
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27"
+      }
+    },
+    {
+      "id": "general_education",
+      "label": "General Education",
+      "type": "GROUP_ALL",
+      "children": [
+        {
+          "label": "GQ",
+          "type": "POOL",
+          "min_credits": 6,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "GQ"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          },
+          "min_grade": "C",
+          "requires_review": true,
+          "review": [
+            "Foundation and breadth slots exclude Inter-Domain courses; the attribute filter alone cannot enforce this."
+          ]
+        },
+        {
+          "label": "GWS",
+          "type": "POOL",
+          "min_credits": 9,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "GWS"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          },
+          "min_grade": "C",
+          "requires_review": true,
+          "review": [
+            "Foundation and breadth slots exclude Inter-Domain courses; the attribute filter alone cannot enforce this."
+          ]
+        },
+        {
+          "label": "GA",
+          "type": "POOL",
+          "min_credits": 3,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "GA"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          },
+          "requires_review": true,
+          "review": [
+            "Foundation and breadth slots exclude Inter-Domain courses; the attribute filter alone cannot enforce this."
+          ]
+        },
+        {
+          "label": "GHW",
+          "type": "POOL",
+          "min_credits": 3,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "GHW"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          },
+          "requires_review": true,
+          "review": [
+            "Foundation and breadth slots exclude Inter-Domain courses; the attribute filter alone cannot enforce this."
+          ]
+        },
+        {
+          "label": "GH",
+          "type": "POOL",
+          "min_credits": 3,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "GH"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          },
+          "requires_review": true,
+          "review": [
+            "Foundation and breadth slots exclude Inter-Domain courses; the attribute filter alone cannot enforce this."
+          ]
+        },
+        {
+          "label": "GS",
+          "type": "POOL",
+          "min_credits": 3,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "GS"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          },
+          "requires_review": true,
+          "review": [
+            "Foundation and breadth slots exclude Inter-Domain courses; the attribute filter alone cannot enforce this."
+          ]
+        },
+        {
+          "label": "GN",
+          "type": "POOL",
+          "min_credits": 3,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "GN"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          },
+          "requires_review": true,
+          "review": [
+            "Foundation and breadth slots exclude Inter-Domain courses; the attribute filter alone cannot enforce this."
+          ]
+        },
+        {
+          "label": "INTER",
+          "type": "POOL",
+          "min_credits": 6,
+          "exclusive": false,
+          "rules": [
+            {
+              "attribute": "INTER"
+            }
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          }
+        },
+        {
+          "label": "Exploration",
+          "type": "POOL",
+          "min_credits": 9,
+          "rules": [],
+          "requires_review": true,
+          "review": [
+            "3 GN credits plus 6 exploration credits; respect permitted attributes, language threshold, and non-double-counting."
+          ],
+          "source": {
+            "source_id": "bulletin_ee_bs_2026_27",
+            "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+            "catalog_year": "2026-27"
+          }
+        }
+      ],
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27"
+      }
+    },
+    {
+      "id": "us",
+      "label": "US",
+      "type": "POOL",
+      "min_credits": 3,
+      "exclusive": false,
+      "rules": [
+        {
+          "attribute": "US"
+        }
+      ],
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27"
+      }
+    },
+    {
+      "id": "il",
+      "label": "IL",
+      "type": "POOL",
+      "min_credits": 3,
+      "exclusive": false,
+      "rules": [
+        {
+          "attribute": "IL"
+        }
+      ],
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27"
+      }
+    },
+    {
+      "id": "wac",
+      "label": "WAC",
+      "type": "POOL",
+      "min_credits": 3,
+      "exclusive": false,
+      "rules": [
+        {
+          "attribute": "WAC"
+        }
+      ],
+      "source": {
+        "source_id": "bulletin_ee_bs_2026_27",
+        "url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#programrequirementstext",
+        "catalog_year": "2026-27"
+      }
+    }
+  ]
+}

@@ -12,6 +12,8 @@
 - 에이전트 도구 명세: `docs/advisor-tools.md` (도구별 입출력, 라우팅 규칙, Gemini function declaration 예시). 예시 값은 가상 데이터입니다.
 - 카탈로그 시드: `data/catalog/2026-27/` (과목 `courses.json`, 전공 요건 `programs/*.json`). 생성 스크립트는 `ingest/parse_bulletin_courses.py`
 - 카탈로그 작업 배경과 변경 내역: `docs/CHANGES-advisor-catalog-db.md`
+- EECS 전공 확대(CMPEN_BS·EE_BS, 2026-27, 주전공만): `docs/CHANGES-eecs-catalog.md`. 크롤러 `ingest/crawl_eecs_catalog.py`, 적재기 `ingest/load_eecs_db.py`(insert-only, 먼저 --dry-run)
+- 수강 제한·학사 일정(`get_deadlines`) 적재와 판정 규칙: `docs/notes/restrictions.md`, `docs/notes/academic-calendar.md`. 두 테이블은 아직 dry-run만 됨
 - 스키마나 도구 명세를 바꾸면 위 문서를 함께 갱신하세요.
 - DB에 테이블을 만들거나 데이터를 다시 적재·수정했다면 `docs/CHANGES-advisor-catalog-db.md`의 "DB load status"(범위, 행 수, 출처)을 같은 커밋에서 갱신하세요. 앱 DB와 같은 DB이므로 `DROP`/`DELETE`는 하지 말고, 적재 전 `--dry-run`으로 확인하세요.
 

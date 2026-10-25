@@ -15,22 +15,54 @@ final class PrerequisiteChecker {
  private static final List<String> RANK=List.of("met","in_progress","unknown","not_met");
  private PrerequisiteChecker(){}
 
- static ObjectNode evaluate(JsonNode tree,JsonNode reportCourses,Map<String,Set<String>> aliases,ObjectMapper mapper){
+ /**
+  * Semester classification estimated from the report's credit totals, per the Bulletin table "Classification of Students
+  * by Semester" (total credits earned: 14.0 or fewer = 1, 14.1-29 = 2, ... 134.1-149 = 10, 149.1 or more = 11).
+  * earned uses completed credits; withInProgress adds credits in progress. Null fields mean the report has no total.
+  */
+ record Standing(Integer earned,Integer withInProgress,Double earnedCredits,Double inProgressCredits){
+  static final Standing UNKNOWN=new Standing(null,null,null,null);
+  static Standing of(JsonNode report){
+   var t=report.path("totals");if(!t.path("completed").isNumber())return UNKNOWN;
+   double done=t.path("completed").asDouble();Double ip=t.path("inProgress").isNumber()?t.path("inProgress").asDouble():null;
+   return new Standing(classification(done),ip==null?null:classification(done+ip),done,ip);
+  }
+ }
+ private static final double[] UPPER={14,29,44,59,74,89,104,119,134,149};
+ static int classification(double credits){int c=1;for(double u:UPPER)if(credits>u)c++;return c;}
+ static final String STANDING_SOURCE="Semester standing is estimated from the report's completed credits using the Bulletin table \"Classification of Students by Semester\"; LionPATH uses total credits earned, including transfer and AP credit.";
+
+ static ObjectNode evaluate(JsonNode tree,JsonNode reportCourses,Map<String,Set<String>> aliases,ObjectMapper mapper){return evaluate(tree,reportCourses,aliases,Standing.UNKNOWN,mapper);}
+ static ObjectNode evaluate(JsonNode tree,JsonNode reportCourses,Map<String,Set<String>> aliases,Standing standing,ObjectMapper mapper){
   var out=mapper.createObjectNode();
   if(tree==null||tree.isNull()||tree.isMissingNode()){out.put("status","no_prerequisites_in_database");return out;}
-  var checked=node(tree,reportCourses,aliases,mapper);out.put("status",checked.path("result").asText());out.set("tree",checked);return out;
+  var checked=node(tree,reportCourses,aliases,standing,mapper);out.put("status",checked.path("result").asText());out.set("tree",checked);return out;
  }
+ /** met / in_progress / not_met / unknown for a minimum semester classification, with the reason. */
+ static String[] standing(int min,Standing s){
+  if(s.earned()==null)return new String[]{"unknown","The report has no completed-credit total, so semester standing cannot be estimated."};
+  String basis=" (estimated semester "+s.earned()+" from "+fmt(s.earnedCredits())+" completed credits)";
+  if(s.earned()>=min)return new String[]{"met","Requires semester "+min+" standing; met"+basis+"."};
+  if(s.withInProgress()!=null&&s.withInProgress()>=min)return new String[]{"in_progress","Requires semester "+min+" standing; reached once current courses are passed (semester "+s.withInProgress()+" with "+fmt(s.inProgressCredits())+" credits in progress)"+basis+"."};
+  return new String[]{"not_met","Requires semester "+min+" standing; not yet"+basis+"."};
+ }
+ private static String fmt(Double d){return d==null?"?":d%1==0?String.valueOf(d.intValue()):String.valueOf(d);}
+ /** ALL semantics over results: any not_met fails, then unknown, then in_progress. */
+ static String combine(List<String> results){return results.isEmpty()?"unknown":worst(results);}
 
- private static ObjectNode node(JsonNode n,JsonNode reportCourses,Map<String,Set<String>> aliases,ObjectMapper mapper){
+ private static ObjectNode node(JsonNode n,JsonNode reportCourses,Map<String,Set<String>> aliases,Standing standing,ObjectMapper mapper){
   var out=(ObjectNode)n.deepCopy();out.remove("children");String type=n.path("type").asText();
   switch(type){
    case "ALL","ANY"->{
     var children=out.putArray("children");var results=new ArrayList<String>();
-    for(var c:n.path("children")){var checked=node(c,reportCourses,aliases,mapper);children.add(checked);results.add(checked.path("result").asText());}
+    for(var c:n.path("children")){var checked=node(c,reportCourses,aliases,standing,mapper);children.add(checked);results.add(checked.path("result").asText());}
     out.put("result",results.isEmpty()?"unknown":type.equals("ALL")?worst(results):best(results));
    }
    case "COURSE","COREQ"->course(out,n,reportCourses,aliases,type.equals("COREQ")||n.path("concurrent_ok").asBoolean(false));
-   case "STANDING"->{out.put("result","unknown");out.put("reason","Semester standing is not available from the report.");}
+   case "STANDING"->{
+    if(n.path("min_semester").isInt()){var r=standing(n.path("min_semester").asInt(),standing);out.put("result",r[0]);out.put("reason",r[1]);if(standing.earned()!=null)out.put("estimate",true);}
+    else{out.put("result","unknown");out.put("reason","The required semester standing could not be read.");}
+   }
    default->{out.put("result","unknown");out.put("reason","The Bulletin wording could not be parsed; quote it instead of interpreting it.");}
   }
   return out;

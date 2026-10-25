@@ -8217,16 +8217,40 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Statistical methods for engineering process characterization and improvement. For non-Industrial Engineering majors. I E 424 Process Quality Engineering (3) This course will provide students with probabilistic and statistical methods required to improve the quality of products and processes. It will start with the introduction to quality culture and the key elements of quality improvement. Then the methods for data presentation and interpretation are discussed. Next, the basic probability concepts and commonly used probability distributions are taught followed by statistical concepts, such as sampling distributions, point and interval estimation, and hypotheses testing. The concepts and methods of statistical tools required for process selection and improvement such as process capability indexes and control charts are discussed next. The course ends with the coverage of simple and multiple regression models.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 Enforced Concurrent at Enrollment: MATH 220 or BE 301",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
-      ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ie/"
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 141"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COREQ",
+                "course": "MATH 220"
+              },
+              {
+                "type": "COREQ",
+                "course": "BE 301"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ie/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ie_2026_27",
+        "collected_for": "EECS"
+      }
     },
     {
       "code": "IEC 200",
@@ -9159,16 +9183,31 @@
       "credits_min": 3.0,
       "credits_max": 3.0,
       "repeatable": false,
-      "description": "Random variables; probability density functions; estimation; statistical tests, t-tests; correlation; simple linear regression; one-way analysis of variance; randomized blocks.",
+      "description": null,
       "attributes": [],
       "crosslists": [],
       "prereq_text": "Enforced Prerequisite at Enrollment: MATH 111 or MATH 141",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Referenced by another course's prerequisite or cross-list; prerequisites and cross-lists not expanded."
-      ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/"
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 111"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/stat/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_stat_2026_27",
+        "collected_for": "EECS"
+      }
     },
     {
       "code": "STS 105",
@@ -9255,14 +9294,19 @@
       "attributes": [
         "GWS"
       ],
-      "crosslists": [],
+      "crosslists": [
+        "ENGL 137H"
+      ],
       "prereq_text": null,
       "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Reference-only row; prerequisite expansion intentionally stops here."
-      ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/"
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cas_2026_27",
+        "collected_for": "EECS"
+      }
     },
     {
       "code": "CAS 138T",
@@ -9278,14 +9322,31 @@
         "FYS",
         "GWS"
       ],
-      "crosslists": [],
-      "prereq_text": "Enforced Prerequisite at Enrollment: ENGL 137H or CAS 137H",
-      "prereq": null,
-      "status": "reference_only",
-      "review": [
-        "Reference-only row; prerequisite expansion intentionally stops here."
+      "crosslists": [
+        "ENGL 138T"
       ],
-      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/"
+      "prereq_text": "Enforced Prerequisite at Enrollment: ENGL 137H or CAS 137H",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "ENGL 137H"
+          },
+          {
+            "type": "COURSE",
+            "course": "CAS 137H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cas_2026_27",
+        "collected_for": "EECS"
+      }
     },
     {
       "code": "CMPEN 270",
@@ -10982,6 +11043,1223 @@
       "provenance": {
         "source_id": "course_phys_2026_27",
         "collected_for": "CMPSC_BS"
+      }
+    },
+    {
+      "code": "BE 301",
+      "subject": "BE",
+      "number": "301",
+      "level": 300,
+      "title": null,
+      "credits_min": null,
+      "credits_max": null,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Referenced course page not collected."
+      ],
+      "source_url": null
+    },
+    {
+      "code": "CAS 100C",
+      "subject": "CAS",
+      "number": "100C",
+      "level": 100,
+      "title": "Effective Speech",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cas_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CAS 100S",
+      "subject": "CAS",
+      "number": "100S",
+      "level": 100,
+      "title": "Effective Speech",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "FYS",
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cas/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cas_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 411",
+      "subject": "CMPEN",
+      "number": "411",
+      "level": 400,
+      "title": "VLSI Digital Circuits",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (CMPEN 371 or CMPEN 471) and EE 310",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPEN 371"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPEN 471"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 310"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 416",
+      "subject": "CMPEN",
+      "number": "416",
+      "level": 400,
+      "title": "Digital Integrated Circuits",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [
+        "EE 416"
+      ],
+      "prereq_text": "Enforced Prerequisite at Enrollment: EE 310",
+      "prereq": {
+        "type": "COURSE",
+        "course": "EE 310"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 417",
+      "subject": "CMPEN",
+      "number": "417",
+      "level": 400,
+      "title": "Digital Design Using Field Programmable Devices",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [
+        "EE 417"
+      ],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 331",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPEN 331"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 455",
+      "subject": "CMPEN",
+      "number": "455",
+      "level": 400,
+      "title": "An Introduction to Digital Image Processing",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [
+        "EE 455"
+      ],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (EE 350 or EE 353 or EE 352) and (CMPSC 121 or CMPSC 131 or CMPSC 201)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "EE 350"
+              },
+              {
+                "type": "COURSE",
+                "course": "EE 353"
+              },
+              {
+                "type": "COURSE",
+                "course": "EE 352"
+              }
+            ]
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "CMPSC 121"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 131"
+              },
+              {
+                "type": "COURSE",
+                "course": "CMPSC 201"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 471",
+      "subject": "CMPEN",
+      "number": "471",
+      "level": 400,
+      "title": null,
+      "credits_min": null,
+      "credits_max": null,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Referenced course page not collected."
+      ],
+      "source_url": null
+    },
+    {
+      "code": "CMPEN 472",
+      "subject": "CMPEN",
+      "number": "472",
+      "level": 400,
+      "title": "Microprocessors and Embedded Systems",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 331",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPEN 331"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 473",
+      "subject": "CMPEN",
+      "number": "473",
+      "level": 400,
+      "title": "Microcomputer Laboratory",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 472",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPEN 472"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 475",
+      "subject": "CMPEN",
+      "number": "475",
+      "level": 400,
+      "title": "Functional Verification",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 331",
+      "prereq": {
+        "type": "COURSE",
+        "course": "CMPEN 331"
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "CMPEN 482W",
+      "subject": "CMPEN",
+      "number": "482W",
+      "level": 400,
+      "title": "Computer Engineering Project Design",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "WAC"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPSC 311 and EE 310 and EE 353 Enforced Concurrent at Enrollment: CMPSC 473 Recommended Preparation: ENGL 202C",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "CMPSC 311"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 310"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 353"
+          },
+          {
+            "type": "COREQ",
+            "course": "CMPSC 473"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Recommended preparation is advisory and was not modeled."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/cmpen/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_cmpen_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EDSGN 100",
+      "subject": "EDSGN",
+      "number": "100",
+      "level": 100,
+      "title": "Cornerstone Engineering Design",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "no_prereq",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/edsgn/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_edsgn_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 200",
+      "subject": "EE",
+      "number": "200",
+      "level": 200,
+      "title": "Design Tools",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: [C or better in CMPEN 270 or ((C or better in CMPEN 271) and CMPEN 275)] and (CMPSC 201 or CMPSC 121 or CMPSC 131)",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Prerequisite at Enrollment: [C or better in CMPEN 270 or ((C or better in CMPEN 271) and CMPEN 275)] and (CMPSC 201 or CMPSC 121 or CMPSC 131)"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite ([); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 210",
+      "subject": "EE",
+      "number": "210",
+      "level": 200,
+      "title": "Circuits and Devices",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: C or better in PHYS 212 Enforced Concurrent at Enrollment: MATH 250 or MATH 251",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "PHYS 212",
+            "min_grade": "C"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COREQ",
+                "course": "MATH 250"
+              },
+              {
+                "type": "COREQ",
+                "course": "MATH 251"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Assumed 'C or better in' applies to every course in its clause."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 300W",
+      "subject": "EE",
+      "number": "300W",
+      "level": 300,
+      "title": "Design Process",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "WAC"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: EE 200 and EE 310 Enforced Concurrent at Enrollment: ENGL 202C",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "EE 200"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 310"
+          },
+          {
+            "type": "COREQ",
+            "course": "ENGL 202C"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 310",
+      "subject": "EE",
+      "number": "310",
+      "level": 300,
+      "title": "Electronic Circuit Design I",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: C or better in EE 210 or C or better in EE 315 or C or better in EET 310",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "EE 210",
+            "min_grade": "C"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 315",
+            "min_grade": "C"
+          },
+          {
+            "type": "COURSE",
+            "course": "EET 310",
+            "min_grade": "C"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Assumed 'C or better in' applies to every course in its clause.",
+        "Assumed 'C or better in' applies to every course in its clause.",
+        "Assumed 'C or better in' applies to every course in its clause."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 315",
+      "subject": "EE",
+      "number": "315",
+      "level": 300,
+      "title": "Electrical Signals and Circuits with Lab",
+      "credits_min": 5.0,
+      "credits_max": 5.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Concurrent at Enrollment: MATH 250",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "EE 330",
+      "subject": "EE",
+      "number": "330",
+      "level": 300,
+      "title": "Engineering Electromagnetics",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (C or better in EE 210 or C or better in EE 315) and (MATH 230 or MATH 232)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "EE 210",
+                "min_grade": "C"
+              },
+              {
+                "type": "COURSE",
+                "course": "EE 315",
+                "min_grade": "C"
+              }
+            ]
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 230",
+                "min_grade": "C"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 232",
+                "min_grade": "C"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Assumed 'C or better in' applies to every course in its clause.",
+        "Assumed 'C or better in' applies to every course in its clause."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 340",
+      "subject": "EE",
+      "number": "340",
+      "level": 300,
+      "title": "Introduction to Nanoelectronics",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: PHYS 214 and C or better in EE 210",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "PHYS 214"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 210",
+            "min_grade": "C"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Assumed 'C or better in' applies to every course in its clause."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 350",
+      "subject": "EE",
+      "number": "350",
+      "level": 300,
+      "title": "Continuous-Time Linear Systems",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (C or better in EE 210) and MATH 220 and (MATH 250 or MATH 251)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "EE 210",
+            "min_grade": "C"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 220",
+            "min_grade": "C"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 250",
+                "min_grade": "C"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 251",
+                "min_grade": "C"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [
+        "Assumed 'C or better in' applies to every course in its clause."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 351",
+      "subject": "EE",
+      "number": "351",
+      "level": 300,
+      "title": "Discrete-Time Linear Systems",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: C or better in EE 350",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "EE 352",
+      "subject": "EE",
+      "number": "352",
+      "level": 300,
+      "title": "Signals and Systems: Continuous and Discrete-Time",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 250 and (EE 210 or EE 314 or EE 315)",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "EE 353",
+      "subject": "EE",
+      "number": "353",
+      "level": 300,
+      "title": "Signals and Systems: Continuous and Discrete-Time",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: EE 210 and (MATH 250 or MATH 251)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "EE 210"
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 250"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 251"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 403W",
+      "subject": "EE",
+      "number": "403W",
+      "level": 400,
+      "title": "Capstone Design",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "WAC"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: EE 300W and ENGL 202C",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "EE 300W"
+          },
+          {
+            "type": "COURSE",
+            "course": "ENGL 202C"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 416",
+      "subject": "EE",
+      "number": "416",
+      "level": 400,
+      "title": "Digital Integrated Circuits",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: EE 310",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "EE 417",
+      "subject": "EE",
+      "number": "417",
+      "level": 400,
+      "title": "Digital Design Using Field Programmable Devices",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: CMPEN 331",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "EE 453",
+      "subject": "EE",
+      "number": "453",
+      "level": 400,
+      "title": "Fundamentals of Digital Signal Processing",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: EE 351 or EE 352 or EE 353",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "EE 351"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 352"
+          },
+          {
+            "type": "COURSE",
+            "course": "EE 353"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_ee_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "EE 455",
+      "subject": "EE",
+      "number": "455",
+      "level": 400,
+      "title": "An Introduction to Digital Image Processing",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (EE 350 or EE 353 or EE 352) and (CMPSC 121 or CMPSC 131 or CMPSC 201)",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/ee/"
+    },
+    {
+      "code": "EET 310",
+      "subject": "EET",
+      "number": "310",
+      "level": 300,
+      "title": null,
+      "credits_min": null,
+      "credits_max": null,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": null,
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Referenced course page not collected."
+      ],
+      "source_url": null
+    },
+    {
+      "code": "ENGL 202H",
+      "subject": "ENGL",
+      "number": "202H",
+      "level": 200,
+      "title": "Effective Writing: Honors",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: 4th semester standing and one of the following courses: ENGL 15 or ENGL 15A or ENGL 15S or ENGL 15E or ESL 15 or ENGL 30H or ENGL 30T or ENGL 137H or CAS 137H",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Enforced Prerequisite at Enrollment: 4th semester standing and one of the following courses: ENGL 15 or ENGL 15A or ENGL 15S or ENGL 15E or ESL 15 or ENGL 30H or ENGL 30T or ENGL 137H or CAS 137H"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite (one of the following courses:); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/engl/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_engl_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "ESL 15",
+      "subject": "ESL",
+      "number": "15",
+      "level": 0,
+      "title": "ESL Composition for American Academic Communication II",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GWS"
+      ],
+      "crosslists": [],
+      "prereq_text": "Prerequisite: a grade of C or higher required in ESL 004",
+      "prereq": {
+        "type": "TEXT",
+        "raw": "Prerequisite: a grade of C or higher required in ESL 004"
+      },
+      "status": "text_only",
+      "review": [
+        "Could not parse prerequisite (a grade of C); kept as TEXT."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/esl/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_esl_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "MATH 111",
+      "subject": "MATH",
+      "number": "111",
+      "level": 100,
+      "title": "Techniques of Calculus II",
+      "credits_min": 2.0,
+      "credits_max": 2.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [
+        "GQ"
+      ],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 110",
+      "prereq": null,
+      "status": "reference_only",
+      "review": [
+        "Reference-only row; prerequisite expansion intentionally stops here."
+      ],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/"
+    },
+    {
+      "code": "MATH 250",
+      "subject": "MATH",
+      "number": "250",
+      "level": 200,
+      "title": "Ordinary Differential Equations",
+      "credits_min": 3.0,
+      "credits_max": 3.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 or MATH 141B or MATH 141E or MATH 141G or MATH 141H",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 141"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141B"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141E"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141G"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "MATH 251",
+      "subject": "MATH",
+      "number": "251",
+      "level": 200,
+      "title": "Ordinary and Partial Differential Equations",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: MATH 141 or MATH 141B or MATH 141E or MATH 141G or MATH 141H",
+      "prereq": {
+        "type": "ANY",
+        "children": [
+          {
+            "type": "COURSE",
+            "course": "MATH 141"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141B"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141E"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141G"
+          },
+          {
+            "type": "COURSE",
+            "course": "MATH 141H"
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "EECS"
+      }
+    },
+    {
+      "code": "MATH 251H",
+      "subject": "MATH",
+      "number": "251H",
+      "level": 200,
+      "title": "Honors Ordinary and Partial Differential Equations",
+      "credits_min": 4.0,
+      "credits_max": 4.0,
+      "repeatable": false,
+      "description": null,
+      "attributes": [],
+      "crosslists": [],
+      "prereq_text": "Enforced Prerequisite at Enrollment: (MATH 141 or MATH 141B or MATH 141E or MATH 141G or MATH 141H) and (MATH 220 or MATH 220H)",
+      "prereq": {
+        "type": "ALL",
+        "children": [
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 141"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 141B"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 141E"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 141G"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 141H"
+              }
+            ]
+          },
+          {
+            "type": "ANY",
+            "children": [
+              {
+                "type": "COURSE",
+                "course": "MATH 220"
+              },
+              {
+                "type": "COURSE",
+                "course": "MATH 220H"
+              }
+            ]
+          }
+        ]
+      },
+      "status": "auto_parsed",
+      "review": [],
+      "source_url": "https://bulletins.psu.edu/university-course-descriptions/undergraduate/math/",
+      "catalog_year": "2026-27",
+      "provenance": {
+        "source_id": "course_math_2026_27",
+        "collected_for": "EECS"
       }
     }
   ]

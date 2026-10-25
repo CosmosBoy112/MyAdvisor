@@ -1,0 +1,323 @@
+{
+  "program_code": "EE_BS",
+  "catalog_year": "2026-27",
+  "scope": "program",
+  "rules": [
+    {
+      "key": "suggested_academic_plan.DEFAULT",
+      "value": {
+        "campus": "UP",
+        "total_credits": 127.0,
+        "terms": [
+          {
+            "year": 1,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CHEM 110 (GN)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE 8 or 9 (or First Year Seminar)",
+                "credits": 1.0,
+                "credits_text": "1",
+                "c_required": false
+              },
+              {
+                "label": "ENGL 15, 30H, or ESL 15 (GWS)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "MATH 140 or 140E (GQ)",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "PHYS 211 (PHYS 211L and PHYS 211R (GN))",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 1,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CMPSC 121 or 131",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "ECON 102 or 104 (GS)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EDSGN 100",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "MATH 141 or 141E (GQ)",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "PHYS 212 (PHYS 212L and PHYS 212R (GN))",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              }
+            ],
+            "total_credits": 17.0
+          },
+          {
+            "year": 2,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "CMPEN 270 or 271 and 275",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "CMPSC 122 or 132",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE 210",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "MATH 220",
+                "credits": null,
+                "credits_text": "2-3",
+                "c_required": false
+              },
+              {
+                "label": "MATH 250",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              }
+            ],
+            "total_credits": null
+          },
+          {
+            "year": 2,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "CAS 100A or 100B (GWS)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE 200",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE 310",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "MATH 230",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "PHYS 214",
+                "credits": 2.0,
+                "credits_text": "2",
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.0
+          },
+          {
+            "year": 3,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "EE 330",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "EE 340",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "EE 350",
+                "credits": 4.0,
+                "credits_text": "4",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course (GHW)",
+                "credits": 1.5,
+                "credits_text": "1.5",
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.5
+          },
+          {
+            "year": 3,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "EE 300W (Writing Intensive)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "ENGL 202C (GWS)",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE/CMPEN 300-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE/CMPEN 300-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 4,
+            "season": "FA",
+            "courses": [
+              {
+                "label": "EE 403W",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE/CMPEN 300/400-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "Related Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "Statistics Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              }
+            ],
+            "total_credits": 15.0
+          },
+          {
+            "year": 4,
+            "season": "SP",
+            "courses": [
+              {
+                "label": "EE/CMPEN 400-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "EE/CMPEN 400-Level Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "Related Elective",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "General Education Course",
+                "credits": 3.0,
+                "credits_text": "3",
+                "c_required": false
+              },
+              {
+                "label": "1.5",
+                "credits": null,
+                "credits_text": "",
+                "c_required": false
+              }
+            ],
+            "total_credits": 16.5
+          }
+        ],
+        "symbols": {
+          "c_required": "Course requires a grade of C or better"
+        }
+      },
+      "description": "Suggested academic plan for Electrical Engineering, B.S. at University Park, in effect for 2026-27. A suggested sequence, not a requirement.",
+      "source_url": "https://bulletins.psu.edu/undergraduate/colleges/engineering/electrical-engineering-bs/#suggestedacademicplantext"
+    }
+  ]
+}

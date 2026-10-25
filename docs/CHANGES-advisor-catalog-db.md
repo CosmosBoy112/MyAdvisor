@@ -273,6 +273,21 @@ Added via INSERT one `MATH_UMNR` minor program, one 2026–27 version (minimum 2
 Added a `courseInventory` extracted from the provided PDF (37 courses / per-term enrollment history, with repeated requirement entries deduplicated) to one existing user CS report. Overall credits, 30 requirements, and conversation history were kept. Original backed up privately outside Git, conditionally UPDATEd, then compared from a new connection. This PDF uses 2023 requirements, so the 2026–27 minor comparison is for reference only.
 
 
+### 2026-10-25 · EECS majors: Computer Engineering and Electrical Engineering
+
+Status: **pending, dry-run only** (rolled back) until the backend with the new major matching is deployed. The dry-run would insert 36 `courses`, 33 `course_versions`, 26 prerequisite trees (3 of them for versions that had none), 3 cross-lists, programs `CMPEN_BS`, `CMPEN_ETM`, `EE_BS`, `EE_ETM` (69 / 7 / 70 / 7 requirement nodes, 75 / 6 / 55 / 7 rules) and 10 `policy_rules`, with every existing row unchanged. Totals after the load: courses 393, course_versions 370, prereq_nodes 981, programs 9, requirement_nodes 328, requirement_rules 710, policy_rules 21. Source: 2026-27 Bulletin program and course description pages (see `docs/CHANGES-eecs-catalog.md`).
+
+After this load the restriction parser finds 8 courses (ENGL 202H added), so `load_course_restrictions.py` would insert 8 rows.
+
+### 2026-10-25 · Enrollment restrictions and academic calendar (code and data ready, not loaded)
+
+No schema changes and no rows written: both loaders were run only with `--dry-run` (rolled back). `course_restrictions`, `terms` and `academic_calendar` still have 0 rows.
+
+- `ingest/load_course_restrictions.py --data data/catalog/2026-27`: 7 rows for 7 courses (`min_semester` 6, `text` 1), 0 missing course versions, 0 stale. Source: 2026-27 Bulletin prerequisite text already in `courses.json`. Details in `docs/notes/restrictions.md`.
+- `ingest/load_calendar_db.py --data data/calendar/2026-27.json`: 3 terms (FA26, SP27, SU27) and 59 Regular Session events; a second load in the same transaction updated 3 + 59 and inserted 0. Source: Registrar 2026-27 academic calendar (retrieved 2026-10-25, one request; the site has no robots.txt). Details in `docs/notes/academic-calendar.md`.
+- Earlier catalog editions (2024-25, 2025-26) are not loaded: `bulletins.psu.edu/robots.txt` disallows `/archive/` for all crawlers, so they are not collected automatically. The backend already picks the report's edition when it is loaded.
+- Update the row counts above and in "Load results" when the real loads run.
+
 ### 2026-10-24: Last-report deletion protection verification
 
 The app now requires each account to retain at least one report. No schema or catalog changes. Account-row locking, ownership checks, and report counting run in one transaction. LiveDatabaseTest created a synthetic account and two reports, verified last-report HTTP 409 protection, rejected another user's deletion, and checked deletion of one of two reports with cascading conversation removal. All test rows were rolled back. No real user reports were modified or deleted.

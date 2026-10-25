@@ -62,6 +62,17 @@ class AdvisorViewsTest {
   tools.call("show_view",args("{\"view\":\"semester_plan\"}"),t);
   assertEquals("unavailable",AdvisorViews.build(tools,t,mapper).at("/data/status").asText());
  }
+ @Test void programsWithoutOptionsUseTheirDefaultPlan()throws Exception{
+  var ee=new CatalogDbService.Program(7,"EE_BS","Electrical Engineering, B.S.","2026-27",127.0,"https://bulletins.psu.edu/ee",Map.of(),Map.of());
+  var t=new AdvisorTools.Turn(turn().report,List.of(),Optional.of(new CatalogDbService.Scope("matched",ee,null,null,"2026-27")),false);
+  tools.call("show_view",args("{\"view\":\"semester_plan\"}"),t);
+  when(catalog.policies(ee,null)).thenReturn((ArrayNode)mapper.readTree("""
+   [{"key":"catalog_snapshot","description":"x","source_url":"https://bulletins.psu.edu/ee"},
+    {"key":"suggested_academic_plan.DEFAULT","source_url":"https://bulletins.psu.edu/ee","description":"Bulletin","value":{"total_credits":127,"terms":[{"year":1,"season":"FA","total_credits":4,"courses":[{"label":"MATH 140 (GQ)","credits":4}]}]}}]"""));
+  var view=AdvisorViews.build(tools,t,mapper);
+  assertEquals("reference_plan",view.at("/data/status").asText());assertFalse(view.path("data").has("option"),"DEFAULT is not shown as an option");
+  assertEquals("Electrical Engineering, B.S.",view.at("/data/program").asText());
+ }
  @Test void planLabelsExpandBareNumbersWithTheLastSubject(){
   assertEquals(List.of("CMPSC 121","CMPSC 131"),AdvisorViews.codes("CMPSC 121 or 131 (GQ)"));
   assertEquals(List.of("CAS 100A","CAS 100B"),AdvisorViews.codes("CAS 100A or 100B (GWS)"));

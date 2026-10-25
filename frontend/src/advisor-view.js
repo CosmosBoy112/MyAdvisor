@@ -31,7 +31,7 @@ export function planProgress(plan){
 }
 export function officialUrl(value){try{const u=new URL(value);return u.protocol==='https:'&&(u.hostname==='psu.edu'||u.hostname.endsWith('.psu.edu'))?u.href:null;}catch{return null;}}
 // Live progress while an answer is being written (polled from /chat/progress). Labels describe the step, never its data.
-const TOOL_LABELS={get_student_record:'Reading your report…',search_courses:'Searching the course catalog…',get_course:'Reading course details…',check_prerequisites:'Checking prerequisites…',get_program_requirements:'Reviewing your program requirements…',find_courses_for_requirement:'Finding courses for a requirement…',get_policies:'Reading program policies…',get_minor_assessment:'Comparing the Math minor…',web_search:'Searching the web…',show_view:'Preparing a screen…',save_memory:'Saving to memory…',forget_memory:'Updating memory…'};
+const TOOL_LABELS={get_student_record:'Reading your report…',search_courses:'Searching the course catalog…',get_course:'Reading course details…',check_prerequisites:'Checking prerequisites…',get_program_requirements:'Reviewing your program requirements…',find_courses_for_requirement:'Finding courses for a requirement…',get_policies:'Reading program policies…',get_minor_assessment:'Comparing the Math minor…',web_search:'Searching the web…',show_view:'Preparing a screen…',get_deadlines:'Checking the academic calendar…',save_memory:'Saving to memory…',forget_memory:'Updating memory…'};
 export function progressLabel(step){
  if(step?.kind==='tool')return TOOL_LABELS[step.detail]||'Looking something up…';
  if(step?.kind==='fallback')return 'Switching to the backup model…';

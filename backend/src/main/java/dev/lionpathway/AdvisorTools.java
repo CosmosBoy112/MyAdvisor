@@ -44,6 +44,10 @@ public class AdvisorTools {
   if(store!=null&&subject!=null){turn.subject=subject;turn.reportId=reportId;try{turn.memories=store.memories(subject);}catch(RuntimeException e){log.warn("Memory lookup failed={}",e.getClass().getSimpleName());}}
   return turn;
  }
+ // Academic calendar (get_deadlines). Optional so the tools still work before the calendar is loaded or in tests.
+ private CalendarRepository calendar;
+ java.time.Clock clock=java.time.Clock.system(java.time.ZoneId.of("America/New_York"));
+ @org.springframework.beans.factory.annotation.Autowired(required=false) void setCalendar(CalendarRepository calendar){this.calendar=calendar;}
  static final String SCHOOL="Penn State University";
  private static final Set<String> NOT_EARNED=Set.of("F","W","UN","AU","LD","NG","XF");
  static String searchContext(JsonNode report,Optional<CatalogDbService.Scope> scope){
@@ -111,17 +115,19 @@ public class AdvisorTools {
   tools.add(fn("check_prerequisites","Deterministically checks prerequisite trees against the course rows in the student's report. Use this instead of judging prerequisites yourself. Pass every course you are considering in one call with codes.",
    props("code",str("One course code, e.g. 'CMPSC 465'"),"codes",strArray("Up to 8 course codes checked in one call, e.g. ['STAT 414','CMPSC 465']"))));
   tools.add(fn("get_program_requirements","Official requirement tree of a loaded program, with node ids. Without node_id it is an overview (course_count per node); pass node_id for one subtree with its courses. Defaults to the report's major and option.",
-   props("program_code",str("e.g. 'DATSC_BS', 'CMPSC_BS', 'CMPSC_ETM'. Defaults to the report's major"),"option",str("Option code, e.g. 'COMPUTATIONAL'"),"node_id",integer("Return only this node and its children"))));
+   props("program_code",str("e.g. 'DATSC_BS', 'CMPSC_BS', 'CMPEN_BS', 'EE_BS', 'CMPSC_ETM'. Defaults to the report's major"),"option",str("Option code, e.g. 'COMPUTATIONAL'"),"node_id",integer("Return only this node and its children"))));
   tools.add(fn("find_courses_for_requirement","Courses that can satisfy one requirement node, marked with whether the student's report already has them.",
    props("node_id",integer("Requirement node id from get_program_requirements"),"limit",integer("Default 20, max 20")),"node_id"));
   tools.add(fn("get_policies","Program policies and the suggested semester plan from the Bulletin/Handbook, with their source edition.",
-   props("program_code",str("Defaults to the report's major"),"key",str("Optional policy key, e.g. 'suggested_academic_plan.COMPUTATIONAL'"))));
+   props("program_code",str("Defaults to the report's major"),"key",str("Optional policy key, e.g. 'suggested_academic_plan.COMPUTATIONAL', or 'suggested_academic_plan.DEFAULT' for programs without options"))));
   if(minor!=null)tools.add(fn("get_minor_assessment","Server-computed reference comparison of the student's courses with the Mathematics minor (2026-27 University Park). Only MATH is supported.",
    props("minor",enumOf("MATH","Minor code")),"minor"));
   if(turn.webEnabled)tools.add(fn("web_search","Searches the public web (Penn State official sources first; Reddit/Rate My Professors for experiences). Use for professors, workload, offerings, or programs not in the catalog database. Call at most once per answer. Never put the student's grades, records or personal details in the query.",
    props("query",str("A public question in plain words"),"sources",enumOf("official|community|any","official = Penn State sites only (requirements, policies, offerings); community = Reddit and Rate My Professors only (experiences, workload, professors); any = whole web (default)")),"query"));
   tools.add(fn("show_view","Opens one screen next to your answer. Call it once, after the tools that support it, when a screen helps: course_detail (one to three courses the student asks about), course_options (courses you recommend), requirement_gap (what is still missing), semester_plan (only when the student asks for planning), minor_check (Math minor). The server fills the screen from the catalog and report; you only choose it.",
    props("view",enumOf(String.join("|",List.of("course_detail","course_options","requirement_gap","semester_plan","minor_check")),"Screen type"),"course_codes",strArray("Courses for course_detail (max 3) or course_options (max 10)"),"node_ids",integerArray("Requirement node ids for requirement_gap (max 3)")),"view"));
+  if(calendar!=null)tools.add(fn("get_deadlines","Official Penn State Registrar academic calendar (Regular Session, full-semester courses): add/drop, late drop, withdrawal, classes begin/end, final exams, holidays. Always answer dates from this tool and cite its source.",
+   props("term_code",str("e.g. 'FA26', 'SP27', 'SU27'. Defaults to the term in session, else the next one"),"event_keys",strArray("e.g. ['late_drop','withdrawal','regular_drop','regular_add','final_exams','classes_begin','classes_end']. Omit for all"),"campus",str("Campus code; defaults to the report's campus (UP for University Park)"))));
   if(memoryEnabled(turn)){
    tools.add(fn("save_memory","Saves one fact or preference the student stated themselves (e.g. 'wants to avoid 8 am classes', 'aiming for data engineering'). Never save your guesses, grades, health or other sensitive details. The student sees a notice and can undo it.",
     props("category",enumOf("preference|goal|constraint|other","Kind of memory"),"content",str("One sentence, at most 500 characters, in the student's language"),"replaces_id",integer("Existing memory id to update instead of adding")),"category","content"));
@@ -146,6 +152,7 @@ public class AdvisorTools {
     case "show_view"->showView(args,turn);
     case "save_memory"->saveMemory(args,turn);
     case "forget_memory"->forgetMemory(args,turn);
+    case "get_deadlines"->deadlines(args,turn);
     default->error("INVALID_ARGUMENT","Unknown tool: "+name);
    };
   }catch(IllegalArgumentException e){result=error("INVALID_ARGUMENT",e.getMessage());}
@@ -218,14 +225,60 @@ public class AdvisorTools {
   var courses=turn.report.path("courseInventory").path("courses");
   if(!courses.isArray())return error("DATA_NOT_AVAILABLE","This report has no recognizable course rows, so prerequisites cannot be checked. Ask for a report that lists course history.");
   var tree=catalog.prereqTree(id.get());var required=new LinkedHashSet<String>();collectCourses(tree,required);
-  var data=PrerequisiteChecker.evaluate(tree,courses,catalog.crosslists(required),mapper);data.put("course",code);data.put("catalogYear",year);
+  var standing=PrerequisiteChecker.Standing.of(turn.report);
+  var data=PrerequisiteChecker.evaluate(tree,courses,catalog.crosslists(required),standing,mapper);data.put("course",code);data.put("catalogYear",year);
+  var restrictionWarnings=new ArrayList<String>();
+  var restrictions=evaluateRestrictions(id.get(),turn,standing,restrictionWarnings);
+  if(!restrictions.isEmpty()){
+   // A restriction that is not met (or cannot be verified) keeps the overall result from reading as "met".
+   data.set("restrictions",restrictions);data.put("prerequisiteStatus",data.path("status").asText());
+   var results=new ArrayList<String>();if(!data.path("status").asText().equals("no_prerequisites_in_database"))results.add(data.path("status").asText());
+   for(var r:restrictions)results.add(r.path("result").asText());
+   data.put("status",PrerequisiteChecker.combine(results));
+  }
   var info=mapper.createObjectNode();if(basics.get().get("prereq_text")!=null)info.put("prerequisite_text",(String)basics.get().get("prereq_text"));if(basics.get().get("source_url")!=null)info.put("source_url",(String)basics.get().get("source_url"));
   if(info.has("prerequisite_text"))data.put("prerequisite_text",info.path("prerequisite_text").asText());
   for(var c:courses)if(c.path("code").asText().equals(code)){data.set("alreadyInReport",c);break;}
   var warnings=new ArrayList<>(yearWarnings(turn));
-  warnings.add("Checked against course rows found in this PDF only. Enrollment restrictions (major, campus, semester standing) are not in the database and were not checked.");
+  warnings.add("Checked against course rows found in this PDF only. Enrollment restrictions beyond those printed in the Bulletin (major, campus or seat limits set in LionPATH) were not checked.");
+  if(usesStanding(data))warnings.add(PrerequisiteChecker.STANDING_SOURCE);
+  warnings.addAll(restrictionWarnings);
   return ok(data,mapper.createArrayNode().add(source("catalog","prereq_nodes:"+code+"@"+year,info.path("source_url").asText(null))).add(source("record","uploaded degree report",null)),warnings);
  }
+
+ /**
+  * Evaluates course_restrictions rows against the report: semester standing from credit totals, program against the
+  * report's matched program, campus against the report's campus. College and free-text rows are unknown.
+  */
+ private ArrayNode evaluateRestrictions(long versionId,Turn turn,PrerequisiteChecker.Standing standing,List<String> warnings){
+  var out=mapper.createArrayNode();List<Map<String,Object>> rows;
+  try{rows=catalog.restrictions(versionId);}catch(RuntimeException e){log.warn("Restriction lookup failed={}",e.getClass().getSimpleName());warnings.add("Enrollment restrictions could not be read from the catalog database.");return out;}
+  for(var row:rows){
+   var r=out.addObject();String type=String.valueOf(row.get("restriction_type"));boolean include=!Boolean.FALSE.equals(row.get("include"));
+   r.put("type",type);if(!include)r.put("exclude",true);if(row.get("raw_text")!=null)r.put("text",(String)row.get("raw_text"));
+   String result,reason;
+   switch(type){
+    case "min_semester"->{int min=((Number)row.get("min_semester")).intValue();r.put("min_semester",min);var s=PrerequisiteChecker.standing(min,standing);result=s[0];reason=s[1];if(standing.earned()!=null)r.put("estimate",true);}
+    case "program"->{
+     String program=(String)row.get("program_code");r.put("program_code",program);var scope=turn.scope;
+     if(scope.isEmpty()){result="unknown";reason="The report's major is not a loaded program, so it cannot be compared with "+program+".";}
+     else{boolean in=scope.get().program().code().equals(program);result=in?"met":"not_met";reason="The report's program is "+scope.get().program().code()+(in?".":", not "+program+".");}
+    }
+    case "campus"->{
+     String campus=(String)row.get("campus");r.put("campus",campus);String reportCampus=turn.report.path("campus").asText("").strip();
+     if(reportCampus.isEmpty()){result="unknown";reason="The report does not name a campus.";}
+     else{boolean in=reportCampus.toLowerCase(Locale.ROOT).contains(campus.toLowerCase(Locale.ROOT));result=in?"met":"not_met";reason="The report's campus is "+reportCampus+".";}
+    }
+    case "college"->{r.put("college",String.valueOf(row.get("college")));result="unknown";reason="The report does not identify the student's college.";}
+    default->{result="unknown";reason="This restriction is Bulletin wording that cannot be checked automatically; quote it and confirm with the department.";}
+   }
+   // An exclusion ("not open to ...") flips met and not_met.
+   if(!include&&(result.equals("met")||result.equals("not_met")))result=result.equals("met")?"not_met":"met";
+   r.put("result",result);r.put("reason",reason);
+  }
+  return out;
+ }
+ private static boolean usesStanding(JsonNode data){return data.toString().contains("\"estimate\":true");}
 
  private ObjectNode programRequirements(JsonNode args,Turn turn){
   var p=program(args,turn);if(p.isEmpty())return programMissing(args,turn);
@@ -287,6 +340,46 @@ public class AdvisorTools {
    List.of("Cite each external claim with its sourceIds, e.g. [W1]. Reddit/Rate My Professors are subjective and never prove a requirement."));
  }
 
+ static final int STALE_DAYS=30;
+ private ObjectNode deadlines(JsonNode args,Turn turn){
+  if(calendar==null)return error("DATA_NOT_AVAILABLE","The academic calendar is not available. Point the student to the Registrar's academic calendar.");
+  var today=java.time.LocalDate.now(clock);String code=text(args,"term_code");
+  var term=code==null?calendar.currentOrNext(today):calendar.term(code.toUpperCase(Locale.ROOT));
+  if(term.isEmpty())return code==null?error("DATA_NOT_AVAILABLE","No loaded term is in session or upcoming. Point the student to the Registrar's academic calendar.")
+   :error("NOT_FOUND","Term "+code+" is not loaded. Loaded terms: "+String.join(", ",calendar.termCodes()));
+  var keys=new ArrayList<String>();args.path("event_keys").forEach(k->keys.add(k.asText()));
+  String campus=campusCode(text(args,"campus")!=null?text(args,"campus"):turn.report.path("campus").asText(null));
+  var events=calendar.events(term.get().code(),keys,campus);
+  var data=mapper.createObjectNode();data.put("term",term.get().code());data.put("session","Regular Session");data.put("today",today.toString());
+  if(campus!=null)data.put("campus",campus);
+  var list=data.putArray("events");var sources=mapper.createArrayNode();var urls=new LinkedHashSet<String>();java.time.Instant oldest=null;
+  for(var e:events){
+   var o=list.addObject();o.put("event",e.key());o.put("label",e.label());if(e.startsOn()!=null)o.put("starts_on",e.startsOn().toString());o.put("ends_on",e.endsOn().toString());
+   o.put("days_left",java.time.temporal.ChronoUnit.DAYS.between(today,e.endsOn()));if(e.campus()!=null)o.put("campus",e.campus());
+   urls.add(e.sourceUrl());if(oldest==null||e.fetchedAt().isBefore(oldest))oldest=e.fetchedAt();
+  }
+  if(oldest!=null)data.put("fetched_at",oldest.toString());
+  for(String u:urls)sources.add(source("calendar","academic_calendar:"+term.get().code(),u));
+  var warnings=new ArrayList<String>(List.of("These are Regular Session dates for full-semester courses. 7-week, 6-week, Maymester and late-start sections have their own deadlines; the student should check the course's own dates in LionPATH."));
+  if(events.isEmpty())warnings.add(keys.isEmpty()?"No calendar events are loaded for this term.":"No event matched "+keys+".");
+  if(oldest!=null&&java.time.Duration.between(oldest,clock.instant()).toDays()>STALE_DAYS)warnings.add("These dates were retrieved more than "+STALE_DAYS+" days ago; check the Registrar page for the latest dates.");
+  if(campus!=null&&!campus.equals("UP"))warnings.add("Commencement and some dates vary by campus; campus-specific rows are loaded only for University Park.");
+  return ok(data,sources,warnings);
+ }
+ /** "University Park" / "UP" -> UP; other campuses keep their name in upper case; unknown -> null (all campus rows). */
+ static String campusCode(String campus){
+  if(campus==null||campus.isBlank())return null;String c=campus.strip().toUpperCase(Locale.ROOT);
+  return c.equals("UP")||c.contains("UNIVERSITY PARK")?"UP":c;
+ }
+ /** Deadlines in the next 14 days for the agent's always-present context; empty when the calendar is not loaded. */
+ ArrayNode upcomingDeadlines(JsonNode report){
+  var out=mapper.createArrayNode();if(calendar==null)return out;
+  try{
+   var today=java.time.LocalDate.now(clock);String campus=campusCode(report.path("campus").asText(null));
+   for(var e:calendar.between(today,today.plusDays(14),campus)){var o=out.addObject();o.put("term",e.term());o.put("event",e.key());o.put("label",e.label());o.put("ends_on",e.endsOn().toString());o.put("days_left",java.time.temporal.ChronoUnit.DAYS.between(today,e.endsOn()));}
+  }catch(RuntimeException e){log.warn("Upcoming deadlines lookup failed={}",e.getClass().getSimpleName());}
+  return out;
+ }
  private ObjectNode showView(JsonNode args,Turn turn){
   String view=args.path("view").asText();if(!VIEWS.contains(view))throw new IllegalArgumentException("view must be one of "+VIEWS);
   if(turn.viewRequest!=null)return error("RATE_LIMITED","A screen is already open for this answer.");

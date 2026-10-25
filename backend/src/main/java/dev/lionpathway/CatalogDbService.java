@@ -14,7 +14,8 @@ public class CatalogDbService {
  private static final org.slf4j.Logger log=org.slf4j.LoggerFactory.getLogger(CatalogDbService.class);
  // Words that may surround a program name in a report ("Data Sciences (BS)", "... - Univ Park") without changing the program.
  private static final Set<String> NEUTRAL=Set.of("b","s","bs","ba","bachelor","of","arts","science","degree","major","option","in",
-  "univ","university","park","up","campus","college","engineering","information","technology","eberly","intercollege");
+  "univ","university","park","up","campus","college","engineering","information","eberly","intercollege");
+ // "technology" is not neutral: Electrical Engineering Technology is a different major from Electrical Engineering.
  private static final Pattern COURSE=Pattern.compile("(?i)\\b([A-Z]{2,6})\\s?(\\d{3}[A-Z]?)\\b");
  private static final Pattern RANGE=Pattern.compile("(20\\d\\d)\\s*[-–—/]\\s*(?:20)?(\\d\\d)");
  private static final Pattern TERM=Pattern.compile("(?i)\\b(spring|summer|fall)\\s+(20\\d\\d)\\b");
@@ -34,12 +35,20 @@ public class CatalogDbService {
  /** A major matches when it contains every word of the program name and nothing else except degree, campus, college or option words. */
  static Optional<Match> matchMajor(String major,List<Program> programs,JsonNode requirements){
   if(major==null||major.isBlank())return Optional.empty();
-  var words=tokens(major);
+  var words=tokens(major);var order=String.join(" ",words);
+  // Several programs can fit ("Computer Science (Engineering)" contains the words of Computer Engineering, since "science"
+  // and "engineering" are also degree/college words): prefer the name that appears as a phrase, then the longer name.
+  Program pick=null;int pickScore=-1;
   for(var p:programs){
    var required=tokens(p.name().replaceAll("\\([^)]*\\)",""));required.removeAll(Set.of("b","s","bs","ba"));
    var allowed=new HashSet<>(NEUTRAL);p.optionNames().values().forEach(n->allowed.addAll(tokens(n)));
    var extra=new HashSet<>(words);extra.removeAll(required);
    if(!words.containsAll(required)||!allowed.containsAll(extra))continue;
+   int score=(order.contains(String.join(" ",required))?100:0)+required.size();
+   if(score>pickScore){pick=p;pickScore=score;}
+  }
+  if(pick!=null){
+   var p=pick;
    for(var o:p.optionNames().keySet())if(words.contains(o.toLowerCase(Locale.ROOT)))return Optional.of(new Match(p,o,"major"));
    // Fall back to an option named in exactly one report requirement title, e.g. "Computational Option List A".
    var found=new LinkedHashSet<String>();
@@ -68,8 +77,16 @@ public class CatalogDbService {
   var programs=programs();
   var match=matchMajor(report.path("major").asText(null),programs,report.path("requirements"));
   if(match.isEmpty())return Optional.empty();
-  var p=match.get().program();String reportYear=catalogYear(report.path("catalogYear").asText(null));
-  return Optional.of(new Scope(reportYear==null?"matched_year_unknown":reportYear.equals(p.catalogYear())?"matched":"matched_year_differs",p,match.get().option(),match.get().optionSource(),reportYear));
+  String reportYear=catalogYear(report.path("catalogYear").asText(null));
+  var p=edition(programs,match.get().program(),reportYear);String option=match.get().option();
+  if(option!=null&&!p.options().containsKey(option))option=null; // option codes can change between editions
+  return Optional.of(new Scope(reportYear==null?"matched_year_unknown":reportYear.equals(p.catalogYear())?"matched":"matched_year_differs",p,option,option==null?null:match.get().optionSource(),reportYear));
+ }
+ /** The loaded version of the matched program for the report's catalog year; the newest one when that year is not loaded. */
+ static Program edition(List<Program> programs,Program matched,String reportYear){
+  if(reportYear==null)return matched;
+  for(var p:programs)if(p.code().equals(matched.code())&&p.catalogYear().equals(reportYear))return p;
+  return matched;
  }
  List<String> loadedProgramNames(){return programs().stream().map(Program::name).toList();}
 
@@ -232,6 +249,10 @@ public class CatalogDbService {
 
  /** Prerequisite wording and source link only, for prerequisite checks that do not need the full course facts. */
  Optional<Map<String,Object>> courseBasics(String code,String year){return jdbc.queryForList("SELECT id, prereq_text, source_url FROM course_versions WHERE course_code=? AND catalog_year=?",code,year).stream().findFirst();}
+ /** Enrollment restrictions printed with a course version (course_restrictions), in load order. */
+ List<Map<String,Object>> restrictions(long versionId){
+  return jdbc.queryForList("SELECT restriction_type, include, program_code, college, min_semester, campus, raw_text FROM course_restrictions WHERE course_version_id=? ORDER BY id",versionId);
+ }
  Optional<Long> versionId(String code,String year){return jdbc.queryForList("SELECT id FROM course_versions WHERE course_code=? AND catalog_year=?",Long.class,code,year).stream().findFirst();}
  Optional<String> description(String code,String year){return jdbc.queryForList("SELECT description FROM course_versions WHERE course_code=? AND catalog_year=? AND description IS NOT NULL",String.class,code,year).stream().findFirst();}
  /** Cross-listed codes for each given code, so a course taken under its other listing still counts. */

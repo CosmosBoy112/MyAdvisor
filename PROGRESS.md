@@ -14,6 +14,20 @@
 
 ---
 
+## 2026-10-25 · Claude Code · `main`
+- 한 일: 카탈로그 DB 범위를 UP EECS 주전공 전체로 확대(2026-27만, 부전공 제외). Computer Engineering(CMPEN_BS/ETM)·Electrical Engineering(EE_BS/ETM) 요건·전공 진입 요건·권장 학기 계획·과목을 Bulletin에서 크롤링(`ingest/crawl_eecs_catalog.py`), insert-only 적재기(`ingest/load_eecs_db.py`). 백엔드: 전공 매칭이 이름이 구(phrase)로 들어있는 전공을 우선(“Computer Science (Engineering)”이 CMPEN으로 잡히지 않게), "technology"를 중립 단어에서 제외(EET≠EE), 옵션 없는 전공의 권장 계획(`suggested_academic_plan.DEFAULT`)
+- 상태: 백엔드 151개 실행·실패 0(live 17개 제외), ingest 테스트 25개 통과. TigerData dry-run(롤백) 통과: 과목 36·버전 33·선수과목 트리 26·전공 4개·policy 10, 기존 행 지문 동일. 실제 적재는 이 커밋 배포 후 진행 예정. 브라우저 확인 미실시
+- 막힌 것: EE 프로그램 승인 목록(300/400 레벨 선택, 추가 6학점)은 Bulletin에 목록이 없어 requires_review 빈 POOL로 둠
+- 다음: Render 재배포 확인 → `load_eecs_db.py` 실제 적재 → "DB load status" 갱신
+- 필요한 설정: 없음. 백엔드 재배포 필요
+
+## 2026-10-25 · Claude Code · `main` (로컬 변경)
+- 한 일: 다른 로컬에서 멈춘 세션(`chat.md`)의 미병합 작업을 main 위에 다시 구현. (1) 수강 제한: `ingest/load_course_restrictions.py`(Bulletin 선수과목 문구 → `course_restrictions`), `check_prerequisites`가 제한·학기(STANDING)를 이수 학점 기반 학기 추정으로 판정하고 전체 status에 합침. (2) 학사 일정: Registrar 2026-27 학사력(정규 세션) 파서·적재기·`data/calendar/2026-27.json`, `get_deadlines` 도구, 14일 내 마감을 에이전트 문맥에 추가, 진행 표시 문구 9개 언어. (3) 리포트 학년도와 같은 카탈로그 판이 DB에 있으면 그 판 사용(`CatalogDbService.edition`). (4) 학교 규정 위반 요청(과제·시험 대행, 서류 위조, 허위로 제한 우회, 타인 기록, 학교 시스템 스크래핑)은 정책 위반이라 답하기 어렵다고 거절하고 정당한 경로 안내(시스템 프롬프트)
+- 상태: 백엔드 단위 149개 실행·실패 0(live 17개 제외). 파이썬 파서 테스트 8개 통과. 프런트 57개 통과·빌드 통과. TigerData dry-run(롤백): 수강 제한 7행(min_semester 6, text 1), 학사 일정 terms 3·이벤트 59, 같은 트랜잭션 재적재 시 신규 0·갱신 59. `LiveCalendarTest`(읽기 전용, 0행) 통과. `LiveUniversityRulesTest`(Luminal 실호출, 합성 리포트): 시험 대행·가짜 진단서 요청은 정책 명시 후 거절, 선수과목 미충족 질문은 정상 답변. 실제 DB 적재, 브라우저 확인, 배포는 미실행
+- 막힌 것: 이전 판 Bulletin(2024-25, 2025-26)은 robots.txt가 `/archive/`를 막아 자동 수집 안 함. 받으려면 사람이 직접 내려받은 파일을 줘야 함. 개설 과목(LionPATH)은 자동 수집 금지라 보류. 학사력의 7주·6주·Maymester 세션은 `academic_calendar`에 session 컬럼이 없어 미적재
+- 다음: 실제 적재(`load_course_restrictions.py`, `load_calendar_db.py`) 여부 결정 후 "DB load status" 행 수 갱신, 이전 판 파일 확보 시 적재
+- 필요한 설정: 새 환경변수 없음. 적재 스크립트에 `psycopg`, 파서에 `beautifulsoup4` 필요(`ingest/requirements.txt`에 이미 있음). 백엔드 재배포 필요
+
 ## 2026-10-25 · Codex · `main`
 - 한 일: 사용자 요청으로 Your chats와 채팅 전체 패널 높이/끝선 정렬 수정 커밋 및 푸시
 - 상태: 최종 CSS 프런트 빌드 및 diff 검사 통과. origin/main과 동일 기준 확인. 실제 브라우저/배포 검증 미실시

@@ -59,6 +59,8 @@ class CatalogTests(unittest.TestCase):
         for n in self.nodes:
             if 'source' in n:
                 self.assertIn(n['source']['source_id'], ids)
+        # Courses collected later for the other EECS majors cite the EECS source list.
+        ids |= {s['id'] for s in read('references/EECS_sources.json')['sources']}
         for c in read('courses.json')['courses']:
             if 'provenance' in c:
                 self.assertIn(c['provenance']['source_id'], ids)

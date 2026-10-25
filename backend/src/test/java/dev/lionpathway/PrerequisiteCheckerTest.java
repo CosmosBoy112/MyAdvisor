@@ -48,4 +48,27 @@ class PrerequisiteCheckerTest {
   assertEquals("A-",result.at("/tree/matched_record/grade").asText());assertEquals("FA 2025",result.at("/tree/matched_record/term").asText());
   assertEquals("no_prerequisites_in_database",PrerequisiteChecker.evaluate(null,rows(),Map.of(),mapper).path("status").asText());
  }
+
+ @Test void semesterClassificationFollowsTheBulletinTable(){
+  // Bulletin "Classification of Students by Semester": 14.0 or fewer = 1, 14.1-29 = 2, 29.1-44 = 3, ..., 149.1 or more = 11.
+  assertEquals(1,PrerequisiteChecker.classification(0));assertEquals(1,PrerequisiteChecker.classification(14));assertEquals(2,PrerequisiteChecker.classification(14.1));
+  assertEquals(2,PrerequisiteChecker.classification(29));assertEquals(3,PrerequisiteChecker.classification(29.1));assertEquals(5,PrerequisiteChecker.classification(59.1));
+  assertEquals(10,PrerequisiteChecker.classification(149));assertEquals(11,PrerequisiteChecker.classification(149.1));
+ }
+ @Test void standingNodesUseTheReportsCreditTotals()throws Exception{
+  var tree=json("{\"type\":\"STANDING\",\"min_semester\":5}");
+  var junior=PrerequisiteChecker.Standing.of(json("{\"totals\":{\"completed\":64,\"inProgress\":15}}"));
+  var result=PrerequisiteChecker.evaluate(tree,rows(),Map.of(),junior,mapper);
+  assertEquals("met",result.path("status").asText());assertTrue(result.at("/tree/estimate").asBoolean());assertTrue(result.at("/tree/reason").asText().contains("64 completed credits"));
+  var almost=PrerequisiteChecker.Standing.of(json("{\"totals\":{\"completed\":50,\"inProgress\":15}}"));
+  assertEquals("in_progress",PrerequisiteChecker.evaluate(tree,rows(),Map.of(),almost,mapper).path("status").asText(),"semester 5 only after current courses");
+  var early=PrerequisiteChecker.Standing.of(json("{\"totals\":{\"completed\":20,\"inProgress\":15}}"));
+  assertEquals("not_met",PrerequisiteChecker.evaluate(tree,rows(),Map.of(),early,mapper).path("status").asText());
+  assertEquals("unknown",PrerequisiteChecker.evaluate(tree,rows(),Map.of(),PrerequisiteChecker.Standing.of(json("{}")),mapper).path("status").asText(),"no totals, no guess");
+  assertEquals("unknown",PrerequisiteChecker.evaluate(tree,rows(),Map.of(),mapper).path("status").asText(),"the old overload has no standing");
+ }
+ @Test void combineUsesAllSemantics(){
+  assertEquals("not_met",PrerequisiteChecker.combine(List.of("met","not_met","unknown")));assertEquals("unknown",PrerequisiteChecker.combine(List.of("met","unknown")));
+  assertEquals("in_progress",PrerequisiteChecker.combine(List.of("met","in_progress")));assertEquals("met",PrerequisiteChecker.combine(List.of("met")));
+ }
 }

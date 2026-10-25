@@ -615,12 +615,13 @@ Chat (`POST /api/reports/{id}/chat`) runs as the tool-calling loop in `AdvisorAg
 | `get_student_record` | `AdvisorTools` | Reads only the stored report (`summary` / `requirements` / `courses`) |
 | `search_courses` | `CatalogDbService.searchCourses` | Every English keyword must appear in the title, description or code; only courses referenced by loaded programs |
 | `get_course` | `CatalogDbService.courses` + description | |
-| `check_prerequisites` | `PrerequisiteChecker` | `met` / `in_progress` / `not_met` / `unknown`; cross-listings count; `TEXT` and `STANDING` nodes are `unknown`; `codes` checks up to 8 courses in one call; concurrent nodes explain that the courses do not have to be taken together. Enrollment restrictions are not checked (`course_restrictions` has no rows) |
-| `get_program_requirements` | `CatalogDbService.requirements(..., withIds, rootId)` | With node ids. Without `node_id` it is an overview (`course_count` per node, no course lists or Bulletin text); `node_id` returns one subtree with its courses |
+| `check_prerequisites` | `PrerequisiteChecker` | `met` / `in_progress` / `not_met` / `unknown`; cross-listings count; `TEXT` nodes are `unknown`; `STANDING` nodes and `min_semester` restrictions use the semester standing estimated from the report's credit totals (Bulletin "Classification of Students by Semester", marked `estimate`); `course_restrictions` rows come back as `restrictions` and `status` combines them with the tree (the tree alone is `prerequisiteStatus`); `codes` checks up to 8 courses in one call; concurrent nodes explain that the courses do not have to be taken together. See `docs/notes/restrictions.md` |
+| `get_program_requirements` | `CatalogDbService.requirements(..., withIds, rootId)` (loaded majors: DATSC_BS, CMPSC_BS, CMPEN_BS, EE_BS, each with its ETM) | With node ids. Without `node_id` it is an overview (`course_count` per node, no course lists or Bulletin text); `node_id` returns one subtree with its courses |
 | `find_courses_for_requirement` | `CatalogDbService.requirementCourses` | Each course is marked `in_report` (no / in_progress / recorded:GRADE) |
 | `get_policies` | `CatalogDbService.policies` | Program policies and the suggested semester plan, in place of `get_policy_rule` |
 | `get_minor_assessment` | `MathMinorService` | MATH only |
 | `web_search` | `WebResearchService.search` | Once per answer. With `WEB_SEARCH_PROVIDER=tavily` and a key, Tavily results (top 6, snippets up to 800 characters) go straight to the agent as `[W#]` sources and excerpts, with no summarizing LLM call. `sources`: `official` (psu.edu only) / `community` (reddit.com, ratemyprofessors.com only) / `any`. The server adds the campus to every query and the program to queries without a course code; grades and records are never added. Tavily failures (429, 432, 433, errors) fall back to Gemini search |
+| `get_deadlines` | `CalendarRepository` | Registrar Regular Session dates (`terms`, `academic_calendar`); defaults to the term in session, else the next one; `days_left`, Registrar source link, warnings for 7-week/6-week/Maymester sections, other campuses and dates older than 30 days. Offered only when the calendar repository is available. Deadlines in the next 14 days (at most 8) are also in the automatic context as `upcomingDeadlines`. See `docs/notes/academic-calendar.md` |
 | `show_view` | `AdvisorViews` | The model picks a screen and its courses or nodes; the server fills the data (below). Once per answer |
 | `save_memory` / `forget_memory` | `AdvisorStore` | Section 7. Scoped to the user, at most 50 memories of 500 characters. Reported to the client as `memoryChanges` for a notice and undo |
 
@@ -647,8 +648,10 @@ Chat (`POST /api/reports/{id}/chat`) runs as the tool-calling loop in `AdvisorAg
 
 **Memory API**: `GET /api/memories`, `DELETE /api/memories/{id}` (own memories only). Saving happens only through the agent tool.
 
+- Catalog edition: when the DB has the program version for the report's catalog year, that edition is used (`CatalogDbService.edition`); otherwise the newest with `matched_year_differs`. Only 2026-27 is loaded so far.
+- University rules: the system prompt declines only the part of a request that breaks Penn State rules (graded work, misrepresenting facts to get around prerequisites or restrictions, forged records or documents, other students' records, scraping university systems), names the policy area and offers the legitimate route. Questions about the rules are answered normally (`LiveUniversityRulesTest`).
 - Not implemented: `run_audit`, `what_if`, `validate_plan`, credit, policy and write tools, an output validation step, personalized semester plans.
-- Tests: `PrerequisiteCheckerTest`, `AdvisorToolsTest`, `AdvisorAgentTest`, `AdvisorViewsTest`, `AgentProgressTest`, `WebResearchServiceTest`; frontend `advisor-view.test.js` and `advisor-view-render.test.js`; opt-in `LiveAdvisorAgentTest`, `LiveAdvisorStoreTest`, `LiveTavilyTest`, `LiveVagueQuestionsTest` (`LIONPATHWAY_LIVE_TEST=1`, real DB and Gemini/Luminal/Tavily; every write is rolled back).
+- Tests: `PrerequisiteCheckerTest`, `AdvisorToolsTest`, `AdvisorAgentTest`, `AdvisorViewsTest`, `AgentProgressTest`, `WebResearchServiceTest`, `AdvisorDeadlinesTest`, `CatalogDbServiceTest`; frontend `advisor-view.test.js` and `advisor-view-render.test.js`; opt-in `LiveAdvisorAgentTest`, `LiveAdvisorStoreTest`, `LiveTavilyTest`, `LiveVagueQuestionsTest`, `LiveCalendarTest`, `LiveUniversityRulesTest` (`LIONPATHWAY_LIVE_TEST=1`, real DB and Gemini/Luminal/Tavily; every write is rolled back).
 
 ---
 
@@ -678,6 +681,7 @@ Chat (`POST /api/reports/{id}/chat`) runs as the tool-calling loop in `AdvisorAg
 10. Save preferences, goals, and constraints the user states with `save_memory`, and apply the notes from the automatic context when recommending.
 11. Propose record, plan, and program changes through write tools, and never say "saved" before approval.
 12. When answering whether a student can graduate, state that it is not an official graduation audit.
+13. Decline only the part of a request that breaks university rules (academic integrity, forged documents, misrepresentation, other students' records, scraping), name the policy area and give the legitimate route.
 
 ## 12. Gemini function declaration examples
 

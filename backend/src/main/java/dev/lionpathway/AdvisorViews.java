@@ -71,11 +71,13 @@ final class AdvisorViews {
  private static ObjectNode semesterPlan(AdvisorTools tools,AdvisorTools.Turn turn,ObjectMapper mapper,ArrayNode warnings){
   var data=mapper.createObjectNode();
   String option=turn.scope.map(CatalogDbService.Scope::option).orElse(null);
+  // Programs without options (CMPEN, EE) store their one plan under DEFAULT.
+  if(option==null&&turn.scope.isPresent()&&turn.scope.get().program().options().isEmpty())option="DEFAULT";
   if(turn.scope.isEmpty()||option==null){data.put("status","unavailable");data.put("message","A suggested plan needs the report's major and option to match a loaded program.");return data;}
   var policy=tools.call("get_policies",mapper.createObjectNode().put("key","suggested_academic_plan."+option),turn);
   if(!policy.path("ok").asBoolean()){data.put("status","unavailable");data.put("message","No suggested semester plan is loaded for "+turn.scope.get().program().code()+" "+option+".");return data;}
   var rule=policy.at("/data/policies/0");var plan=rule.path("value");
-  data.put("status","reference_plan");data.put("program",turn.scope.get().program().name());data.put("option",option);data.set("totalCredits",plan.path("total_credits"));
+  data.put("status","reference_plan");data.put("program",turn.scope.get().program().name());if(!option.equals("DEFAULT"))data.put("option",option);data.set("totalCredits",plan.path("total_credits"));
   if(rule.has("source_url"))data.set("sourceUrl",rule.get("source_url"));
   var terms=data.putArray("terms");
   for(var t:plan.path("terms")){

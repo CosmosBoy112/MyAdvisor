@@ -41,4 +41,23 @@ class CatalogDbServiceTest {
   var out=new CatalogDbService(jdbc,mapper).context(mapper.readTree("{\"major\":\"Data Sciences (BS)\"}"),"Explain List A");
   assertEquals("catalog_unavailable",out.path("status").asText());
  }
+ @Test void overlappingEecsNamesPickTheProgramNamedAsAPhrase()throws Exception{
+  var eecs=new ArrayList<>(programs);
+  // Computer Engineering first: DB order must not decide.
+  eecs.add(0,new CatalogDbService.Program(3,"CMPEN_BS","Computer Engineering, B.S.","2026-27",127.0,"https://bulletins.psu.edu/",Map.of(),Map.of()));
+  eecs.add(new CatalogDbService.Program(4,"EE_BS","Electrical Engineering, B.S.","2026-27",127.0,"https://bulletins.psu.edu/",Map.of(),Map.of()));
+  var none=mapper.readTree("[]");
+  for(String[] c:new String[][]{{"Computer Science (BS)","CMPSC_BS"},{"Computer Science, B.S. (Engineering)","CMPSC_BS"},{"Computer Science - Engineering - University Park","CMPSC_BS"},
+    {"Computer Engineering (BS)","CMPEN_BS"},{"Computer Engineering, B.S. - University Park","CMPEN_BS"},{"Electrical Engineering (BS)","EE_BS"},{"Data Sciences (BS)","DATSC_BS"}})
+   assertEquals(c[1],CatalogDbService.matchMajor(c[0],eecs,none).orElseThrow().program().code(),c[0]);
+  assertTrue(CatalogDbService.matchMajor("Electrical Engineering Technology (BS)",eecs,none).isEmpty(),"EET is a different major");
+ }
+ @Test void editionFollowsTheReportsCatalogYearWhenLoaded(){
+  var newest=programs.get(0);
+  var older=new CatalogDbService.Program(9,"DATSC_BS","Data Sciences, B.S.","2024-25",124.0,"https://bulletins.psu.edu/archive/2024-25/",Map.of("APPLIED",91L),Map.of("APPLIED","Applied Data Sciences"));
+  var loaded=List.of(newest,older,programs.get(1));
+  assertSame(older,CatalogDbService.edition(loaded,newest,"2024-25"));
+  assertSame(newest,CatalogDbService.edition(loaded,newest,"2025-26"),"an edition that is not loaded falls back to the newest");
+  assertSame(newest,CatalogDbService.edition(loaded,newest,null));
+ }
 }

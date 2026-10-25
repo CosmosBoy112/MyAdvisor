@@ -34,3 +34,6 @@ test('live progress shows the current step and the finished ones once',()=>{
  assert.equal(progressView([{kind:'tool',detail:'web_search'}]).current,'Searching the web…');
  assert.equal(progressLabel({kind:'fallback',detail:'gemini'}),'Switching to the backup model…');assert.equal(progressLabel({kind:'tool',detail:'unknown_tool'}),'Looking something up…');
 });
+test('the calendar tool has its own progress label',()=>{
+ assert.equal(progressLabel({kind:'tool',detail:'get_deadlines'}),'Checking the academic calendar…');
+});
