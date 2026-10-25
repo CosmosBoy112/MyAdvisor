@@ -15,6 +15,13 @@
 ---
 
 ## 2026-10-24 · Claude Code · `main`
+- 한 일: README 전체를 영어로 번역하고 Deployment(Vercel/Render/CORS/Auth0) 절 추가. 오래된 내용(영어/한국어만 지원, "자동 배포하지 않음")은 현재 상태(10개 언어 → `docs/LANGUAGES.md`, 해커톤용 배포 중)로 고침. `AGENTS.md`에 "작성 언어" 규칙 추가: 외부에 보이는 글(README·docs·VERIFICATION·UI·주석·커밋·PR)은 영어, PROGRESS·AGENTS는 한국어 허용. 이어서 `docs/advisor-tools.md`, `docs/CHANGES-advisor-catalog-db.md`, `docs/CHANGES-cmpsc-catalog.md`, `VERIFICATION.md`도 영어로 번역(내용·수치·코드 블록 그대로), AGENTS.md의 절 이름 참조를 영어 제목으로 갱신
+- 상태: 문서 변경만. README가 가리키는 문서·설정 파일 경로가 실제로 있는지 확인. 남은 한국어는 `git ls-files` 전체 검색으로 확인
+- 막힌 것: 없음
+- 다음: 없음. 이제 저장소에서 한국어는 PROGRESS·AGENTS와 기능상 필요한 문자열(한국어 입력 감지·라우팅 키워드·테스트 입력)만 남음
+- 필요한 설정: 없음
+
+## 2026-10-24 · Claude Code · `main`
 - 한 일: README 제목을 OnlyPlans로 바꾸고 배포 주소(https://www.onlyplans.courses, 프론트 Vercel·백엔드 Render) 한 줄 추가. Auth0 audience·Java 패키지·Docker 태그·`LIONPATHWAY_LIVE_TEST` 등 실제 설정값/식별자의 `lionpathway`는 그대로 둠
 - 상태: 문서 변경만. 배포 주소는 curl로 OnlyPlans 페이지·Render API 연결 확인
 - 막힌 것: 없음

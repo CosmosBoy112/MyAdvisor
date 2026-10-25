@@ -1,114 +1,110 @@
-# 검증 결과
+# Verification results
 
-## 최신 구현 검증
+## Latest implementation check
 
-- Vue production build: 통과
-- Frontend Node tests: 5개 통과
-- Spring Boot Maven package: 통과
-- Backend 일반 JUnit tests: 12개 통과
-- 실제 Gemini 구조화 분석 + TigerData 저장/조회 + Gemini 답변 통합 테스트: 통과
-- 실제 TigerData CRUD / 소유자 분리 / 대화 기록 / 삭제 cascade 테스트: 통과
-- 실제 연결 테스트에는 가상 데이터만 사용했으며 DB 테스트 레코드는 롤백
-- `.env` 자동 로드 후 `/api/health`: `live: true`
-- 비로그인 `/api/reports`: HTTP 401
-- Auth0 OIDC discovery 및 프런트/백엔드 domain·audience 일치: 확인
-- 브라우저에서 Auth0 로그인: `Service not found: https://lionpathway-api`로 차단. Auth0 Dashboard에 해당 API Identifier 등록 필요
-- 로그인 후 실제 사용자 PDF 업로드: 위 Auth0 설정이 해결되기 전까지 브라우저 전체 흐름 미검증
-- 실제 학생 LionPATH PDF 정확도: 보고서 미제공으로 미검증
-- DeepSeek/루미나리: Luminal `flash.luminal.cloud/v1`의 `deepseek-ai/DeepSeek-V4.1-Flash` 연결. 직접 호출 200 확인, 앱 화면에서의 전체 흐름은 미검증 (아래 "Luminal 라우팅" 참고)
+- Vue production build: passed
+- Frontend Node tests: 5 passed
+- Spring Boot Maven package: passed
+- Backend regular JUnit tests: 12 passed
+- Integration test with real Gemini structured analysis + TigerData save/read + Gemini answer: passed
+- Real TigerData CRUD / owner isolation / conversation history / cascade delete tests: passed
+- Real-connection tests used only synthetic data, and DB test records were rolled back
+- `/api/health` after automatic `.env` loading: `live: true`
+- Signed-out `/api/reports`: HTTP 401
+- Auth0 OIDC discovery and frontend/backend domain and audience match: confirmed
+- Auth0 sign-in in the browser: blocked by `Service not found: https://lionpathway-api`. The API Identifier must be registered in the Auth0 Dashboard
+- Real user PDF upload after sign-in: full browser flow not verified until the Auth0 issue above is resolved
+- Accuracy on real student LionPATH PDFs: not verified, no report provided
+- DeepSeek/Luminal: connected to `deepseek-ai/DeepSeek-V4.1-Flash` at Luminal `flash.luminal.cloud/v1`. A direct call returned 200; the full flow in the app UI is not verified (see "Luminal routing" below)
 
-## 모델 설정 변경
+## Model configuration change
 
-기존 `gemini-2.5-flash`는 모델 정보 조회에는 응답했지만 생성 요청은 신규 사용자에게 지원하지 않는다는 HTTP 404를 반환했습니다. 제공자 응답이 안내한 `gemini-3.8-flash`로 로컬 GEMINI_MODEL을 변경했고, 구조화 분석과 질문 응답을 검증했습니다. 실제 응답 시간과 과금은 모델·계정 상태에 따라 달라집니다.
+The previous `gemini-2.5-flash` answered model info lookups but returned HTTP 404 for generation, saying it is not available to new users. Local `GEMINI_MODEL` was changed to `gemini-3.8-flash` as the provider response suggested, and structured analysis and question answering were verified. Actual latency and billing depend on the model and account.
 
-## 기존 화면 검증
+## Existing screen checks
 
-첫 화면, 샘플 대시보드, 완료 필터, Department List 상세, 원문 근거 모달, 요건별 샘플 채팅을 확인했습니다. 샘플 화면의 답변은 사전에 작성된 로컬 응답이며 실제 Gemini 응답과 구분됩니다.
+Checked the landing page, sample dashboard, completed filter, Department List details, source evidence modal, and per-requirement sample chat. Answers on the sample screens are prewritten local responses and are distinguished from real Gemini answers.
 
+## Staying signed in after refresh
 
-## 새로고침 인증 유지 수정
+- Auth0 SDK cache changed from memory to localstorage, with refresh tokens and SSO fallback
+- `Checking session` is shown while the SDK initializes; the report list is requested only after authentication completes
+- 7 frontend tests and the production build passed
+- Regression tests: synthetic auth entries survive recreating the SDK cache instance, removed entries are not restored, and the signed-out UI is not shown during session restore
+- The full real-account flow (sign in → refresh → renew after token expiry) was not automatically verified in this change. The user reported fixing the earlier Auth0 API registration issue
+- Sign in again after applying the change. Continuous token renewal needs Auth0 Refresh Token Rotation / Allow Offline Access
 
-- Auth0 SDK 캐시를 memory에서 localstorage로 변경하고 refresh token 사용 및 SSO fallback 설정
-- SDK 초기화 중에는 Checking session 표시, 인증 완료 후에만 보고서 목록 요청
-- 프런트 테스트 7개 및 production build 통과
-- 회귀 테스트: SDK 캐시 인스턴스를 재생성해도 가상 인증 항목 유지, 항목 제거 후 복원되지 않음, 세션 복원 중 signed-out UI 방지
-- 실제 계정의 로그인 → 새로고침 → 토큰 만료 후 갱신 전체 흐름은 이번 수정에서 자동 검증하지 않음. 사용자는 기존 Auth0 API 등록 문제를 해결했다고 알림
-- 수정 적용 후 재로그인 필요. 지속적인 토큰 갱신에는 Auth0 Refresh Token Rotation / Allow Offline Access 설정 필요
+## Fix for PDF upload hanging forever
 
-## PDF 업로드 무한 대기 수정
+- Hard timeout that also covers waiting for the auth token
+- A canceled file is not uploaded even if a stalled token arrives late
+- Time limit also applies when the body stalls after HTTP headers
+- Upload stage and real elapsed time are shown, plus a stop-waiting button
+- Showing the analysis result is decoupled from refreshing the saved report list
+- Server AI request Future cancellation / 504 error, and time limits on DB communication, queries, and locks
+- 11 frontend tests, 14 regular backend tests, and both builds passed
+- The user's real PDF was not re-sent; whether that file succeeds needs separate confirmation
 
-- 인증 토큰을 기다리는 시간까지 포함하는 하드 타임아웃 적용
-- 멈춘 인증 후 늦게 토큰이 도착해도 취소된 파일을 업로드하지 않음
-- HTTP 헤더 이후 본문이 멈추는 경우에도 시간 제한 적용
-- 업로드 단계와 실제 경과 시간 표시, 대기 중단 버튼 추가
-- 분석 결과 표시와 저장 보고서 목록 새로고침 분리
-- 서버 AI 요청 Future 취소 / 504 오류, DB 통신·쿼리·잠금 시간 제한 추가
-- 프런트 테스트 11개, 백엔드 일반 테스트 14개 및 두 빌드 통과
-- 사용자의 실제 PDF를 재전송하지 않았으며 그 파일의 성공 여부는 별도 확인 필요
+## Cause of 100-second PDF analysis failures and model switch
 
+- Two real uploads: PDF extraction succeeded in 337 ms / 55 ms, then the AI stage hit the 100-second timeout
+- Previous gemini-3.8-flash: even a small synthetic report took about 96.8 seconds, and a separate request returned HTTP 503 high demand
+- gemini-3.5-flash also returned HTTP 503 on long analyses. Local config and examples switched to gemini-3.5-flash-lite
+- Gemini 3 uses low thinking, an instruction to avoid duplicate requirements, and logs only response status, time, and token counts
+- Error messages distinguish truncated output (MAX_TOKENS), overload (503), and timeouts, without assuming PDF size is the cause
+- Real API check: 8-page / 24-requirement synthetic report in 7.6 seconds; total requirement count, credit totals, and source quotations all matched
+- Short report analysis about 1.3 seconds, chatbot about 1 second; TigerData save/read, ownership isolation, and conversation storage passed. Test data rolled back
+- The user's real PDF still needs a re-upload to confirm success and extraction accuracy. The times above were measured on synthetic input and are not guarantees
+- Model reasoning settings reference: https://ai.google.dev/gemini-api/docs/generate-content/thinking
 
-## PDF 분석 100초 실패 원인 확인 및 모델 교체
+## Luminal routing added
 
-- 실제 업로드 2건: PDF 추출 337ms / 55ms 성공 후 AI 단계에서 100초 timeout 확인
-- 기존 gemini-3.8-flash: 작은 가상 보고서도 약 96.8초 소요, 별도 요청에서 HTTP 503 high demand 확인
-- gemini-3.5-flash도 긴 분석에서 HTTP 503 발생. 로컬 설정 및 예시를 gemini-3.5-flash-lite로 변경
-- Gemini 3에는 low thinking 설정, 요건 중복 출력 방지 지시, 응답 상태/시간/토큰 수만 로그에 기록
-- 출력 중단(MAX_TOKENS), 과부하(503), 시간 초과를 구분하며 PDF 크기가 원인이라고 단정하지 않는 오류 문구 적용
-- 실제 API 검증: 8페이지/24개 요건 가상 보고서 7.6초, 전체 요건 수/학점 합계/원문 인용 일치 통과
-- 짧은 보고서 분석 약 1.3초, 챗봇 약 1초, TigerData 저장/조회/소유권 격리/대화 저장 통과. 테스트 데이터 rollback
-- 사용자 실제 PDF는 재업로드 후 성공 여부와 추출 정확도 확인 필요. 위 시간은 가상 입력에 대한 측정이며 보장값이 아님
-- 모델 추론 설정 참고: https://ai.google.dev/gemini-api/docs/generate-content/thinking
+- Planning, What-If, comparison, and sequencing questions, plus questions over 400 characters, go to Luminal; other chat and PDF analysis go to Gemini
+- 6 `ModelRouterTest` tests: question classification, provider selection, Gemini fallback on Luminal failure, Luminal skipped when no key is set
+- 20 regular backend JUnit tests and the frontend production build passed
+- Direct Luminal `/chat/completions` call: HTTP 200, OpenAI-compatible response format confirmed
+- Luminal answer in the browser after sign-in: not verified
 
+## Luminal live connection check
 
-## Luminal 라우팅 추가
+- Sent a synthetic report and a semester-plan comparison question using the local `backend/.env` settings
+- Configured model deepseek-ai/DeepSeek-V4.1-Flash: HTTP 200, real answer received, about 3.5 seconds
+- Confirmed ModelRouter chose provider=luminal, and that the Gemini fallback was not called
+- No real student PDFs or existing user reports were used. Nothing saved to the DB
+- Rerun from the backend directory: `LIONPATHWAY_LUMINAL_TEST=1 ./mvnw -Dtest=LiveLuminalTest test`
+- This test runs only when explicitly enabled and uses API quota
 
-- 계획·What-If·비교·순서 질문과 400자 초과 질문은 Luminal, 나머지 채팅과 PDF 분석은 Gemini
-- `ModelRouterTest` 6개: 질문 분류, 제공자 선택, Luminal 실패 시 Gemini 전환, 키 미설정 시 Luminal 생략 확인
-- 백엔드 일반 JUnit tests 20개, 프런트 production build 통과
-- Luminal `/chat/completions` 직접 호출: HTTP 200, OpenAI 호환 응답 형식 확인
-- 로그인 후 브라우저에서 Luminal 응답 확인: 미검증
+## 2026-10-24 Official CMPSC catalog
 
-## Luminal 실제 연결 검증
+- `python -m unittest discover -s ingest -p 'test_cmpsc_catalog.py' -v`: 12/12 passed. Covers campus/year, ETM, compound alternatives, cross-listing, sources, unconfirmed lists, and isolation of the historical Handbook.
+- 75/75 official course codes matched, 0 mismatches. 14 matched courses with prerequisite review need manual confirmation.
+- All catalog JSON SHA-256 hashes identical before and after cache-based regeneration. Existing non-CMPSC courses unchanged from HEAD.
+- `git diff --check` passed. No frontend/backend runtime code changed, so builds were not rerun. DB loading, real PDF matching, and graduation decisions were not implemented or verified.
 
-- 로컬 backend/.env의 설정으로 가상 보고서와 학기별 계획 비교 질문을 전송
-- 설정 모델 deepseek-ai/DeepSeek-V4.1-Flash: HTTP 200, 실제 답변 수신, 약 3.5초
-- ModelRouter 결과 provider=luminal 확인. Gemini fallback이 호출되지 않았는지도 검증
-- 실제 학생 PDF/기존 사용자 보고서는 테스트에 사용하지 않음. DB 저장 없음
-- 재실행: backend 디렉터리에서 `LIONPATHWAY_LUMINAL_TEST=1 ./mvnw -Dtest=LiveLuminalTest test`
-- 이 테스트는 명시적으로 활성화해야 실행되며 API 사용량이 발생함
+## 2026-10-24 CMPSC app integration
 
-## 2026-10-24 CMPSC 공식 카탈로그
+- Maven regular tests: 26 of 30 passed, 4 Live* tests skipped by environment variable. The 6 new CatalogServiceTest tests check scope rejection, source confirmation, credit preservation/conflicts, unconfirmed lists, the 27 elective codes, upload save arguments, and chat context.
+- Separate `LIONPATHWAY_LIVE_TEST=1 ... -Dtest=LiveDatabaseTest test`: matching results saved to and read from real TigerData JSONB; ownership, conversations, and deletion confirmed; transaction rolled back.
+- 11 frontend tests passed and the Vite production build succeeded.
+- Real signed-in browser / PDF / AI generation and the Docker container were not part of this check.
+- Restarted the changed backend with the live profile and confirmed the `/api/health` response.
 
-- `python -m unittest discover -s ingest -p 'test_cmpsc_catalog.py' -v`: 12/12 통과. 캠퍼스/학년도, ETM, 복합 대안, 교차개설, 출처, 미확인 목록과 과거 Handbook 격리 검증.
-- 공식 과목 코드 75/75 매칭, 불일치 0. 선수과목 review가 있는 매칭 과목 14개는 수동 확인 필요.
-- 캐시 기반 재생성 전후 모든 카탈로그 JSON SHA-256 동일. CMPSC 대상이 아닌 기존 과목은 HEAD 대비 그대로 유지됨.
-- `git diff --check` 통과. 프런트/백엔드 런타임 코드 미변경으로 빌드 재실행하지 않음. DB 적재·실제 PDF 매칭·졸업 판정은 구현/검증하지 않음.
+## 2026-10-24 LionPATH used / IP correction
 
-## 2026-10-24 CMPSC 앱 연결
+- 28 regular backend tests passed; 4 external-service tests and 1 local PDF selection test skipped. A separate DegreeCreditReconcilerTest run, including PDFBox extraction of a user-provided PDF, passed 3 tests. The original file is not committed.
+- With synthetic data, confirmed future-term IP included in used, separation of needed and IP, and marking totals as unknown on mismatches, duplicates, or a missing section end.
+- 15 frontend tests and the build passed. Displayed IP includes courses planned as of the report date. Existing saved analyses are not corrected automatically; the change applies to new uploads.
 
-- Maven 일반 테스트: 30개 중 26개 통과, Live* 4개 환경변수 조건으로 제외. 새 CatalogServiceTest 6개는 범위 거부, 원문 확인, 학점 보존/충돌, 미확인 목록, 27개 선택 코드, 업로드 저장 인자와 채팅 컨텍스트를 검증합니다.
-- 별도 `LIONPATHWAY_LIVE_TEST=1 ... -Dtest=LiveDatabaseTest test`: 실제 TigerData JSONB에 매칭 결과 저장/조회 검증, 소유권/대화/삭제 확인, 트랜잭션 롤백 완료.
-- 프런트 11개 테스트 통과 및 Vite production build 성공.
-- 실제 로그인 브라우저/PDF/AI 생성 및 Docker 컨테이너는 이번 검증에 포함하지 않았습니다.
+## 2026-10-24 Language / typography
 
-- 변경된 백엔드를 live 프로필로 재시작하고 `/api/health` 응답 확인.
+- 18 frontend tests and the production build passed. Verified English default, mixed Korean/English, preserving language on empty/numeric input, and language switching in the real requirement chart component.
+- 29 backend tests passed, 5 conditional tests skipped. Mock-based check that the selected language reaches the analysis service and the saved result.
+- In the browser, confirmed Korean UI on the landing page, sample dashboard, and chat after Korean input, and a return to English after English input. Visually checked the dark-mode chat screen. Real Gemini/Luminal generated answers and full mobile screens were not part of this check.
 
-## 2026-10-24 LionPATH used / IP 교정
+## 2026-10-24 CMPSC catalog DB load
 
-- 일반 백엔드 테스트 28개 통과, 외부 서비스 4개 및 로컬 PDF 선택 테스트 1개 제외. 별도 DegreeCreditReconcilerTest 실행은 사용자 제공 PDF의 PDFBox 추출까지 포함해 3개 통과. 원본 파일은 커밋하지 않음.
-- 합성 데이터로 used에 포함된 미래 학기 IP, needed와 IP 구분, 합계 불일치/중복/섹션 끝 누락 시 미확인 처리를 확인.
-- 프런트 테스트 15개 및 빌드 통과. 표시되는 IP는 보고서 시점의 예정 과목을 포함. 기존 저장 분석은 자동 수정하지 않으며 새 업로드에 적용.
-
-## 2026-10-24 언어/타이포그래피
-
-- 프런트 18개 테스트 및 production build 통과. 영어 기본값, 한영 혼합, 빈/숫자 입력 유지, 실제 요건 차트 컴포넌트의 언어 변경을 검증.
-- 백엔드 29개 통과, 조건부 5개 제외. 선택한 언어가 분석 서비스와 저장 결과로 전달되는지 mock 기반 확인.
-- 브라우저에서 한국어 입력 후 랜딩·샘플 대시보드·채팅의 한국어 UI, 영어 재입력 시 영어 복귀 확인. 다크 모드 채팅 화면 시각 확인. 실제 Gemini/Luminal 생성 응답과 모바일 전체 화면은 이번 검증에 포함하지 않음.
-
-## 2026-10-24 CMPSC 카탈로그 DB 적재
-
-- `load_cmpsc_db.py --dry-run` 성공 후 실제 적재 커밋 완료. 다른 연결에서 동일 dry-run 재실행 시 inserted_programs=[]로 중복 없음 확인.
-- CMPSC_BS: 요건 노드 78/규칙 87, CMPSC_ETM: 7/7, policy_rules 추가 5. 과목 참조 75개 존재 확인.
-- 전체 DB: programs/program_versions 4/4, requirement_nodes 175, requirement_rules 567, policy_rules 10. 공용 courses 357, course_versions 337, prereq_nodes 880 유지.
-- 원본 요건 트리와 DB 왕복 결과 일치, 정책 JSON 일치. 열·제약·인덱스 스키마 지문 및 공용/DATSC 행 수·내용 해시 전후 동일. DDL/UPDATE/DELETE/DROP 미사용, 앱 사용자·보고서·대화 데이터 접근 없음.
-- `python -m unittest discover -s ingest -p 'test_*.py' -v`: 15개 통과. 앱의 JSON CatalogService를 DB 조회로 전환하지 않았으며 해당 통합 동작은 이번 작업 범위 밖.
+- After a successful `load_cmpsc_db.py --dry-run`, the real load was committed. Rerunning the same dry-run from another connection returned `inserted_programs=[]`, confirming no duplicates.
+- CMPSC_BS: 78 requirement nodes / 87 rules; CMPSC_ETM: 7/7; 5 policy_rules added. All 75 course references exist.
+- Whole DB: programs/program_versions 4/4, requirement_nodes 175, requirement_rules 567, policy_rules 10. Shared courses 357, course_versions 337, prereq_nodes 880 unchanged.
+- Source requirement tree matches the DB round trip, and policy JSON matches. Column/constraint/index schema fingerprints and shared/DATSC row counts and content hashes are identical before and after. No DDL/UPDATE/DELETE/DROP used; no access to app user, report, or conversation data.
+- `python -m unittest discover -s ingest -p 'test_*.py' -v`: 15 passed. The app's JSON `CatalogService` was not switched to DB queries; that integration was out of scope for this work.

@@ -1,186 +1,186 @@
-# 변경 가이드: Advisor 카탈로그 DB 초안 (`advisor-catalog-db`)
+# Change guide: Advisor catalog DB draft (`advisor-catalog-db`)
 
-> **TigerData에 실제로 적재된 카탈로그 DB의 현재 상태**(만든 테이블, 행 수, 출처, 재적재 방법, 확인 쿼리)는 맨 아래 [DB 적재 현황](#db-적재-현황-2026-10-24) 절을 보세요.
+> For the **current state of the catalog DB actually loaded into TigerData** (tables created, row counts, sources, how to reload, verification queries), see the [DB load status](#db-load-status-2026-10-24) section at the bottom.
 
-이번 푸시에서 무엇이 추가·변경됐는지, 기존 코드와 어떻게 연결되는지 정리한 문서입니다.
+This document summarizes what this push added or changed and how it connects to the existing code.
 
-## 한 줄 요약
+## Summary
 
-앱 코드(백엔드·프런트)는 **변경 없음**. Advisor 에이전트용 DB 스키마 초안, 도구 명세, 2026-27 Bulletin 카탈로그 시드 데이터, 파서 스크립트를 **새 파일로만** 추가했습니다.
+**No changes** to app code (backend or frontend). The Advisor agent DB schema draft, tool spec, 2026-27 Bulletin catalog seed data, and parser script were added **as new files only**.
 
-## 브랜치 구성
+## Branch makeup
 
-| 기반 | 내용 |
+| Base | Contents |
 |---|---|
-| `origin/main` (`5f4b4a9`) | 최신 UI·Luminal 라우팅·다크모드까지 포함 |
-| `origin/backend` 병합 (`f60680d`) | `AGENTS.md`, `CLAUDE.md`, `PROGRESS.md` 추가. `main`에 아직 없던 커밋 |
-| 이번 커밋 | 아래 "추가된 파일" |
+| `origin/main` (`5f4b4a9`) | Includes the latest UI, Luminal routing, and dark mode |
+| `origin/backend` merge (`f60680d`) | Adds `AGENTS.md`, `CLAUDE.md`, `PROGRESS.md`; commits not yet on `main` |
+| This commit | See "Added files" below |
 
-`VERIFICATION.md` 병합 충돌은 양쪽 섹션("Luminal 라우팅 추가", "Luminal 실제 연결 검증")을 모두 남기는 방식으로 해결했습니다.
+The `VERIFICATION.md` merge conflict was resolved by keeping both sections ("Luminal routing added" and "Luminal live connection check").
 
-## 추가된 파일
+## Added files
 
-| 경로 | 설명 |
+| Path | Description |
 |---|---|
-| `docs/advisor-schema.sql` | Advisor DB 스키마 초안 (PostgreSQL / TigerData) |
-| `docs/advisor-tools.md` | 에이전트가 호출할 도구 명세, 라우팅 규칙, Gemini function declaration 예시 |
-| `data/catalog/2026-27/courses.json` | 43개 과목군, 302개 과목 시드 |
-| `data/catalog/2026-27/programs/DATSC_BS.json` | Data Sciences B.S. 요건 트리 (123학점, APPLIED / COMPUTATIONAL / STATISTICAL 옵션) |
-| `data/catalog/2026-27/programs/DATSC_ETM.json` | Data Sciences Entrance to Major 요건 |
-| `ingest/parse_bulletin_courses.py` | 저장한 Bulletin 과목 페이지 HTML → `courses.json` 파서 |
-| `docs/CHANGES-advisor-catalog-db.md` | 이 문서 |
+| `docs/advisor-schema.sql` | Advisor DB schema draft (PostgreSQL / TigerData) |
+| `docs/advisor-tools.md` | Tool spec for the agent, routing rules, Gemini function declaration examples |
+| `data/catalog/2026-27/courses.json` | Seed of 43 subjects, 302 courses |
+| `data/catalog/2026-27/programs/DATSC_BS.json` | Data Sciences B.S. requirement tree (123 credits, APPLIED / COMPUTATIONAL / STATISTICAL options) |
+| `data/catalog/2026-27/programs/DATSC_ETM.json` | Data Sciences Entrance to Major requirements |
+| `ingest/parse_bulletin_courses.py` | Parser from saved Bulletin course page HTML → `courses.json` |
+| `docs/CHANGES-advisor-catalog-db.md` | This document |
 
-## 1. DB 스키마 (`docs/advisor-schema.sql`)
+## 1. DB schema (`docs/advisor-schema.sql`)
 
-**아직 앱에 연결되지 않았습니다.** `DatabaseConfig`는 계속 `backend/src/main/resources/schema.sql`만 실행합니다. 기존 `reports` 관련 테이블과는 별개의 초안입니다.
+**Not yet wired into the app.** `DatabaseConfig` still runs only `backend/src/main/resources/schema.sql`. This draft is separate from the existing `reports` tables.
 
-| 섹션 | 주요 테이블 | 용도 |
+| Section | Main tables | Purpose |
 |---|---|---|
-| 1. 기준 데이터 | `catalog_years`, `terms`, `grades` | 학년도·학기·성적 순위 |
-| 2. 과목 | `courses`, `course_versions`, `course_attributes`, `course_crosslists`, `prereq_nodes` | 학년도별 과목 정보, GenEd 속성, 선수과목 트리 |
-| 3. 프로그램 | `programs`, `program_versions`, `program_options`, `requirement_nodes`, `requirement_rules`, `course_restrictions` | 전공 요건 트리와 규칙 |
-| 4. 개설 | `course_offerings` | 학기별 실제 개설 정보 |
-| 5. 학점 인정 | `credit_sources`, `credit_equivalencies` | AP/IB·편입 학점 인정표 |
-| 6. 규정 | `policy_rules`, `academic_calendar` | 수치 규정, 학사 일정 |
-| 7. 사용자 | `app_users`, `student_profiles`, `student_programs`, `student_courses`, `student_exceptions` | 학생 기록 |
-| 8–9. 계획·감사 | `plans`, `plan_courses`, `audit_snapshots` | 수강 계획, audit 캐시 |
-| 10. 대화·메모 | `conversations`, `conversation_messages`, `student_memories` | 대화 기록, 장기 메모 |
-| 11. 실행 기록 | `agent_runs`, `agent_steps` | TimescaleDB hypertable, 90일 보존 |
-| 12. 규정 검색 | `policy_chunks` (주석 처리) | pgvector 필요, 선택 사항 |
+| 1. Reference data | `catalog_years`, `terms`, `grades` | Catalog years, terms, grade order |
+| 2. Courses | `courses`, `course_versions`, `course_attributes`, `course_crosslists`, `prereq_nodes` | Per-year course info, GenEd attributes, prerequisite trees |
+| 3. Programs | `programs`, `program_versions`, `program_options`, `requirement_nodes`, `requirement_rules`, `course_restrictions` | Major requirement trees and rules |
+| 4. Offerings | `course_offerings` | Actual per-term offerings |
+| 5. Credit transfer | `credit_sources`, `credit_equivalencies` | AP/IB and transfer credit tables |
+| 6. Policies | `policy_rules`, `academic_calendar` | Numeric policies, academic calendar |
+| 7. Users | `app_users`, `student_profiles`, `student_programs`, `student_courses`, `student_exceptions` | Student records |
+| 8–9. Plans and audits | `plans`, `plan_courses`, `audit_snapshots` | Course plans, audit cache |
+| 10. Conversations and notes | `conversations`, `conversation_messages`, `student_memories` | Conversation history, long-term notes |
+| 11. Run logs | `agent_runs`, `agent_steps` | TimescaleDB hypertable, 90-day retention |
+| 12. Policy search | `policy_chunks` (commented out) | Requires pgvector; optional |
 
-주의: 11번 섹션은 `timescaledb` 확장이 필요합니다(Tiger Cloud에는 기본 설치). 로컬 PostgreSQL에서 실행 검증은 아직 하지 않았습니다.
+Note: section 11 needs the `timescaledb` extension (installed by default on Tiger Cloud). It has not yet been run against local PostgreSQL.
 
-## 2. 도구 명세 (`docs/advisor-tools.md`)
+## 2. Tool spec (`docs/advisor-tools.md`)
 
-`advisor-schema.sql` 기반으로 에이전트 도구를 정의합니다.
+Defines agent tools on top of `advisor-schema.sql`.
 
-- 카탈로그 조회: `search_courses`, `get_course`, `search_programs`, `get_program`, `get_offerings`
-- 룰 엔진 계산: `get_student_record`, `check_prerequisites`, `run_audit`, `what_if`, `find_courses_for_requirement`, `validate_plan`
-- 학점: `get_credit_summary`, `gpa_what_if`, `lookup_credit_equivalency`
-- 규정: `get_policy_rule`, `get_deadlines`, `search_policy`
-- 기타: `web_search`, `save_memory`, `forget_memory`, 승인이 필요한 쓰기 도구 4개
+- Catalog lookup: `search_courses`, `get_course`, `search_programs`, `get_program`, `get_offerings`
+- Rule engine: `get_student_record`, `check_prerequisites`, `run_audit`, `what_if`, `find_courses_for_requirement`, `validate_plan`
+- Credits: `get_credit_summary`, `gpa_what_if`, `lookup_credit_equivalency`
+- Policies: `get_policy_rule`, `get_deadlines`, `search_policy`
+- Other: `web_search`, `save_memory`, `forget_memory`, and 4 write tools that require approval
 
-핵심 원칙은 "학점·GPA·요건·수강 가능 여부는 LLM이 직접 세지 않고 계산 도구 결과로 답한다"입니다 (11절 라우팅 규칙). 문서 안 예시 값은 형식 설명용 가상 값입니다.
+The core principle: "the LLM never counts credits, GPA, requirements, or eligibility itself; it answers from tool results" (routing rules in section 11). Example values in the document are synthetic and only illustrate the format.
 
-## 3. 카탈로그 데이터 (`data/catalog/2026-27/`)
+## 3. Catalog data (`data/catalog/2026-27/`)
 
-`courses.json`의 각 과목에는 `status`와 `review`가 있습니다. **DB에 넣기 전 `review` 항목을 사람이 확인해야 합니다.**
+Each course in `courses.json` has `status` and `review`. **A person must check `review` entries before loading into the DB.**
 
-| `status` | 개수 | 의미 |
+| `status` | Count | Meaning |
 |---|---|---|
-| `auto_parsed` | 166 | 선수과목을 트리로 자동 파싱 |
-| `reference_only` | 73 | 참고용으로만 포함 |
-| `text_only` | 27 | 문법에 맞지 않아 원문 TEXT 노드로 유지 |
-| `no_prereq` | 23 | 선수과목 없음 |
-| `not_in_course_list` | 13 | Bulletin 페이지에 없어 fallback 제목·학점만 사용 |
+| `auto_parsed` | 166 | Prerequisites parsed automatically into a tree |
+| `reference_only` | 73 | Included for reference only |
+| `text_only` | 27 | Didn't fit the grammar; kept as a raw TEXT node |
+| `no_prereq` | 23 | No prerequisites |
+| `not_in_course_list` | 13 | Not on a Bulletin page; uses fallback title and credits only |
 
-`review`가 붙은 과목: 137개 (예: "Could not parse prerequisite ...; kept as TEXT.").
+Courses with `review`: 137 (e.g. "Could not parse prerequisite ...; kept as TEXT.").
 
-## 4. 파서 (`ingest/parse_bulletin_courses.py`)
+## 4. Parser (`ingest/parse_bulletin_courses.py`)
 
 ```bash
 python ingest/parse_bulletin_courses.py \
   --pages DIR --codes CODES.json --catalog-year 2026-27 --out courses.json
 ```
 
-- `DIR`: `https://bulletins.psu.edu/university-course-descriptions/undergraduate/<subject>/`를 `c_<subject>.html`로 저장한 폴더
+- `DIR`: a folder with `https://bulletins.psu.edu/university-course-descriptions/undergraduate/<subject>/` saved as `c_<subject>.html`
 - `CODES.json`: `{"codes": [...], "fallback_titles": {"CODE": [title, credits]}}`
-- 표준 라이브러리만 사용 (추가 패키지 없음)
-- 입력 HTML 폴더와 `CODES.json`은 이번 커밋에 포함되지 않았습니다
+- Standard library only (no extra packages)
+- The input HTML folder and `CODES.json` are not included in this commit
 
-## 기존 코드에 미치는 영향
+## Impact on existing code
 
-- 백엔드·프런트 소스, `pom.xml`, `package.json`, `.env.example`: 변경 없음
-- 새 환경변수: 없음
-- 기존 테스트·빌드 동작: 영향 없음 (새 파일은 빌드 경로 밖)
+- Backend/frontend source, `pom.xml`, `package.json`, `.env.example`: unchanged
+- New environment variables: none
+- Existing tests and builds: unaffected (new files are outside the build path)
 
-## 검증 상태
+## Verification status
 
-- 확인함: JSON 3개 파싱, 파서 `py_compile` 통과, 비밀값 미포함 확인
-- 미검증: `advisor-schema.sql` 실제 DB 실행, 시드 데이터 적재, `review` 항목 수동 검토
-- 2026-10-24 갱신: 섹션 1–6 실행과 DATSC 시드 적재 완료 ([DB 적재 현황](#db-적재-현황-2026-10-24)). `review` 수동 검토와 섹션 7–12 실행은 여전히 미검증
+- Checked: the 3 JSON files parse, the parser passes `py_compile`, no secrets included
+- Not verified: running `advisor-schema.sql` on a real DB, loading the seed data, manual review of `review` entries
+- Updated 2026-10-24: sections 1–6 executed and DATSC seed loaded ([DB load status](#db-load-status-2026-10-24)). Manual `review` and running sections 7–12 are still not verified
 
-## 다음 할 일
+## Next steps
 
-1. ~~TigerData 개발 DB에서 `advisor-schema.sql` 실행 확인~~ → 섹션 1–6만 실행 완료 (2026-10-24)
-2. `courses.json`의 `review` 137건 검토 후 시드 로더 작성 (`courses` / `course_versions` / `prereq_nodes`) → 로더 작성·적재 완료. **`review` 검토는 아직 안 함** (TEXT 노드 그대로 적재)
-3. ~~`DATSC_BS.json` → `requirement_nodes` / `requirement_rules` 적재~~ → 완료 (2026-10-24)
-4. (일부 완료: 채팅에 카탈로그 문맥 연결, 아래 "채팅 연결" 절) 백엔드에 `check_prerequisites`, `run_audit`부터 도구 구현 후 Gemini function calling 연결
+1. ~~Run `advisor-schema.sql` on the TigerData dev DB~~ → only sections 1–6 executed (2026-10-24)
+2. Review the 137 `review` entries in `courses.json`, then write the seed loader (`courses` / `course_versions` / `prereq_nodes`) → loader written and data loaded. **`review` not yet done** (TEXT nodes loaded as-is)
+3. ~~Load `DATSC_BS.json` → `requirement_nodes` / `requirement_rules`~~ → done (2026-10-24)
+4. (Partly done: catalog context wired into chat, see "Chat integration" below) Implement backend tools starting with `check_prerequisites` and `run_audit`, then wire up Gemini function calling
 
-## CMPSC 추가 수집
+## Additional CMPSC collection
 
-University Park 2026–27의 후속 수집·Handbook 학년도 충돌·명칭 매칭 범위는 [CMPSC 변경 내역](CHANGES-cmpsc-catalog.md)을 참고하세요. CMPSC 비교는 이제 앱에 연결되어 기존 reports.analysis JSONB에 저장됩니다. Advisor 전용 DB 스키마/감사 엔진 구현은 별도 작업입니다.
+For the follow-up University Park 2026–27 collection, the Handbook catalog-year conflict, and the scope of name matching, see the [CMPSC change log](CHANGES-cmpsc-catalog.md). The CMPSC comparison is now wired into the app and stored in the existing `reports.analysis` JSONB. Implementing the Advisor-specific DB schema and audit engine is separate work.
 
-## DB 적재 현황 (2026-10-24)
+## DB load status (2026-10-24)
 
-Computational Data Sciences(DTSCE) 질문에 답할 수 있도록 카탈로그를 TigerData에 적재했습니다. 채팅은 이 테이블을 읽습니다: 아래 [채팅 연결](#채팅-연결-catalogdbservice) 절을 보세요. CMPSC_BS/CMPSC_ETM 요건도 기존 테이블에 추가 적재했습니다(아래 CMPSC 추가 적재 절). 앱의 CMPSC 비교는 여전히 JSON 기반 `CatalogService`를 사용하며 DB 조회로 바꾸지는 않았습니다. 공용 과목·선수과목 데이터와 기존 DATSC 행은 변경하지 않았습니다.
+The catalog was loaded into TigerData so the app can answer Computational Data Sciences (DTSCE) questions. Chat reads these tables; see [Chat integration](#chat-integration-catalogdbservice) below. CMPSC_BS/CMPSC_ETM requirements were also added to the existing tables (see the CMPSC section below). The app's CMPSC comparison still uses the JSON-based `CatalogService` and was not switched to DB queries. Shared course/prerequisite data and existing DATSC rows were not changed.
 
-### 만든 범위
+### What was created
 
-- `docs/advisor-schema.sql` **섹션 1–6만** 실행했습니다 (기준 데이터, 과목, 프로그램, 개설, 학점 인정, 규정). 모두 `CREATE ... IF NOT EXISTS`입니다.
-- 섹션 7–12(학생 기록, 계획, 감사 캐시, 대화, 실행 로그 hypertable, pgvector)는 **만들지 않았습니다**. 앱용 `app_users` / `reports` / `chat_messages`는 건드리지 않습니다.
-- 대상 DB: `backend/.env`의 `TIGER_DATABASE_URL` (앱과 같은 DB)
+- **Only sections 1–6** of `docs/advisor-schema.sql` were executed (reference data, courses, programs, offerings, credit transfer, policies). All statements are `CREATE ... IF NOT EXISTS`.
+- Sections 7–12 (student records, plans, audit cache, conversations, run-log hypertable, pgvector) were **not created**. The app's `app_users` / `reports` / `chat_messages` are untouched.
+- Target DB: `TIGER_DATABASE_URL` from `backend/.env` (the same DB as the app)
 
-### 적재 결과
+### Load results
 
-| 테이블 | 행 수 | 내용 |
+| Table | Rows | Contents |
 |---|---|---|
-| `catalog_years` | 1 | `2026-27` (시작·종료일은 Summer 2026 입학 기준의 근사값) |
-| `grades` | 12 | A ~ F 평점(Senate Policy 47-60), SA / UN / W |
-| `courses` | 357 | 과목 코드. 선수과목·교차개설·요건 규칙에만 등장하는 코드 포함 |
-| `course_versions` | 337 | 2026-27 제목·학점·설명·선수과목 원문. 제목/학점이 확인되지 않은 참조 과목 20개는 `courses`에만 있음 |
-| `course_attributes` | 122 | GenEd 등 속성 (GN, GQ, GS, WAC, GWS, ...) |
-| `course_crosslists` | 25 | 교차개설 쌍 |
-| `prereq_nodes` | 880 | 선수과목 트리. 파싱 못 한 33건은 `TEXT` 노드(`raw_text`에 원문) |
+| `catalog_years` | 1 | `2026-27` (start/end dates approximate, based on Summer 2026 admission) |
+| `grades` | 12 | A–F grade points (Senate Policy 47-60), SA / UN / W |
+| `courses` | 357 | Course codes, including codes that appear only in prerequisites, cross-lists, or requirement rules |
+| `course_versions` | 337 | 2026-27 titles, credits, descriptions, raw prerequisite text. 20 referenced courses without a confirmed title/credits exist only in `courses` |
+| `course_attributes` | 122 | GenEd and other attributes (GN, GQ, GS, WAC, GWS, ...) |
+| `course_crosslists` | 25 | Cross-listed pairs |
+| `prereq_nodes` | 880 | Prerequisite trees. 33 unparsed entries are `TEXT` nodes (raw text in `raw_text`) |
 | `programs` / `program_versions` | 4 / 4 | `DATSC_BS`, `DATSC_ETM`, `CMPSC_BS`, `CMPSC_ETM` |
 | `program_options` | 3 | `APPLIED`, `COMPUTATIONAL`, `STATISTICAL` |
-| `requirement_nodes` / `requirement_rules` | 175 / 567 | DATSC 90/473 + CMPSC 85/94. CMPSC 노드 원본 메타데이터는 source_text에 JSON으로 보존 |
-| `policy_rules` | 10 | DATSC 5건 + CMPSC 5건(아래 각 키 설명) |
-| `terms`, `course_offerings`, `credit_*`, `academic_calendar`, `course_restrictions` | 0 | 테이블만 생성 |
+| `requirement_nodes` / `requirement_rules` | 175 / 567 | DATSC 90/473 + CMPSC 85/94. CMPSC node metadata preserved as JSON in `source_text` |
+| `policy_rules` | 10 | 5 DATSC + 5 CMPSC (keys described below) |
+| `terms`, `course_offerings`, `credit_*`, `academic_calendar`, `course_restrictions` | 0 | Tables created only |
 
-### 출처
+### Sources
 
-| 자료 | 판 | 쓰인 곳 |
+| Source | Edition | Used for |
 |---|---|---|
-| [Bulletin: Data Sciences, B.S. (Engineering)](https://bulletins.psu.edu/undergraduate/colleges/engineering/data-sciences-bs/) | 2026-27 | 전공 요건, List A/B(권장 계획 각주), 권장 학기 계획, 자연과학 제외 목록 |
-| [Bulletin 과목 설명](https://bulletins.psu.edu/university-course-descriptions/undergraduate/) | 2026-27 | 과목·선수과목. 2026-10-24에 43개 과목 페이지를 재수집해 기존 시드와 대조: 내용 동일, 제목이 비어 있던 참조 과목 14개만 채움 |
-| [DTSCE Handbook](https://www.eecs.psu.edu/assets/docs/handbooks/DTSCE-handbook-2024-2025.pdf) | **2024-25** | Department List 제외·상한, FYS 대체, 대체 인정 과목 |
+| [Bulletin: Data Sciences, B.S. (Engineering)](https://bulletins.psu.edu/undergraduate/colleges/engineering/data-sciences-bs/) | 2026-27 | Major requirements, List A/B (suggested plan footnotes), suggested semester plan, natural science exclusion list |
+| [Bulletin course descriptions](https://bulletins.psu.edu/university-course-descriptions/undergraduate/) | 2026-27 | Courses and prerequisites. On 2026-10-24, 43 course pages were re-collected and compared with the existing seed: content identical; only 14 referenced courses with empty titles were filled in |
+| [DTSCE Handbook](https://www.eecs.psu.edu/assets/docs/handbooks/DTSCE-handbook-2024-2025.pdf) | **2024-25** | Department List exclusions and caps, FYS substitution, accepted substitutions |
 
-2026-10-24 기준 EECS 사이트에 공개된 DTSCE Handbook은 2024-25판이 최신입니다(2025-26 / 2026-27판 없음). Bulletin의 "LIST OF COMPUTATIONAL DATA SCIENCES COURSES" 링크도 이 페이지로 연결됩니다. Handbook에서 온 규칙은 `description`에 "2026-27 적용은 어드바이저 확인 필요"를 명시했습니다.
+As of 2026-10-24, the 2024-25 DTSCE Handbook is the latest published on the EECS site (no 2025-26 or 2026-27 edition). The Bulletin's "LIST OF COMPUTATIONAL DATA SCIENCES COURSES" link also points there. Rules taken from the Handbook state "confirm 2026-27 applicability with an adviser" in their `description`.
 
-Handbook과 Bulletin이 다른 부분:
-- 졸업 학점: Handbook "at least 126" / Bulletin 2026-27 **123** → 요건은 Bulletin 값 사용, Handbook 문구는 `department_list_rules.value.note`에 보존
-- List A/B: Handbook에만 있는 CMPSC/MATH 467, DS 300, MATH 436, MATH 465, IST 441은 넣지 않음. Bulletin 2026-27 목록(DS 441, MATH 486 포함) 사용
-- 자연과학 제외: Handbook에만 ASTRO 6, GAME 180N 있음 → Bulletin 목록 사용, 차이는 `description`에 기록
+Where the Handbook and Bulletin differ:
+- Graduation credits: Handbook "at least 126" / Bulletin 2026-27 **123** → requirements use the Bulletin value; the Handbook wording is kept in `department_list_rules.value.note`
+- List A/B: CMPSC/MATH 467, DS 300, MATH 436, MATH 465, and IST 441, which appear only in the Handbook, are not included. The Bulletin 2026-27 list (including DS 441 and MATH 486) is used
+- Natural science exclusions: ASTRO 6 and GAME 180N appear only in the Handbook → the Bulletin list is used, and the difference is recorded in `description`
 
-### `policy_rules` 키 (`scope='program'`, `scope_code='DATSC_BS'`, `catalog_year='2026-27'`)
+### `policy_rules` keys (`scope='program'`, `scope_code='DATSC_BS'`, `catalog_year='2026-27'`)
 
-| key | 출처 | value |
+| key | Source | value |
 |---|---|---|
-| `suggested_academic_plan.COMPUTATIONAL` | Bulletin 2026-27 | 8학기 과목·학점(합계 123, 학기별 합계 검산), `c_required`, `list_a`, `list_b` |
-| `natural_science_exclusions` | Bulletin 2026-27 | GN 9학점, 제외 과목 |
-| `department_list_rules` | Handbook 2024-25 | 6학점, 상한(ROTC 3 등), 제외 과목·범위·범주 |
-| `first_year_seminar_makeup` | Handbook 2024-25 | 별도 FYS가 없을 때 1학점 대체와 청원 URL |
-| `communications_substitutions` | Handbook 2024-25 | ENGL 15, CAS 100, MATH 230 대체 과목 |
+| `suggested_academic_plan.COMPUTATIONAL` | Bulletin 2026-27 | 8-semester courses and credits (total 123, per-semester totals checked), `c_required`, `list_a`, `list_b` |
+| `natural_science_exclusions` | Bulletin 2026-27 | 9 GN credits, excluded courses |
+| `department_list_rules` | Handbook 2024-25 | 6 credits, caps (ROTC 3, etc.), excluded courses, ranges, and categories |
+| `first_year_seminar_makeup` | Handbook 2024-25 | 1-credit substitution when there is no separate FYS, and the petition URL |
+| `communications_substitutions` | Handbook 2024-25 | Substitutes for ENGL 15, CAS 100, MATH 230 |
 
-### 다시 적재하기
+### Reloading
 
 ```sh
 python -m pip install -r ingest/requirements.txt
-# backend/.env 의 TIGER_DATABASE_* 를 읽습니다 (환경변수가 있으면 우선)
-python ingest/load_catalog_db.py --data data/catalog/2026-27 --programs DATSC_BS DATSC_ETM --dry-run   # 넣어 보고 롤백
+# Reads TIGER_DATABASE_* from backend/.env (environment variables take precedence)
+python ingest/load_catalog_db.py --data data/catalog/2026-27 --programs DATSC_BS DATSC_ETM --dry-run   # insert, then roll back
 python ingest/load_catalog_db.py --data data/catalog/2026-27 --programs DATSC_BS DATSC_ETM
 ```
 
-- 한 트랜잭션으로 실행합니다. 다시 실행하면 해당 학년도의 과목 버전·선수과목 트리·요건 트리·규정을 교체합니다(`courses` 코드는 남김).
-- 규정 파일 재생성: Bulletin 페이지를 HTML로 저장한 뒤 `python ingest/build_datsc_policies.py PAGE.html data/catalog/2026-27/policies/DATSC_BS.json`. Handbook 규칙은 스크립트 안에 옮겨 적은 값이므로 새 Handbook이 나오면 직접 대조해 고쳐야 합니다.
+- Runs in a single transaction. Rerunning replaces that catalog year's course versions, prerequisite trees, requirement trees, and policies (`courses` codes are kept).
+- Regenerating the policy file: save the Bulletin page as HTML, then run `python ingest/build_datsc_policies.py PAGE.html data/catalog/2026-27/policies/DATSC_BS.json`. Handbook rules are transcribed into the script, so compare and update them by hand when a new Handbook is published.
 
-### TigerData 콘솔에서 확인
+### Checking in the TigerData console
 
-[console.cloud.timescale.com](https://console.cloud.timescale.com) → 서비스(`.env` 호스트의 첫 부분이 서비스 ID) → SQL editor. 조회만 할 때는 `SELECT`만 사용하세요(앱 DB와 같음).
+[console.cloud.timescale.com](https://console.cloud.timescale.com) → your service (the first part of the `.env` host is the service ID) → SQL editor. Use only `SELECT` when just looking (it's the same DB as the app).
 
 ```sql
--- Computational 옵션 요건 트리
+-- Computational option requirement tree
 WITH RECURSIVE t AS (
   SELECT n.id, n.label, n.node_type, n.min_credits, 0 AS d
   FROM requirement_nodes n JOIN program_options o ON o.id = n.option_id
@@ -189,39 +189,39 @@ WITH RECURSIVE t AS (
   SELECT c.id, c.label, c.node_type, c.min_credits, d + 1 FROM requirement_nodes c JOIN t ON c.parent_id = t.id)
 SELECT repeat('  ', d) || label, node_type, min_credits FROM t ORDER BY id;
 
--- 선수과목: CMPSC 360 을 들으면 열리는 과목
+-- Prerequisites: courses unlocked by taking CMPSC 360
 SELECT DISTINCT v.course_code, v.title
 FROM prereq_nodes p JOIN course_versions v ON v.id = p.course_version_id
 WHERE p.required_course = 'CMPSC 360';
 
--- 권장 학기 계획 / 규정 출처
+-- Suggested semester plan / policy sources
 SELECT jsonb_pretty(value -> 'terms') FROM policy_rules WHERE key = 'suggested_academic_plan.COMPUTATIONAL';
 SELECT key, description, source_url FROM policy_rules ORDER BY key;
 ```
 
-### CMPSC 추가 적재 — 스키마 변경 없음
+### CMPSC load, no schema changes
 
-University Park · 2026–27의 `CMPSC_BS`와 `CMPSC_ETM`을 `ingest/load_cmpsc_db.py`로 추가했습니다. 기존 `load_catalog_db.py`는 DDL 및 삭제 후 재적재를 수행하므로 이번 CMPSC 작업에는 사용하지 않았습니다.
+University Park 2026–27 `CMPSC_BS` and `CMPSC_ETM` were added with `ingest/load_cmpsc_db.py`. The existing `load_catalog_db.py` runs DDL and deletes before reloading, so it was not used for the CMPSC work.
 
-- DDL, UPDATE, DELETE, DROP 없이 INSERT와 조회만 사용합니다. 동일 데이터를 다시 실행하면 기존 트리·정책을 비교하여 새 행을 만들지 않습니다. 기존 CMPSC 데이터가 다르면 자동 교체하지 않고 롤백합니다.
-- CMPSC_BS: 최소 127학점, 요건 노드 78개·규칙 87개. CMPSC_ETM: 노드 7개·규칙 7개, GPA 3.20 및 C 이상 조건.
-- 연결된 75개 과목 버전은 이미 DB에 있어 재사용합니다. 공용 과목 357개, 과목 버전 337개, 선수과목 노드 880개 및 DATSC 요건/규정은 그대로 유지합니다.
-- 노드의 `source_text`에는 원문 인용이 아닌 **JSON 메타데이터**임을 표시한 뒤 `source`, `requires_review`, `review`, `credits_range` 등을 보존합니다. AND/OR 자식 구조와 교차개설 대안은 요건 트리에 그대로 저장합니다.
-- Department List와 승인 자연과학 목록 같은 빈 POOL은 아무 과목이나 인정한다는 뜻이 아닙니다. DB를 읽는 도구는 아래 snapshot의 검토 조건과 범위를 반드시 함께 읽어야 합니다. 이 적재가 자동 졸업 판정 엔진을 구현하는 것은 아닙니다.
-- 스키마의 열/제약조건/인덱스 지문과 공용·다른 전공 테이블의 행 수 및 내용 해시를 적재 전후 대조합니다. 앱 보고서·사용자·대화 테이블은 읽거나 쓰지 않습니다.
+- Uses only INSERT and SELECT, with no DDL, UPDATE, DELETE, or DROP. Rerunning with identical data compares against the existing tree and policies and creates no new rows. If existing CMPSC data differs, it rolls back instead of replacing it automatically.
+- CMPSC_BS: minimum 127 credits, 78 requirement nodes, 87 rules. CMPSC_ETM: 7 nodes, 7 rules, GPA 3.20 and C-or-better conditions.
+- The 75 linked course versions already existed in the DB and are reused. The 357 shared courses, 337 course versions, 880 prerequisite nodes, and DATSC requirements/policies are unchanged.
+- A node's `source_text` is marked as **JSON metadata**, not a verbatim quote, and preserves `source`, `requires_review`, `review`, `credits_range`, and so on. AND/OR child structures and cross-listed alternatives are stored as-is in the requirement tree.
+- An empty POOL, such as the Department List or the approved natural science list, does not mean any course counts. Tools reading the DB must also read the review conditions and scope in the snapshot below. This load does not implement an automatic graduation audit engine.
+- Schema column/constraint/index fingerprints, plus row counts and content hashes of shared and other-major tables, are compared before and after loading. App report, user, and conversation tables are neither read nor written.
 
-추가한 `policy_rules` (`scope='program'`, `catalog_year='2026-27'`):
+Added `policy_rules` (`scope='program'`, `catalog_year='2026-27'`):
 
-| scope_code | key | 내용 |
+| scope_code | key | Contents |
 |---|---|---|
-| CMPSC_BS | catalog_snapshot | 원본 전공 JSON 전체, 출처 해시, `automatic_audit_allowed=false`. 캠퍼스/학년도/GenEd 중복/미확인 조건 보존 |
-| CMPSC_ETM | catalog_snapshot | 원본 ETM JSON 전체. 소속·graded PSU 29–55학점·AP/transfer 제외·입학 학기 보존 |
-| CMPSC_BS | handbook_crosswalk | 2024–25 Handbook과 2026–27 Bulletin의 차이. `automatic_application_allowed=false`, 과거 제한은 참고 전용 |
-| CMPSC_BS | course_matches | 75개 과목의 코드 매칭·출처·선수과목 검토 상태 |
-| CMPSC_BS | sources | 공식 URL·수집 시각·원문 SHA-256 |
+| CMPSC_BS | catalog_snapshot | Full source major JSON, source hashes, `automatic_audit_allowed=false`. Preserves campus, catalog year, GenEd overlap, and unconfirmed conditions |
+| CMPSC_ETM | catalog_snapshot | Full source ETM JSON. Preserves enrollment, 29–55 graded PSU credits, AP/transfer exclusion, and admission term |
+| CMPSC_BS | handbook_crosswalk | Differences between the 2024–25 Handbook and the 2026–27 Bulletin. `automatic_application_allowed=false`; historical limits are reference only |
+| CMPSC_BS | course_matches | Code matches, sources, and prerequisite review status for 75 courses |
+| CMPSC_BS | sources | Official URLs, collection times, source SHA-256 |
 
 ```sh
-# 기존 스키마와 공용 과목이 있어야 하며, 테이블을 생성하지 않습니다.
+# Requires the existing schema and shared courses; does not create tables.
 python ingest/load_cmpsc_db.py --data data/catalog/2026-27 --dry-run
 python ingest/load_cmpsc_db.py --data data/catalog/2026-27
 python -m unittest discover -s ingest -p 'test_cmpsc_db.py' -v
@@ -237,33 +237,31 @@ SELECT scope_code, key, value FROM policy_rules
 WHERE scope_code IN ('CMPSC_BS','CMPSC_ETM') AND catalog_year='2026-27';
 ```
 
-원본은 [CMPSC Bulletin](https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-science-bs/) 2026–27과 [EECS Handbook 목록](https://www.eecs.psu.edu/Students/undergraduate/Computer-Science.aspx)의 2024–25 학부 Handbook입니다. 과거 Handbook을 현재 요건에 자동 적용하지 않습니다. 현재 앱의 JSON 기반 매칭 흐름은 변경하지 않았습니다.
+Sources are the 2026–27 [CMPSC Bulletin](https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-science-bs/) and the 2024–25 undergraduate Handbook from the [EECS Handbook list](https://www.eecs.psu.edu/Students/undergraduate/Computer-Science.aspx). The historical Handbook is never applied automatically to current requirements. The app's current JSON-based matching flow was not changed.
 
-### 채팅 연결 (`CatalogDbService`)
+### Chat integration (`CatalogDbService`)
 
-채팅 요청마다 `ReportController`가 `CatalogDbService.context(report, question)` 결과를 `report.catalogDb`로 붙여 Gemini/Luminal에 보냅니다. 업로드·저장된 리포트는 바꾸지 않습니다.
+For every chat request, `ReportController` attaches the result of `CatalogDbService.context(report, question)` as `report.catalogDb` and sends it to Gemini/Luminal. Uploaded and saved reports are not modified.
 
-- **전공 일치 조건**: 리포트 `major`가 `programs`(program_type `major`)의 이름 단어를 모두 포함하고, 나머지는 학위·캠퍼스·단과대·옵션 단어뿐일 때만 일치. 프로그램 이름의 괄호(예: `(Engineering)`)는 무시. 예: `Data Sciences (BS)` → DATSC_BS, `Computer Science (BS)` → CMPSC_BS / `Comp Sci - Univ Park (BS)`(약칭), `Computer Engineering (BS)`, `Data Sciences Minor` 불일치. 새 전공을 적재하면 코드 수정 없이 대상이 됩니다. 캠퍼스는 확인하지 않습니다(CMPSC_BS는 University Park 기준 데이터).
-- **status**: `matched`(학년도 일치), `matched_year_differs`(예: 리포트 Fall 2024 → 2024-25, DB 2026-27. 답변에 차이를 반드시 명시), `matched_year_unknown`, `major_not_in_catalog`(카탈로그 질문에 일반 지식으로 답하지 않음), `catalog_unavailable`(DB 오류 시 리포트만으로 답변)
-- **옵션**: 전공명에 옵션 단어가 있거나, 리포트 요건 제목에 옵션 하나만 등장하면(예: "Computational Option List A") 그 옵션 요건만 포함. 모르면 전체 옵션 포함하고 옵션을 가정하지 않음
-- **포함 내용**: 공통·옵션 요건 트리(과목 제목·학점), 전공 진입 요건, `policy_rules`(Handbook 출처 규칙은 판을 밝히고 어드바이저 확인 권고), 질문에 나온 과목 최대 8개의 학점·속성·교차개설·선수과목 트리·열리는 과목
-- **CMPSC 적재 형식 처리**: `source_text`가 "catalog metadata (not a verbatim quote)"이면 Bulletin 원문(`bulletin_text`)으로 넘기지 않고 `requires_review`·`review`·`credits_range`·(검토 노드의) `source_url`만 전달. 규칙 없는 POOL은 `course_list: not_listed_in_database`(아무 과목이나 인정 아님). 8,000자 넘는 정책 값(`catalog_snapshot` 등)은 `value_omitted`로 표시하고 제외
-- **문맥 크기**(실측): Data Sciences 약 17KB, CMPSC 약 26KB
-- **규칙**(`GeminiService.CHAT_SYSTEM`): 출처 URL 인용, `unparsed_text` 선수과목은 해석하지 않고 인용, 리포트의 이수 상태·학점은 바꾸지 않음. `report.catalog`(JSON 기반 CMPSC 비교)의 기존 규칙은 그대로 유지
-- 테스트: `CatalogDbServiceTest`(전공·학년도·과목 코드·DB 오류), `LiveCatalogDbTest`(`LIONPATHWAY_LIVE_TEST=1`, 실제 DB 조회 전용)
+- **Major match rule**: matches only when the report `major` contains every word of a `programs` name (program_type `major`) and the remaining words are only degree, campus, college, or option words. Parentheses in program names (e.g. `(Engineering)`) are ignored. Examples: `Data Sciences (BS)` → DATSC_BS, `Computer Science (BS)` → CMPSC_BS; `Comp Sci - Univ Park (BS)` (abbreviated), `Computer Engineering (BS)`, and `Data Sciences Minor` do not match. Newly loaded majors become eligible without code changes. Campus is not checked (CMPSC_BS data is University Park).
+- **status**: `matched` (catalog year matches), `matched_year_differs` (e.g. report Fall 2024 → 2024-25 vs DB 2026-27; the answer must state the difference), `matched_year_unknown`, `major_not_in_catalog` (catalog questions are not answered from general knowledge), `catalog_unavailable` (on DB error, answers come from the report only)
+- **Options**: if the major name contains an option word, or exactly one option appears in the report's requirement titles (e.g. "Computational Option List A"), only that option's requirements are included. Otherwise all options are included and no option is assumed
+- **Included**: common and option requirement trees (course titles and credits), entrance-to-major requirements, `policy_rules` (Handbook-sourced rules state their edition and recommend confirming with an adviser), and for up to 8 courses mentioned in the question: credits, attributes, cross-lists, prerequisite tree, and courses they unlock
+- **CMPSC load format**: when `source_text` is "catalog metadata (not a verbatim quote)", it is not passed as Bulletin text (`bulletin_text`); only `requires_review`, `review`, `credits_range`, and (for review nodes) `source_url` are passed. A POOL with no rules is `course_list: not_listed_in_database` (not "any course counts"). Policy values over 8,000 characters (`catalog_snapshot`, etc.) are marked `value_omitted` and excluded
+- **Context size** (measured): Data Sciences about 17 KB, CMPSC about 26 KB
+- **Rules** (`GeminiService.CHAT_SYSTEM`): cite source URLs, quote `unparsed_text` prerequisites without interpreting them, never change the report's completion status or credits. Existing rules for `report.catalog` (the JSON-based CMPSC comparison) are kept
+- Tests: `CatalogDbServiceTest` (major, catalog year, course codes, DB errors), `LiveCatalogDbTest` (`LIONPATHWAY_LIVE_TEST=1`, read-only queries on the real DB)
 
+### 2026-10-24 · Restoring completed items in an app report
 
-### 2026-10-24 · 앱 보고서 완료 항목 복구
+No catalog table or schema changes. Added 28 missing Satisfied sections, verified against the PDF source text, to one existing CS report in `reports.analysis` (19 complete, 6 dependent on IP, 3 needing course-table verification). The existing 2 incomplete items, overall credits 127/74 earned/30 IP, and conversation history were kept. The original was backed up to a private working folder outside Git, updated only if it matched the existing JSON, and verified from a separate connection. `RequirementReconciler` applies the same restoration to new PDF uploads. The completed count is the number of report requirement sections, not a sum of credits or courses that may overlap.
 
-카탈로그 테이블이나 스키마 변경 없음. `reports.analysis`의 기존 CS 보고서 1건에 PDF 원문에서 검증한 누락 Satisfied 섹션 28개를 추가했다(완료 19, IP 의존 6, 과목표 검증 필요 3). 기존 미완료 2개, 전체 학점 127/74 earned/30 IP, 대화 기록은 유지했다. 원본은 Git 밖의 비공개 작업 폴더에 백업했으며 기존 JSON과 일치할 때만 갱신 후 별도 연결에서 검증했다. `RequirementReconciler`는 새 PDF 업로드에도 동일한 복원을 적용한다. 완료 개수는 보고서 요건 섹션 수이며 서로 겹칠 수 있는 학점/과목을 합산한 값이 아니다.
+### 2026-10-24 · Adding applied course details
 
-### 2026-10-24 · 인정 과목 내역 추가
+Filled in the per-requirement `appliedCourses`/`appliedCoursesVerified` fields for the same app report. For the 24 requirements whose source course-table totals match `used`, stored 30 course assignments (including duplicates) with code, title, term, credits, grade/IP, and page. Uncertain tables were left empty and existing status/credits kept. Separate private backup, conditional update, and comparison from a new connection completed. No catalog or DB schema changes.
 
-동일 앱 보고서 1건의 요건별 `appliedCourses`/`appliedCoursesVerified` 필드 보완. 원문 과목표 합계와 used가 일치하는 24요건에 30개 과목 배정(중복 포함)의 코드·제목·학기·학점·성적/IP·페이지 저장. 불확실한 표는 비워 두고 기존 상태/학점은 유지. 별도 비공개 백업, 조건부 갱신, 새 연결 대조 완료. 카탈로그/DB 스키마 변경 없음.
+### 2026-10-24 · Math minor reference requirements and course history
 
+Added via INSERT one `MATH_UMNR` minor program, one 2026–27 version (minimum 26 credits), and one `minor_audit_rules_v1` policy snapshot. The 4 requirement groups, grades, overlap and individual credit limits, and source conflicts are kept in the policy JSON and not duplicated into `requirement_nodes`. No existing tables, schema, or catalog rows were modified. Using the dedicated `ingest/load_math_minor_db.py`: `--dry-run` rollback → real load → rerun no-op and identical schema fingerprint confirmed. `MathMinorService` reads the DB snapshot to compute the Math minor comparison; see `docs/MATH-MINOR.md` for scope.
 
-### 2026-10-24 · Math minor 참고 요건 및 과목 내역
-
-`MATH_UMNR` minor 프로그램 1건, 2026–27 버전 1건(최소26학점), `minor_audit_rules_v1` 정책 스냅샷 1건을 INSERT로 추가했다. 4개 요건 그룹·성적·중복/개별 학점 제한·출처 충돌은 policy JSON에 보관하며 requirement_nodes에는 별도 복제하지 않았다. 기존 테이블/스키마/카탈로그 행은 수정하지 않았다. 전용 `ingest/load_math_minor_db.py --dry-run` 롤백 → 실제 적재 → 재실행 no-op 및 스키마 지문 동일 확인. `MathMinorService`가 DB 스냅샷을 읽어 Math minor 비교를 계산하며 자세한 범위는 `docs/MATH-MINOR.md` 참조.
-
-기존 사용자 CS 보고서 1건에 제공 PDF에서 추출한 courseInventory(37개 과목/학기별 수강 내역, 반복 요건 표시는 중복 제거)를 추가했다. 전체 학점/30개 요건/대화 기록은 유지. 원본 Git 밖 비공개 백업 및 조건부 UPDATE 후 새 연결에서 대조했다. 이 PDF는 2023년 요건이므로 2026–27 마이너 비교는 참고값이다.
+Added a `courseInventory` extracted from the provided PDF (37 courses / per-term enrollment history, with repeated requirement entries deduplicated) to one existing user CS report. Overall credits, 30 requirements, and conversation history were kept. Original backed up privately outside Git, conditionally UPDATEd, then compared from a new connection. This PDF uses 2023 requirements, so the 2026–27 minor comparison is for reference only.
