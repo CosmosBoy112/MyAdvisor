@@ -254,7 +254,7 @@ body,.app-shell{background:var(--page)}
 .conversation-main .chat-form:focus-within{box-shadow:0 0 0 2px var(--accent-soft)}
 .conversation-main .chat-form textarea,.chat-form textarea{min-height:26px;height:auto;max-height:140px;padding:4px 0;resize:none;line-height:1.6}
 .chat-form-icon{color:var(--psu-blue);flex-shrink:0}
-.conversation-main .chat-form button,.chat-form button{width:42px;height:42px;border-radius:14px}
+.conversation-main .chat-form button,.chat-form button{width:42px;height:42px;border-radius:50%}
 .report-sidebar{background:var(--surface);border:0;border-radius:28px;box-shadow:var(--card-shadow)}
 .saved-report{border:0;border-radius:18px;background:var(--surface);box-shadow:var(--card-shadow)}
 .saved-report:hover,.saved-report[aria-expanded="true"]{background:var(--accent-soft)}
@@ -274,6 +274,6 @@ body,.app-shell{background:var(--page)}
 [data-theme="dark"] .app-shell .welcome-primary,[data-theme="dark"] .app-shell .preview-question{background:#1e407c}[data-theme="dark"] .app-shell .welcome-primary:hover{background:#29569f}
 .conversation-main .chat-header .chat-actions>button,.conversation-context .clear-chat-button{border:0;border-radius:999px;background:var(--surface-subtle)}
 .conversation-main .chat-header .chat-actions>button:hover,.conversation-context .clear-chat-button:hover{background:var(--accent-soft)}
-.conversation-main .conversation-context{display:flex;align-self:stretch;border-radius:0;padding:0;background:transparent}
+.conversation-main .conversation-context{display:flex;align-self:stretch;border-radius:0;padding:0 0 14px;background:transparent;border-bottom-color:var(--surface-subtle)}
 .conversation-filename{border-radius:999px;padding:5px 12px;background:var(--surface-subtle)}
 .conversation-main .chat-form{min-height:0;padding:8px 8px 8px 20px}
