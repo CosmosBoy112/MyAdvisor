@@ -4,8 +4,13 @@ export function progress(totals) {
   const completeWidth=Math.min(completed,required)/required*100;
   return {remaining:Math.max(0,required-completed),additional:Math.max(0,required-completed-inProgress),completeWidth,progressWidth:Math.min(inProgress,Math.max(0,required-completed))/required*100,percent:Math.round(completeWidth)};
 }
+export function coveredByPlan(item) {
+ if(item.status==='complete')return true;
+ const chart=progress(item);
+ return item.status==='in_progress' && chart!==null && chart.additional===0;
+}
 export function filterRequirements(items, filter) {
- return items.filter(r=>filter==='all'||(filter==='remaining'&&r.status!=='complete')||(filter==='complete'&&r.status==='complete'));
+ return items.filter(r=>filter==='all'||(filter==='remaining'&&!coveredByPlan(r))||(filter==='complete'&&coveredByPlan(r)));
 }
 export function validateFile(file) {
  if (!file || !file.name.toLowerCase().endsWith('.pdf')) return 'Please choose a PDF report.';

@@ -8,6 +8,13 @@ export function detectInputLanguage(text,current='en'){
 }
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
+'Covered':'충족 / 예정', 'Covered (':'충족 / 예정 (', 'Covered requirements':'충족된 요건 (예정 포함)', 'covered':'충족 / 예정',
+'Covered by planned courses':'충족 예정 — 추가 수강 불필요',
+'No extra courses needed if planned courses are passed.':'예정된 과목을 통과하면 이 요건을 위한 추가 수강은 필요 없습니다.',
+'requirements covered (including planned)':'개 요건 충족 (예정 포함)',
+'No requirements are covered yet. Check the remaining or unverified items.':'충족되었거나 충족 예정인 요건이 없습니다. 미완료·확인 필요 항목을 확인하세요.',
+'All listed requirements are covered. Select “Covered” to view them.':'모든 요건이 충족되었거나 충족 예정입니다. 충족 / 예정 탭에서 확인하세요.',
+
 'Courses counted toward this requirement':'이 요건에 인정된 과목',
 'Course':'과목', 'Term':'수강 학기', 'Credits':'학점', 'Grade / status':'성적 / 상태', 'PDF page':'PDF 페이지',
 'These courses appear in this requirement’s PDF table. IP courses are not earned credits yet.':'이 요건의 PDF 과목표에 기재된 내역입니다. 수강 중·예정(IP) 과목은 아직 이수 완료가 아닙니다.',

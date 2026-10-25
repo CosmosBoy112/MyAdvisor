@@ -29,7 +29,7 @@ import org.springframework.stereotype.Component;
   }
   if(out.path("requirements").isEmpty())warnings.add("No degree requirements were identified in this document.");
   warnings.add("Credit totals and requirement completion are separate. Review AI extraction against the original report and confirm decisions with an adviser.");
-  return out;
+  return RequirementPlanning.annotate(out);
  }
  private void sanitizeCredits(ObjectNode node,ArrayNode warnings){for(String key:List.of("required","completed","inProgress")){JsonNode n=node.path(key);if(n.isNull()||n.isMissingNode()){node.putNull(key);continue;}if(!n.isNumber()||!Double.isFinite(n.asDouble())||n.asDouble()<0||n.asDouble()>500){node.putNull(key);warnings.add("An invalid credit value was left unknown: "+key);}}}
  private String normalize(String s){return s.replaceAll("\s+"," ").trim();}

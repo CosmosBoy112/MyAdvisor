@@ -61,8 +61,8 @@ public class CatalogService {
  /** Old saved reports lack PDF scope evidence. Do not infer it from user goals or silently migrate them. */
  public JsonNode forRead(JsonNode stored){
   ObjectNode copy=stored.deepCopy();
-  if(!copy.has("catalog"))return enrich(copy,Map.of());
-  return copy;
+  if(!copy.has("catalog"))enrich(copy,Map.of());
+  return RequirementPlanning.annotate(copy);
  }
  private ObjectNode match(ObjectNode item){
   ObjectNode out=mapper.createObjectNode();out.put("requiresReview",true);out.put("automaticApplicationAllowed",false);

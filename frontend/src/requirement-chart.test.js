@@ -30,24 +30,22 @@ test('chart buttons switch completed rows and explain a zero-result view',async(
  await writeFile(generated,compileScript(descriptor,{id:'chart-test',inlineTemplate:true}).content);
  try{
   const {default:Chart}=await import(generated.href);
-  for(const requirements of [items,items.slice(1)]){
+  for(const requirements of [items,items.slice(2)]){
    const root=node('root');const app=renderer.createApp(Chart,{requirements});app.mount(root);
    const buttons=()=>all(root).filter(n=>n.tag==='button'&&n.props.class?.includes('chart-toggle'));
    const rows=()=>all(root).filter(n=>n.tag==='button'&&n.props.class==='chart-row');
-   assert.equal(rows().length,2);
-   const pending=rows().find(n=>text(n).includes('Pending course group'));
-   assert.match(text(pending),/3 credits still to earn/);
-   assert.match(text(pending),/0 needed after current courses/);
+   assert.equal(rows().length,1);
+   assert.ok(!rows().some(n=>text(n).includes('Pending course group')));
    buttons()[1].props.onClick();await nextTick();
    assert.equal(buttons()[1].props['aria-pressed'],true);
-   assert.equal(rows().length,requirements===items?1:0);
-   if(requirements===items)assert.match(text(rows()[0]),/Completed course group/);
-   else assert.match(text(root),/No requirements are marked complete/);
+   assert.equal(rows().length,requirements===items?2:0);
+   if(requirements===items){const pending=rows().find(n=>text(n).includes('Pending course group'));assert.match(text(pending),/Covered by planned courses/);assert.match(text(pending),/0 needed after current courses/);}
+   else assert.match(text(root),/No requirements are covered/);
    buttons()[0].props.onClick();await nextTick();
-   assert.equal(rows().length,2);assert.equal(buttons()[0].props['aria-pressed'],true);
+   assert.equal(rows().length,1);assert.equal(buttons()[0].props['aria-pressed'],true);
    locale.value='ko';await nextTick();
-   assert.match(text(root),/요건별 남은 학점/);assert.match(text(buttons()[1]),/완료/);
-   assert.match(text(root),/Pending course group/); // Official source title stays original.
+   assert.match(text(root),/요건별 남은 학점/);assert.match(text(buttons()[1]),/충족/);
+   assert.match(text(root),/Unverified course group/); // Official source title stays original.
    locale.value='en';await nextTick();app.unmount();
   }
  }finally{await unlink(generated);}

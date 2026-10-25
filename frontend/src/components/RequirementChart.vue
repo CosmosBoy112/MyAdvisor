@@ -1,11 +1,11 @@
 <script setup>
 import {t} from '../i18n.js';
 import {computed,ref} from 'vue';
-import {progress,filterRequirements} from '../model.js';
+import {progress,coveredByPlan,filterRequirements} from '../model.js';
 const props=defineProps({requirements:{type:Array,default:()=>[]}});
 const emit=defineEmits(['select']);
 const view=ref('remaining');
-const completedCount=computed(()=>props.requirements.filter(item=>item.status==='complete').length);
+const completedCount=computed(()=>props.requirements.filter(coveredByPlan).length);
 const remainingCount=computed(()=>props.requirements.length-completedCount.value);
 const rows=computed(()=>filterRequirements(props.requirements,view.value)
  .map(item=>({item,chart:progress(item)}))
@@ -15,18 +15,18 @@ function label(row){const {item,chart}=row;return chart?`${item.title}: ${credit
 </script>
 <template>
  <section class="requirement-chart" aria-labelledby="requirement-chart-title">
-  <div class="chart-header"><div><h2 id="requirement-chart-title">{{view==='complete'?t('Completed requirements'):t('What’s left, by requirement')}}</h2></div><div class="chart-filters" role="group" aria-label="Requirement chart filter"><button class="chart-toggle" type="button" :aria-pressed="view==='remaining'" @click="view='remaining'">{{t("To complete (")}}{{remainingCount}})</button><button class="chart-toggle" type="button" :aria-pressed="view==='complete'" @click="view='complete'">{{t("Completed (")}}{{completedCount}})</button></div></div>
+  <div class="chart-header"><div><h2 id="requirement-chart-title">{{view==='complete'?t('Covered requirements'):t('What’s left, by requirement')}}</h2></div><div class="chart-filters" role="group" aria-label="Requirement chart filter"><button class="chart-toggle" type="button" :aria-pressed="view==='remaining'" @click="view='remaining'">{{t("To complete (")}}{{remainingCount}})</button><button class="chart-toggle" type="button" :aria-pressed="view==='complete'" @click="view='complete'">{{t("Covered (")}}{{completedCount}})</button></div></div>
   <div class="chart-key" aria-label="Chart legend"><span><i class="earned"></i>{{t("Completed")}}</span><span><i class="current"></i>{{t("In progress")}}</span><span><i class="remaining"></i>{{t("After current courses")}}</span></div>
   <div v-if="rows.length" class="chart-rows">
    <button v-for="row in rows" :key="row.item.id" type="button" class="chart-row" :aria-label="label(row)+' Open requirement details.'" @click="emit('select',row.item)">
-    <span class="row-heading"><span class="row-title">{{row.item.title}}<small v-if="row.item.status==='review'" class="review-label">{{t("Needs review")}}</small></span><strong v-if="row.chart?.remaining>0">{{credits(row.chart.remaining)}} <small>{{t("credits still to earn")}}</small></strong><strong v-else-if="row.chart && row.item.inProgress>0" class="pending">{{t("Pending current courses")}}</strong><strong v-else-if="row.chart && row.item.status==='complete'" class="pending">{{t("Complete")}}</strong><strong v-else class="pending">{{t("Needs confirmation")}}</strong></span>
+    <span class="row-heading"><span class="row-title">{{row.item.title}}<small v-if="row.item.status==='review'" class="review-label">{{t("Needs review")}}</small></span><strong v-if="coveredByPlan(row.item)" class="pending">{{row.item.status==='complete'?t('Complete'):t('Covered by planned courses')}}</strong><strong v-else-if="row.chart?.remaining>0">{{credits(row.chart.remaining)}} <small>{{t("credits still to earn")}}</small></strong><strong v-else-if="row.chart && row.item.inProgress>0" class="pending">{{t("Pending current courses")}}</strong><strong v-else-if="row.chart && row.item.status==='complete'" class="pending">{{t("Complete")}}</strong><strong v-else class="pending">{{t("Needs confirmation")}}</strong></span>
     <span v-if="row.chart" class="requirement-track" aria-hidden="true"><span class="earned" :style="{width:row.chart.completeWidth+'%'}"></span><span class="current" :style="{width:row.chart.progressWidth+'%'}"></span></span>
     <span v-else class="requirement-track unknown" aria-hidden="true"></span>
     <span class="row-caption"><span>{{credits(row.item.completed)}} / {{credits(row.item.required)}} {{t("credits completed")}}<span v-if="Number.isFinite(row.item.inProgress) && row.item.inProgress>0"> · {{credits(row.item.inProgress)}} {{t("in progress")}}</span><span v-if="row.chart"> · {{credits(row.chart.additional)}} {{t("needed after current courses")}}</span></span><span>{{row.chart?t('View details →'):t('Credit totals need confirmation →')}}</span></span>
    </button>
   </div>
-  <p class="sr-only" role="status" aria-live="polite">{{t("Showing")}} {{rows.length}} {{view==='complete'?t('completed'):t('unfinished or unverified')}} {{t("requirements")}}</p>
-  <p v-if="!rows.length" class="chart-empty">{{!requirements.length?t('No requirements were identified in this report.'):view==='complete'?t('No requirements are marked complete in this report yet. In-progress and needs-review items are under “To complete”.'):t('All listed requirements are marked complete. Select “Completed” to view them.')}}</p>
+  <p class="sr-only" role="status" aria-live="polite">{{t("Showing")}} {{rows.length}} {{view==='complete'?t('covered'):t('unfinished or unverified')}} {{t("requirements")}}</p>
+  <p v-if="!rows.length" class="chart-empty">{{!requirements.length?t('No requirements were identified in this report.'):view==='complete'?t('No requirements are covered yet. Check the remaining or unverified items.'):t('All listed requirements are covered. Select “Covered” to view them.')}}</p>
   <p class="chart-note">{{t("In-progress credits are not earned yet. Requirements may overlap; course eligibility needs confirmation.")}}</p>
  </section>
 </template>
