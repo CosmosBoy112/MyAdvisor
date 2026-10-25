@@ -15,6 +15,11 @@ test('HTML stays text and dangerous URL protocols cannot become links',()=>{
 test('search widget document has a restrictive CSP',()=>{
  const doc=searchDocument('<div>Search suggestions</div>');
  assert.ok(doc.includes("default-src 'none'"));assert.ok(doc.includes("form-action 'none'"));
+ assert.ok(doc.includes("background:#ffffff!important"));
+ assert.ok(doc.includes("color-scheme:light"));
+ const dark=searchDocument("<div>Suggestions</div>","dark");
+ assert.ok(dark.includes("background:#1b1d20!important"));
+ assert.ok(dark.includes("color-scheme:dark"));
 });
 
 test('chat answers render headings, lists and emphasis as data, never HTML',()=>{

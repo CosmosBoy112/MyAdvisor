@@ -50,4 +50,8 @@ export function chatBlocks(text,sources=[]){
  return blocks;
 }
 // Provider Search Suggestions are isolated from the application, without scripts or same-origin access.
-export function searchDocument(html){return '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\' https:; img-src https: data:; font-src https:; form-action \'none\'">'+html;}
+export function searchDocument(html,theme='light'){
+ const dark=theme==='dark';
+ const background=dark?'#1b1d20':'#ffffff';
+ const color=dark?'#f0f0f2':'#001e44';
+ return '<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\' https:; img-src https: data:; font-src https:; form-action \'none\'">'+html+`<style>html,body{background:${background}!important;color:${color};margin:0;min-height:100%}.container{background:${background}!important;border:0!important;border-radius:0!important;box-shadow:none!important}html{color-scheme:${dark?'dark':'light'}}</style>`;}
