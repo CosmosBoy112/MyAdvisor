@@ -10,7 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.*;
 @Configuration
 public class SecurityConfig {
- @Bean CorsConfigurationSource cors(@Value("${app.frontend-origin}") String origin){
+ @Bean CorsConfigurationSource corsConfigurationSource(@Value("${app.frontend-origin}") String origin){
   var config=new CorsConfiguration(); config.setAllowedOrigins(List.of(origin));config.setAllowedMethods(List.of("GET","POST","DELETE","OPTIONS"));config.setAllowedHeaders(List.of("Authorization","Content-Type"));config.setMaxAge(3600L);
   var source=new UrlBasedCorsConfigurationSource();source.registerCorsConfiguration("/**",config);return source;
  }

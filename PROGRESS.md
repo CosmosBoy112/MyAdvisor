@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · Claude Code · `main`
+- 한 일: CORS 설정 빈 이름을 `cors` → `corsConfigurationSource`로 변경. Spring Security 6.4는 이 이름으로만 찾기 때문에 기존 설정이 무시되어, 배포 환경(Vercel→Render)에서 모든 교차 출처 preflight가 403이던 문제 수정. 로컬은 Vite 프록시로 같은 출처라 드러나지 않았음
+- 상태: 수정 전 jar를 demo 프로필로 로컬 실행 시 허용 Origin preflight도 403 재현. 수정 후 `FRONTEND_ORIGIN` Origin → 200 + `Access-Control-Allow-Origin`, 다른 Origin → 403 확인. `mvn package` 테스트 전체 통과. Render 재배포 후 실제 브라우저 로그인·채팅은 미검증
+- 막힌 것: 없음
+- 다음: Render 재배포 후 `https://www.onlyplans.courses`에서 로그인·채팅 확인
+- 필요한 설정: Render `FRONTEND_ORIGIN`=프론트 실제 주소(현재 www 도메인, 끝 `/` 없이). Auth0 SPA 앱 Callback/Logout/Web Origins에 같은 주소 추가
+
 ## 2026-10-24 · Codex · `main`
 - 한 일: 로그인 후 API 오류 처리 보완: JSON 파싱 전401/403 처리, HTML/일반텍스트 오류와 잘못 연결된 웹페이지를 구분. 정상 JSON 에러 보존 및 빈 DELETE 200/204 지원. 배포 연결 설명 docs/DEPLOYMENT.md 추가
 - 상태: 프런트33개 테스트/빌드 통과. 실제 www.onlyplans.courses 번들의 API base가 빈 값이고 /api/health·/api/reports가 Vercel404 텍스트 반환하는 것 확인. 로컬 health는 정상
