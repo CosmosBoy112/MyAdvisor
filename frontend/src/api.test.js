@@ -20,3 +20,21 @@ test('successful response and upstream error stay distinguishable',async()=>{
  assert.deepEqual(await apiRequest('/test',{}, {getHeaders,fetchImpl:async()=>({status:200,ok:true,text:async()=>'{"id":"ok"}'})}),{id:'ok'});
  await assert.rejects(apiRequest('/test',{}, {getHeaders,fetchImpl:async()=>({status:504,ok:false,text:async()=>'{"message":"AI deadline exceeded"}'})}),/AI deadline exceeded/);
 });
+
+test('HTML authentication errors retain status-specific guidance',async()=>{
+ for(const [status,reason] of [[401,/session could not be verified/],[403,/Access is unavailable/]]){
+  await assert.rejects(apiRequest('/api/reports',{}, {getHeaders:async()=>({}),fetchImpl:async()=>new Response('<html>error</html>',{status})}),reason);
+ }
+});
+test('HTML app fallbacks and proxy errors explain the connection problem without displaying raw HTML',async()=>{
+ for(const [status,reason] of [[200,/web page instead of data/],[502,/HTTP 502/],[500,/HTTP 500/]]){
+  await assert.rejects(apiRequest('/api/reports',{}, {getHeaders:async()=>({}),fetchImpl:async()=>new Response('<html>private diagnostic</html>',{status})}),e=>reason.test(e.message)&&!e.message.includes('private diagnostic'));
+ }
+});
+test('empty success cannot masquerade as a report list; empty deletion is allowed',async()=>{
+ const settings={getHeaders:async()=>({}),fetchImpl:async()=>new Response('',{status:200})};
+ await assert.rejects(apiRequest('/api/reports',{},settings),/empty response/);
+ assert.equal(await apiRequest('/api/reports/id',{method:'DELETE'},settings),null);
+ assert.equal(await apiRequest('/api/reports/id',{method:'DELETE'},{...settings,fetchImpl:async()=>new Response(null,{status:204})}),null);
+ assert.deepEqual(await apiRequest('/api/reports',{}, {...settings,fetchImpl:async()=>new Response('[]',{status:200})}),[]);
+});

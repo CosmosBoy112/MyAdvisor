@@ -32,9 +32,10 @@ import org.springframework.web.multipart.MultipartFile;
  public JsonNode upload(Jwt jwt,MultipartFile file,String intent)throws java.io.IOException{return upload(jwt,file,intent,"en");}
  @GetMapping public List<Map<String,Object>> list(@AuthenticationPrincipal Jwt jwt){return repository.list(jwt.getSubject());}
  @GetMapping("/{id}/messages")public List<Map<String,Object>> messages(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){repository.get(id,jwt.getSubject());return repository.history(id);}
+ @DeleteMapping("/{id}/messages")public void clearMessages(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){repository.clearHistory(id,jwt.getSubject());}
  @GetMapping("/{id}")public JsonNode get(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){return withMinor(catalog.forRead(repository.get(id,jwt.getSubject())));}
  @PostMapping("/{id}/chat")public Map<String,Object> chat(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id,@Valid @RequestBody Question body){
-  var report=(com.fasterxml.jackson.databind.node.ObjectNode)withMinor(catalog.forRead(repository.get(id,jwt.getSubject())));report.put("responseLanguage",body.language()==null?"en":body.language());report.put("webSearchEnabled",body.webSearch()==null||body.webSearch());
+  var report=(com.fasterxml.jackson.databind.node.ObjectNode)withMinor(catalog.forRead(repository.get(id,jwt.getSubject())),body.question());report.put("responseLanguage",body.language()==null?"en":body.language());report.put("webSearchEnabled",body.webSearch()==null||body.webSearch());
   var history=repository.history(id);var response=new LinkedHashMap<String,Object>();
   boolean agentFailed=false;
   // The client polls /chat/progress/{requestId} while this request is running.
@@ -55,7 +56,8 @@ import org.springframework.web.multipart.MultipartFile;
   if(progress==null||!requestId.matches(REQUEST_ID))throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND);
   return progress.read(jwt.getSubject(),requestId).orElseGet(()->Map.of("steps",List.of(),"done",false));
  }
- private JsonNode withMinor(JsonNode report){if(minor!=null)((com.fasterxml.jackson.databind.node.ObjectNode)report).set("minorAssessment",minor.evaluate(report));return report;}
+ private JsonNode withMinor(JsonNode report){return withMinor(report,"");}
+ private JsonNode withMinor(JsonNode report,String question){((com.fasterxml.jackson.databind.node.ObjectNode)report).remove("minorAssessment");if(minor!=null&&MathMinorService.relevant(report,question))((com.fasterxml.jackson.databind.node.ObjectNode)report).set("minorAssessment",minor.evaluate(report));return report;}
  @DeleteMapping("/{id}")public void delete(@AuthenticationPrincipal Jwt jwt,@PathVariable UUID id){repository.delete(id,jwt.getSubject());}
  static final String REQUEST_ID="[0-9a-fA-F-]{36}";
  public record Question(@NotBlank @Size(max=2000)String question,@Pattern(regexp=SupportedLanguages.PATTERN)String language,Boolean webSearch,@Pattern(regexp=REQUEST_ID)String requestId){

@@ -16,15 +16,23 @@ export async function apiRequest(url, options = {}, {
     // A late auth response must never send a cancelled upload.
     if (controller.signal.aborted) return;
     onStage('analysis');
-    const response = await fetchImpl(url, {...options, signal:controller.signal, headers:{...headers,...options.headers}});
+    const response = await fetchImpl(url, {...options, signal:controller.signal, headers:{Accept:'application/json',...headers,...options.headers}});
     if (response.status === 204) return null;
-    const raw = await response.text();
-    let data = {};
-    try { data = raw ? JSON.parse(raw) : {}; }
-    catch { throw new Error('The server returned an unreadable response. Please retry.'); }
+    // Authentication failures often have an empty or HTML body. Preserve the
+    // HTTP meaning before parsing so a proxy/login page cannot hide the cause.
     if (response.status === 401) throw new Error('Your session could not be verified. Sign out and sign in again.');
     if (response.status === 403) throw new Error('Access is unavailable. Check the backend live profile.');
-    if (!response.ok) throw new Error(data.message || 'The request could not be completed.');
+    const raw = await response.text();
+    let data;
+    try { data = raw.trim() ? JSON.parse(raw) : null; }
+    catch {
+      if (!response.ok) throw new Error(`The API server returned HTTP ${response.status} instead of JSON. Check that the Spring Boot backend is running and the /api proxy points to it.`);
+      if (/^\s*</.test(raw)) throw new Error('The API request returned a web page instead of data. Check VITE_API_BASE_URL and the /api proxy configuration, then reload.');
+      throw new Error('The server returned an unreadable response. Please retry.');
+    }
+    if (!response.ok) throw new Error(typeof data?.message === 'string' ? data.message : `The API request failed (HTTP ${response.status}). Please retry.`);
+    if (data === null && options.method?.toUpperCase() === 'DELETE') return null;
+    if (data === null) throw new Error('The API server returned an empty response. Please retry.');
     return data;
   };
   deadline = setTimeout(() => stop('The request timed out. Check My reports before retrying; the server may have saved the result.'), timeoutMs);

@@ -1,65 +1,65 @@
 # University Park Computer Science · 2026–27
 
-공식 Bulletin의 CMPSC_BS(University Park) 요건과 과목을 수집하고, 공식 EECS 페이지의 학부 Handbook과 대조했습니다. 다른 캠퍼스의 CSENG_BS는 포함하지 않습니다.
+We collected the CMPSC_BS (University Park) requirements and courses from the official Bulletin and cross-checked them against the undergraduate Handbook linked from the official EECS page. CSENG_BS at other campuses is not included.
 
-## 수집 결과
+## What was collected
 
-- 학위 최소 127학점, 전공 106–108학점, General Education 45학점. 전공과 GenEd 중복 24학점이 있어 모든 항목을 단순 합산하면 안 됩니다.
-- 전공 요건에 등장하는 과목 코드 75개를 8개 과목 페이지에서 모두 찾았습니다. 선수과목 해석에 review가 있는 과목 14개는 자동 충족 판정 대상이 아닙니다.
-- CMPSC_ETM은 University Park의 GPA 3.20, graded Penn State 29–55학점 및 C 이상 선수과목 조건을 별도 저장합니다. AP/편입 학점과 현재 소속은 추가 검증이 필요합니다.
-- CMPEN 270 또는 (271 AND 275), MATH 230/230H 또는 (231 AND 232) 구조를 보존합니다. STAT/MATH 교차개설 코드는 대안이며 이중 학점으로 계산하지 않습니다.
+- Degree minimum 127 credits, major 106–108 credits, General Education 45 credits. The major and GenEd overlap by 24 credits, so the items must not simply be summed.
+- All 75 course codes that appear in the major requirements were found across 8 course pages. 14 courses whose prerequisite interpretation needs review are not eligible for automatic satisfaction.
+- CMPSC_ETM stores University Park's GPA 3.20, 29–55 graded Penn State credits, and C-or-better prerequisite conditions separately. AP/transfer credits and current enrollment status need additional verification.
+- The structures CMPEN 270 or (271 AND 275) and MATH 230/230H or (231 AND 232) are preserved. STAT/MATH cross-listed codes are alternatives and are not counted as double credit.
 
-## Handbook 학년도 충돌
+## Handbook catalog-year conflict
 
-2026-10-24 수집 당시 공식 EECS 페이지에 연결된 최신 학부 Handbook은 2024–25입니다. PDF 표지와 링크는 2024–25이지만, 18쪽에는 2021–22 입학생을 지칭하는 문구도 있어 적용 학년도를 확정할 수 없습니다. 2026–27 규칙으로 자동 적용하지 않습니다.
+When collected on 2026-10-24, the latest undergraduate Handbook linked from the official EECS page was 2024–25. The PDF cover and link say 2024–25, but page 18 also refers to students admitted in 2021–22, so the applicable year can't be confirmed. It is not applied automatically as 2026–27 rules.
 
-| 항목 | 2026–27 Bulletin | 이전 Handbook | 매칭 처리 |
+| Item | 2026–27 Bulletin | Earlier Handbook | Matching treatment |
 |---|---|---|---|
-| Department List | 6학점 | 10–14학점 | 명칭 연결, 학점 충돌 표시. 승인 과목 목록은 확인 필요 |
-| CS technical electives | 명시된 27개 코드 중 18학점 | CS electives 12학점 및 별도 구조 | 현재 목록 사용, 이전 구조 자동 대체 금지 |
-| Supporting Electives | 동일한 독립 요건 확인 안 됨 | 주제에 맞는 고급 과목 6학점 | 현재 자연과학/Department List로 변환 금지 |
-| 자연과학 선택 | PHYS 213 또는 214 또는 승인 목록 3학점 | 이전 안내 | 승인 목록 분기는 확인 필요 |
-| Writing | CMPSC 483W가 필수 목록에 포함 | 이전 선택 구조 | 이전 선택 과목의 대체 인정 추정 금지 |
+| Department List | 6 credits | 10–14 credits | Names linked, credit conflict flagged. Approved course list needs confirmation |
+| CS technical electives | 18 credits from 27 listed codes | 12 credits of CS electives with a separate structure | Use the current list; never auto-substitute the old structure |
+| Supporting Electives | No equivalent standalone requirement found | 6 credits of topic-relevant advanced courses | Don't convert to current natural science / Department List |
+| Natural science elective | PHYS 213 or 214, or 3 credits from an approved list | Earlier guidance | Approved-list branch needs confirmation |
+| Writing | CMPSC 483W is in the required list | Earlier elective structure | Don't assume earlier electives substitute |
 
-빈 승인 목록은 ‘아무 과목 가능’이 아닙니다. `requires_review`와 미해결 분기를 존중해야 합니다. Handbook의 제외 과목과 상한은 `historical_*`에만 저장합니다. 과목 존재 여부와 해당 요건에 인정되는지는 별개의 판단입니다.
+An empty approved list does not mean "any course counts." `requires_review` and unresolved branches must be respected. Handbook exclusions and caps are stored only in `historical_*`. Whether a course exists and whether it counts toward a requirement are separate judgments.
 
-## 파일
+## Files
 
-- `data/catalog/2026-27/programs/CMPSC_BS.json`: 현재 학위 요건 트리
-- `data/catalog/2026-27/programs/CMPSC_ETM.json`: 현재 전공 진입 조건
-- `data/catalog/2026-27/courses.json`: 기존 카탈로그에 공식 과목 정보 병합
-- `data/catalog/2026-27/references/CMPSC_course_matches.json`: 코드별 출처·선수과목 검토 상태
-- `data/catalog/2026-27/references/CMPSC_handbook_crosswalk.json`: 보고서 항목 명칭, 충돌, 과거 지침
-- `data/catalog/2026-27/references/CMPSC_sources.json`: URL, 수집 시각, 원문 SHA-256
-- `ingest/crawl_cmpsc_catalog.py`: 재수집 스크립트. 원문 HTML/PDF는 별도 캐시에 보관
-- `ingest/match_cmpsc_requirements.py`: 명시적 별칭 기반 매칭 CLI. 학년도와 캠퍼스 필수, 불명확한 List A/B는 unmatched
+- `data/catalog/2026-27/programs/CMPSC_BS.json`: current degree requirement tree
+- `data/catalog/2026-27/programs/CMPSC_ETM.json`: current entrance-to-major conditions
+- `data/catalog/2026-27/courses.json`: official course data merged into the existing catalog
+- `data/catalog/2026-27/references/CMPSC_course_matches.json`: per-code source and prerequisite review status
+- `data/catalog/2026-27/references/CMPSC_handbook_crosswalk.json`: report item names, conflicts, historical guidance
+- `data/catalog/2026-27/references/CMPSC_sources.json`: URLs, collection times, source SHA-256
+- `ingest/crawl_cmpsc_catalog.py`: re-collection script. Source HTML/PDF are kept in a separate cache
+- `ingest/match_cmpsc_requirements.py`: explicit-alias matching CLI. Catalog year and campus are required; ambiguous List A/B stays unmatched
 
-## 실행
+## Running
 
-Python 3.10 이상, `lxml`, `pypdf`가 필요합니다.
+Requires Python 3.10+, `lxml`, and `pypdf`.
 
 ```sh
 python -m pip install -r ingest/requirements.txt
 python ingest/crawl_cmpsc_catalog.py --cache /tmp/cmpsc-sources --out data/catalog/2026-27
-# 캐시로 재현: --offline / 원문 재수집: --refresh
+# Reproduce from cache: --offline / re-fetch sources: --refresh
 python ingest/match_cmpsc_requirements.py 'Department List' --catalog-year 2026-27 --campus UP
 python -m unittest discover -s ingest -p 'test_cmpsc_catalog.py' -v
 ```
 
-크롤러는 Bulletin 학년도가 바뀌거나 새 Handbook이 연결되면 검토를 요구하며 중단합니다. 캐시는 원본 URL을 바꾸지 않고 같은 수집용 디렉터리를 사용하세요. 재수집 후 결과를 검토하고 커밋해야 합니다.
+The crawler stops and asks for review when the Bulletin year changes or a new Handbook is linked. Reuse the same collection directory for the cache without changing source URLs. Review and commit the results after re-collecting.
 
-## 앱 적용 범위
+## Scope in the app
 
-카탈로그 시드와 Python 매칭 도구에 더해 Spring Boot `CatalogService`가 Maven 빌드 시 포함된 JSON을 읽습니다. 새 PDF는 Gemini 추출과 증거 검증 후 전공·캠퍼스·학년도를 비교합니다. 해당 메타데이터와 원문 텍스트의 표기가 확인되면 항목별 정확한 별칭으로 매칭합니다. 문서 내 표기의 존재 확인이며 복수 프로그램 문서 전체에 대한 학사 검증은 아닙니다. 다른 학년도/캠퍼스/미확인 값은 자동 적용하지 않습니다.
+Beyond the catalog seed and the Python matching tool, the Spring Boot `CatalogService` reads the JSON bundled at Maven build time. For a new PDF, major, campus, and catalog year are compared after Gemini extraction and evidence validation. When the metadata and source text confirm them, items are matched by exact alias. This confirms the wording exists in the document; it is not an academic audit of an entire multi-program document. Other years, campuses, or unconfirmed values are never applied automatically.
 
-비교 결과(`catalog`, `requirements[].catalogMatch`)는 기존 `reports.analysis` JSONB에 함께 저장됩니다. 사용자 분석 저장은 기존 소유권·삭제 정책을 그대로 따릅니다. 이후 CMPSC 원본 요건은 기존 Advisor 카탈로그 테이블에도 추가 적재했습니다. 스키마 변경 없이 넣었으며 상세 내용은 `CHANGES-advisor-catalog-db.md`의 CMPSC 추가 적재 절을 참고하세요. 앱 비교는 여전히 JSON을 읽습니다. 보고서 조회·내보내기·Gemini/Luminal 채팅에서 동일한 출처와 검토 정보를 사용합니다. 기존 저장 보고서는 원문이 없어 재업로드 전 scope_unverified 또는 scope_not_matched로 표시됩니다.
+The comparison (`catalog`, `requirements[].catalogMatch`) is stored alongside the existing `reports.analysis` JSONB, and saved analyses follow the existing ownership and deletion policy. The CMPSC source requirements were later also loaded into the existing Advisor catalog tables without schema changes; see the CMPSC section of `CHANGES-advisor-catalog-db.md`. The app comparison still reads the JSON. Report views, exports, and Gemini/Luminal chat all use the same sources and review information. Previously saved reports have no source text, so they show `scope_unverified` or `scope_not_matched` until re-uploaded.
 
-Vue는 전체 비교 상태, 요구 학점 충돌, 공식 출처 링크, 목록이 명시된 선택 과목과 선수과목 검토 상태를 표시합니다. 보고서의 학점·완료 상태는 유지합니다. 자연과학의 승인 목록, 과거 Supporting Electives, 불명확한 List A/B는 자동 인정하지 않습니다. Docker는 저장소 루트에서 `docker build -f backend/Dockerfile -t lionpathway-api .`로 빌드합니다.
+Vue shows the overall comparison status, required-credit conflicts, official source links, electives with explicit lists, and prerequisite review status. The report's credits and completion status are kept. Approved natural science lists, historical Supporting Electives, and ambiguous List A/B are never accepted automatically. Build Docker from the repository root with `docker build -f backend/Dockerfile -t lionpathway-api .`.
 
-후속 로더/감사 엔진은 미해결 목록, GenEd 중복/분배, 학점 출처, 최소 성적, 반복/동등 과목을 별도로 처리해야 합니다. 현재 스키마 초안에서 지원하지 않는 메타데이터를 버리고 졸업 가능으로 판정하면 안 됩니다. 보고서의 명시 학년도나 남은 학점을 이 명칭 매칭 결과로 덮어쓰지 마세요.
+A future loader/audit engine must handle unresolved lists, GenEd overlap/distribution, credit sources, minimum grades, and repeated/equivalent courses separately. Don't drop metadata the current schema draft can't represent and then declare a student eligible to graduate. Don't overwrite the report's stated catalog year or remaining credits with these name-matching results.
 
-## 공식 출처
+## Official sources
 
 - [Computer Science B.S. Bulletin](https://bulletins.psu.edu/undergraduate/colleges/engineering/computer-science-bs/)
-- [EECS Computer Science 학부 Handbook 목록](https://www.eecs.psu.edu/Students/undergraduate/Computer-Science.aspx)
+- [EECS Computer Science undergraduate Handbook list](https://www.eecs.psu.edu/Students/undergraduate/Computer-Science.aspx)
 - [2024–25 Handbook PDF](https://www.eecs.psu.edu/assets/docs/handbooks/CMPSC-handbook-2024-2025.pdf)

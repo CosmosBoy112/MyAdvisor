@@ -9,6 +9,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 @Service
 public class MathMinorService {
+ static boolean relevant(JsonNode report,String question){
+  String math="(?iu)(\\bmath(?:ematics)?\\b|MATH_UMNR|수학|数学|數學|matem[aá]tica|mathématique|mathematik|математ|गणित)";
+  String minor="(?iu)(\\bminor\\b|부전공|마이너|辅修|輔修|副専攻|副修|nebenfach|дополнительн|माइनर)";
+  if(Pattern.compile(math).matcher(report.path("minor").asText("")).find())return true;
+  for(String text:List.of(report.path("intent").asText(""),question))
+   if(Pattern.compile(math).matcher(text).find()&&Pattern.compile(minor).matcher(text).find())return true;
+  return false;
+ }
  private final ObjectMapper mapper;private final JsonNode seed;private final Map<String,JsonNode> courseFacts=new LinkedHashMap<>();private final Optional<JdbcTemplate> jdbc;
  public MathMinorService(ObjectMapper mapper,Optional<JdbcTemplate> jdbc)throws Exception{
   this.mapper=mapper;this.jdbc=jdbc;

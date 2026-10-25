@@ -1,39 +1,39 @@
-# Advisor Agent 도구 명세 (초안)
+# Advisor Agent tool spec (draft)
 
-`docs/advisor-schema.sql` 기반. 유저 쿼리 → 문맥 조립 → 에이전트 ⇄ 도구 → 출력 검증 → 응답 구조에서 에이전트가 호출하는 도구 목록과 입출력 형식입니다.
+Based on `docs/advisor-schema.sql`. Lists the tools the agent calls, and their input/output formats, in the flow: user query → context assembly → agent ⇄ tools → output validation → response.
 
-예시 값(과목, 선수과목, 학점, 규정 수치, 날짜)은 형식을 보여주기 위한 가상 값이며 실제 Bulletin과 대조하지 않았습니다.
+Example values (courses, prerequisites, credits, policy numbers, dates) are synthetic, only illustrate the format, and were not checked against the actual Bulletin.
 
-## 목차
+## Contents
 
-| 분류 | 도구 |
+| Category | Tools |
 |---|---|
-| 자동 문맥 | (도구 아님) 프로필, 전공, audit 요약, 장기 메모 |
-| 카탈로그 조회 | `search_courses`, `get_course`, `search_programs`, `get_program`, `get_offerings` |
-| 기록·계산 | `get_student_record`, `check_prerequisites`, `run_audit`, `what_if`, `find_courses_for_requirement`, `validate_plan` |
-| 학점 | `get_credit_summary`, `gpa_what_if`, `lookup_credit_equivalency` |
-| 학교 규정 | `get_policy_rule`, `get_deadlines`, `search_policy` |
-| 외부 검색 | `web_search`, `search_internal_docs` (미정) |
-| 메모 | `save_memory`, `forget_memory` |
-| 쓰기 (승인 필요) | `save_plan`, `update_student_record`, `set_program_goal`, `update_profile` |
-| 실행 기록 | (도구 아님) 서버가 `agent_runs`, `agent_steps`에 자동 기록 |
+| Automatic context | (not a tool) profile, programs, audit summary, long-term notes |
+| Catalog lookup | `search_courses`, `get_course`, `search_programs`, `get_program`, `get_offerings` |
+| Records and computation | `get_student_record`, `check_prerequisites`, `run_audit`, `what_if`, `find_courses_for_requirement`, `validate_plan` |
+| Credits | `get_credit_summary`, `gpa_what_if`, `lookup_credit_equivalency` |
+| University policy | `get_policy_rule`, `get_deadlines`, `search_policy` |
+| External search | `web_search`, `search_internal_docs` (TBD) |
+| Notes | `save_memory`, `forget_memory` |
+| Writes (approval required) | `save_plan`, `update_student_record`, `set_program_goal`, `update_profile` |
+| Run logs | (not a tool) the server records automatically to `agent_runs`, `agent_steps` |
 
-## 0. 공통 규칙
+## 0. Common rules
 
-**식별자 형식**
+**Identifier formats**
 
-| 항목 | 형식 | 예 |
+| Item | Format | Example |
 |---|---|---|
-| 과목 | `SUBJECT NUMBER` | `STAT 414`, `CMPSC 497A` |
-| 학기 | `FA` / `SP` / `SU` + 연도 2자리 | `FA26` |
-| 학년도 | `YYYY-YY` | `2025-26` |
-| 프로그램 | 대문자 코드 | `DATSC_BS`, `STAT_MINOR`, `DATSC_ETM` |
+| Course | `SUBJECT NUMBER` | `STAT 414`, `CMPSC 497A` |
+| Term | `FA` / `SP` / `SU` + 2-digit year | `FA26` |
+| Catalog year | `YYYY-YY` | `2025-26` |
+| Program | Uppercase code | `DATSC_BS`, `STAT_MINOR`, `DATSC_ETM` |
 
-**유저 식별**: 어떤 도구도 유저 ID를 인자로 받지 않습니다. 서버가 JWT `sub`로 주입합니다. LLM이 다른 유저 데이터에 접근할 경로를 원천 차단합니다.
+**User identity**: no tool takes a user ID as an argument. The server injects it from the JWT `sub`, which removes any path for the LLM to reach another user's data.
 
-**학년도 기본값**: `catalog_year`를 생략하면 유저 프로필의 학년도, 프로필이 없으면 현재 학년도를 사용합니다.
+**Default catalog year**: if `catalog_year` is omitted, the user profile's catalog year is used; without a profile, the current catalog year.
 
-**응답 봉투**: 모든 도구가 같은 형태로 응답합니다.
+**Response envelope**: every tool responds in the same shape.
 
 ```json
 {
@@ -42,7 +42,7 @@
   "sources": [
     { "type": "catalog", "ref": "course_versions:STAT 414@2025-26", "url": "https://bulletins.psu.edu/...", "catalog_year": "2025-26" }
   ],
-  "warnings": ["SP27 개설 정보는 아직 수집되지 않았습니다."]
+  "warnings": ["SP27 offering data has not been collected yet."]
 }
 ```
 
@@ -51,29 +51,29 @@
 ```
 
 - `sources[].type`: `catalog` | `offering` | `record` | `audit` | `equivalency` | `policy_rule` | `calendar` | `policy` | `web`
-- 출력 검증 단계는 답변의 수치·과목 코드·날짜가 이번 턴의 도구 결과(또는 자동 문맥)에 존재하는지, 근거가 `sources`에 있는지 확인합니다.
+- The output validation step checks that numbers, course codes, and dates in the answer exist in this turn's tool results (or the automatic context), and that their evidence is in `sources`.
 
-**에러 코드**
+**Error codes**
 
-| 코드 | 의미 | 에이전트 대응 |
+| Code | Meaning | Agent response |
 |---|---|---|
-| `INVALID_ARGUMENT` | 형식 오류, 범위 초과 | 인자 수정 후 1회 재시도 |
-| `NOT_FOUND` | 과목·프로그램·계획·규정 없음 | `search_*`로 후보 확인 |
-| `DATA_NOT_AVAILABLE` | 해당 학기/학년도 데이터 미수집 | 유저에게 미확인이라고 명시 |
-| `PROFILE_INCOMPLETE` | 학년도·전공 등 필수 프로필 없음 | 유저에게 질문 |
-| `RATE_LIMITED` | 호출 한도 초과 | 중단하고 안내 |
+| `INVALID_ARGUMENT` | Malformed or out of range | Fix the arguments and retry once |
+| `NOT_FOUND` | No such course, program, plan, or policy | Check candidates with `search_*` |
+| `DATA_NOT_AVAILABLE` | Data for that term/catalog year not collected | Tell the user it's unconfirmed |
+| `PROFILE_INCOMPLETE` | Required profile data (catalog year, major, etc.) missing | Ask the user |
+| `RATE_LIMITED` | Call limit exceeded | Stop and explain |
 
-**호출 한도**: 한 턴에 도구 호출 최대 8회, 목록형 결과는 최대 20개.
+**Call limits**: at most 8 tool calls per turn; list results at most 20 items.
 
-**판정 값**: 확실하지 않으면 추측하지 않고 `unknown`을 반환합니다. 예) 파싱 못 한 선수과목 문장(`TEXT` 노드), 매칭 안 된 이전 학점, 해석 못 한 수강 제한(`text` 제한).
+**Judgment values**: when unsure, return `unknown` instead of guessing. E.g. unparsed prerequisite sentences (`TEXT` nodes), unmatched prior credit, uninterpreted enrollment restrictions (`text` restrictions).
 
-**규정 범위 우선순위**: 같은 `key`의 `policy_rules`가 여러 범위에 있으면 program > college > university 순으로 적용하고, 적용한 범위를 결과에 표시합니다.
+**Policy scope precedence**: when `policy_rules` with the same `key` exist at several scopes, apply program > college > university, and show the applied scope in the result.
 
 ---
 
-## 1. 자동 문맥 (도구 아님)
+## 1. Automatic context (not a tool)
 
-매 턴 프롬프트에 서버가 넣는 내용입니다. 이것만으로 답할 수 있으면 도구를 호출하지 않습니다.
+The server inserts this into the prompt every turn. If it's enough to answer, no tool is called.
 
 ```json
 {
@@ -89,33 +89,33 @@
   ],
   "upcoming_deadlines": [ { "event": "late_drop", "label": "Late drop deadline", "date": "2026-11-13" } ],
   "memories": [
-    { "id": 4, "category": "preference", "content": "8시 수업은 피하고 싶음" },
-    { "id": 7, "category": "goal", "content": "데이터 엔지니어 진로 희망" }
+    { "id": 4, "category": "preference", "content": "Wants to avoid 8 a.m. classes" },
+    { "id": 7, "category": "goal", "content": "Hopes to become a data engineer" }
   ],
   "primary_plan_id": "1f6c..."
 }
 ```
 
-`upcoming_deadlines`는 현재 학기 `academic_calendar`에서 14일 이내 항목만 넣습니다.
+`upcoming_deadlines` includes only items within 14 days from the current term's `academic_calendar`.
 
 ---
 
-## 2. 카탈로그 조회
+## 2. Catalog lookup
 
 ### `search_courses`
-자연어/조건으로 과목 찾기.
+Find courses by natural language or filters.
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
-| `query` | string | | 제목·설명 키워드 |
+| `query` | string | | Title/description keywords |
 | `subject` | string | | `STAT` |
 | `level_min`, `level_max` | int | | `400`, `499` |
-| `attributes` | string[] | | `["GQ"]`, 모두 만족(AND) |
-| `offered_term` | string | | 해당 학기 개설 과목만 |
+| `attributes` | string[] | | `["GQ"]`, all must match (AND) |
+| `offered_term` | string | | Only courses offered that term |
 | `catalog_year` | string | | |
-| `limit` | int | | 기본 10, 최대 20 |
+| `limit` | int | | Default 10, max 20 |
 
-입력 중 최소 하나는 있어야 합니다.
+At least one input is required.
 
 ```json
 { "courses": [
@@ -124,14 +124,14 @@
 ], "total": 1 }
 ```
 
-`offered_in_term`: `yes`(수집된 개설 확인) | `no`(수집됐지만 없음) | `predicted`(미수집, `typical_terms` 기준 예상) | `unknown`
+`offered_in_term`: `yes` (confirmed in collected offerings) | `no` (collected but not offered) | `predicted` (not collected; predicted from `typical_terms`) | `unknown`
 
-테이블: `courses`, `course_versions`, `course_attributes`, `course_offerings`
+Tables: `courses`, `course_versions`, `course_attributes`, `course_offerings`
 
 ### `get_course`
-과목 상세, 선수과목 트리, 수강 제한, 이 과목이 열어주는 과목.
+Course details, prerequisite tree, enrollment restrictions, and courses this one unlocks.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
 | `code` | string | ✓ |
 | `catalog_year` | string | |
@@ -157,12 +157,12 @@
 }
 ```
 
-테이블: `course_versions`, `course_attributes`, `course_crosslists`, `prereq_nodes`, `course_restrictions`
+Tables: `course_versions`, `course_attributes`, `course_crosslists`, `prereq_nodes`, `course_restrictions`
 
 ### `search_programs`
-"통계 마이너", "데이터 사이언스 전공 진입 요건" 같은 표현을 프로그램 코드로 변환.
+Turns phrases like "statistics minor" or "data science entrance to major requirements" into program codes.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
 | `query` | string | ✓ |
 | `program_type` | `major` \| `minor` \| `certificate` \| `gened` \| `entrance` | |
@@ -175,14 +175,14 @@
 ```
 
 ### `get_program`
-요건 트리 구조.
+Requirement tree structure.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
 | `program_code` | string | ✓ |
 | `option_code` | string | |
 | `catalog_year` | string | |
-| `depth` | int | 기본 전체 |
+| `depth` | int | Default: full tree |
 
 ```json
 {
@@ -198,17 +198,17 @@
 }
 ```
 
-- `rules`는 `requirement_rules`를 사람이 읽을 수 있는 문장으로 요약한 값입니다.
-- `entrance_program`은 `programs.entrance_for`로 이 전공을 가리키는 ETM 프로그램입니다.
+- `rules` is a human-readable summary of `requirement_rules`.
+- `entrance_program` is the ETM program whose `programs.entrance_for` points to this major.
 
 ### `get_offerings`
-학기별 개설 섹션.
+Sections offered per term.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
-| `course_codes` | string[] | ✓ (최대 10) |
+| `course_codes` | string[] | ✓ (max 10) |
 | `term_code` | string | ✓ |
-| `campus` | string | 기본 프로필 캠퍼스 |
+| `campus` | string | Default: profile campus |
 
 ```json
 { "term": "SP27", "fetched_at": "2026-10-20T04:00:00Z", "sections": [
@@ -216,17 +216,17 @@
 ], "not_offered": ["STAT 416"] }
 ```
 
-수집하지 않은 학기는 `DATA_NOT_AVAILABLE`이고, `data.predicted`에 `typical_terms` 기준 예상(`{ "STAT 414": true }`)을 담습니다. "개설 안 됨"(`not_offered`), "예상"(`predicted`), "모름"을 구분합니다.
+An uncollected term returns `DATA_NOT_AVAILABLE`, with a `typical_terms`-based prediction in `data.predicted` (`{ "STAT 414": true }`). "Not offered" (`not_offered`), "predicted" (`predicted`), and "unknown" are kept distinct.
 
 ---
 
-## 3. 학생 기록과 계산 (룰 엔진)
+## 3. Student records and computation (rule engine)
 
 ### `get_student_record`
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
-| `status` | (`completed` \| `in_progress` \| `transfer` \| `exam`)[] | 기본 전체 |
+| `status` | (`completed` \| `in_progress` \| `transfer` \| `exam`)[] | Default: all |
 | `term_code` | string | |
 
 ```json
@@ -237,15 +237,15 @@
 ```
 
 ### `check_prerequisites`
-수강 가능 여부. 선수과목, 동시수강, 수강 제한을 함께 평가합니다.
+Whether a course can be taken. Evaluates prerequisites, corequisites, and enrollment restrictions together.
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
 | `course_code` | string | ✓ | |
-| `term_code` | string | | 이 학기에 듣는다고 가정. 기본 다음 학기 |
-| `assume_completed` | string[] | | 그 전까지 추가로 들었다고 가정 |
-| `same_term` | string[] | | 같은 학기에 함께 듣는다고 가정 (동시수강 판정용) |
-| `plan_id` | string | | 계획의 이전 학기 과목을 이수로, 같은 학기 과목을 동시수강으로 가정 |
+| `term_code` | string | | Assume it's taken this term. Default: next term |
+| `assume_completed` | string[] | | Assume these are also completed before then |
+| `same_term` | string[] | | Assume these are taken the same term (for corequisites) |
+| `plan_id` | string | | Treat the plan's earlier-term courses as completed and same-term courses as concurrent |
 
 ```json
 {
@@ -265,21 +265,21 @@
 }
 ```
 
-- `eligible`: `yes` | `no` | `unknown`. 트리와 제한이 모두 `met`이어야 `yes`.
-- 노드 `status`: `met` | `unmet` | `in_progress` | `same_term` | `unknown`
-- 학기 standing은 해당 학기 시작 시점의 예상 학점과 `policy_rules`의 `semester_classification`으로 계산합니다.
-- 수강 중 과목은 `in_progress`로 표시하고, 학기가 끝나야 충족되는 경우 `warnings`에 남깁니다.
+- `eligible`: `yes` | `no` | `unknown`. `yes` only when the tree and all restrictions are `met`.
+- Node `status`: `met` | `unmet` | `in_progress` | `same_term` | `unknown`
+- Semester standing is computed from projected credits at the start of that term and `semester_classification` in `policy_rules`.
+- In-progress courses are marked `in_progress`; if a requirement is met only once the term ends, it's noted in `warnings`.
 
 ### `run_audit`
-요건별 충족 현황. Entrance to Major도 같은 도구로 확인합니다(`program_code`에 ETM 코드).
+Per-requirement status. Entrance to Major uses the same tool (pass the ETM code as `program_code`).
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
-| `program_code` | string | | 기본 declared 전공 |
-| `option_code` | string | | 기본 프로필 옵션 |
-| `plan_id` | string | | 계획 과목까지 반영 |
-| `count_in_progress` | bool | | 기본 `true`. `false`면 이수 완료만 |
-| `node_id` | int | | 특정 요건만 |
+| `program_code` | string | | Default: declared major |
+| `option_code` | string | | Default: profile option |
+| `plan_id` | string | | Include planned courses |
+| `count_in_progress` | bool | | Default `true`. `false` counts completed only |
+| `node_id` | int | | A single requirement only |
 
 ```json
 {
@@ -297,15 +297,15 @@
 }
 ```
 
-- 노드 `status`: `satisfied` | `partial` | `unsatisfied` | `unknown`
-- `in_progress` 학점은 `completed`에 합산하지 않습니다. `GPA_MIN`은 성적이 확정된 과목만 계산합니다.
-- 이전·시험 학점은 `credit_equivalencies`로 매칭된 `psu_course_code` 또는 `psu_label`(과목 접두사·레벨)로 규칙에 대입합니다.
-- 결과는 `audit_snapshots`에 입력 해시와 함께 캐시합니다.
+- Node `status`: `satisfied` | `partial` | `unsatisfied` | `unknown`
+- `in_progress` credits are not added to `completed`. `GPA_MIN` uses only courses with final grades.
+- Transfer and exam credits are applied to rules via the `psu_course_code` or `psu_label` (subject prefix and level) matched in `credit_equivalencies`.
+- Results are cached in `audit_snapshots` with an input hash.
 
 ### `what_if`
-가정 변경 전후 비교. 아무것도 저장하지 않습니다.
+Before/after comparison for hypothetical changes. Nothing is saved.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
 | `add_courses` | `{code, term, grade?}[]` | |
 | `remove_courses` | string[] | |
@@ -314,7 +314,7 @@
 | `switch_option` | `{program, option}` | |
 | `base_plan_id` | string | |
 
-입력 중 최소 하나는 있어야 합니다. `grade`를 주면 `GPA_MIN` 노드에도 반영합니다.
+At least one input is required. If `grade` is given, it's also applied to `GPA_MIN` nodes.
 
 ```json
 { "programs": [
@@ -331,18 +331,18 @@
 
 `issues[].type`: `prereq_unmet` | `coreq_unmet` | `restricted` | `credit_overload` | `not_offered` | `offering_predicted` | `offering_unknown` | `duplicate` | `double_count_conflict`
 
-`credit_overload` 기준은 프로필 `max_credits_per_term`이고, `policy_rules`의 `max_credits_without_approval`을 넘으면 승인 필요라고 별도로 표시합니다.
+`credit_overload` is based on the profile's `max_credits_per_term`; exceeding `max_credits_without_approval` in `policy_rules` is flagged separately as needing approval.
 
 ### `find_courses_for_requirement`
-"이 요건 채우려면 뭘 들어야 해?" 추천의 핵심 도구.
+The core recommendation tool for "what should I take to fill this requirement?"
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
 | `program_code` | string | ✓ | |
-| `node_id` | int | ✓ | `run_audit` / `get_program` 결과에서 |
-| `term_code` | string | | 이 학기 개설·수강 가능 여부 포함 |
-| `eligible_only` | bool | | 기본 `false` |
-| `limit` | int | | 기본 10, 최대 20 |
+| `node_id` | int | ✓ | From `run_audit` / `get_program` results |
+| `term_code` | string | | Include offering and eligibility for this term |
+| `eligible_only` | bool | | Default `false` |
+| `limit` | int | | Default 10, max 20 |
 
 ```json
 { "node": { "node_id": 310, "label": "GN", "remaining": { "credits": 6 } },
@@ -353,18 +353,18 @@
   ] }
 ```
 
-- 정렬: 수강 가능 → 개설 확인(`yes` > `predicted` > `unknown`) → 다른 요건도 함께 채우는 과목 순.
-- `eligible`은 `check_prerequisites`와 같은 판정(선수과목, 동시수강, 수강 제한)입니다.
-- `also_satisfies`는 노드의 `exclusive` 설정을 존중합니다.
-- 장기 메모(예: "8시 수업 피하고 싶음")는 도구가 아니라 에이전트가 결과를 설명할 때 반영합니다.
+- Sort order: eligible → offering confirmed (`yes` > `predicted` > `unknown`) → courses that also fill other requirements.
+- `eligible` uses the same judgment as `check_prerequisites` (prerequisites, corequisites, enrollment restrictions).
+- `also_satisfies` respects the node's `exclusive` setting.
+- Long-term notes (e.g. "wants to avoid 8 a.m. classes") are applied by the agent when explaining results, not by the tool.
 
 ### `validate_plan`
-학기별 계획 검사와 졸업 예상 학기.
+Checks a semester-by-semester plan and projects the graduation term.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
-| `plan_id` | string | 둘 중 하나 |
-| `terms` | `{term, courses[]}[]` | 둘 중 하나 (저장 안 된 초안) |
+| `plan_id` | string | One of the two |
+| `terms` | `{term, courses[]}[]` | One of the two (unsaved draft) |
 
 ```json
 { "terms": [
@@ -379,15 +379,15 @@
 
 ---
 
-## 4. 학점
+## 4. Credits
 
 ### `get_credit_summary`
-학점·GPA 현황. 자동 문맥의 `record_summary`보다 자세한 분해가 필요할 때 호출합니다.
+Credit and GPA status. Called when a finer breakdown than the automatic context's `record_summary` is needed.
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
-| `group_by` | (`status` \| `level` \| `subject` \| `attribute` \| `term`)[] | | 기본 `["status"]` |
-| `gpa_scopes` | `{label, subjects?[], program_code?, node_id?}[]` | | 추가로 계산할 GPA 범위 (예: 전공 GPA) |
+| `group_by` | (`status` \| `level` \| `subject` \| `attribute` \| `term`)[] | | Default `["status"]` |
+| `gpa_scopes` | `{label, subjects?[], program_code?, node_id?}[]` | | Additional GPA scopes to compute (e.g. major GPA) |
 
 ```json
 {
@@ -401,17 +401,17 @@
 }
 ```
 
-- GPA는 `grades.points`가 있는 PSU 이수 과목만 계산합니다. 이전·시험 학점은 학점에만 포함합니다.
-- 재수강 과목의 GPA 처리 방식은 `policy_rules`의 `repeat_gpa_rule`을 따릅니다. 규칙이 없으면 `warnings`에 남기고 모든 시도를 포함합니다.
+- GPA uses only completed PSU courses with `grades.points`. Transfer and exam credits count toward credits only.
+- GPA handling for repeated courses follows `repeat_gpa_rule` in `policy_rules`. Without that rule, a warning is added and all attempts are included.
 
 ### `gpa_what_if`
-예상 성적에 따른 GPA 계산, 또는 목표 GPA에 필요한 평균 성적 역산.
+GPA from expected grades, or the average grade needed to reach a target GPA.
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
-| `assumed_grades` | `{code, grade}[]` | 둘 중 하나 | 수강 중·계획 과목의 가정 성적 |
-| `target` | `{gpa, credits}` | 둘 중 하나 | "앞으로 N학점에서 목표 GPA 달성" 역산 |
-| `scope` | `{label, subjects?[], program_code?, node_id?}` | | 기본 누적 GPA |
+| `assumed_grades` | `{code, grade}[]` | One of the two | Assumed grades for in-progress or planned courses |
+| `target` | `{gpa, credits}` | One of the two | Back-solve "reach target GPA over the next N credits" |
+| `scope` | `{label, subjects?[], program_code?, node_id?}` | | Default: cumulative GPA |
 
 ```json
 { "scope": "Cumulative", "current": { "gpa": 3.41, "graded_credits": 54 },
@@ -419,17 +419,17 @@
   "required_average": null }
 ```
 
-`target`을 주면 `required_average`에 필요한 평균 평점(예: `3.62`)을 넣고, 4.0을 넘으면 `achievable: false`를 함께 반환합니다.
+With `target`, `required_average` holds the needed average grade points (e.g. `3.62`); if that exceeds 4.0, `achievable: false` is also returned.
 
 ### `lookup_credit_equivalency`
-AP·IB 등 시험 점수나 타 대학 과목이 PSU에서 어떻게 인정되는지 조회.
+How AP/IB exam scores or courses from other institutions are credited at PSU.
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
-| `source` | string | ✓ | `AP`, `IB`, 기관 이름 또는 코드 |
-| `item` | string | | `Calculus BC`, `MATH 201`. 생략하면 해당 출처의 목록 |
-| `score` | number | | 시험 점수 |
-| `as_of` | date | | 기본 오늘. 적용 기간 판정용 |
+| `source` | string | ✓ | `AP`, `IB`, institution name or code |
+| `item` | string | | `Calculus BC`, `MATH 201`. Omit to list everything for the source |
+| `score` | number | | Exam score |
+| `as_of` | date | | Default today. Used to check the effective period |
 
 ```json
 { "source": { "code": "AP", "name": "Advanced Placement", "kind": "exam" },
@@ -437,20 +437,20 @@ AP·IB 등 시험 점수나 타 대학 과목이 PSU에서 어떻게 인정되�
     { "item": "Calculus BC", "score_range": [4, 5], "awarded": "MATH 140, MATH 141", "psu_course_code": null,
       "credits": 8, "attributes": ["GQ"], "effective_from": "2024-05-01", "effective_to": null }
   ],
-  "note": "공개 인정표 기준 예상이며 최종 인정은 학교 심사 결과를 따릅니다." }
+  "note": "Estimate based on the public equivalency table; final credit depends on the university's review." }
 ```
 
-- 기관 이름이 모호하면 후보 목록을 `data.candidates`로 반환하고 `matches`는 비웁니다.
-- 테이블에 없는 기관·과목은 `NOT_FOUND`이며, 개별 심사 대상이라고 안내합니다.
+- If the institution name is ambiguous, candidates are returned in `data.candidates` and `matches` is empty.
+- Institutions or courses not in the table return `NOT_FOUND`, with a note that they require individual review.
 
 ---
 
-## 5. 학교 규정
+## 5. University policy
 
 ### `get_policy_rule`
-수치·구조화 규정 조회. 계산 도구도 내부적으로 같은 데이터를 씁니다.
+Numeric and structured policy lookup. Computation tools use the same data internally.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
 | `key` | string | ✓ |
 | `catalog_year` | string | |
@@ -461,17 +461,17 @@ AP·IB 등 시험 점수나 타 대학 과목이 PSU에서 어떻게 인정되�
   "broader": [] }
 ```
 
-- 프로필의 단과대·전공 기준으로 가장 구체적인 범위의 값을 `applied_scope`와 함께 반환하고, 그 값에 가려진 더 넓은 범위의 값은 `broader`에 함께 담습니다.
-- 등록된 `key` 목록은 `key: "*"`로 조회합니다.
+- Returns the most specific value for the profile's college and major together with `applied_scope`, and puts broader-scope values it overrides in `broader`.
+- List registered keys with `key: "*"`.
 
 ### `get_deadlines`
-학사 일정과 마감일.
+Academic calendar and deadlines.
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
-| `term_code` | string | | 기본 현재 학기 |
-| `event_keys` | string[] | | `late_drop`, `withdrawal` 등. 생략하면 전체 |
-| `campus` | string | | 기본 프로필 캠퍼스 |
+| `term_code` | string | | Default: current term |
+| `event_keys` | string[] | | `late_drop`, `withdrawal`, etc. Omit for all |
+| `campus` | string | | Default: profile campus |
 
 ```json
 { "term": "FA26", "events": [
@@ -479,18 +479,18 @@ AP·IB 등 시험 점수나 타 대학 과목이 PSU에서 어떻게 인정되�
 ], "fetched_at": "2026-08-01T00:00:00Z" }
 ```
 
-`fetched_at`이 30일보다 오래됐으면 `warnings`에 "Registrar 페이지에서 최신 날짜를 확인하세요"를 넣고 링크를 `sources`에 포함합니다.
+If `fetched_at` is older than 30 days, add "Check the Registrar page for the latest dates" to `warnings` and include the link in `sources`.
 
 ### `search_policy`
-설명형 규정 RAG. `policy_chunks` + pgvector 필요.
+RAG over descriptive policies. Requires `policy_chunks` + pgvector.
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
 | `query` | string | ✓ | |
-| `scope` | (`university` \| `college` \| `program`)[] | | 기본 전체 |
-| `include_profile_scopes` | bool | | 기본 `true`. 프로필의 단과대·전공 문서를 함께 검색 |
+| `scope` | (`university` \| `college` \| `program`)[] | | Default: all |
+| `include_profile_scopes` | bool | | Default `true`. Also search the profile's college and major documents |
 | `catalog_year` | string | | |
-| `k` | int | | 기본 5, 최대 10 |
+| `k` | int | | Default 5, max 10 |
 
 ```json
 { "chunks": [
@@ -501,188 +501,185 @@ AP·IB 등 시험 점수나 타 대학 과목이 PSU에서 어떻게 인정되�
 ] }
 ```
 
-같은 주제로 대학·단과대 규정이 함께 나오면 에이전트는 둘 다 보여줍니다.
+When university and college policies on the same topic both come back, the agent shows both.
 
 ---
 
-## 6. 외부 검색
+## 6. External search
 
 ### `web_search`
-최후 수단. DB와 규정 데이터로 답할 수 없을 때만 호출합니다.
+Last resort. Called only when the DB and policy data can't answer.
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
 | `query` | string | ✓ |
-| `max_results` | int | 기본 5 |
+| `max_results` | int | Default 5 |
 
 ```json
 { "results": [ { "title": "...", "url": "https://stat.psu.edu/...", "snippet": "...", "retrieved_at": "2026-10-24T..." } ] }
 ```
 
-- 서버에서 `psu.edu` 하위 도메인으로 제한합니다.
-- 결과는 `sources[].type = "web"`로 표시하고, 답변에서 공식 요건과 구분합니다. DB 결과와 충돌하면 DB가 우선입니다.
+- The server restricts results to `psu.edu` subdomains.
+- Results are marked `sources[].type = "web"` and distinguished from official requirements in the answer. If they conflict with DB results, the DB wins.
 
-### `search_internal_docs` (미정)
-PSU 로그인 뒤 문서용 자리입니다. 대상 문서와 접근 방식이 정해지면 `search_policy`와 같은 입출력으로 구현합니다. 유저 계정으로 대리 로그인해 수집하는 방식은 사용하지 않습니다.
+### `search_internal_docs` (TBD)
+Placeholder for documents behind PSU sign-in. Once the target documents and access method are decided, it will use the same input/output as `search_policy`. Collecting by signing in on behalf of the user's account will not be used.
 
 ---
 
-## 7. 장기 메모
+## 7. Long-term notes
 
-메모는 위험도가 낮고 자주 쓰이므로 승인 없이 바로 저장합니다. 대신 프런트가 "메모 저장됨: …" 알림과 되돌리기를 보여주고, 설정 화면에서 전체 목록을 보고 지울 수 있게 합니다.
+Notes are low risk and frequently used, so they're saved immediately without approval. Instead, the frontend shows a "Note saved: …" notice with undo, and a settings screen lists all notes for review and deletion.
 
 ### `save_memory`
 
-| 입력 | 타입 | 필수 | 설명 |
+| Input | Type | Required | Description |
 |---|---|---|---|
 | `category` | `preference` \| `goal` \| `constraint` \| `other` | ✓ | |
-| `content` | string | ✓ | 500자 이하, 한 문장 |
-| `replaces_id` | int | | 기존 메모를 수정할 때 |
+| `content` | string | ✓ | 500 characters or fewer, one sentence |
+| `replaces_id` | int | | When editing an existing note |
 
 ```json
-{ "memory": { "id": 9, "category": "constraint", "content": "여름학기는 수강하지 않음" }, "notice": "shown_to_user" }
+{ "memory": { "id": 9, "category": "constraint", "content": "Won't take summer courses" }, "notice": "shown_to_user" }
 ```
 
-- 유저가 직접 말한 사실·선호만 저장합니다. 에이전트의 추측, 성적·건강 등 민감한 내용은 저장하지 않습니다.
-- 유저당 최대 50개. 넘으면 `INVALID_ARGUMENT`로 정리를 요청합니다.
-- 서버가 현재 메시지를 `source_message_id`로 기록합니다.
+- Save only facts and preferences the user stated directly. Never save the agent's guesses or sensitive content such as grades or health.
+- At most 50 per user. Beyond that, return `INVALID_ARGUMENT` asking the user to clean up.
+- The server records the current message as `source_message_id`.
 
 ### `forget_memory`
 
-| 입력 | 타입 | 필수 |
+| Input | Type | Required |
 |---|---|---|
 | `id` | int | ✓ |
 
-유저가 "그거 잊어줘"라고 하거나 메모가 새 발언과 충돌할 때 호출합니다.
+Called when the user says "forget that" or a note conflicts with something newly said.
 
 ---
 
-## 8. 쓰기 도구 (유저 승인 필요)
+## 8. Write tools (user approval required)
 
-LLM은 변경을 **제안**만 합니다. 쓰기 도구는 실제로 저장하지 않고 `pending_action`을 반환합니다. 프런트가 이를 확인 카드로 보여주고, 유저가 승인하면 서버가 실행합니다. 승인 요청은 LLM을 거치지 않습니다.
+The LLM only **proposes** changes. Write tools don't save anything; they return a `pending_action`. The frontend shows it as a confirmation card, and the server executes it once the user approves. The approval request never goes through the LLM.
 
-공통 응답:
+Common response:
 
 ```json
 { "pending_action": {
   "id": "pa_7f2...", "kind": "save_plan",
-  "summary": "SP27에 STAT 414, DS 340 추가",
+  "summary": "Add STAT 414 and DS 340 to SP27",
   "diff": { "added": [ { "term": "SP27", "course": "STAT 414" } ], "removed": [] },
   "expires_at": "2026-10-24T16:00:00Z"
 } }
 ```
 
-| 도구 | 입력 | 대상 테이블 |
+| Tool | Input | Target tables |
 |---|---|---|
 | `save_plan` | `plan_id?`, `name`, `terms[{term, courses[]}]`, `make_primary?` | `plans`, `plan_courses` |
 | `update_student_record` | `add[{code?, raw_label?, term, status, grade?, credits, equivalency_id?}]`, `update[{id, ...}]`, `remove[id]` | `student_courses` |
 | `set_program_goal` | `program_code`, `option_code?`, `status` (`declared` \| `intended` \| `exploring` \| `remove`) | `student_programs` |
 | `update_profile` | `catalog_year?`, `expected_grad_term?`, `campus?`, `college?`, `max_credits_per_term?` | `student_profiles` |
 
-승인 API: `POST /api/actions/{id}/confirm`, `POST /api/actions/{id}/cancel`. 승인되면 관련 `audit_snapshots`를 무효화합니다.
+Approval API: `POST /api/actions/{id}/confirm`, `POST /api/actions/{id}/cancel`. Approval invalidates related `audit_snapshots`.
 
 ---
 
-## 9. 실행 기록 (도구 아님)
+## 9. Run logs (not a tool)
 
-서버가 매 턴 자동으로 남깁니다. TigerData hypertable이며 90일 보존 정책이 걸려 있습니다.
+The server records these automatically every turn. They're TigerData hypertables with a 90-day retention policy.
 
-| 테이블 | 단위 | 기록 내용 |
+| Table | Unit | Recorded |
 |---|---|---|
-| `agent_runs` | 턴 | 모델, 상태(`ok` / `error` / `rate_limited` / `validation_failed`), 총 소요 시간, LLM·도구 호출 횟수, 토큰 수 |
-| `agent_steps` | 단계 | `llm` / `tool` / `validation`, 도구 이름, 인자, 결과, 소요 시간, 에러 코드 |
+| `agent_runs` | Turn | Model, status (`ok` / `error` / `rate_limited` / `validation_failed`), total duration, LLM and tool call counts, token counts |
+| `agent_steps` | Step | `llm` / `tool` / `validation`, tool name, arguments, result, duration, error code |
 
-- `agent_steps.run_id`는 FK 없이 `agent_runs.id`와 같은 값으로 연결합니다.
-- 출력 검증이 실패해 답변을 다시 생성하면 `validation` 단계로 남기고, 재시도 후에도 실패하면 `validation_failed`로 끝냅니다.
-- 유저 삭제 시 `app_users` FK의 `ON DELETE CASCADE`로 함께 지워집니다.
+- `agent_steps.run_id` links to `agent_runs.id` by value, without a FK.
+- If output validation fails and the answer is regenerated, it's recorded as a `validation` step; if it still fails after retrying, the run ends as `validation_failed`.
+- When a user is deleted, rows are removed through `ON DELETE CASCADE` on the `app_users` FK.
 
 ---
 
-## 9.5 v1 구현 현황 (2026-10-24)
+## 9.5 v1 implementation status (2026-10-24)
 
-채팅(`POST /api/reports/{id}/chat`)은 `AdvisorAgent`의 도구 호출 루프로 동작합니다. 실행 순서:
+Chat (`POST /api/reports/{id}/chat`) runs as the tool-calling loop in `AdvisorAgent`. Order of attempts:
 
-1. **Luminal 에이전트** (`ADVISOR_AGENT_PROVIDER=luminal`, 기본값). OpenAI 호환 `tools` / `tool_calls` / `role: tool` 메시지. assistant 메시지(`reasoning_content` 포함)는 그대로 다시 보냄. `LUMINAL_API_KEY`가 비어 있으면 건너뜀
-2. **Gemini 에이전트** (Luminal 오류·타임아웃 시, 또는 `ADVISOR_AGENT_PROVIDER=gemini`). 새 turn으로 처음부터 다시 실행
-3. **고정 문맥 채팅** (두 에이전트 모두 실패 시). `report.catalogDb` + 웹 검색 + Gemini만(`ModelRouter.fallbackChat`, Luminal 생략)
+1. **Luminal agent** (`ADVISOR_AGENT_PROVIDER=luminal`, the default). OpenAI-compatible `tools` / `tool_calls` / `role: tool` messages; the assistant message (including `reasoning_content`) is sent back verbatim. Skipped when `LUMINAL_API_KEY` is empty.
+2. **Gemini agent** when Luminal errors or times out (or with `ADVISOR_AGENT_PROVIDER=gemini`). Starts a fresh turn.
+3. **Fixed-context chat** when both agents fail: `report.catalogDb` + web search + Gemini only (`ModelRouter.fallbackChat`).
 
-`ADVISOR_AGENT_ENABLED=false`면 1·2를 건너뛰고 기존 `ModelRouter.chat`(Luminal 라우팅 포함)을 씁니다.
+`ADVISOR_AGENT_ENABLED=false` skips 1 and 2 and uses the previous `ModelRouter.chat`.
 
-**시간 예산**(프런트 채팅 요청 타임아웃 160초, `App.vue` `send`): 에이전트 단계 전체 75초(Luminal 최대 55초·호출당 25초, Gemini는 남은 시간·호출당 35초, 최소 20초) + 고정 문맥 폴백 최대 70초(웹 30초 + Gemini 40초) = 145초. 실행마다 남은 시간이 14초 미만이면 도구를 금지하고 바로 답하게 합니다.
+**Time budget** (frontend chat timeout 160 s in `App.vue` `send`): the agent stage is capped at 75 s (Luminal at most 55 s and 25 s per call; Gemini gets the rest, at least 20 s, 35 s per call), plus at most 70 s for the fixed-context fallback (web 30 s + Gemini 40 s) = 145 s. Once less than 14 s is left in a run, tools are switched off and the model must answer.
 
-| 도구 | 구현 | 비고 |
+| Tool | Implementation | Notes |
 |---|---|---|
-| `get_student_record` | `AdvisorTools` | 저장된 리포트만 읽음(`summary` / `requirements` / `courses`). 학생 테이블(섹션 7) 미사용 |
-| `search_courses` | `CatalogDbService.searchCourses` | 영어 키워드는 단어마다 제목·설명·코드 중 하나에 있어야 함. 적재된 과목(프로그램이 참조하는 과목)만 |
-| `get_course` | `CatalogDbService.courses` + 설명 | |
-| `check_prerequisites` | `PrerequisiteChecker` | `met` / `in_progress` / `not_met` / `unknown`. 교차개설 반영. `TEXT`·`STANDING`은 `unknown`. 수강 제한(`course_restrictions` 0행)·학기 지정 인자는 미지원 |
-| `get_program_requirements` | `CatalogDbService.requirements(..., withIds, rootId)` | 노드 id 포함. `node_id` 없으면 개요(노드별 `course_count`, 과목 목록·원문 제외), `node_id`로 하위 트리와 과목 |
-| `find_courses_for_requirement` | `CatalogDbService.requirementCourses` | 과목마다 `in_report`(no / in_progress / recorded:등급). `eligible` 판정은 아직 없음 |
-| `get_policies` | `CatalogDbService.policies` | 명세의 `get_policy_rule` 대신 프로그램 규정 조회 |
-| `get_minor_assessment` | `MathMinorService` | MATH만 |
-| `web_search` | `WebResearchService.search` | 답변당 1회. `WEB_SEARCH_PROVIDER=tavily`(키 있을 때)면 Tavily 검색 결과(상위 6개, 스니펫 800자 이하)를 LLM 요약 없이 바로 `[W#]` 출처·발췌로 전달. `sources`: `official`(psu.edu만) / `community`(reddit.com·ratemyprofessors.com만) / `any`. Tavily가 실패(할당량 429·432·433, 오류)하면 Gemini 검색으로 폴백. 결과는 기존처럼 `webResearch`로 프런트에 전달 |
-| `show_view` | `AdvisorViews` | 화면 종류와 과목/노드만 고름. 데이터는 서버가 도구로 채움(아래). 답변당 1회 |
-| `save_memory` / `forget_memory` | `AdvisorStore` | 7절. 유저 본인 범위, 최대 50개, 500자. 응답 `memoryChanges`로 알림·되돌리기 |
+| `get_student_record` | `AdvisorTools` | Reads only the stored report (`summary` / `requirements` / `courses`) |
+| `search_courses` | `CatalogDbService.searchCourses` | Every English keyword must appear in the title, description or code; only courses referenced by loaded programs |
+| `get_course` | `CatalogDbService.courses` + description | |
+| `check_prerequisites` | `PrerequisiteChecker` | `met` / `in_progress` / `not_met` / `unknown`; cross-listings count; `TEXT` and `STANDING` nodes are `unknown`; `codes` checks up to 8 courses in one call; concurrent nodes explain that the courses do not have to be taken together. Enrollment restrictions are not checked (`course_restrictions` has no rows) |
+| `get_program_requirements` | `CatalogDbService.requirements(..., withIds, rootId)` | With node ids. Without `node_id` it is an overview (`course_count` per node, no course lists or Bulletin text); `node_id` returns one subtree with its courses |
+| `find_courses_for_requirement` | `CatalogDbService.requirementCourses` | Each course is marked `in_report` (no / in_progress / recorded:GRADE) |
+| `get_policies` | `CatalogDbService.policies` | Program policies and the suggested semester plan, in place of `get_policy_rule` |
+| `get_minor_assessment` | `MathMinorService` | MATH only |
+| `web_search` | `WebResearchService.search` | Once per answer. With `WEB_SEARCH_PROVIDER=tavily` and a key, Tavily results (top 6, snippets up to 800 characters) go straight to the agent as `[W#]` sources and excerpts, with no summarizing LLM call. `sources`: `official` (psu.edu only) / `community` (reddit.com, ratemyprofessors.com only) / `any`. The server adds the campus to every query and the program to queries without a course code; grades and records are never added. Tavily failures (429, 432, 433, errors) fall back to Gemini search |
+| `show_view` | `AdvisorViews` | The model picks a screen and its courses or nodes; the server fills the data (below). Once per answer |
+| `save_memory` / `forget_memory` | `AdvisorStore` | Section 7. Scoped to the user, at most 50 memories of 500 characters. Reported to the client as `memoryChanges` for a notice and undo |
 
-- 자동 문맥: 학생 프로필(`AdvisorTools.profile`: 학교·캠퍼스·전공/옵션·과목 행 전체를 이수(성적)/수강 중/미이수/검토 필요로 분류·남은 요건·현재 수강으로 충족되는 요건·최근 언급 과목(이전 화면 속 과목 포함)), 학점 합계·경고, 카탈로그 범위, 장기 메모, 응답 언어, 최근 대화 12개. 요건 트리는 넣지 않음. 모호한 질문("다음 학기 뭐 들어?", "어려워?")은 프로필로 해석하고 가정을 한 줄로 밝힘
-- 웹 검색어: 서버가 캠퍼스를 항상, 전공은 과목 코드가 없는 검색어에만 덧붙임(`searchContext` = "캠퍼스|전공", 성적·기록은 넣지 않음)
-- 답변 보정: 빈 답변, 도구 호출 마크업이 섞인 답변(DeepSeek DSML 등), 화면만 가리키는 280자 미만 답변은 한 번 다시 요청. 마크업은 사용자에게 보내지 않음
-- `check_prerequisites`는 `codes`로 최대 8과목을 한 번에 판정(도구 호출 1회). 동시수강 노드에는 "같이 들어야 한다는 뜻이 아님" 설명을 붙임
-- 한도: 모델 호출 6회(마지막은 도구 금지: Gemini `mode: NONE`, Luminal `tool_choice: none`), 데이터 도구 호출 8회(`show_view`·메모 도구는 제외). 인자가 JSON 객체가 아니면 도구를 실행하지 않고 `INVALID_ARGUMENT`를 돌려줌
-- 응답: `answer`, `provider`(실제로 답한 쪽: `luminal-agent` / `gemini-agent` / 폴백 시 `gemini`), `toolCalls`(도구 이름·인자·ok), `webResearch`(검색했을 때), `view`(화면), `memoryChanges`(저장·삭제한 메모. 실패한 Luminal 실행에서 저장한 것도 포함)
+- Automatic context: a student profile (`AdvisorTools.profile`: school, campus, program and option, every course row classified as completed with grade / in progress / not earned / needs review, open requirements, requirements covered by current courses, and the most recently discussed courses, including courses shown on an earlier screen), credit totals and warnings, catalog scope, memories, response language and the last 12 messages. No requirement trees. Vague questions ("what should I take next?", "is it hard?") are read through the profile, and the model states its assumption in one clause instead of asking.
+- Limits: 6 model calls (the last one without tools: Gemini `mode: NONE`, Luminal `tool_choice: none`) and 8 data-tool calls; `show_view` and memory tools do not count. Arguments that are not a JSON object become an `INVALID_ARGUMENT` result without running the tool.
+- Answer repair: an empty answer, an answer with tool-call markup in its text (DeepSeek DSML and similar), or an answer under 280 characters that only points at the screen is asked for once more. Markup is never sent to the user.
+- Response: `answer`, `provider` (`luminal-agent` / `gemini-agent` / `gemini` on fallback), `toolCalls` (name, arguments, ok), `webResearch` (when searched), `view` (screen), `memoryChanges` (memories saved or forgotten, including by a Luminal run that later failed).
 
-**화면(`view`)**: 에이전트가 `show_view`로 고른 화면을 `AdvisorViews`가 리포트와 카탈로그 도구로 채웁니다. 모델이 쓴 숫자는 들어가지 않습니다. 프런트 `AdvisorView.vue`가 대시보드 상단에 표시하고, 채팅 메시지의 "화면 열기" 칩으로 다시 엽니다. 화면은 `chat_messages`에 답변과 함께 저장되어 대화를 다시 열어도 남습니다.
+**Screens (`view`)**: `AdvisorViews` fills the screen chosen with `show_view` from the report and the catalog tools; no numbers come from model text. The frontend shows it under the answer in the chat (`AdvisorView.vue`). Screens are stored with the answer in `chat_messages`, so they come back when a conversation is reopened.
 
-| view | 데이터 |
+| view | Data |
 |---|---|
-| `course_detail` | 과목마다 `get_course` + `check_prerequisites`(트리별 판정) |
-| `course_options` | 과목마다 제목·학점·속성, 선수과목 판정 결과, 리포트 포함 여부 |
-| `requirement_gap` | 리포트에서 완료·`coveredByPlan`이 아닌 요건 + 지정 노드의 `find_courses_for_requirement` |
-| `semester_plan` | `suggested_academic_plan.<옵션>`(Bulletin 권장 계획)에 리포트 과목 표시(`recorded:등급` / `in_progress` / `not_in_report` / `generic`). 개인 맞춤·검증된 일정이 아님. 옵션을 모르거나 계획이 없으면 `unavailable` |
-| `minor_check` | `get_minor_assessment` 결과(프런트는 `MinorPlanner` 재사용) |
+| `course_detail` | `get_course` + `check_prerequisites` per course |
+| `course_options` | Title, credits and attributes, prerequisite result and report status per course |
+| `requirement_gap` | Report requirements that are neither completed nor `coveredByPlan`, plus `find_courses_for_requirement` for the given nodes |
+| `semester_plan` | `suggested_academic_plan.<option>` (the Bulletin's suggested plan) with the report's courses marked (`recorded:GRADE` / `in_progress` / `not_in_report` / `generic`). Not a personalized or validated schedule; `unavailable` when the option is unknown or no plan is loaded |
+| `minor_check` | The `get_minor_assessment` result (rendered with `MinorPlanner`) |
 
-**업로드**: PDF 분석에는 사용자 목표(intent)를 넣지 않고 학생 상태만 추출합니다(`gemini.analyze(pages, "", language)`). intent는 리포트에 저장되고, 업로드 직후 프런트가 채팅을 열어 에이전트의 첫 질문으로 보냅니다.
+**Upload**: PDF analysis no longer receives the user's goal and extracts the student's status only (`gemini.analyze(pages, "", language)`). The goal is stored with the report and the frontend sends it as the first chat question.
 
-**실행 기록**: 실행마다 `agent_runs`(모델, 상태, 소요 시간, LLM·도구 호출 수, 화면 종류, 오류)와 `agent_steps`(LLM/도구 단계, 도구 이름·인자·결과, 소요 시간, 오류 코드; 결과 2만 자 초과는 요약)를 남깁니다. Luminal 실패 후 Gemini 실행은 별도 run입니다. 저장 실패는 답변을 막지 않습니다. 90일 보존, 리포트 삭제 시 함께 삭제(`backend/src/main/resources/schema.sql`)
+**Run log**: each run writes `agent_runs` (model, status, latency, LLM and tool call counts, screen type, error) and `agent_steps` (LLM/tool step, tool name, arguments, result, latency, error code; results over 20,000 characters are summarized). A Gemini run after a Luminal failure is a separate run. Logging failures never block the answer. 90-day retention; rows are deleted with their report (`backend/src/main/resources/schema.sql`).
 
-**진행 상황**: 채팅 요청에 `requestId`(UUID)를 넣으면 서버(`AgentProgress`, 메모리, 10분 보관)가 단계(`llm` plan/answer, `tool` 이름, `fallback`)를 기록합니다. 프런트는 답변을 기다리는 동안 `GET /api/reports/{id}/chat/progress/{requestId}`를 1초마다 조회해 "선수과목 확인 중…" 같은 단계와 경과 시간을 보여줍니다. 본인(JWT subject) 요청만 조회되고, 도구 인자·결과는 담지 않습니다.
+**Progress**: a chat request may carry `requestId` (a UUID). `AgentProgress` keeps its steps in memory for 10 minutes (`llm` plan/answer, `tool` name, `fallback`), and the frontend polls `GET /api/reports/{id}/chat/progress/{requestId}` once a second to show steps such as "Checking prerequisites…" with the elapsed time. Only the requesting user (JWT subject) can read it, and no tool arguments or results are kept.
 
-**메모 API**: `GET /api/memories`, `DELETE /api/memories/{id}`(본인 것만). 저장은 에이전트 도구로만 합니다.
-- 실측(2026-10-24, 가상 리포트, `deepseek-ai/DeepSeek-V4.1-Flash`): "Can I take CMPSC 465 next semester?" → `get_student_record`, `check_prerequisites`, `get_course`×2, 약 9.4초. "What algorithms course should I take?"(과목 코드 없음) → `get_student_record`×2, `get_program_requirements`, `get_course`, `check_prerequisites`, 약 10.7초. 이 질문에서는 `search_courses` 대신 요건 트리에서 과목을 찾음
-- 실측(같은 날, 화면·메모 추가 후, Luminal): "Can I take CMPSC 465?" → `course_detail` 약 12초. "Show me a semester plan to graduate." → `get_policies`·`get_program_requirements` 후 `semester_plan` 약 18~28초. "remember … avoid 8 am classes" → `save_memory` 약 4초. 업로드 목표 문장 "Computational Data Sciences, considering a Math minor" → `get_minor_assessment` 후 `minor_check` 약 12초. 예산 조정 전에는 마지막 질문에서 Luminal이 35초를 넘겨 Gemini로 폴백했음
-- 미구현: `run_audit`, `what_if`, `validate_plan`, 학점·규정·쓰기 도구, 출력 검증 단계, 개인 맞춤 학기 계획(현재는 Bulletin 권장 계획 + 표시)
-- 테스트: `PrerequisiteCheckerTest`, `AdvisorToolsTest`, `AdvisorAgentTest`(루프·한도·폴백), `AdvisorViewsTest`(화면·메모·실행 기록·예산), 프런트 `advisor-view.test.js`·`advisor-view-render.test.js`, `LiveAdvisorAgentTest`·`LiveAdvisorStoreTest`(`LIONPATHWAY_LIVE_TEST=1`, 실제 DB + Gemini/Luminal. 쓰기는 모두 트랜잭션 롤백)
+**Memory API**: `GET /api/memories`, `DELETE /api/memories/{id}` (own memories only). Saving happens only through the agent tool.
+
+- Not implemented: `run_audit`, `what_if`, `validate_plan`, credit, policy and write tools, an output validation step, personalized semester plans.
+- Tests: `PrerequisiteCheckerTest`, `AdvisorToolsTest`, `AdvisorAgentTest`, `AdvisorViewsTest`, `AgentProgressTest`, `WebResearchServiceTest`; frontend `advisor-view.test.js` and `advisor-view-render.test.js`; opt-in `LiveAdvisorAgentTest`, `LiveAdvisorStoreTest`, `LiveTavilyTest`, `LiveVagueQuestionsTest` (`LIONPATHWAY_LIVE_TEST=1`, real DB and Gemini/Luminal/Tavily; every write is rolled back).
 
 ---
 
-## 10. 남은 한계
+## 10. Remaining limitations
 
-| 영역 | 내용 |
+| Area | Details |
 |---|---|
-| 중복 인정 | 노드 단위 `exclusive`만 지원. "전공·마이너 간 최대 N학점 공유" 같은 프로그램 간 규칙은 미지원 |
-| 학위 전체 조건 | "마지막 N학점은 PSU에서" 같은 거주 요건은 수강 장소 필터가 없어 표현 불가 |
-| 미래 개설 | `typical_terms` 기반 예상일 뿐, 실제 개설은 수집된 학기만 확정 |
-| 학점 인정 | 공개 인정표에 있는 항목만. 개별 심사 결과는 유저가 기록을 직접 수정 |
-| 규정 해석 | 예외 승인이 필요한 사안은 판정하지 않고 절차·담당 부서만 안내 |
+| Double counting | Only node-level `exclusive` is supported. Cross-program rules like "share at most N credits between major and minor" are not |
+| Degree-wide conditions | Residency rules like "last N credits at PSU" can't be expressed without a filter on where courses were taken |
+| Future offerings | Only a `typical_terms`-based prediction; actual offerings are confirmed only for collected terms |
+| Credit transfer | Only items in public equivalency tables. Individual review results are entered by the user editing their record |
+| Policy interpretation | Matters needing an exception are not judged; only the procedure and responsible office are given |
 
 ---
 
-## 11. 에이전트 라우팅 규칙 (시스템 프롬프트 요약)
+## 11. Agent routing rules (system prompt summary)
 
-1. 자동 문맥으로 답할 수 있으면 도구를 호출하지 않는다.
-2. 학점·GPA·요건·수강 가능 여부는 반드시 계산 도구(`run_audit`, `what_if`, `check_prerequisites`, `validate_plan`, `get_credit_summary`, `gpa_what_if`) 결과로 답한다. 직접 세지 않는다.
-3. 과목·프로그램 이름이 모호하면 `search_courses` / `search_programs`로 코드를 확정한 뒤 진행한다.
-4. 마감일과 규정 수치는 `get_deadlines` / `get_policy_rule` 값으로만 답하고, 적용 학년도와 출처 링크를 함께 보여준다.
-5. 설명형 규정은 `search_policy` 결과를 인용하고 규정 번호·링크를 붙인다. 대학과 단과대 규정이 함께 나오면 둘 다 보여준다.
-6. 출처 우선순위: 계산 도구·카탈로그·규정 데이터 > `search_policy` > `web_search`.
-7. 학점 인정 결과는 "공개 인정표 기준 예상"이라고 밝힌다.
-8. `unknown`, `predicted`, `DATA_NOT_AVAILABLE`은 추측으로 메우지 않고 유저에게 그대로 알린다.
-9. 예외 승인이 필요한 사안(학점 초과, 마감 후 철회, 요건 대체)은 가능 여부를 판단하지 않고 절차와 어드바이저 상담을 안내한다.
-10. 유저가 밝힌 선호·목표·제약은 `save_memory`로 저장하고, 추천할 때 자동 문맥의 메모를 반영한다.
-11. 기록·계획·전공 변경은 쓰기 도구로 제안하고, 승인 전에는 "저장했다"고 말하지 않는다.
-12. 졸업 가능 여부를 답할 때는 공식 졸업 판정이 아니라는 점을 명시한다.
+1. If the automatic context can answer, don't call a tool.
+2. Answer credits, GPA, requirements, and eligibility only from computation tool results (`run_audit`, `what_if`, `check_prerequisites`, `validate_plan`, `get_credit_summary`, `gpa_what_if`). Never count yourself.
+3. If a course or program name is ambiguous, confirm the code with `search_courses` / `search_programs` before continuing.
+4. Answer deadlines and policy numbers only from `get_deadlines` / `get_policy_rule`, and show the applicable catalog year and source link.
+5. Quote `search_policy` results for descriptive policies, with the policy number and link. When university and college policies both come back, show both.
+6. Source precedence: computation tools, catalog, and policy data > `search_policy` > `web_search`.
+7. State that credit-transfer results are "estimates based on the public equivalency table."
+8. Never fill in `unknown`, `predicted`, or `DATA_NOT_AVAILABLE` with guesses; tell the user as is.
+9. For matters that need an exception (credit overload, withdrawal after the deadline, requirement substitution), don't judge whether it's possible; explain the procedure and suggest seeing an adviser.
+10. Save preferences, goals, and constraints the user states with `save_memory`, and apply the notes from the automatic context when recommending.
+11. Propose record, plan, and program changes through write tools, and never say "saved" before approval.
+12. When answering whether a student can graduate, state that it is not an official graduation audit.
 
-## 12. Gemini function declaration 예시
+## 12. Gemini function declaration examples
 
 ```json
 {

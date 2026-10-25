@@ -10,6 +10,13 @@ class MathMinorServiceTest {
  final ObjectMapper mapper=new ObjectMapper();
  ObjectNode report(){var r=mapper.createObjectNode();r.put("catalogYear","2026-27");r.put("campus","University Park");r.putObject("courseInventory").put("method","pdf_course_rows_v1").putArray("courses");return r;}
  void add(ObjectNode r,String code,int credits,String grade){((ArrayNode)r.at("/courseInventory/courses")).addObject().put("code",code).put("term","FA 2026").put("credits",credits).put("grade",grade);}
+ @Test void minorComparisonRequiresInterest(){
+  var report=new ObjectMapper().createObjectNode().put("major","Computer Science").put("intent","Which MATH 140 section should I take?");
+  assertFalse(MathMinorService.relevant(report,"How many credits remain?"));
+  assertTrue(MathMinorService.relevant(report,"Can I add a math minor?"));
+  assertTrue(MathMinorService.relevant(report,"수학 부전공 가능해?"));
+  report.put("minor","Mathematics");assertTrue(MathMinorService.relevant(report,""));
+ }
  @Test void distinguishesEarnedPlannedAndMissingAndAvoidsRepeatCounting()throws Exception{
   var r=report();add(r,"MATH 140",4,"A");add(r,"MATH 141",4,"IP");add(r,"MATH 220",2,"C");add(r,"MATH 230",4,"B");add(r,"MATH 441",3,"B");add(r,"MATH 441",3,"IP");
   var a=new MathMinorService(mapper,Optional.empty()).evaluate(r);assertEquals(13,a.path("completed").asInt());assertEquals(4,a.path("planned").asInt());assertEquals(9,a.path("additionalCredits").asInt());assertEquals("covered_by_plan",a.at("/groups/1/status").asText());assertTrue(a.at("/groups/1/options").isEmpty());assertEquals("needs_review",a.at("/uniqueFromMajor/status").asText());
