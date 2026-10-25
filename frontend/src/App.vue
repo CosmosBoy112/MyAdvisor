@@ -35,7 +35,15 @@ onMounted(()=>{
 });
 onUnmounted(()=>chromeObserver?.disconnect());
 const theme=ref(document.documentElement.dataset.theme||'light');
+let themeTransitionTimer;
+onUnmounted(()=>{clearTimeout(themeTransitionTimer);document.documentElement.classList.remove('theme-transition');});
 function toggleTheme(){
+ clearTimeout(themeTransitionTimer);
+ if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.documentElement.classList.add('theme-transition');
+  void document.documentElement.offsetHeight;
+  themeTransitionTimer=setTimeout(()=>document.documentElement.classList.remove('theme-transition'),650);
+ }
  theme.value=theme.value==='dark'?'light':'dark';
  document.documentElement.dataset.theme=theme.value;
  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme.value==='dark'?'#111214':'#ffffff');
