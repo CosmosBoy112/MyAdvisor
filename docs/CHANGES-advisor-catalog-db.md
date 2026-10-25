@@ -241,7 +241,9 @@ WHERE scope_code IN ('CMPSC_BS','CMPSC_ETM') AND catalog_year='2026-27';
 
 ### 채팅 연결 (`CatalogDbService`)
 
-채팅 요청마다 `ReportController`가 `CatalogDbService.context(report, question)` 결과를 `report.catalogDb`로 붙여 Gemini/Luminal에 보냅니다. 업로드·저장된 리포트는 바꾸지 않습니다.
+> 2026-10-24부터 채팅은 기본적으로 `AdvisorAgent`(도구 호출 방식, `docs/advisor-tools.md` 9.5절)가 처리합니다. 아래 고정 문맥 방식은 에이전트가 실패할 때의 폴백입니다.
+
+채팅 요청마다(폴백 시) `ReportController`가 `CatalogDbService.context(report, question)` 결과를 `report.catalogDb`로 붙여 Gemini/Luminal에 보냅니다. 업로드·저장된 리포트는 바꾸지 않습니다.
 
 - **전공 일치 조건**: 리포트 `major`가 `programs`(program_type `major`)의 이름 단어를 모두 포함하고, 나머지는 학위·캠퍼스·단과대·옵션 단어뿐일 때만 일치. 프로그램 이름의 괄호(예: `(Engineering)`)는 무시. 예: `Data Sciences (BS)` → DATSC_BS, `Computer Science (BS)` → CMPSC_BS / `Comp Sci - Univ Park (BS)`(약칭), `Computer Engineering (BS)`, `Data Sciences Minor` 불일치. 새 전공을 적재하면 코드 수정 없이 대상이 됩니다. 캠퍼스는 확인하지 않습니다(CMPSC_BS는 University Park 기준 데이터).
 - **status**: `matched`(학년도 일치), `matched_year_differs`(예: 리포트 Fall 2024 → 2024-25, DB 2026-27. 답변에 차이를 반드시 명시), `matched_year_unknown`, `major_not_in_catalog`(카탈로그 질문에 일반 지식으로 답하지 않음), `catalog_unavailable`(DB 오류 시 리포트만으로 답변)
@@ -252,6 +254,10 @@ WHERE scope_code IN ('CMPSC_BS','CMPSC_ETM') AND catalog_year='2026-27';
 - **규칙**(`GeminiService.CHAT_SYSTEM`): 출처 URL 인용, `unparsed_text` 선수과목은 해석하지 않고 인용, 리포트의 이수 상태·학점은 바꾸지 않음. `report.catalog`(JSON 기반 CMPSC 비교)의 기존 규칙은 그대로 유지
 - 테스트: `CatalogDbServiceTest`(전공·학년도·과목 코드·DB 오류), `LiveCatalogDbTest`(`LIONPATHWAY_LIVE_TEST=1`, 실제 DB 조회 전용)
 
+
+### 2026-10-24 · 에이전트 실행 기록·장기 메모 테이블 (앱 스키마)
+
+카탈로그 테이블 변경 없음. 앱 스키마(`backend/src/main/resources/schema.sql`, 백엔드 시작 시 실행)에 `agent_runs`·`agent_steps`(TimescaleDB hypertable, 7일 청크, 90일 보존 정책, `reports` 삭제 시 CASCADE)와 `student_memories`(유저별, 리포트 삭제 시 `report_id`만 NULL)를 `CREATE ... IF NOT EXISTS`로 추가했다. `docs/advisor-schema.sql` 섹션 7·9 설계를 앱 테이블(`reports`) 기준으로 맞췄다. `LiveAdvisorStoreTest`로 TigerData에서 트랜잭션 안 생성·쓰기·삭제 연쇄를 확인한 뒤 롤백했으며, 실제 생성은 다음 백엔드 시작 때 이루어진다. 행 수: 0(생성 전).
 
 ### 2026-10-24 · 앱 보고서 완료 항목 복구
 

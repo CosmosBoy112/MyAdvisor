@@ -1,5 +1,6 @@
 import {ref} from 'vue';
 import translations from './locales/translations.js';
+import agentTranslations from './locales/agent-translations.js';
 // UI translations are intentionally explicit; report evidence and course names stay original.
 export const locale=ref('en');
 export {detectInputLanguage} from './language.js';
@@ -112,6 +113,7 @@ Object.assign(ko,{
   "PHYS 213 or PHYS 214 are explicit choices; the other approved-list branch needs confirmation.": "PHYS 213 또는 PHYS 214가 명시된 선택지입니다. 그 밖의 승인 목록은 확인이 필요합니다.",
   "Do not add the old separate four-credit language requirement to the current program.": "이전 학년도의 별도 외국어 4학점 요건을 현재 전공 요건에 추가하지 마세요."
 });
+for(const [code,dict] of Object.entries(agentTranslations))Object.assign(code==='ko'?ko:translations[code],dict);
 export function t(text){return (locale.value==='ko'?ko:translations[locale.value])?.[text]??text;}
 export function displayLanguage(hasReport){return hasReport?locale.value:'en';}
 export function pageText(text,hasReport){return hasReport?t(text):text;}

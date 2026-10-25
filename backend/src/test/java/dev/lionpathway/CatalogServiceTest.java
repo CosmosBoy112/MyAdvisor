@@ -61,10 +61,11 @@ class CatalogServiceTest {
  @Test void uploadForwardsSelectedLanguageAndPersistsIt()throws Exception{
   var pdf=mock(PdfReader.class);var gemini=mock(GeminiService.class);var repo=mock(ReportRepository.class);
   var controller=new ReportController(pdf,gemini,mock(ModelRouter.class),new AnalysisValidator(),repo,catalog,mock(CatalogDbService.class));
-  when(pdf.read(any())).thenReturn(pages);when(gemini.analyze(pages,"한국어 설명", "ko")).thenReturn(report());
+  when(pdf.read(any())).thenReturn(pages);when(gemini.analyze(pages,"", "ko")).thenReturn(report());
   var jwt=Jwt.withTokenValue("test").header("alg","RS256").subject("owner").build();
   var output=controller.upload(jwt,new MockMultipartFile("file","test.pdf","application/pdf",new byte[]{1}),"한국어 설명","ko");
-  assertEquals("ko",output.path("responseLanguage").asText());verify(gemini).analyze(pages,"한국어 설명","ko");
+  assertEquals("ko",output.path("responseLanguage").asText());verify(gemini).analyze(pages,"","ko");
+  assertEquals("한국어 설명",output.path("intent").asText(),"the goal is kept for the first agent question, not sent to analysis");
  }
 
 }

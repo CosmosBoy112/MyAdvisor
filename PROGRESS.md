@@ -14,6 +14,16 @@
 
 ---
 
+## 2026-10-24 · Claude Code · `main`
+- 한 일: 채팅을 도구 호출형 에이전트로 전환(`AdvisorAgent`, 메인 Luminal → Gemini 에이전트 → 고정 문맥 채팅 순 폴백). 도구 12개(리포트·카탈로그·선수과목 룰 엔진·Math 부전공·웹 검색·화면·메모). 에이전트가 `show_view`로 화면(과목 상세·추천 과목·남은 요건·권장 학기 계획·부전공)을 고르면 서버가 데이터를 채워 대시보드에 표시. 장기 메모(저장 알림·되돌리기·목록 삭제), 실행 기록(`agent_runs`/`agent_steps`). 업로드는 상태만 추출하고 목표 문장은 첫 채팅 질문으로 자동 실행
+- 상태: 백엔드 단위 111개 통과/13조건부 제외, 프런트 36개 통과·빌드 통과. 실호출(`LiveAdvisorAgentTest`, `LiveAdvisorStoreTest`): 스키마+저장소 트랜잭션 드라이런(하이퍼테이블·리포트 삭제 시 로그 삭제·메모 소유자 범위) 통과 후 롤백, Luminal 에이전트 4개 질문 모두 Luminal이 답하고 화면 3종·메모 저장·실행 기록 확인(쓰기 롤백). 새 테이블은 아직 실제로 만들어지지 않았고 백엔드 재시작 시 `schema.sql`이 생성. 실행 중인 로컬 서버 재시작, 브라우저 실사용(로그인 필요), 웹 검색 도구 실호출, 배포 환경은 미검증
+- 추가(웹 검색): `web_search`를 Tavily 검색 API로 전환(결과를 에이전트에 바로 전달, 검색용 LLM 호출 없음, 공식/커뮤니티 범위 지정). Tavily 실패 시 Gemini 검색 폴백. 실호출 `LiveTavilyTest`: 검색 1.6초·결과 6개·약 3.5천 자, Luminal 에이전트가 Reddit 질문에 `sources=community`로 검색해 [W#] 인용 답변(10초). 같은 날 실사용 중 발견한 Luminal 빈 최종 답변(재요청 1회 추가)과 `ASTRO 7N`·`ENGL 15` 형식 과목 코드 거부 버그 수정. 백엔드 단위 117개 통과/14조건부 제외
+- 추가(문맥): 학생 프로필(이수·수강 중 과목, 남은 요건, 최근 언급 과목)을 매 질문 문맥에 넣고 모호한 질문 해석 규칙, 웹 검색어에 캠퍼스·전공 자동 보강, 선수과목 일괄 판정, DeepSeek 도구 마크업 누출·화면만 가리키는 짧은 답변 재요청. `LiveVagueQuestionsTest`("what should I take next semester?" → "is it hard?" → "any good electives?") 3회 반복 실행: 후속 질문이 직전 추천 과목으로 해석됨, 마크업 누출 0건. 첫 계획 질문은 Luminal 단일 호출이 17~22초 걸려 예산 초과로 Gemini 에이전트 폴백(총 약 57초). 백엔드 단위 124개 통과/15조건부 제외
+- 추가(진행 표시): 채팅 대기 중 에이전트 단계(질문 분석·선수과목 확인·웹 검색·백업 모델 전환·답변 작성)와 경과 시간을 1초 폴링으로 표시(`AgentProgress`, `/chat/progress/{requestId}`, 9개 언어). 백엔드 단위 127개 통과/15조건부 제외, 프런트 37개 통과·빌드 통과. 브라우저 실사용은 미검증
+- 막힌 것: Gemini Google Search 할당량 소진(`quota_exceeded`) — Tavily 사용 시 영향 없음. Tavily 무료 플랜은 월 1,000크레딧(기본 검색 1회=1크레딧)
+- 다음: 백엔드 재시작 후 브라우저에서 업로드→첫 질문→화면 흐름 확인, `validate_plan`, 출력 검증 단계
+- 필요한 설정: (선택) `WEB_SEARCH_PROVIDER`(tavily/gemini, 코드 기본 gemini·예시 파일 tavily), `TAVILY_API_KEY`. (선택) `ADVISOR_AGENT_ENABLED`(기본 true), `ADVISOR_AGENT_PROVIDER`(기본 luminal). Luminal 사용 시 기존 `LUMINAL_API_KEY`/`LUMINAL_BASE_URL`/`LUMINAL_MODEL`. DB: 백엔드 시작 시 `agent_runs`·`agent_steps`(hypertable, 90일 보존)·`student_memories`를 `CREATE ... IF NOT EXISTS`로 생성
+
 ## 2026-10-24 · Codex · `main`
 - 한 일: 입력 중 언어 변경 watch 제거. Enter/전송 버튼으로 제출할 때만 언어 감지·전환, Shift+Enter 줄바꿈 및 영어 메인 유지
 - 상태: 프런트30개 테스트·빌드 통과. 브라우저 샘플 채팅에서 한국어 입력/Shift+Enter 시 영어 유지, Enter 제출 후 한국어 UI·답변 전환 확인. 실 AI 재호출 없음(백엔드 변경 없음)

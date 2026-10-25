@@ -62,25 +62,34 @@ public class CatalogDbService {
   return new ArrayList<>(out);
  }
 
+ record Scope(String status,Program program,String option,String optionSource,String reportYear){}
+ /** The loaded program matching the report's major, with how its catalog year relates to the report's; empty when the major is not loaded. */
+ Optional<Scope> scope(JsonNode report){
+  var programs=programs();
+  var match=matchMajor(report.path("major").asText(null),programs,report.path("requirements"));
+  if(match.isEmpty())return Optional.empty();
+  var p=match.get().program();String reportYear=catalogYear(report.path("catalogYear").asText(null));
+  return Optional.of(new Scope(reportYear==null?"matched_year_unknown":reportYear.equals(p.catalogYear())?"matched":"matched_year_differs",p,match.get().option(),match.get().optionSource(),reportYear));
+ }
+ List<String> loadedProgramNames(){return programs().stream().map(Program::name).toList();}
+
  /** Never throws: catalog lookup problems must not block the report-only answer. */
  public ObjectNode context(JsonNode report,String question){
   ObjectNode out=mapper.createObjectNode();
   try{
-   var programs=programs();
-   var match=matchMajor(report.path("major").asText(null),programs,report.path("requirements"));
-   if(match.isEmpty()){
+   var scope=scope(report);
+   if(scope.isEmpty()){
     out.put("status","major_not_in_catalog");
     out.put("message","The report's major is not one of the programs loaded in the catalog database. Do not answer catalog questions from it.");
-    var names=out.putArray("loadedPrograms");programs.forEach(p->names.add(p.name()));return out;
+    var names=out.putArray("loadedPrograms");loadedProgramNames().forEach(names::add);return out;
    }
-   var p=match.get().program();String option=match.get().option();
-   String reportYear=catalogYear(report.path("catalogYear").asText(null));
-   out.put("status",reportYear==null?"matched_year_unknown":reportYear.equals(p.catalogYear())?"matched":"matched_year_differs");
+   var p=scope.get().program();String option=scope.get().option();String reportYear=scope.get().reportYear();
+   out.put("status",scope.get().status());
    out.put("program",p.name());out.put("programCode",p.code());out.put("catalogYear",p.catalogYear());
    if(reportYear!=null)out.put("reportCatalogYear",reportYear);
    if(p.minTotalCredits()!=null)out.put("minimumTotalCredits",p.minTotalCredits());
    out.put("bulletinUrl",p.sourceUrl());
-   if(option!=null){out.put("option",p.optionNames().get(option));out.put("optionSource",match.get().optionSource());}
+   if(option!=null){out.put("option",p.optionNames().get(option));out.put("optionSource",scope.get().optionSource());}
    else out.put("option","unknown: requirements for every option are included");
    out.set("requirements",requirements(p,option==null?null:p.options().get(option)));
    jdbc.query("SELECT pv.id, p.name FROM programs p JOIN program_versions pv ON pv.program_code=p.code WHERE p.entrance_for=? AND pv.catalog_year=?",
@@ -96,9 +105,17 @@ public class CatalogDbService {
  }
 
  private List<Program> programs(){
-  var rows=jdbc.queryForList("""
+  return programRows(jdbc.queryForList("""
    SELECT pv.id, p.code, p.name, pv.catalog_year, pv.min_total_credits, pv.source_url FROM program_versions pv JOIN programs p ON p.code=pv.program_code
-   WHERE p.program_type='major' ORDER BY pv.catalog_year DESC""");
+   WHERE p.program_type='major' ORDER BY pv.catalog_year DESC"""));
+ }
+ /** Any loaded program version by code, including Entrance to Major programs; newest catalog year first. */
+ Optional<Program> program(String code){
+  return programRows(jdbc.queryForList("""
+   SELECT pv.id, p.code, p.name, pv.catalog_year, pv.min_total_credits, pv.source_url FROM program_versions pv JOIN programs p ON p.code=pv.program_code
+   WHERE p.code=? ORDER BY pv.catalog_year DESC""",code)).stream().findFirst();
+ }
+ private List<Program> programRows(List<Map<String,Object>> rows){
   var out=new ArrayList<Program>();
   for(var r:rows){
    long id=((Number)r.get("id")).longValue();var options=new LinkedHashMap<String,Long>();var names=new LinkedHashMap<String,String>();
@@ -108,14 +125,17 @@ public class CatalogDbService {
   }
   return out;
  }
+ String defaultYear(){return jdbc.queryForObject("SELECT max(code) FROM catalog_years",String.class);}
 
  /** Requirement tree for the common requirements plus the given option (all options when null). */
- private ArrayNode requirements(Program p,Long optionId){
+ private ArrayNode requirements(Program p,Long optionId){return requirements(p,optionId,false,null);}
+ /** withIds adds node ids for find-courses lookups; rootId returns only that node's subtree (empty when it is not in this program). */
+ ArrayNode requirements(Program p,Long optionId,boolean withIds,Long rootId){
   var nodes=new LinkedHashMap<Long,ObjectNode>();var parents=new HashMap<Long,Long>();var optionOf=new HashMap<Long,Long>();
   jdbc.query("""
    SELECT n.id, n.parent_id, n.option_id, o.name AS option_name, n.label, n.node_type, n.min_count, n.min_credits, n.min_grade, n.min_gpa, n.exclusive, n.source_text
    FROM requirement_nodes n LEFT JOIN program_options o ON o.id=n.option_id WHERE n.program_version_id=? ORDER BY n.parent_id NULLS FIRST, n.sort_order, n.id""",rs->{
-   ObjectNode n=mapper.createObjectNode();n.put("label",rs.getString("label"));n.put("type",rs.getString("node_type"));
+   ObjectNode n=mapper.createObjectNode();if(withIds)n.put("id",rs.getLong("id"));n.put("label",rs.getString("label"));n.put("type",rs.getString("node_type"));
    if(rs.getObject("option_name")!=null&&rs.getObject("parent_id")==null)n.put("option",rs.getString("option_name"));
    for(String f:List.of("min_count","min_credits","min_gpa"))if(rs.getObject(f)!=null)n.put(f,rs.getBigDecimal(f));
    if(rs.getString("min_grade")!=null)n.put("min_grade",rs.getString("min_grade"));
@@ -155,10 +175,11 @@ public class CatalogDbService {
    if(parent==null){if(optionId==null||!optionOf.containsKey(e.getKey())||optionOf.get(e.getKey()).equals(optionId))roots.add(e.getValue());}
    else{var pn=nodes.get(parent);(pn.has("children")?(ArrayNode)pn.get("children"):pn.putArray("children")).add(e.getValue());}
   }
+  if(rootId!=null){var subtree=mapper.createArrayNode();if(nodes.containsKey(rootId))subtree.add(nodes.get(rootId));return subtree;}
   return roots;
  }
 
- private ArrayNode policies(Program p,String option){
+ ArrayNode policies(Program p,String option){
   var out=mapper.createArrayNode();
   jdbc.query("SELECT key, value::text, description, policy_ref, source_url FROM policy_rules WHERE catalog_year=? AND scope='program' AND scope_code=? ORDER BY key",rs->{
    String key=rs.getString(1);
@@ -172,7 +193,7 @@ public class CatalogDbService {
  }
 
  /** Course facts for codes named in the question: credits, attributes, prerequisite tree and what the course unlocks. */
- private ArrayNode courses(List<String> codes,String year){
+ ArrayNode courses(List<String> codes,String year){
   var out=mapper.createArrayNode();
   for(String code:codes){
    var rows=jdbc.queryForList("SELECT id, title, credits_min, credits_max, prereq_text, source_url FROM course_versions WHERE course_code=? AND catalog_year=?",code,year);
@@ -190,13 +211,14 @@ public class CatalogDbService {
   }
   return out;
  }
- private JsonNode prereqTree(long versionId){
+ JsonNode prereqTree(long versionId){
   var nodes=new LinkedHashMap<Long,ObjectNode>();var parents=new HashMap<Long,Long>();
-  jdbc.query("SELECT id, parent_id, node_type, required_course, min_grade, min_semester, raw_text FROM prereq_nodes WHERE course_version_id=? ORDER BY parent_id NULLS FIRST, sort_order, id",rs->{
+  jdbc.query("SELECT id, parent_id, node_type, required_course, min_grade, min_semester, concurrent_ok, raw_text FROM prereq_nodes WHERE course_version_id=? ORDER BY parent_id NULLS FIRST, sort_order, id",rs->{
    ObjectNode n=mapper.createObjectNode();n.put("type",rs.getString("node_type"));
    if(rs.getString("required_course")!=null)n.put("course",rs.getString("required_course"));
    if(rs.getString("min_grade")!=null)n.put("min_grade",rs.getString("min_grade"));
    if(rs.getObject("min_semester")!=null)n.put("min_semester",rs.getInt("min_semester"));
+   if(rs.getBoolean("concurrent_ok"))n.put("concurrent_ok",true);
    if(rs.getString("raw_text")!=null)n.put("unparsed_text",rs.getString("raw_text"));
    nodes.put(rs.getLong("id"),n);if(rs.getObject("parent_id")!=null)parents.put(rs.getLong("id"),rs.getLong("parent_id"));
   },versionId);
@@ -206,5 +228,73 @@ public class CatalogDbService {
    if(parent==null)root=e.getValue();else{var pn=nodes.get(parent);(pn.has("children")?(ArrayNode)pn.get("children"):pn.putArray("children")).add(e.getValue());}
   }
   return root;
+ }
+
+ /** Prerequisite wording and source link only, for prerequisite checks that do not need the full course facts. */
+ Optional<Map<String,Object>> courseBasics(String code,String year){return jdbc.queryForList("SELECT id, prereq_text, source_url FROM course_versions WHERE course_code=? AND catalog_year=?",code,year).stream().findFirst();}
+ Optional<Long> versionId(String code,String year){return jdbc.queryForList("SELECT id FROM course_versions WHERE course_code=? AND catalog_year=?",Long.class,code,year).stream().findFirst();}
+ Optional<String> description(String code,String year){return jdbc.queryForList("SELECT description FROM course_versions WHERE course_code=? AND catalog_year=? AND description IS NOT NULL",String.class,code,year).stream().findFirst();}
+ /** Cross-listed codes for each given code, so a course taken under its other listing still counts. */
+ Map<String,Set<String>> crosslists(Collection<String> codes){
+  var out=new HashMap<String,Set<String>>();
+  for(String code:codes)out.put(code,new LinkedHashSet<>(jdbc.queryForList("SELECT CASE WHEN course_code=? THEN crosslisted_code ELSE course_code END FROM course_crosslists WHERE ? IN (course_code, crosslisted_code)",String.class,code,code)));
+  return out;
+ }
+ private static String like(String word){return "%"+word.replace("\\","\\\\").replace("%","\\%").replace("_","\\_")+"%";}
+ /** Every keyword must appear in the title, description or code; all filters are ANDed. */
+ ArrayNode searchCourses(String query,String subject,Integer levelMin,Integer levelMax,List<String> attributes,String year,int limit){
+  var sql=new StringBuilder("""
+   SELECT c.code, v.title, v.credits_min, v.credits_max,
+    (SELECT string_agg(a.attribute, ',' ORDER BY a.attribute) FROM course_attributes a WHERE a.course_version_id=v.id) AS attributes
+   FROM courses c JOIN course_versions v ON v.course_code=c.code WHERE v.catalog_year=?""");
+  var args=new ArrayList<Object>(List.of(year));
+  if(query!=null)for(String w:query.strip().split("\\s+")){if(w.length()<2||args.size()>6)continue;sql.append(" AND (v.title ILIKE ? OR coalesce(v.description,'') ILIKE ? OR c.code ILIKE ?)");args.addAll(List.of(like(w),like(w),like(w)));}
+  if(subject!=null){sql.append(" AND c.subject=?");args.add(subject.toUpperCase(Locale.ROOT));}
+  if(levelMin!=null){sql.append(" AND c.level>=?");args.add(levelMin);}
+  if(levelMax!=null){sql.append(" AND c.level<=?");args.add(levelMax);}
+  for(String a:attributes){sql.append(" AND EXISTS (SELECT 1 FROM course_attributes a WHERE a.course_version_id=v.id AND a.attribute=?)");args.add(a.toUpperCase(Locale.ROOT));}
+  sql.append(" ORDER BY c.code LIMIT ?");args.add(limit);
+  var out=mapper.createArrayNode();
+  jdbc.query(sql.toString(),rs->{
+   var c=out.addObject();c.put("code",rs.getString("code"));c.put("title",rs.getString("title"));
+   c.put("credits",rs.getBigDecimal("credits_min").equals(rs.getBigDecimal("credits_max"))?rs.getBigDecimal("credits_min").toPlainString():rs.getBigDecimal("credits_min")+"-"+rs.getBigDecimal("credits_max"));
+   var attrs=c.putArray("attributes");if(rs.getString("attributes")!=null)for(String a:rs.getString("attributes").split(","))attrs.add(a);
+  },args.toArray());
+  return out;
+ }
+ /** Courses that can satisfy one requirement node: listed courses plus courses matching its subject/attribute/level rules, minus exclusions. */
+ Optional<ObjectNode> requirementCourses(long nodeId,String year,int limit){
+  var nodes=jdbc.queryForList("SELECT n.label, n.node_type, n.min_count, n.min_credits, n.min_grade, p.program_code FROM requirement_nodes n JOIN program_versions p ON p.id=n.program_version_id WHERE n.id=?",nodeId);
+  if(nodes.isEmpty())return Optional.empty();
+  var node=nodes.getFirst();var out=mapper.createObjectNode();out.put("node_id",nodeId);out.put("label",(String)node.get("label"));out.put("type",(String)node.get("node_type"));out.put("program_code",(String)node.get("program_code"));
+  for(String f:List.of("min_count","min_credits"))if(node.get(f)!=null)out.put(f,((Number)node.get(f)).doubleValue());
+  if(node.get("min_grade")!=null)out.put("min_grade",(String)node.get("min_grade"));
+  var rules=jdbc.queryForList("SELECT include, course_code, subject, attribute, level_min, level_max FROM requirement_rules WHERE node_id=? ORDER BY id",nodeId);
+  if(rules.isEmpty()){out.put("course_list","not_listed_in_database");out.putArray("courses");return Optional.of(out);}
+  var include=new ArrayList<String>();var exclude=new ArrayList<String>();var args=new ArrayList<Object>(List.of(year));var excludeArgs=new ArrayList<Object>();
+  for(var r:rules){
+   var parts=new ArrayList<String>();var target=Boolean.TRUE.equals(r.get("include"))?args:excludeArgs;
+   if(r.get("course_code")!=null){parts.add("c.code=?");target.add(r.get("course_code"));}
+   if(r.get("subject")!=null){parts.add("c.subject=?");target.add(r.get("subject"));}
+   if(r.get("attribute")!=null){parts.add("EXISTS (SELECT 1 FROM course_attributes a WHERE a.course_version_id=v.id AND a.attribute=?)");target.add(r.get("attribute"));}
+   if(r.get("level_min")!=null){parts.add("c.level>=?");target.add(r.get("level_min"));}
+   if(r.get("level_max")!=null){parts.add("c.level<=?");target.add(r.get("level_max"));}
+   (Boolean.TRUE.equals(r.get("include"))?include:exclude).add("("+String.join(" AND ",parts)+")");
+  }
+  var describe=out.putArray("rules");
+  for(var r:rules){var d=describe.addObject();if(!Boolean.TRUE.equals(r.get("include")))d.put("exclude",true);for(String f:List.of("course_code","subject","attribute"))if(r.get(f)!=null)d.put(f,(String)r.get(f));for(String f:List.of("level_min","level_max"))if(r.get(f)!=null)d.put(f,((Number)r.get(f)).intValue());}
+  var courses=out.putArray("courses");
+  if(include.isEmpty())return Optional.of(out);
+  // Listed codes may be Bulletin references without a loaded version; those come back with not_in_catalog_database.
+  String sql="SELECT c.code, v.title, v.credits_min, v.credits_max FROM courses c LEFT JOIN course_versions v ON v.course_code=c.code AND v.catalog_year=? WHERE ("+String.join(" OR ",include)+")"
+   +(exclude.isEmpty()?"":" AND NOT ("+String.join(" OR ",exclude)+")")+" ORDER BY c.code LIMIT ?";
+  args.addAll(excludeArgs);args.add(limit+1);
+  jdbc.query(sql,rs->{
+   if(courses.size()>=limit){out.put("truncated",true);return;}
+   var c=courses.addObject();c.put("code",rs.getString("code"));
+   if(rs.getString("title")==null){c.put("status","not_in_catalog_database");return;}
+   c.put("title",rs.getString("title"));c.put("credits",rs.getBigDecimal("credits_min").equals(rs.getBigDecimal("credits_max"))?rs.getBigDecimal("credits_min").toPlainString():rs.getBigDecimal("credits_min")+"-"+rs.getBigDecimal("credits_max"));
+  },args.toArray());
+  return Optional.of(out);
  }
 }

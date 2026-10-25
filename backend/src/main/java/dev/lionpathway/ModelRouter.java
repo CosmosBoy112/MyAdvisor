@@ -14,15 +14,22 @@ import org.springframework.stereotype.Service;
  public ModelRouter(GeminiService gemini,LuminalService luminal,WebResearchService web){this.gemini=gemini;this.luminal=luminal;this.web=web;}
  static boolean complex(String question){return question.length()>400||COMPLEX.matcher(question).find();}
  public Answer chat(JsonNode report,String question,List<Map<String,Object>> history){
-  JsonNode research=null;
-  if(web!=null && WebResearchService.shouldSearch(report,question)){
-   research=web.search(question,history);
-   var copy=(com.fasterxml.jackson.databind.node.ObjectNode)report.deepCopy();
-   var context=research.deepCopy();((com.fasterxml.jackson.databind.node.ObjectNode)context).remove("searchEntryPoint");
-   copy.set("webResearch",context);report=copy;
-  }
-  var raw=answer(report,question,history);
-  return new Answer(raw.text(),raw.provider(),research);
+  var withResearch=withResearch(report,question,history);
+  var raw=answer(withResearch.report(),question,history);
+  return new Answer(raw.text(),raw.provider(),withResearch.research());
+ }
+ /** Fixed-context chat after an agent failure: same web evidence, Gemini only (at most 30 s search + 40 s answer). */
+ public Answer fallbackChat(JsonNode report,String question,List<Map<String,Object>> history){
+  var withResearch=withResearch(report,question,history);
+  return new Answer(gemini.chat(withResearch.report(),question,history),"gemini",withResearch.research());
+ }
+ private record Researched(JsonNode report,JsonNode research){}
+ private Researched withResearch(JsonNode report,String question,List<Map<String,Object>> history){
+  if(web==null || !WebResearchService.shouldSearch(report,question))return new Researched(report,null);
+  var research=web.search(question,history);
+  var copy=(com.fasterxml.jackson.databind.node.ObjectNode)report.deepCopy();
+  var context=research.deepCopy();((com.fasterxml.jackson.databind.node.ObjectNode)context).remove("searchEntryPoint");
+  copy.set("webResearch",context);return new Researched(copy,research);
  }
  private Answer answer(JsonNode report,String question,List<Map<String,Object>> history){
   if(complex(question)&&luminal.configured()){

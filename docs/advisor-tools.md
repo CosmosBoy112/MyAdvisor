@@ -598,6 +598,63 @@ LLM은 변경을 **제안**만 합니다. 쓰기 도구는 실제로 저장하�
 
 ---
 
+## 9.5 v1 구현 현황 (2026-10-24)
+
+채팅(`POST /api/reports/{id}/chat`)은 `AdvisorAgent`의 도구 호출 루프로 동작합니다. 실행 순서:
+
+1. **Luminal 에이전트** (`ADVISOR_AGENT_PROVIDER=luminal`, 기본값). OpenAI 호환 `tools` / `tool_calls` / `role: tool` 메시지. assistant 메시지(`reasoning_content` 포함)는 그대로 다시 보냄. `LUMINAL_API_KEY`가 비어 있으면 건너뜀
+2. **Gemini 에이전트** (Luminal 오류·타임아웃 시, 또는 `ADVISOR_AGENT_PROVIDER=gemini`). 새 turn으로 처음부터 다시 실행
+3. **고정 문맥 채팅** (두 에이전트 모두 실패 시). `report.catalogDb` + 웹 검색 + Gemini만(`ModelRouter.fallbackChat`, Luminal 생략)
+
+`ADVISOR_AGENT_ENABLED=false`면 1·2를 건너뛰고 기존 `ModelRouter.chat`(Luminal 라우팅 포함)을 씁니다.
+
+**시간 예산**(프런트 채팅 요청 타임아웃 160초, `App.vue` `send`): 에이전트 단계 전체 75초(Luminal 최대 55초·호출당 25초, Gemini는 남은 시간·호출당 35초, 최소 20초) + 고정 문맥 폴백 최대 70초(웹 30초 + Gemini 40초) = 145초. 실행마다 남은 시간이 14초 미만이면 도구를 금지하고 바로 답하게 합니다.
+
+| 도구 | 구현 | 비고 |
+|---|---|---|
+| `get_student_record` | `AdvisorTools` | 저장된 리포트만 읽음(`summary` / `requirements` / `courses`). 학생 테이블(섹션 7) 미사용 |
+| `search_courses` | `CatalogDbService.searchCourses` | 영어 키워드는 단어마다 제목·설명·코드 중 하나에 있어야 함. 적재된 과목(프로그램이 참조하는 과목)만 |
+| `get_course` | `CatalogDbService.courses` + 설명 | |
+| `check_prerequisites` | `PrerequisiteChecker` | `met` / `in_progress` / `not_met` / `unknown`. 교차개설 반영. `TEXT`·`STANDING`은 `unknown`. 수강 제한(`course_restrictions` 0행)·학기 지정 인자는 미지원 |
+| `get_program_requirements` | `CatalogDbService.requirements(..., withIds, rootId)` | 노드 id 포함. `node_id` 없으면 개요(노드별 `course_count`, 과목 목록·원문 제외), `node_id`로 하위 트리와 과목 |
+| `find_courses_for_requirement` | `CatalogDbService.requirementCourses` | 과목마다 `in_report`(no / in_progress / recorded:등급). `eligible` 판정은 아직 없음 |
+| `get_policies` | `CatalogDbService.policies` | 명세의 `get_policy_rule` 대신 프로그램 규정 조회 |
+| `get_minor_assessment` | `MathMinorService` | MATH만 |
+| `web_search` | `WebResearchService.search` | 답변당 1회. `WEB_SEARCH_PROVIDER=tavily`(키 있을 때)면 Tavily 검색 결과(상위 6개, 스니펫 800자 이하)를 LLM 요약 없이 바로 `[W#]` 출처·발췌로 전달. `sources`: `official`(psu.edu만) / `community`(reddit.com·ratemyprofessors.com만) / `any`. Tavily가 실패(할당량 429·432·433, 오류)하면 Gemini 검색으로 폴백. 결과는 기존처럼 `webResearch`로 프런트에 전달 |
+| `show_view` | `AdvisorViews` | 화면 종류와 과목/노드만 고름. 데이터는 서버가 도구로 채움(아래). 답변당 1회 |
+| `save_memory` / `forget_memory` | `AdvisorStore` | 7절. 유저 본인 범위, 최대 50개, 500자. 응답 `memoryChanges`로 알림·되돌리기 |
+
+- 자동 문맥: 학생 프로필(`AdvisorTools.profile`: 학교·캠퍼스·전공/옵션·과목 행 전체를 이수(성적)/수강 중/미이수/검토 필요로 분류·남은 요건·현재 수강으로 충족되는 요건·최근 언급 과목(이전 화면 속 과목 포함)), 학점 합계·경고, 카탈로그 범위, 장기 메모, 응답 언어, 최근 대화 12개. 요건 트리는 넣지 않음. 모호한 질문("다음 학기 뭐 들어?", "어려워?")은 프로필로 해석하고 가정을 한 줄로 밝힘
+- 웹 검색어: 서버가 캠퍼스를 항상, 전공은 과목 코드가 없는 검색어에만 덧붙임(`searchContext` = "캠퍼스|전공", 성적·기록은 넣지 않음)
+- 답변 보정: 빈 답변, 도구 호출 마크업이 섞인 답변(DeepSeek DSML 등), 화면만 가리키는 280자 미만 답변은 한 번 다시 요청. 마크업은 사용자에게 보내지 않음
+- `check_prerequisites`는 `codes`로 최대 8과목을 한 번에 판정(도구 호출 1회). 동시수강 노드에는 "같이 들어야 한다는 뜻이 아님" 설명을 붙임
+- 한도: 모델 호출 6회(마지막은 도구 금지: Gemini `mode: NONE`, Luminal `tool_choice: none`), 데이터 도구 호출 8회(`show_view`·메모 도구는 제외). 인자가 JSON 객체가 아니면 도구를 실행하지 않고 `INVALID_ARGUMENT`를 돌려줌
+- 응답: `answer`, `provider`(실제로 답한 쪽: `luminal-agent` / `gemini-agent` / 폴백 시 `gemini`), `toolCalls`(도구 이름·인자·ok), `webResearch`(검색했을 때), `view`(화면), `memoryChanges`(저장·삭제한 메모. 실패한 Luminal 실행에서 저장한 것도 포함)
+
+**화면(`view`)**: 에이전트가 `show_view`로 고른 화면을 `AdvisorViews`가 리포트와 카탈로그 도구로 채웁니다. 모델이 쓴 숫자는 들어가지 않습니다. 프런트 `AdvisorView.vue`가 대시보드 상단에 표시하고, 채팅 메시지의 "화면 열기" 칩으로 다시 엽니다. 화면은 `chat_messages`에 답변과 함께 저장되어 대화를 다시 열어도 남습니다.
+
+| view | 데이터 |
+|---|---|
+| `course_detail` | 과목마다 `get_course` + `check_prerequisites`(트리별 판정) |
+| `course_options` | 과목마다 제목·학점·속성, 선수과목 판정 결과, 리포트 포함 여부 |
+| `requirement_gap` | 리포트에서 완료·`coveredByPlan`이 아닌 요건 + 지정 노드의 `find_courses_for_requirement` |
+| `semester_plan` | `suggested_academic_plan.<옵션>`(Bulletin 권장 계획)에 리포트 과목 표시(`recorded:등급` / `in_progress` / `not_in_report` / `generic`). 개인 맞춤·검증된 일정이 아님. 옵션을 모르거나 계획이 없으면 `unavailable` |
+| `minor_check` | `get_minor_assessment` 결과(프런트는 `MinorPlanner` 재사용) |
+
+**업로드**: PDF 분석에는 사용자 목표(intent)를 넣지 않고 학생 상태만 추출합니다(`gemini.analyze(pages, "", language)`). intent는 리포트에 저장되고, 업로드 직후 프런트가 채팅을 열어 에이전트의 첫 질문으로 보냅니다.
+
+**실행 기록**: 실행마다 `agent_runs`(모델, 상태, 소요 시간, LLM·도구 호출 수, 화면 종류, 오류)와 `agent_steps`(LLM/도구 단계, 도구 이름·인자·결과, 소요 시간, 오류 코드; 결과 2만 자 초과는 요약)를 남깁니다. Luminal 실패 후 Gemini 실행은 별도 run입니다. 저장 실패는 답변을 막지 않습니다. 90일 보존, 리포트 삭제 시 함께 삭제(`backend/src/main/resources/schema.sql`)
+
+**진행 상황**: 채팅 요청에 `requestId`(UUID)를 넣으면 서버(`AgentProgress`, 메모리, 10분 보관)가 단계(`llm` plan/answer, `tool` 이름, `fallback`)를 기록합니다. 프런트는 답변을 기다리는 동안 `GET /api/reports/{id}/chat/progress/{requestId}`를 1초마다 조회해 "선수과목 확인 중…" 같은 단계와 경과 시간을 보여줍니다. 본인(JWT subject) 요청만 조회되고, 도구 인자·결과는 담지 않습니다.
+
+**메모 API**: `GET /api/memories`, `DELETE /api/memories/{id}`(본인 것만). 저장은 에이전트 도구로만 합니다.
+- 실측(2026-10-24, 가상 리포트, `deepseek-ai/DeepSeek-V4.1-Flash`): "Can I take CMPSC 465 next semester?" → `get_student_record`, `check_prerequisites`, `get_course`×2, 약 9.4초. "What algorithms course should I take?"(과목 코드 없음) → `get_student_record`×2, `get_program_requirements`, `get_course`, `check_prerequisites`, 약 10.7초. 이 질문에서는 `search_courses` 대신 요건 트리에서 과목을 찾음
+- 실측(같은 날, 화면·메모 추가 후, Luminal): "Can I take CMPSC 465?" → `course_detail` 약 12초. "Show me a semester plan to graduate." → `get_policies`·`get_program_requirements` 후 `semester_plan` 약 18~28초. "remember … avoid 8 am classes" → `save_memory` 약 4초. 업로드 목표 문장 "Computational Data Sciences, considering a Math minor" → `get_minor_assessment` 후 `minor_check` 약 12초. 예산 조정 전에는 마지막 질문에서 Luminal이 35초를 넘겨 Gemini로 폴백했음
+- 미구현: `run_audit`, `what_if`, `validate_plan`, 학점·규정·쓰기 도구, 출력 검증 단계, 개인 맞춤 학기 계획(현재는 Bulletin 권장 계획 + 표시)
+- 테스트: `PrerequisiteCheckerTest`, `AdvisorToolsTest`, `AdvisorAgentTest`(루프·한도·폴백), `AdvisorViewsTest`(화면·메모·실행 기록·예산), 프런트 `advisor-view.test.js`·`advisor-view-render.test.js`, `LiveAdvisorAgentTest`·`LiveAdvisorStoreTest`(`LIONPATHWAY_LIVE_TEST=1`, 실제 DB + Gemini/Luminal. 쓰기는 모두 트랜잭션 롤백)
+
+---
+
 ## 10. 남은 한계
 
 | 영역 | 내용 |

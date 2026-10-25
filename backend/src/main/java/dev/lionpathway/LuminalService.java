@@ -4,6 +4,7 @@ import java.net.http.*;
 import java.time.Duration;
 import java.util.*;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
@@ -14,17 +15,34 @@ import org.springframework.stereotype.Service;
  private final String apiKey,baseUrl,model;private final ObjectMapper mapper;
  private final HttpClient client=HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(15)).build();
  public LuminalService(@Value("${LUMINAL_API_KEY:}")String key,@Value("${LUMINAL_BASE_URL:https://flash.luminal.cloud/v1}")String baseUrl,@Value("${LUMINAL_MODEL:deepseek-ai/DeepSeek-V4.1-Flash}")String model,ObjectMapper mapper){if(!baseUrl.startsWith("https://"))throw new IllegalArgumentException("LUMINAL_BASE_URL must use https");if(!model.matches("[A-Za-z0-9._/:-]+"))throw new IllegalArgumentException("Invalid Luminal model name");this.apiKey=key.strip();this.baseUrl=baseUrl.replaceAll("/+$","");this.model=model;this.mapper=mapper;}
+ public String model(){return model;}
  public boolean configured(){return !apiKey.isEmpty();}
  public String chat(JsonNode report,String question,List<Map<String,Object>> history){
   return complete(GeminiService.CHAT_SYSTEM,GeminiService.chatInput(report,question,history));
  }
  private String complete(String system,String text){
+  var payload=Map.of("model",model,"temperature",0.2,"messages",List.of(Map.of("role","system","content",system),Map.of("role","user","content",text)));
+  String answer=post(payload,TIMEOUT).path("message").path("content").asText("");
+  if(answer.isBlank())throw new UpstreamFailure("Luminal did not return an answer. Try a different question.");return answer;
+ }
+ /** One OpenAI-style tool-calling turn: returns the assistant message (content and/or tool_calls, reasoning_content intact). toolsAllowed=false forces a text answer. */
+ public JsonNode agentTurn(JsonNode messages,JsonNode tools,boolean toolsAllowed,Duration timeout){
+  if(!configured())throw new UpstreamFailure("Luminal is not configured on the server.");
+  var payload=Map.of("model",model,"temperature",0.2,"messages",messages,"tools",toolSpecs(tools,mapper),"tool_choice",toolsAllowed?"auto":"none");
+  var message=post(payload,timeout).path("message");
+  if(!message.isObject())throw new UpstreamFailure("Luminal did not return an answer. Try a different question.");
+  return message;
+ }
+ /** AdvisorTools declarations (name, description, JSON-schema parameters) in OpenAI function-tool form. */
+ static ArrayNode toolSpecs(JsonNode declarations,ObjectMapper mapper){
+  var out=mapper.createArrayNode();for(var d:declarations){var t=out.addObject();t.put("type","function");t.set("function",d);}return out;
+ }
+ private JsonNode post(Object payload,Duration timeout){
   if(!configured())throw new UpstreamFailure("Luminal is not configured on the server.");
   long started=System.nanoTime();
   try{
-   var payload=Map.of("model",model,"temperature",0.2,"messages",List.of(Map.of("role","system","content",system),Map.of("role","user","content",text)));
-   var request=HttpRequest.newBuilder(URI.create(baseUrl+"/chat/completions")).timeout(TIMEOUT).header("Content-Type","application/json").header("Authorization","Bearer "+apiKey).POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload))).build();
-   var response=BoundedHttp.send(client,request,TIMEOUT);
+   var request=HttpRequest.newBuilder(URI.create(baseUrl+"/chat/completions")).timeout(timeout).header("Content-Type","application/json").header("Authorization","Bearer "+apiKey).POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload))).build();
+   var response=BoundedHttp.send(client,request,timeout);
    log.info("Luminal response model={} status={} elapsedMs={}",model,response.statusCode(),(System.nanoTime()-started)/1_000_000);
    if(response.statusCode()!=200){
     String message=switch(response.statusCode()){
@@ -37,8 +55,7 @@ import org.springframework.stereotype.Service;
    }
    JsonNode choice=mapper.readTree(response.body()).path("choices").path(0);
    if("length".equals(choice.path("finish_reason").asText()))throw new UpstreamFailure("The Luminal response was cut off. Please ask a narrower question.");
-   String answer=choice.path("message").path("content").asText("");
-   if(answer.isBlank())throw new UpstreamFailure("Luminal did not return an answer. Try a different question.");return answer;
-  }catch(java.net.http.HttpTimeoutException e){throw new AnalysisTimeout("Luminal did not respond within 60 seconds. Please retry in a moment.");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new UpstreamFailure("The Luminal request was interrupted.");}catch(java.io.IOException e){throw new UpstreamFailure("Could not reach Luminal. Please try again.");}
+   return choice;
+  }catch(java.net.http.HttpTimeoutException e){throw new AnalysisTimeout("Luminal did not respond within "+timeout.toSeconds()+" seconds. Please retry in a moment.");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new UpstreamFailure("The Luminal request was interrupted.");}catch(java.io.IOException e){throw new UpstreamFailure("Could not reach Luminal. Please try again.");}
  }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
  private final String apiKey,model;private final ObjectMapper mapper;private final JsonNode schema;
  private final HttpClient client=HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(15)).build();
  public GeminiService(@Value("${GEMINI_API_KEY}")String key,@Value("${GEMINI_MODEL}")String model,ObjectMapper mapper)throws Exception{if(!model.matches("[A-Za-z0-9._-]+"))throw new IllegalArgumentException("Invalid Gemini model name");this.apiKey=key;this.model=model;this.mapper=mapper;try(var stream=new ClassPathResource("analysis-schema.json").getInputStream()){schema=mapper.readTree(stream);}}
+ public String model(){return model;}
  public JsonNode analyze(Map<Integer,String> pages,String intent){return analyze(pages,intent,"en");}
  public JsonNode analyze(Map<Integer,String> pages,String intent,String language){
   String system="""
@@ -40,9 +41,22 @@ import org.springframework.stereotype.Service;
  }
  private String generate(String system,String text,Map<String,Object> config){return generate(system,text,config,Duration.ofSeconds(100));}
  private String generate(String system,String text,Map<String,Object> config,Duration timeout){
+  var payload=Map.of("systemInstruction",Map.of("parts",List.of(Map.of("text",system))),"contents",List.of(Map.of("role","user","parts",List.of(Map.of("text",text)))),"generationConfig",generationConfig(model,config));
+  JsonNode result=post(payload,timeout);
+  var answer=new StringBuilder();for(JsonNode part:result.path("candidates").path(0).path("content").path("parts"))if(!part.path("thought").asBoolean(false)&&part.path("text").isTextual())answer.append(part.path("text").asText());
+  if(answer.isEmpty())throw new UpstreamFailure("The AI service did not return an answer. Try a different report or question.");return answer.toString();
+ }
+ /** One function-calling turn: returns the model's content (text and/or functionCall parts, thought signatures intact). toolsAllowed=false forces a text answer. */
+ public JsonNode agentTurn(String system,JsonNode contents,JsonNode tools,boolean toolsAllowed,Duration timeout){
+  var payload=Map.of("systemInstruction",Map.of("parts",List.of(Map.of("text",system))),"contents",contents,"tools",List.of(Map.of("functionDeclarations",tools)),
+   "toolConfig",Map.of("functionCallingConfig",Map.of("mode",toolsAllowed?"AUTO":"NONE")),"generationConfig",generationConfig(model,Map.of("temperature",0.2)));
+  var content=post(payload,timeout).path("candidates").path(0).path("content");
+  if(!content.path("parts").isArray()||content.path("parts").isEmpty())throw new UpstreamFailure("The AI service did not return an answer. Try a different report or question.");
+  return content;
+ }
+ private JsonNode post(Object payload,Duration timeout){
   long started=System.nanoTime();
   try{
-   var payload=Map.of("systemInstruction",Map.of("parts",List.of(Map.of("text",system))),"contents",List.of(Map.of("role","user","parts",List.of(Map.of("text",text)))),"generationConfig",generationConfig(model,config));
    var request=HttpRequest.newBuilder(URI.create("https://generativelanguage.googleapis.com/v1beta/models/"+model+":generateContent")).timeout(timeout).header("Content-Type","application/json").header("x-goog-api-key",apiKey).POST(HttpRequest.BodyPublishers.ofString(mapper.writeValueAsString(payload))).build();
    var response=BoundedHttp.send(client,request,timeout);
    log.info("Gemini response model={} status={} elapsedMs={}",model,response.statusCode(),(System.nanoTime()-started)/1_000_000);
@@ -60,8 +74,7 @@ import org.springframework.stereotype.Service;
    String finish=result.path("candidates").path(0).path("finishReason").asText("UNKNOWN");
    log.info("Gemini result finish={} outputTokens={} thinkingTokens={}",finish,result.path("usageMetadata").path("candidatesTokenCount").asInt(),result.path("usageMetadata").path("thoughtsTokenCount").asInt());
    if("MAX_TOKENS".equals(finish))throw new UpstreamFailure("The AI response was cut off before analysis finished. Please try again with a shorter report.");
-   var answer=new StringBuilder();for(JsonNode part:result.path("candidates").path(0).path("content").path("parts"))if(!part.path("thought").asBoolean(false)&&part.path("text").isTextual())answer.append(part.path("text").asText());
-   if(answer.isEmpty())throw new UpstreamFailure("The AI service did not return an answer. Try a different report or question.");return answer.toString();
+   return result;
   }catch(java.net.http.HttpTimeoutException e){throw new AnalysisTimeout("The AI service did not respond within "+timeout.toSeconds()+" seconds. Please retry in a moment.");}catch(InterruptedException e){Thread.currentThread().interrupt();throw new UpstreamFailure("The AI request was interrupted.");}catch(java.io.IOException e){throw new UpstreamFailure("Could not reach the AI service. Please try again.");}
  }
 }

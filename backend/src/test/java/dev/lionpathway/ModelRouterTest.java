@@ -32,4 +32,10 @@ class ModelRouterTest {
   var answer=new ModelRouter(gemini,luminal,web).chat(mapper.createObjectNode(),"Professor reviews",List.of());
   assertEquals("unavailable",answer.webResearch().path("status").asText());assertTrue(answer.text().contains("report"));
  }
+ @Test void fallbackChatSkipsLuminalButKeepsWebEvidence(){
+  var gemini=mock(GeminiService.class);var luminal=mock(LuminalService.class);var web=mock(WebResearchService.class);when(luminal.configured()).thenReturn(true);
+  var evidence=mapper.createObjectNode().put("status","searched");when(web.search(any(),any())).thenReturn(evidence);when(gemini.chat(any(),any(),any())).thenReturn("g");
+  var answer=new ModelRouter(gemini,luminal,web).fallbackChat(mapper.createObjectNode(),"Plan my semesters with professor reviews",List.of());
+  assertEquals("gemini",answer.provider());assertEquals(evidence,answer.webResearch());verify(luminal,never()).chat(any(),any(),any());
+ }
 }
