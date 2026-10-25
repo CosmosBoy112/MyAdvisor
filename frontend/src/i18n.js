@@ -8,6 +8,7 @@ export function detectInputLanguage(text,current='en'){
 }
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
+'The PDF marks this section satisfied. In-progress courses are shown separately from earned credits.':'PDF에서 충족으로 표시된 항목입니다. 수강 중인 과목은 이수 완료 학점과 구분합니다.',
 'Web search quota is exhausted. This answer could not be verified online.':'검색 API 사용량 한도를 초과해 이 답변을 인터넷에서 검증하지 못했습니다.',
 'Web findings may be outdated or subjective. Confirm course eligibility and academic decisions with your adviser.':'인터넷 정보는 오래되었거나 주관적일 수 있습니다. 과목 인정 여부와 학업 결정은 어드바이저와 상담 후 확정하세요.',
 'No supported web findings were returned.':'출처로 뒷받침되는 검색 결과를 받지 못했습니다.',

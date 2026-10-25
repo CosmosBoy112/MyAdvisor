@@ -251,3 +251,8 @@ WHERE scope_code IN ('CMPSC_BS','CMPSC_ETM') AND catalog_year='2026-27';
 - **문맥 크기**(실측): Data Sciences 약 17KB, CMPSC 약 26KB
 - **규칙**(`GeminiService.CHAT_SYSTEM`): 출처 URL 인용, `unparsed_text` 선수과목은 해석하지 않고 인용, 리포트의 이수 상태·학점은 바꾸지 않음. `report.catalog`(JSON 기반 CMPSC 비교)의 기존 규칙은 그대로 유지
 - 테스트: `CatalogDbServiceTest`(전공·학년도·과목 코드·DB 오류), `LiveCatalogDbTest`(`LIONPATHWAY_LIVE_TEST=1`, 실제 DB 조회 전용)
+
+
+### 2026-10-24 · 앱 보고서 완료 항목 복구
+
+카탈로그 테이블이나 스키마 변경 없음. `reports.analysis`의 기존 CS 보고서 1건에 PDF 원문에서 검증한 누락 Satisfied 섹션 28개를 추가했다(완료 19, IP 의존 6, 과목표 검증 필요 3). 기존 미완료 2개, 전체 학점 127/74 earned/30 IP, 대화 기록은 유지했다. 원본은 Git 밖의 비공개 작업 폴더에 백업했으며 기존 JSON과 일치할 때만 갱신 후 별도 연결에서 검증했다. `RequirementReconciler`는 새 PDF 업로드에도 동일한 복원을 적용한다. 완료 개수는 보고서 요건 섹션 수이며 서로 겹칠 수 있는 학점/과목을 합산한 값이 아니다.

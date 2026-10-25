@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
   sanitizeCredits((ObjectNode)out.path("totals"),warnings);
   DegreeCreditReconciler.reconcile(out,pages,warnings);
   if(out.path("requirements").size()>150)throw new IllegalArgumentException("Too many requirements were returned. Please use a shorter report.");
+  RequirementReconciler.reconcile(out,pages);
   int index=0;
   for(JsonNode value:out.path("requirements")){
    if(!(value instanceof ObjectNode r)||!r.path("title").isTextual()||!r.path("description").isTextual())throw new IllegalArgumentException("The requirement structure was incomplete. Please try again.");
