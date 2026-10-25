@@ -21,3 +21,10 @@ opens the main chat; returning accounts can navigate between Profile and chat.
 No profile/upload modal is used. Last-report deletion protection remains in both UI and API.
 
 Selecting My reports keeps the user on Profile and replaces the list with the full report inline. A dedicated back button restores My reports. During report loading, list and detail content stay hidden until loading completes. Chat View report continues to use the sidebar. Requirement question actions return to the chat composer.
+
+
+## Clear conversation
+View report stays in the chat header. Clear chat sits at the right end of the PDF filename row, and is disabled for empty or active conversations.
+A confirmation dialog explains that messages will be permanently removed while the report remains.
+`DELETE /api/reports/{id}/messages` verifies ownership and deletes only that report's messages.
+The UI clears messages after success and preserves them on error. Sample conversations reset locally.

@@ -30,15 +30,15 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
  try{
   const {default:App}=await import((await compile(new URL('./App.vue',import.meta.url))).href);
   const {locale}=await import('./i18n.js');
-  async function mount(rows,{listFails=false,authenticated=true,hash='#/'}={}){
+  async function mount(rows,{listFails=false,authenticated=true,hash='#/',clearFails=false}={}){
    app?.unmount();document.body.innerHTML='<div id="test-app"></div>';locale.value='en';sessionStorage.clear();window.history.replaceState(null,'',hash);
-   const requests=[];
+   const requests=[];let historyCleared=false;
    const auth={isAuthenticated:ref(authenticated),isLoading:ref(false),error:ref(null),user:ref({sub:'synthetic-user',name:'Test Student',email:'student@example.test'}),getAccessTokenSilently:async()=>'synthetic-test-token',loginWithRedirect:async()=>{},logout:()=>{auth.isAuthenticated.value=false;}};
    globalThis.fetch=async(url,options={})=>{
     requests.push({url,options});
     if(url.endsWith('/health'))return new Response('{"status":"ok","live":true}');
     if(url==='/api/reports'&&!options.method){if(listFails)return new Response('NOT_FOUND',{status:404});return Response.json(rows);}
-    if(url.endsWith('/messages'))return Response.json([{role:'assistant',content:'Previous conversation'}]);
+    if(url.endsWith('/messages')){if(options.method==='DELETE'){if(clearFails)return Response.json({message:'Reset failed'},{status:500});historyCleared=true;return new Response(null,{status:204});}return Response.json(historyCleared?[]:[{role:'assistant',content:'Previous conversation'}]);}
     if(url.endsWith('/chat'))return Response.json({answer:'Synthetic answer',provider:'test'});
     if(url==='/api/reports'&&options.method==='POST'){rows.unshift({id:'new-report',filename:'new-report.pdf',createdAt:'2026-10-24'});return Response.json({...sample,id:'new-report',demo:false,fileName:'new-report.pdf'});}
     if(options.method==='DELETE'){if(rows.length<=1)return Response.json({message:'Keep at least one report.'},{status:409});rows.splice(rows.findIndex(r=>url.endsWith('/'+r.id)),1);return new Response(null,{status:204});}
@@ -54,6 +54,27 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    assert.ok(document.querySelector('.report-sidebar'));assert.match(document.body.textContent,/Sample data/);
    document.querySelector('.brand').click();await settle();assert.ok(document.querySelector('.welcome'));
   });
+  await t.test('sign out appears only beside the profile identity',async()=>{
+   await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}]);
+   assert.equal(button('Sign out'),undefined);
+   await click('Profile');assert.ok(document.querySelector('.profile-identity .profile-signout'));
+   assert.equal([...document.querySelectorAll('button')].filter(b=>b.textContent.trim()==='Sign out').length,1);
+   await click('Sign out');assert.ok(document.querySelector('.welcome'));
+  });
+  await t.test('clear chat confirms, preserves the report and stays cleared after reopening',async()=>{
+   const {requests}=await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}]);
+   assert.ok(document.querySelector('.conversation-context .clear-chat-button'));assert.equal(document.querySelector('.chat-form .clear-chat-button'),null);assert.equal(document.querySelector('.chat-header .clear-chat-button'),null);
+   await click('Clear chat');await click('Keep conversation');assert.match(document.querySelector('.chat-body').textContent,/Previous conversation/);
+   await click('Clear chat');document.querySelector('.confirm-actions .danger-button').click();await settle();
+   assert.doesNotMatch(document.querySelector('.chat-body').textContent,/Previous conversation/);
+   assert.equal(requests.filter(r=>r.options.method==='DELETE').length,1);
+   assert.equal(requests.find(r=>r.options.method==='DELETE').url,'/api/reports/saved/messages');
+   await click('Profile');assert.equal(document.querySelectorAll('.saved-report').length,1);document.querySelector('.saved-report').click();await settle();document.querySelector('.brand').click();await settle();
+   assert.doesNotMatch(document.querySelector('.chat-body').textContent,/Previous conversation/);
+   await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}],{clearFails:true});
+   await click('Clear chat');document.querySelector('.confirm-actions .danger-button').click();await settle();
+   assert.match(document.querySelector('.chat-body').textContent,/Previous conversation/);assert.match(document.querySelector('[role=dialog]').textContent,/Reset failed/);
+  });
   await t.test('first report setup appears after account sign-in, never on the public main page',async()=>{
    const {auth}=await mount([],{authenticated:false});assert.equal(document.querySelector('input[type=file]'),null);assert.equal(button('Add new'),undefined);
    auth.isAuthenticated.value=true;await settle();
@@ -67,12 +88,12 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    assert.ok(document.querySelector('main.profile-page .profile-upload'));assert.equal(document.querySelector('.conversation-main'),null);
    await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}],{hash:'#/profile'});
    assert.ok(document.querySelector('main.profile-page'));assert.equal(document.querySelector('.conversation-main'),null);
-   await click('Ask your report');assert.ok(document.querySelector('.conversation-main'));assert.equal(window.location.hash,'#/');
+   assert.equal(button('Ask your report'),undefined);document.querySelector('.brand').click();await settle();assert.ok(document.querySelector('.conversation-main'));assert.equal(window.location.hash,'#/');
   });
   await t.test('returning account restores chat; report is optional and profile reopens it',async()=>{
    const {requests}=await mount([{id:'saved-one',filename:'saved-report.pdf',major:'Computer Science',createdAt:'2026-10-24'}]);
    assert.ok(document.querySelector('.conversation-main'));assert.equal(document.querySelector('.report-sidebar'),null);assert.match(document.querySelector('.chat-body').textContent,/Previous conversation/);
-   await click('View report');assert.ok(document.querySelector('aside.report-sidebar'));await click('Hide report');assert.equal(document.querySelector('.report-sidebar'),null);
+   await click('View report');assert.ok(document.querySelector('aside.report-sidebar'));assert.equal(document.querySelector('.report-toggle'),null);document.querySelector('.report-sidebar button[aria-label="Hide report"]').click();await settle();assert.equal(document.querySelector('.report-sidebar'),null);assert.ok(button('View report'));
    await click('Profile');document.querySelector('.saved-report').click();await settle();assert.ok(document.querySelector('.profile-page .profile-report'));assert.equal(document.querySelector('.report-sidebar'),null);assert.equal(document.querySelector('.conversation-main'),null);
    await click('Profile');await click('Add new');assert.ok(document.querySelector('.profile-upload'));assert.equal(document.querySelector('.conversation-main'),null);
    assert.ok(requests.some(r=>r.url==='/api/reports/saved-one/messages'));
@@ -89,7 +110,7 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    const pending=new Promise(resolve=>{release=resolve;});
    globalThis.fetch=async(url,options)=>{if(url==='/api/reports')await pending;return originalFetch(url,options);};
    await click('Profile');
-   assert.match(document.querySelector('.profile-page .loading-message').textContent,/Loading reports/);
+   assert.match(document.querySelector('.profile-page .loading-message').textContent,/Loading reports/);assert.ok(document.querySelector('.profile-page .loading-mark'));
    assert.equal(document.querySelector('.saved-report-row'),null);
    assert.equal(document.querySelector('.profile-report'),null);
    assert.equal(document.querySelector('.profile-upload'),null);
@@ -113,8 +134,8 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
   await t.test('profile disables the last deletion and disables it after deleting a second report',async()=>{
    const {requests}=await mount([{id:'first',filename:'first.pdf',createdAt:'2026-10-24'},{id:'second',filename:'second.pdf',createdAt:'2026-10-23'}]);
    assert.equal(document.querySelector('.profile-upload'),null);await click('Profile');
-   document.querySelectorAll('.saved-report-delete')[1].click();await settle();await click('Delete report');
-   assert.equal(document.querySelectorAll('.saved-report').length,1);const last=document.querySelector('.saved-report-delete');assert.equal(last.disabled,true);last.click();await settle();
+   document.querySelectorAll('.saved-report-row .saved-report-delete')[1].click();await settle();await click('Delete report');
+   assert.equal(document.querySelectorAll('.saved-report').length,1);const last=document.querySelector('.saved-report-row .saved-report-delete');assert.equal(last.disabled,true);last.click();await settle();
    assert.match(document.querySelector('.profile-page').textContent,/Keep at least one report/);assert.equal(requests.filter(r=>r.options.method==='DELETE').length,1);
   });
   await t.test('upload from profile activates main chat and sends the submitted question once',async()=>{

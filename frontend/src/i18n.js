@@ -123,3 +123,5 @@ Object.assign(ko,{"Profile": "프로필", "View report": "리포트 보기", "Hi
 Object.assign(ko,{"Add new": "새로 추가", "Analyze and save": "분석 후 저장", "Report saved to your profile.": "리포트가 프로필에 저장되었습니다."});
 
 Object.assign(ko,{"Set up your profile": "프로필 설정", "Add your first report": "첫 리포트 등록", "Complete your account setup by adding a LionPATH PDF.": "LionPATH PDF를 등록해 계정 설정을 완료하세요.", "Keep at least one report. Add another report before deleting this one.": "리포트는 최소 1개를 유지해야 합니다. 다른 리포트를 등록한 뒤 삭제하세요."});
+
+Object.assign(ko,{"Clear chat": "채팅 초기화", "Clear this conversation?": "이 대화를 초기화할까요?", "Messages for this report will be permanently deleted. Your report will be kept.": "이 리포트의 메시지가 영구 삭제됩니다. 리포트는 유지됩니다.", "Keep conversation": "대화 유지", "Clearing…": "초기화 중…"});

@@ -268,7 +268,12 @@ export default {
     "Set up your profile": "设置个人资料",
     "Add your first report": "添加第一份报告",
     "Complete your account setup by adding a LionPATH PDF.": "添加 LionPATH PDF 以完成账户设置。",
-    "Keep at least one report. Add another report before deleting this one.": "请至少保留一份报告。删除前请先添加另一份报告。"
+    "Keep at least one report. Add another report before deleting this one.": "请至少保留一份报告。删除前请先添加另一份报告。",
+    "Clear chat": "清空聊天",
+    "Clear this conversation?": "清空此对话？",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "此报告的消息将被永久删除。报告将保留。",
+    "Keep conversation": "保留对话",
+    "Clearing…": "正在清空…"
   },
   "ja": {
     "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.": "2026–27年度のBulletinではMATH 400が3単位上限と記載されています。日付のない学科の案内では、学習アシスタントとしてのMATH 497の経験が別途3単位上限とされています。このプレビューでは、アドバイザーの確認を待つ間、両方とも保守的に上限を設定しています。",
@@ -538,7 +543,12 @@ export default {
     "Set up your profile": "プロフィール設定",
     "Add your first report": "最初のレポートを追加",
     "Complete your account setup by adding a LionPATH PDF.": "LionPATH PDF を追加してアカウント設定を完了してください。",
-    "Keep at least one report. Add another report before deleting this one.": "レポートを最低1件保持してください。削除する前に別のレポートを追加してください。"
+    "Keep at least one report. Add another report before deleting this one.": "レポートを最低1件保持してください。削除する前に別のレポートを追加してください。",
+    "Clear chat": "チャットを消去",
+    "Clear this conversation?": "この会話を消去しますか？",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "このレポートのメッセージは完全に削除されます。レポートは保持されます。",
+    "Keep conversation": "会話を保持",
+    "Clearing…": "消去中…"
   },
   "es": {
     "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.": "El Boletín 2026–27 enumera MATH 400 con un límite de 3 créditos; la guía departamental sin fecha limita por separado la experiencia de asistente de aprendizaje MATH 497 a 3. Esta vista previa limita ambos de forma conservadora a la espera de la confirmación del asesor.",
@@ -808,7 +818,12 @@ export default {
     "Set up your profile": "Configura tu perfil",
     "Add your first report": "Añade tu primer informe",
     "Complete your account setup by adding a LionPATH PDF.": "Añade un PDF de LionPATH para completar la configuración de tu cuenta.",
-    "Keep at least one report. Add another report before deleting this one.": "Conserva al menos un informe. Añade otro antes de eliminar este."
+    "Keep at least one report. Add another report before deleting this one.": "Conserva al menos un informe. Añade otro antes de eliminar este.",
+    "Clear chat": "Borrar chat",
+    "Clear this conversation?": "¿Borrar esta conversación?",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "Los mensajes de este informe se eliminarán permanentemente. El informe se conservará.",
+    "Keep conversation": "Conservar conversación",
+    "Clearing…": "Borrando…"
   },
   "fr": {
     "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.": "Le Bulletin 2026–27 indique que MATH 400 est plafonné à 3 crédits ; les conseils du département, non datés, plafonnent séparément l’expérience d’assistant d’apprentissage MATH 497 à 3. Cet aperçu plafonne prudemment les deux dans l’attente de la confirmation d’un conseiller.",
@@ -1078,7 +1093,12 @@ export default {
     "Set up your profile": "Configurez votre profil",
     "Add your first report": "Ajoutez votre premier rapport",
     "Complete your account setup by adding a LionPATH PDF.": "Ajoutez un PDF LionPATH pour terminer la configuration de votre compte.",
-    "Keep at least one report. Add another report before deleting this one.": "Conservez au moins un rapport. Ajoutez-en un autre avant de supprimer celui-ci."
+    "Keep at least one report. Add another report before deleting this one.": "Conservez au moins un rapport. Ajoutez-en un autre avant de supprimer celui-ci.",
+    "Clear chat": "Effacer le chat",
+    "Clear this conversation?": "Effacer cette conversation ?",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "Les messages de ce rapport seront définitivement supprimés. Le rapport sera conservé.",
+    "Keep conversation": "Conserver la conversation",
+    "Clearing…": "Suppression…"
   },
   "de": {
     "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.": "Das Bulletin 2026–27 führt MATH 400 mit einer Obergrenze von 3 Credits auf; die undatierte Fachbereichsrichtlinie begrenzt die Learning-Assistant-Erfahrung MATH 497 separat auf 3. Diese Vorschau begrenzt beide konservativ bis zur Bestätigung durch die Studienberatung.",
@@ -1348,7 +1368,12 @@ export default {
     "Set up your profile": "Profil einrichten",
     "Add your first report": "Ersten Bericht hinzufügen",
     "Complete your account setup by adding a LionPATH PDF.": "Füge eine LionPATH-PDF hinzu, um dein Konto einzurichten.",
-    "Keep at least one report. Add another report before deleting this one.": "Behalte mindestens einen Bericht. Füge vor dem Löschen einen weiteren hinzu."
+    "Keep at least one report. Add another report before deleting this one.": "Behalte mindestens einen Bericht. Füge vor dem Löschen einen weiteren hinzu.",
+    "Clear chat": "Chat löschen",
+    "Clear this conversation?": "Diese Unterhaltung löschen?",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "Die Nachrichten dieses Berichts werden dauerhaft gelöscht. Der Bericht bleibt erhalten.",
+    "Keep conversation": "Unterhaltung behalten",
+    "Clearing…": "Wird gelöscht…"
   },
   "pt": {
     "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.": "O Bulletin de 2026–27 lista MATH 400 com limite de 3 créditos; a orientação departamental sem data limita separadamente a experiência de assistente de aprendizagem em MATH 497 a 3. Esta prévia limita ambos de forma conservadora, pendente de confirmação do orientador.",
@@ -1618,7 +1643,12 @@ export default {
     "Set up your profile": "Configure seu perfil",
     "Add your first report": "Adicione seu primeiro relatório",
     "Complete your account setup by adding a LionPATH PDF.": "Adicione um PDF do LionPATH para concluir a configuração da conta.",
-    "Keep at least one report. Add another report before deleting this one.": "Mantenha pelo menos um relatório. Adicione outro antes de excluir este."
+    "Keep at least one report. Add another report before deleting this one.": "Mantenha pelo menos um relatório. Adicione outro antes de excluir este.",
+    "Clear chat": "Limpar conversa",
+    "Clear this conversation?": "Limpar esta conversa?",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "As mensagens deste relatório serão excluídas permanentemente. O relatório será mantido.",
+    "Keep conversation": "Manter conversa",
+    "Clearing…": "Limpando…"
   },
   "ru": {
     "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.": "В бюллетене 2026–27 указано, что MATH 400 ограничен 3 кредитами; недатированное руководство кафедры отдельно ограничивает опыт ассистента по обучению MATH 497 3 кредитами. В этом предварительном просмотре оба ограничения консервативно применены до подтверждения консультантом.",
@@ -1888,7 +1918,12 @@ export default {
     "Set up your profile": "Настройка профиля",
     "Add your first report": "Добавьте первый отчёт",
     "Complete your account setup by adding a LionPATH PDF.": "Добавьте PDF LionPATH, чтобы завершить настройку аккаунта.",
-    "Keep at least one report. Add another report before deleting this one.": "Сохраните хотя бы один отчёт. Перед удалением добавьте другой."
+    "Keep at least one report. Add another report before deleting this one.": "Сохраните хотя бы один отчёт. Перед удалением добавьте другой.",
+    "Clear chat": "Очистить чат",
+    "Clear this conversation?": "Очистить этот разговор?",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "Сообщения этого отчёта будут удалены навсегда. Отчёт сохранится.",
+    "Keep conversation": "Сохранить разговор",
+    "Clearing…": "Очистка…"
   },
   "hi": {
     "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.": "2026–27 बुलेटिन में MATH 400 को 3 क्रेडिट तक सीमित बताया गया है; बिना तारीख वाला विभागीय मार्गदर्शन अलग से लर्निंग-असिस्टेंट MATH 497 अनुभव को 3 तक सीमित करता है। यह पूर्वावलोकन सलाहकार की पुष्टि तक दोनों को रूढ़िवादी रूप से सीमित करता है।",
@@ -2158,6 +2193,11 @@ export default {
     "Set up your profile": "प्रोफ़ाइल सेट करें",
     "Add your first report": "अपनी पहली रिपोर्ट जोड़ें",
     "Complete your account setup by adding a LionPATH PDF.": "खाता सेटअप पूरा करने के लिए LionPATH PDF जोड़ें।",
-    "Keep at least one report. Add another report before deleting this one.": "कम से कम एक रिपोर्ट रखें। इसे हटाने से पहले दूसरी रिपोर्ट जोड़ें।"
+    "Keep at least one report. Add another report before deleting this one.": "कम से कम एक रिपोर्ट रखें। इसे हटाने से पहले दूसरी रिपोर्ट जोड़ें।",
+    "Clear chat": "चैट साफ़ करें",
+    "Clear this conversation?": "यह बातचीत साफ़ करें?",
+    "Messages for this report will be permanently deleted. Your report will be kept.": "इस रिपोर्ट के संदेश स्थायी रूप से हटा दिए जाएँगे। आपकी रिपोर्ट बनी रहेगी।",
+    "Keep conversation": "बातचीत रखें",
+    "Clearing…": "साफ़ हो रहा है…"
   }
 };

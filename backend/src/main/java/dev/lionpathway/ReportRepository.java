@@ -15,6 +15,11 @@ import org.springframework.http.HttpStatus;
  public List<Map<String,Object>> list(String owner){return jdbc.queryForList("SELECT id,filename,analysis->>'major' AS major,created_at AS \"createdAt\" FROM reports WHERE owner_subject=? ORDER BY created_at DESC LIMIT 50",owner);}
  public List<Map<String,Object>> history(UUID id){var rows=jdbc.queryForList("SELECT role, content FROM (SELECT id,role,content FROM chat_messages WHERE report_id=? ORDER BY id DESC LIMIT 12) recent ORDER BY id",id);return rows.stream().map(ChatMessageCodec::decode).toList();}
  @Transactional public void conversation(UUID id,String question,String answer){jdbc.update("INSERT INTO chat_messages(report_id,role,content) VALUES (?,'user',?),(?,'assistant',?)",id,question,id,answer);}
+ @Transactional public void clearHistory(UUID id,String owner){
+  Long owned=jdbc.queryForObject("SELECT count(*) FROM reports WHERE id=? AND owner_subject=?",Long.class,id,owner);
+  if(owned==null||owned==0)throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Report not found");
+  jdbc.update("DELETE FROM chat_messages WHERE report_id IN (SELECT id FROM reports WHERE id=? AND owner_subject=?)",id,owner);
+ }
  @Transactional public void delete(UUID id,String owner){
   // Serialize deletions for this account so two concurrent requests cannot both
   // observe two reports and delete the last pair. Ownership is checked first.
