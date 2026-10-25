@@ -10,6 +10,7 @@ import ChatAnswer from './components/ChatAnswer.vue';
 import AppliedCourses from './components/AppliedCourses.vue';
 import MinorPlanner from './components/MinorPlanner.vue';
 import RequirementChart from './components/RequirementChart.vue';
+import WelcomePage from './components/WelcomePage.vue';
 import BrandMark from './components/BrandMark.vue';
 import {apiRequest} from './api.js';
 import {sessionStatus} from './auth-config.js';
@@ -104,9 +105,9 @@ function pick(f){if(busy.value)return;error.value='';const problem=validateFile(
 function drop(event){dragging.value=false;if(event.dataTransfer.files.length)pick(event.dataTransfer.files[0]);}
 async function signIn(){error.value='';if(!configured){notice.value='Live sign-in needs Auth0 configuration. You can explore the sample without an account.';return;}try{if(intent.value.trim())sessionStorage.setItem('lionpathway-goal',intent.value);await auth.loginWithRedirect();}catch(e){error.value=e.message;}}
 function signOut(){auth?.logout({logoutParams:{returnTo:window.location.origin}});}
-function demo(){report.value=structuredClone(sample);chatBusy.value=false;reportPanelOpen.value=false;uploadOpen.value=false;messages.value=[];filter.value='all';error.value='';notice.value='';window.scrollTo(0,0);void answerInitialQuestion(intent.value);}
+function demo(showReport=false){report.value=structuredClone(sample);chatBusy.value=false;reportPanelOpen.value=Boolean(showReport);uploadOpen.value=false;messages.value=[];filter.value='all';error.value='';notice.value='';window.scrollTo(0,0);void answerInitialQuestion(intent.value);}
 function reset(){report.value=null;messages.value=[];chatBusy.value=false;reportPanelOpen.value=false;uploadOpen.value=false;source.value=null;error.value='';expanded.value=null;deleteConfirm.value=false;}
-function home(){if(busy.value||onboarding.value)return;historyOpen.value=false;uploadOpen.value=false;reportPanelOpen.value=false;}
+function home(){if(busy.value||onboarding.value)return;if(report.value?.demo){reset();return;}historyOpen.value=false;uploadOpen.value=false;reportPanelOpen.value=false;}
 async function addReport(){if(busy.value||chatBusy.value)return;historyOpen.value=true;uploadOpen.value=true;error.value='';if(report.value)intent.value='';file.value=null;consent.value=false;await nextTick();fileInput.value?.click();}
 async function analyze(){const submittedIntent=intent.value.trim();let analysisSucceeded=false;useInputLanguage(submittedIntent);error.value='';if(authLoading.value){error.value='Sign-in is still loading. Please try again in a moment.';return;}if(!configured){error.value='Live PDF analysis requires Auth0, Gemini, and the backend. Use “Explore a sample” to preview the experience.';return;}if(!auth.isAuthenticated.value){await signIn();return;}if(!file.value){fileInput.value.click();return;}if(!consent.value){error.value='Please allow your report text to be sent to the AI providers for analysis.';return;}if(busy.value)return;busy.value=true;elapsed.value=0;uploadStage.value='auth';uploadController=new AbortController();const started=Date.now();const ticker=setInterval(()=>elapsed.value=Math.floor((Date.now()-started)/1000),1000);try{const form=new FormData();form.append('file',file.value);form.append('intent',submittedIntent);form.append('language',locale.value);report.value=await request('/api/reports',{method:'POST',body:form},{signal:uploadController.signal,onStage:stage=>uploadStage.value=stage});messages.value=[];chatBusy.value=false;reportPanelOpen.value=false;uploadOpen.value=false;filter.value='all';expanded.value=null;file.value=null;consent.value=false;notice.value='Report saved to your profile.';await loadHistory();historyOpen.value=false;window.scrollTo(0,0);analysisSucceeded=true;}catch(e){error.value=e.message;}finally{clearInterval(ticker);uploadController=null;busy.value=false;}if(analysisSucceeded)await answerInitialQuestion(submittedIntent);}
 async function answerInitialQuestion(text){
@@ -139,8 +140,9 @@ function value(n){return Number.isFinite(n)?n:'—';}
   </header>
   <div v-if="deletionNotice" class="success-toast" role="status" aria-live="polite" aria-atomic="true"><Check :size="18"/><span>{{t(deletionNotice)}}</span><button type="button" @click="dismissDeletionNotice" aria-label="Dismiss deletion notification"><X :size="16"/></button></div>
   <div v-if="notice" class="notice" role="status">{{t(notice)}}<button @click="notice=''" :aria-label="t(&quot;Dismiss&quot;)"><X :size="16"/></button></div>
-  <div v-if="error && (report || historyOpen)" class="global-error error" role="alert">{{t(error)}}<button @click="error=''" :aria-label="t(&quot;Dismiss error&quot;)"><X :size="16"/></button></div>
-  <main v-if="!report && !onboarding && !historyOpen" class="landing">
+  <div v-if="error && (report || historyOpen || !signedIn)" class="global-error error" role="alert">{{t(error)}}<button @click="error=''" :aria-label="t(&quot;Dismiss error&quot;)"><X :size="16"/></button></div>
+  <WelcomePage v-if="!signedIn && !authLoading && !report" @signin="signIn" @sample="demo"/>
+  <main v-if="(signedIn || authLoading) && !report && !onboarding && !historyOpen" class="landing">
    <section class="hero">
     <h1>Your academic assistant</h1><p class="hero-description">Sign in to connect your report and start a conversation.</p>
     <form v-if="!signedIn" class="search-card" @submit.prevent="signIn"><label class="sr-only" for="landing-question">Your question</label><textarea id="landing-question" v-model="intent" rows="2" maxlength="1000" @keydown="submitOnEnter" placeholder="Ask about courses, credits or a minor…"></textarea><div class="search-toolbar"><button type="submit" class="outline-button">Sign in <ArrowUpRight :size="16"/></button></div></form>

@@ -46,6 +46,14 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    };
    app=createApp(App);app.provide('authConfigured',true);app.provide('testAuth',auth);app.mount('#test-app');await settle();return {auth,requests};
   }
+  await t.test('signed-out introduction opens sample analysis and returns home',async()=>{
+   await mount([],{authenticated:false});
+   assert.match(document.querySelector('.welcome').textContent,/easy-A courses/);
+   assert.match(document.querySelector('.welcome-end').textContent,/Try OnlyPlans/);
+   await click('Open the sample analysis');
+   assert.ok(document.querySelector('.report-sidebar'));assert.match(document.body.textContent,/Sample data/);
+   document.querySelector('.brand').click();await settle();assert.ok(document.querySelector('.welcome'));
+  });
   await t.test('first report setup appears after account sign-in, never on the public main page',async()=>{
    const {auth}=await mount([],{authenticated:false});assert.equal(document.querySelector('input[type=file]'),null);assert.equal(button('Add new'),undefined);
    auth.isAuthenticated.value=true;await settle();
