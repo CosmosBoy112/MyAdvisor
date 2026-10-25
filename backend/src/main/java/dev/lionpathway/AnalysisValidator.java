@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
   DegreeCreditReconciler.reconcile(out,pages,warnings);
   if(out.path("requirements").size()>150)throw new IllegalArgumentException("Too many requirements were returned. Please use a shorter report.");
   for(var item:out.path("requirements"))if(item instanceof ObjectNode node){node.remove("appliedCourses");node.remove("appliedCoursesVerified");}
+  CourseInventory.extract(out,pages);
   RequirementReconciler.reconcile(out,pages);
   int index=0;
   for(JsonNode value:out.path("requirements")){

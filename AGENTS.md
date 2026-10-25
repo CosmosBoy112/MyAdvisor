@@ -15,6 +15,8 @@
 - 스키마나 도구 명세를 바꾸면 위 문서를 함께 갱신하세요.
 - DB에 테이블을 만들거나 데이터를 다시 적재·수정했다면 `docs/CHANGES-advisor-catalog-db.md`의 "DB 적재 현황"(범위, 행 수, 출처)을 같은 커밋에서 갱신하세요. 앱 DB와 같은 DB이므로 `DROP`/`DELETE`는 하지 말고, 적재 전 `--dry-run`으로 확인하세요.
 
+- **Math minor**: `docs/MATH-MINOR.md` 참조. `MATH_UMNR` 2026–27 규칙은 policy_rules의 minor_audit_rules_v1 스냅샷에 저장. `MathMinorService`가 courseInventory와 대조해 참고 결과를 반환하며 전공 중복6학점/학년도/최종 승인은 별도 검토. 전용 적재기는 `ingest/load_math_minor_db.py`(먼저 --dry-run).
+
 ## 커밋·푸시 전
 - `PROGRESS.md` 맨 위에 이번 작업 항목을 추가하고 같은 커밋에 포함하세요. 형식은 파일 상단 템플릿을 따릅니다.
 - "상태"에는 실제로 실행한 검증만 적고, 미검증 범위를 숨기지 마세요.

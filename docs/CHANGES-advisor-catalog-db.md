@@ -260,3 +260,10 @@ WHERE scope_code IN ('CMPSC_BS','CMPSC_ETM') AND catalog_year='2026-27';
 ### 2026-10-24 · 인정 과목 내역 추가
 
 동일 앱 보고서 1건의 요건별 `appliedCourses`/`appliedCoursesVerified` 필드 보완. 원문 과목표 합계와 used가 일치하는 24요건에 30개 과목 배정(중복 포함)의 코드·제목·학기·학점·성적/IP·페이지 저장. 불확실한 표는 비워 두고 기존 상태/학점은 유지. 별도 비공개 백업, 조건부 갱신, 새 연결 대조 완료. 카탈로그/DB 스키마 변경 없음.
+
+
+### 2026-10-24 · Math minor 참고 요건 및 과목 내역
+
+`MATH_UMNR` minor 프로그램 1건, 2026–27 버전 1건(최소26학점), `minor_audit_rules_v1` 정책 스냅샷 1건을 INSERT로 추가했다. 4개 요건 그룹·성적·중복/개별 학점 제한·출처 충돌은 policy JSON에 보관하며 requirement_nodes에는 별도 복제하지 않았다. 기존 테이블/스키마/카탈로그 행은 수정하지 않았다. 전용 `ingest/load_math_minor_db.py --dry-run` 롤백 → 실제 적재 → 재실행 no-op 및 스키마 지문 동일 확인. `MathMinorService`가 DB 스냅샷을 읽어 Math minor 비교를 계산하며 자세한 범위는 `docs/MATH-MINOR.md` 참조.
+
+기존 사용자 CS 보고서 1건에 제공 PDF에서 추출한 courseInventory(37개 과목/학기별 수강 내역, 반복 요건 표시는 중복 제거)를 추가했다. 전체 학점/30개 요건/대화 기록은 유지. 원본 Git 밖 비공개 백업 및 조건부 UPDATE 후 새 연결에서 대조했다. 이 PDF는 2023년 요건이므로 2026–27 마이너 비교는 참고값이다.

@@ -8,6 +8,26 @@ export function detectInputLanguage(text,current='en'){
 }
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
+'The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.':'2026–27 Bulletin은 MATH 400을 최대 3학점으로 제한합니다. 학과 안내는 학습조교 MATH 497에 3학점 제한을 두므로, 이 비교에서는 확인 전까지 둘 다 최대 3학점으로 계산합니다.',
+'The department page includes MATH 240 and MATH 252; the 2026–27 Bulletin additional-course pool does not. They are not automatically applied here.':'학과 안내의 MATH 240·252는 2026–27 Bulletin 선택 목록에 없어 자동 인정하지 않았습니다.',
+'Known overlapping-course pairs are counted once. Other duplicate-credit restrictions, cross-list substitutions, repeatability and approvals require verification.':'확인된 중복 과목 쌍은 한 번만 인정합니다. 그 외 중복·교차개설·재수강·대체 승인은 확인이 필요합니다.',
+'Six credits must be unique from the major prescribed courses. The PDF course list alone does not establish this.':'전공 필수 과목과 겹치지 않는 6학점이 필요합니다. PDF 과목 목록만으로는 확정할 수 없습니다.',
+'This is a reference comparison, not a minor declaration or graduation certification.':'참고용 비교이며 부전공 신청이나 졸업 자격 확정은 아닙니다.',
+
+'Math minor planner':'수학 부전공 플래너','Reference estimate':'참고용 예상 결과','Ask about my Math minor':'내 수학 부전공 계획 질문하기',
+'Re-upload a PDF with course tables to compare this minor. Missing courses are not treated as zero.':'과목표가 있는 PDF를 다시 업로드하면 비교할 수 있습니다. 누락된 과목을 0학점으로 판단하지 않습니다.',
+'Minimum additional credits':'최소 추가 필요 학점',
+'This is a 2026–27 University Park comparison. Your report follows a different or unconfirmed campus/year:':'2026–27 University Park 기준 비교입니다. 보고서 적용 캠퍼스·학년도가 다르거나 미확인입니다:',
+'Based only on courses found in this PDF. Six credits unique from major prescribed courses, substitutions and minor declaration still need adviser confirmation.':'이 PDF에서 확인한 과목 기준입니다. 전공 필수와 겹치지 않는 6학점, 대체 인정, 부전공 신청은 어드바이저 확인이 필요합니다.',
+'course rows could not be fully read.':'개 과목 행을 완전히 읽지 못했습니다.',
+'Additional mathematics':'선택 수학 과목','400-level mathematics':'400레벨 수학 과목','additional credits':'학점 추가 필요',
+'Possible courses to fill this gap':'부족한 요건에 사용할 과목 후보',
+'Options require prerequisite and duplicate-credit checks; availability is not verified.':'선수과목·중복 학점 인정 여부를 확인해야 합니다. 개설 여부는 미확인입니다.',
+'Courses not automatically counted':'자동 인정에서 제외한 과목','conflicting_records':'기록 불일치','minimum_grade_not_met':'최소 성적 미충족','grade_equivalence_unverified':'성적 인정 여부 미확인','overlapping_course_pair':'중복 인정 제한 과목',
+'Extracted course history':'추출한 전체 과목 내역','Repeated appearances across requirement sections are counted once.':'여러 요건에 반복된 동일 수강 내역은 한 번만 집계합니다.',
+'Rules and checks':'적용 규칙과 확인 사항','All counted courses require C or better. Planned courses count only if passed with the required grade.':'인정 과목은 모두 C 이상이어야 합니다. 예정 과목도 해당 성적으로 통과한다는 조건입니다.',
+'Math department guidance ↗':'수학과 안내 ↗',
+
 'Covered':'충족 / 예정', 'Covered (':'충족 / 예정 (', 'Covered requirements':'충족된 요건 (예정 포함)', 'covered':'충족 / 예정',
 'Covered by planned courses':'충족 예정 — 추가 수강 불필요',
 'No extra courses needed if planned courses are passed.':'예정된 과목을 통과하면 이 요건을 위한 추가 수강은 필요 없습니다.',

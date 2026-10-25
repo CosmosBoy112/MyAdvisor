@@ -1,0 +1,88 @@
+{
+  "program": {
+    "code": "MATH_UMNR",
+    "name": "Mathematics, Minor (Science)",
+    "type": "minor",
+    "college": "Eberly College of Science"
+  },
+  "catalog_year": "2026-27",
+  "campus": "University Park",
+  "credits_range": [
+    26,
+    28
+  ],
+  "min_grade": "C",
+  "unique_from_major_prescribed_credits": 6,
+  "source_url": "https://bulletins.psu.edu/undergraduate/colleges/eberly-science/mathematics-minor/",
+  "department_url": "https://science.psu.edu/math/undergraduate/minors",
+  "retrieved_on": "2026-10-24",
+  "groups": [
+    {
+      "id": "calculus1",
+      "label": "MATH 140",
+      "min_credits": 4,
+      "courses": [
+        "MATH 140"
+      ]
+    },
+    {
+      "id": "calculus2",
+      "label": "MATH 141",
+      "min_credits": 4,
+      "courses": [
+        "MATH 141"
+      ]
+    },
+    {
+      "id": "additional",
+      "label": "Additional mathematics",
+      "min_credits": 6,
+      "max_credits": 8,
+      "courses": [
+        "MATH 220",
+        "MATH 230",
+        "MATH 231",
+        "MATH 232",
+        "MATH 250",
+        "MATH 251",
+        "MATH 310",
+        "MATH 311W",
+        "MATH 312"
+      ]
+    },
+    {
+      "id": "upper",
+      "label": "400-level mathematics",
+      "min_credits": 12,
+      "subject": "MATH",
+      "number_min": 400,
+      "number_max": 499,
+      "course_caps": {
+        "MATH 400": 3,
+        "MATH 497": 3
+      }
+    }
+  ],
+  "conflicting_pairs": [
+    [
+      "MATH 414",
+      "MATH 418"
+    ],
+    [
+      "MATH 451",
+      "MATH 455"
+    ],
+    [
+      "MATH 436",
+      "MATH 441"
+    ]
+  ],
+  "review_notes": [
+    "The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.",
+    "The department page includes MATH 240 and MATH 252; the 2026–27 Bulletin additional-course pool does not. They are not automatically applied here.",
+    "Known overlapping-course pairs are counted once. Other duplicate-credit restrictions, cross-list substitutions, repeatability and approvals require verification.",
+    "Six credits must be unique from the major prescribed courses. The PDF course list alone does not establish this.",
+    "This is a reference comparison, not a minor declaration or graduation certification."
+  ],
+  "status": "reference_requires_review"
+}
