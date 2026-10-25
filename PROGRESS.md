@@ -15,6 +15,13 @@
 ---
 
 ## 2026-10-24 · Codex · `main`
+- 한 일: 로그인 후 API 오류 처리 보완: JSON 파싱 전401/403 처리, HTML/일반텍스트 오류와 잘못 연결된 웹페이지를 구분. 정상 JSON 에러 보존 및 빈 DELETE 200/204 지원. 배포 연결 설명 docs/DEPLOYMENT.md 추가
+- 상태: 프런트33개 테스트/빌드 통과. 실제 www.onlyplans.courses 번들의 API base가 빈 값이고 /api/health·/api/reports가 Vercel404 텍스트 반환하는 것 확인. 로컬 health는 정상
+- 막힌 것: 프로덕션은 프런트만으로 API에 연결되지 않음. 실제 백엔드 배포 주소 확인 후 Vercel VITE_API_BASE_URL/백엔드 FRONTEND_ORIGIN 설정 및 재배포 필요. 오류 안내 수정만으로 프로덕션 연결은 해결되지 않음
+- 다음: 백엔드 공개URL 확인 및 프로덕션 연결 검증
+- 필요한 설정: 기존 VITE_API_BASE_URL, FRONTEND_ORIGIN 등(상세 배포 문서)
+
+## 2026-10-24 · Codex · `main`
 - 한 일: 메인 질문을 제출 시점에 보관하고 PDF 분석 성공 후 리포트 채팅창을 자동으로 열어 질문 전송·답변 표시. 빈 입력/분석 실패 시 자동 질문 없음. 샘플도 동일 흐름(예시 답변임을 표시)
 - 상태: 프런트30개 테스트/빌드 통과. 브라우저에서 메인 Department List 질문→샘플 리포트→채팅창·질문·해당 예시 답변 자동 표시 확인. 인증 PDF 업로드/실 AI 전체 흐름 재검증 없음
 - 막힌 것: 없음
