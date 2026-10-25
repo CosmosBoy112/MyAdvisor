@@ -8,6 +8,21 @@ export function detectInputLanguage(text,current='en'){
 }
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
+'Web search quota is exhausted. This answer could not be verified online.':'검색 API 사용량 한도를 초과해 이 답변을 인터넷에서 검증하지 못했습니다.',
+'Web findings may be outdated or subjective. Confirm course eligibility and academic decisions with your adviser.':'인터넷 정보는 오래되었거나 주관적일 수 있습니다. 과목 인정 여부와 학업 결정은 어드바이저와 상담 후 확정하세요.',
+'No supported web findings were returned.':'출처로 뒷받침되는 검색 결과를 받지 못했습니다.',
+'Web search is temporarily unavailable. This answer could not be verified online.':'현재 웹 검색을 사용할 수 없어 이 답변을 인터넷에서 검증하지 못했습니다.',
+'Web sources':'웹 출처',
+'Retrieved:':'조회 시각:',
+'Official PSU source':'PSU 공식 출처',
+'Community opinion':'커뮤니티 의견',
+'Web source — verify publisher':'웹 출처 — 게시자 확인 필요',
+'Retrieval date is not publication date. Reviews do not establish degree requirements.':'조회 시각은 게시일이 아닙니다. 후기는 졸업 요건의 근거가 될 수 없습니다.',
+'Google Search suggestions':'Google 검색 제안',
+'Checking your report and web sources…':'보고서와 웹 자료를 확인하고 있어요…',
+'Search the web when needed':'필요할 때 웹 검색',
+'Your question may be used for search. Do not include personal information.':'질문이 검색에 사용될 수 있습니다. 개인정보는 입력하지 마세요.',
+
 'Courses for this requirement':'요건 충족에 사용할 과목',
 'This requirement is already marked complete.':'이미 완료로 표시된 요건입니다.',
 'Options listed in your PDF':'PDF에 명시된 선택 과목',
