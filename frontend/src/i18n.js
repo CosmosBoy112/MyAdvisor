@@ -8,6 +8,23 @@ export function detectInputLanguage(text,current='en'){
 }
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
+'Courses for this requirement':'요건 충족에 사용할 과목',
+'This requirement is already marked complete.':'이미 완료로 표시된 요건입니다.',
+'Options listed in your PDF':'PDF에 명시된 선택 과목',
+'Follow the report’s selection rules; these are not confirmed remaining courses.':'보고서의 선택 조건을 따르세요. 아래 과목이 모두 미이수 과목이라는 뜻은 아닙니다.',
+'No course options listed in the PDF. Check the catalog below or ask about this requirement.':'PDF에 선택 과목이 없습니다. 카탈로그가 있으면 아래에서 확인하거나 이 요건에 대해 질문하세요.',
+'Help me choose courses':'어떤 과목을 들을지 질문하기',
+'How to satisfy this requirement':'요건 충족 방법',
+'Bulletin course options':'Bulletin 참고 과목',
+'Complete all groups below':'아래 모든 그룹 충족',
+'Choose groups:':'선택할 그룹 수:',
+'Choose courses:':'선택할 과목 수:',
+'credits minimum':'학점 이상',
+'Minimum grade:':'최소 성적:',
+'Course attribute:':'과목 속성:',
+'Selection requires confirmation':'선택 조건 확인 필요',
+'Approved course list unavailable — confirm with your adviser.':'승인 과목 목록 미확인 — 지도교수와 확인하세요.',
+
 'Upload your LionPATH What-If Report.':'LionPATH What-If 보고서를 업로드하세요.',
 'Sample data · no live AI analysis.':'샘플 데이터 · 실제 AI 분석 아님',
 'Gray assumes current courses are passed.':'회색 구간은 수강 과목 통과 후 기준입니다.',

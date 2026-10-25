@@ -94,3 +94,10 @@ button,input,textarea{letter-spacing:inherit}
 .credit-headline strong,.credit-legend strong,.chart-legend strong,.donut-center strong,.row-heading>strong{font-variant-numeric:lining-nums tabular-nums;letter-spacing:-.025em}
 :lang(ko) .hero h1,:lang(ko) .page-heading h1{letter-spacing:-.025em;word-break:keep-all;overflow-wrap:anywhere}
 :lang(ko) .eyebrow{letter-spacing:.02em}
+
+.requirement-courses{margin:18px 0;padding:18px;border:1px solid var(--line);border-radius:10px;background:var(--surface-subtle)}
+.requirement-courses h3{margin:0 0 8px;font-size:var(--text-body);font-weight:600}
+.requirement-courses .course-source{margin-top:12px;font-weight:500}
+.requirement-courses .report-course-list{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:10px 0}
+.report-course-list li{padding:7px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.requirement-courses .outline-button{margin-top:14px}.course-gap{color:var(--ink)}

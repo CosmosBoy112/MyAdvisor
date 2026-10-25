@@ -14,6 +14,13 @@
 
 ---
 
+## 2026-10-24 · Codex · `main`
+- 한 일: 요건 상세에 PDF 선택 과목 카드/추가 필요 학점/과목 선택 질문 버튼 추가. Bulletin 연결 항목은 과목명·선수과목과 AND/OR 선택 트리, 최소 성적·학점·검토 조건을 펼쳐 표시. 기존 main의 DB 채팅 연결 변경 fast-forward 반영
+- 상태: 프런트 19개 테스트 통과(중첩 AND/OR, 미확인 승인 목록, 한국어 표시 포함), Vite 빌드·diff 공백 검사 통과. 실제 브라우저/유료 AI 답변 미검증. DB 스키마와 백엔드 로직 변경 없음
+- 막힌 것: PDF/일치하는 카탈로그에 목록이 없으면 과목을 생성하지 않고 확인 필요 표시. 개인별 이수 과목 대조나 수강 자격 확정 기능은 아님
+- 다음: 보고서 요건을 펼쳐 과목 목록 확인. 학년도/전공이 불일치하는 보고서는 적용 가능한 카탈로그 확보 필요
+- 필요한 설정: 없음
+
 ## 2026-10-24 · CosmosBoy112 · `main`
 - 한 일: 채팅이 TigerData 카탈로그(Bulletin 2026-27, Handbook 2024-25)를 근거로 답하도록 `CatalogDbService` 추가. 리포트 전공이 DB의 전공(DATSC_BS, CMPSC_BS)과 일치할 때만 요건 트리·전공 진입 요건·규정·질문 속 과목의 선수과목/열리는 과목을 `report.catalogDb`로 붙임. CMPSC 적재 메타데이터는 원문으로 넘기지 않고 검토 표시만 전달, 빈 목록은 미확인으로 표시. 학년도가 다르면 답변에 명시, 일치하지 않는 전공은 카탈로그 질문에 일반 지식으로 답하지 않음. 문서: `docs/CHANGES-advisor-catalog-db.md` "채팅 연결" 절
 - 상태: 백엔드 테스트 41개 중 35개 통과·6개 설정상 제외(`CatalogDbServiceTest` 6개 추가). `LiveCatalogDbTest`로 실제 DB 확인(문맥 DS 약 17KB / CMPSC 약 26KB, 약칭 `Comp Sci - Univ Park (BS)`는 major_not_in_catalog). 임시 테스트로 실제 Luminal 답변 확인: DS 리포트는 CMPSC 465 선수과목·List A를 출처와 함께 답하고 2026-27/2024-25 차이를 명시, CMPSC 리포트는 빈 승인 자연과학 목록을 "아무 GN"으로 해석하지 않고 requires_review를 명시. 이 컴퓨터의 Gemini 키는 404라 Gemini 답변과 브라우저 전체 흐름은 미검증
