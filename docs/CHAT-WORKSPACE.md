@@ -45,3 +45,10 @@ The UI clears messages after success and preserves them on error. Sample convers
 - When the agent opens a screen (`view`: course details, course options, what is left, suggested semester plan, Math minor check), it appears as a card directly under that answer (`AdvisorView.vue`). Closing it leaves an "Open screen" chip. Screens are saved with the answer, so a reopened conversation shows them as chips.
 - Memories the agent saved or forgot appear under the answer with Undo. The chat settings menu (⋯) has Memories, a list of the account's memories with delete buttons (`GET`/`DELETE /api/memories`).
 - The upload consent now names Luminal and Gemini for chat answers. Screen data is built by the server from the report and catalog (`docs/advisor-tools.md` section 9.5), never from model text.
+
+
+## Introduction navigation
+The OnlyPlans brand opens `#/intro` for both signed-in and signed-out visitors.
+Introduction start buttons open the current conversation for signed-in accounts with a saved report,
+resume profile setup for accounts without a report, and start Auth0 sign-in for signed-out visitors.
+Visiting the introduction does not clear the current report or conversation. Its text remains English.

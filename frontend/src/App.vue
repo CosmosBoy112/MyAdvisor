@@ -19,6 +19,21 @@ import {viewTitle,progressView} from './advisor-view.js';
 import {apiRequest} from './api.js';
 import {sessionStatus} from './auth-config.js';
 import {progress,coveredByPlan,filterRequirements,validateFile,hasMathMinorInterest} from './model.js';
+const appShell=ref(null),fixedHeader=ref(null),fixedFooter=ref(null);
+let chromeObserver;
+onMounted(()=>{
+ const measure=()=>{
+  for(const [element,property] of [[fixedHeader.value,'--app-header-height'],[fixedFooter.value,'--app-footer-height']]){
+   const height=element?.getBoundingClientRect().height;
+   if(height)appShell.value?.style.setProperty(property,`${height}px`);
+  }
+  const themeBounds=fixedHeader.value?.querySelector('.theme-toggle')?.getBoundingClientRect();
+  if(themeBounds?.width)appShell.value?.style.setProperty('--chat-right-edge',`${Math.max(0,document.documentElement.clientWidth-themeBounds.right)}px`);
+ };
+ measure();
+ if(typeof ResizeObserver!=='undefined'){chromeObserver=new ResizeObserver(measure);chromeObserver.observe(fixedHeader.value);chromeObserver.observe(fixedFooter.value);const controls=fixedHeader.value?.querySelector('.header-right');if(controls)chromeObserver.observe(controls);}
+});
+onUnmounted(()=>chromeObserver?.disconnect());
 const theme=ref(document.documentElement.dataset.theme||'light');
 function toggleTheme(){
  theme.value=theme.value==='dark'?'light':'dark';
@@ -26,6 +41,7 @@ function toggleTheme(){
  document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme.value==='dark'?'#111214':'#ffffff');
  try{localStorage.setItem('lionpathway-theme',theme.value);}catch{}
 }
+const introOpen=ref(window.location.hash==='#/intro');
 const configured=inject('authConfigured');
 const auth=configured?useAuth0():null;
 const report=ref(null),intent=ref(''),file=ref(null),fileInput=ref(null),busy=ref(false),error=ref(''),notice=ref(''),dragging=ref(false),filter=ref('all'),expanded=ref(null),source=ref(null),reportPanelOpen=ref(false),uploadOpen=ref(false),question=ref(''),messages=ref([]),chatBusy=ref(false),chatBody=ref(null),consent=ref(false);
@@ -35,8 +51,8 @@ watch(notice,message=>{
  if(message==='Report saved to your profile.')savedNoticeTimer=setTimeout(()=>{notice.value='';},4000);
 },{flush:'sync'});
 onUnmounted(()=>clearTimeout(savedNoticeTimer));
-const t=text=>pageText(text,Boolean(report.value));
-watch([locale,report],()=>{document.documentElement.lang=displayLanguage(Boolean(report.value));},{immediate:true});
+const t=text=>pageText(text,Boolean(report.value)&&!introOpen.value);
+watch([locale,report,introOpen],()=>{document.documentElement.lang=displayLanguage(Boolean(report.value)&&!introOpen.value);},{immediate:true});
 const webSearch=ref(true);
 // Live agent steps for the answer being written, polled once a second from /chat/progress.
 const agentSteps=ref([]),chatElapsed=ref(0),agentProgress=computed(()=>progressView(agentSteps.value));
@@ -83,7 +99,7 @@ const savedReports=ref([]),historyBusy=ref(false),historyLoaded=ref(false),histo
 const signedIn=computed(()=>Boolean(auth?.isAuthenticated.value));
 const authLoading=computed(()=>Boolean(auth?.isLoading.value));
 const onboarding=computed(()=>signedIn.value&&historyLoaded.value&&!savedReports.value.length&&(!report.value||report.value.demo));
-const chatListAvailable=computed(()=>signedIn.value&&historyLoaded.value&&savedReports.value.length>0&&Boolean(report.value)&&!report.value.demo&&!historyOpen.value&&!onboarding.value);
+const chatListAvailable=computed(()=>signedIn.value&&!introOpen.value&&historyLoaded.value&&savedReports.value.length>0&&Boolean(report.value)&&!report.value.demo&&!historyOpen.value&&!onboarding.value);
 const chatListOpen=ref((()=>{try{return localStorage.getItem('onlyplans-chat-list')!=='hidden';}catch{return true;}})());
 // Opening the report panel tucks the chat list away without changing the saved preference.
 const chatListTucked=ref(false);
@@ -93,15 +109,17 @@ const chatListVisible=computed(()=>chatListAvailable.value&&chatListOpen.value&&
 function rememberLastQuestion(id,text){const item=savedReports.value.find(row=>row.id===id);if(item)item.lastQuestion=text?text.slice(0,120):null;}
 const canDeleteReport=computed(()=>historyLoaded.value&&!historyBusy.value&&savedReports.value.length>1);
 function syncPage(){
+ introOpen.value=window.location.hash==='#/intro';
+ if(introOpen.value){historyOpen.value=false;reportPanelOpen.value=false;return;}
  const mustSetup=onboarding.value||busy.value;
  historyOpen.value=signedIn.value&&(mustSetup||window.location.hash==='#/profile');
  if(historyOpen.value&&window.location.hash!=='#/profile')window.history.replaceState(null,'','#/profile');
 }
-watch(onboarding,required=>{if(required){historyOpen.value=true;window.history.replaceState(null,'','#/profile');}});
-watch(historyOpen,open=>{const hash=open?'#/profile':'#/';if(window.location.hash!==hash)window.history.pushState(null,'',hash);});
+watch(onboarding,required=>{if(required&&!introOpen.value){historyOpen.value=true;window.history.replaceState(null,'','#/profile');}});
+watch([historyOpen,introOpen],([open,intro])=>{const hash=intro?'#/intro':open?'#/profile':'#/';if(window.location.hash!==hash)window.history.pushState(null,'',hash);});
 onMounted(()=>window.addEventListener('hashchange',syncPage));
 onUnmounted(()=>window.removeEventListener('hashchange',syncPage));
-function openProfile(){historyOpen.value=true;reportPanelOpen.value=false;void loadHistory();}
+function openProfile(){introOpen.value=false;historyOpen.value=true;reportPanelOpen.value=false;void loadHistory();}
 const session=computed(()=>sessionStatus(configured,authLoading.value,signedIn.value));
 async function checkService(){try{const r=await fetch(base+'/api/health');if(!r.ok)throw Error();service.value=await r.json();serviceError.value='';}catch{serviceError.value='The analysis server is not connected. Start the Spring Boot backend, then retry.';}}
 onMounted(()=>{checkService();const draft=sessionStorage.getItem('lionpathway-goal');if(draft){intent.value=draft;sessionStorage.removeItem('lionpathway-goal');notice.value='You’re signed in. Attach your PDF again to begin the analysis.';}});
@@ -140,9 +158,23 @@ function pick(f){if(busy.value)return;error.value='';const problem=validateFile(
 function drop(event){dragging.value=false;if(event.dataTransfer.files.length)pick(event.dataTransfer.files[0]);}
 async function signIn(){error.value='';if(!configured){notice.value='Live sign-in needs Auth0 configuration. You can explore the sample without an account.';return;}try{if(intent.value.trim())sessionStorage.setItem('lionpathway-goal',intent.value);await auth.loginWithRedirect();}catch(e){error.value=e.message;}}
 function signOut(){auth?.logout({logoutParams:{returnTo:window.location.origin}});}
-function demo(showReport=false){report.value=structuredClone(sample);chatBusy.value=false;reportPanelOpen.value=Boolean(showReport);uploadOpen.value=false;messages.value=[];filter.value='all';error.value='';notice.value='';window.scrollTo(0,0);void answerInitialQuestion(intent.value);}
+function demo(showReport=false){introOpen.value=false;report.value=structuredClone(sample);chatBusy.value=false;reportPanelOpen.value=Boolean(showReport);uploadOpen.value=false;messages.value=[];filter.value='all';error.value='';notice.value='';window.scrollTo(0,0);void answerInitialQuestion(intent.value);}
 function reset(){report.value=null;messages.value=[];chatBusy.value=false;reportPanelOpen.value=false;uploadOpen.value=false;source.value=null;error.value='';expanded.value=null;deleteConfirm.value=false;}
-function home(){if(busy.value||onboarding.value)return;if(report.value?.demo){reset();return;}historyOpen.value=false;uploadOpen.value=false;reportPanelOpen.value=false;}
+function home(){if(busy.value||onboarding.value)return;introOpen.value=false;if(report.value?.demo){reset();return;}historyOpen.value=false;uploadOpen.value=false;reportPanelOpen.value=false;}
+function introduce(){
+ if(busy.value)return;
+ introOpen.value=true;historyOpen.value=false;reportPanelOpen.value=false;chatSettingsOpen.value=false;
+ window.scrollTo(0,0);
+}
+async function startPlanning(){
+ if(authLoading.value)return;
+ if(!signedIn.value){await signIn();return;}
+ if(historyBusy.value||reportBusy.value)return;
+ if(!historyLoaded.value&&!await loadHistory()){openProfile();return;}
+ if(!savedReports.value.length){openProfile();return;}
+ if(!report.value||report.value.demo){await openReport(savedReports.value[0].id);if(!report.value||report.value.demo)return;}
+ home();window.scrollTo(0,0);
+}
 async function addReport(){if(busy.value||chatBusy.value)return;historyOpen.value=true;uploadOpen.value=true;error.value='';if(report.value)intent.value='';file.value=null;consent.value=false;await nextTick();fileInput.value?.click();}
 async function analyze(){const submittedIntent=intent.value.trim();let analysisSucceeded=false;useInputLanguage(submittedIntent);error.value='';if(authLoading.value){error.value='Sign-in is still loading. Please try again in a moment.';return;}if(!configured){error.value='Live PDF analysis requires Auth0, Gemini, and the backend. Use “Explore a sample” to preview the experience.';return;}if(!auth.isAuthenticated.value){await signIn();return;}if(!file.value){fileInput.value.click();return;}if(!consent.value){error.value='Please allow your report text to be sent to the AI providers for analysis.';return;}if(busy.value)return;busy.value=true;elapsed.value=0;uploadStage.value='auth';uploadController=new AbortController();const started=Date.now();const ticker=setInterval(()=>elapsed.value=Math.floor((Date.now()-started)/1000),1000);try{const form=new FormData();form.append('file',file.value);form.append('intent',submittedIntent);form.append('language',locale.value);report.value=await request('/api/reports',{method:'POST',body:form},{signal:uploadController.signal,onStage:stage=>uploadStage.value=stage});messages.value=[];chatBusy.value=false;reportPanelOpen.value=false;uploadOpen.value=false;filter.value='all';expanded.value=null;file.value=null;consent.value=false;notice.value='Report saved to your profile.';await loadHistory();historyOpen.value=false;window.scrollTo(0,0);analysisSucceeded=true;}catch(e){error.value=e.message;}finally{clearInterval(ticker);uploadController=null;busy.value=false;}if(analysisSucceeded)await answerInitialQuestion(submittedIntent);}
 async function answerInitialQuestion(text){
@@ -168,25 +200,24 @@ function value(n){return Number.isFinite(n)?n:'—';}
 </script>
 
 <template>
- <div class="app-shell" :class="{'report-visible':reportPanelOpen && report && !historyOpen,'chats-visible':chatListVisible}" @keydown.esc="chatSettingsOpen=false;source=null;reportPanelOpen=false;if(!busy)uploadOpen=false;deleteConfirm=false;if(!clearChatBusy)clearChatOpen=false">
-  <header class="topbar">
-   <button class="brand" @click="home" aria-label="OnlyPlans home"><BrandMark :size="40"/><span>Only<span class="brand-accent">Plans</span></span></button>
+ <div ref="appShell" class="app-shell" :class="{'report-visible':reportPanelOpen && report && !historyOpen,'chats-visible':chatListVisible}" @keydown.esc="chatSettingsOpen=false;source=null;reportPanelOpen=false;if(!busy)uploadOpen=false;deleteConfirm=false;if(!clearChatBusy)clearChatOpen=false">
+  <header ref="fixedHeader" class="topbar">
+   <button class="brand" @click="introduce" aria-label="OnlyPlans home"><BrandMark :size="40"/><span>Only<span class="brand-accent">Plans</span></span></button>
    <div class="header-right"><button type="button" class="theme-toggle" :aria-label="theme==='dark'?'Switch to light mode':'Switch to dark mode'" :title="theme==='dark'?'Switch to light mode':'Switch to dark mode'" @click="toggleTheme"><Sun v-if="theme==='dark'" :size="22"/><Moon v-else :size="22"/></button><span v-if="session==='restoring'" class="session-restoring" role="status"><LoadingMark :size="24"/> {{t("Checking session…")}}</span><button v-if="session==='signed-in'" class="sign-in" @click="openProfile"><UserRound :size="21"/> {{t("Profile")}}</button><button v-if="session==='signed-out'" class="sign-in" @click="signIn">{{t("Sign in")}} <ArrowUpRight :size="15"/></button></div>
   </header>
   <div v-if="deletionNotice" class="success-toast" role="status" aria-live="polite" aria-atomic="true"><Check :size="18"/><span>{{t(deletionNotice)}}</span><button type="button" @click="dismissDeletionNotice" aria-label="Dismiss deletion notification"><X :size="16"/></button></div>
   <div v-if="notice" class="notice" role="status">{{t(notice)}}<button @click="notice=''" :aria-label="t(&quot;Dismiss&quot;)"><X :size="16"/></button></div>
   <div v-if="error && (report || historyOpen || !signedIn)" class="global-error error" role="alert">{{t(error)}}<button @click="error=''" :aria-label="t(&quot;Dismiss error&quot;)"><X :size="16"/></button></div>
-  <WelcomePage v-if="!signedIn && !authLoading && !report" @signin="signIn" @sample="demo"/>
-  <main v-if="(signedIn || authLoading) && !report && !onboarding && !historyOpen" class="landing">
+  <WelcomePage v-if="introOpen || (!signedIn && !authLoading && !report)" @signin="startPlanning" @sample="demo"/>
+  <main v-if="!introOpen && (signedIn || authLoading) && !report && !onboarding && !historyOpen" class="landing">
    <section class="hero">
-    <h1>Your academic assistant</h1><p class="hero-description">Sign in to connect your report and start a conversation.</p>
     <form v-if="!signedIn" class="search-card" @submit.prevent="signIn"><label class="sr-only" for="landing-question">Your question</label><textarea id="landing-question" v-model="intent" rows="2" maxlength="1000" @keydown="submitOnEnter" placeholder="Ask about courses, credits or a minor…"></textarea><div class="search-toolbar"><button type="submit" class="outline-button">Sign in <ArrowUpRight :size="16"/></button></div></form>
-    <p v-if="historyBusy||reportBusy" role="status" class="loading-message branded-loading"><LoadingMark/>Loading your account…</p>
+    <p v-if="authLoading||historyBusy||reportBusy" role="status" class="loading-message branded-loading account-loading"><LoadingMark :size="80"/>Loading your account…</p>
     <div v-if="error" class="error" role="alert"><p>{{error}}</p><button v-if="signedIn" class="outline-button" @click="loadHistory">Retry</button></div>
     <div v-if="!signedIn" class="hero-actions"><button @click="demo">Explore a sample <ArrowRight :size="14"/></button></div>
    </section>
   </main>
-  <main v-if="(signedIn && historyOpen) || report" :class="{'profile-page':historyOpen,workspace:chatListVisible}">
+  <main v-if="!introOpen && ((signedIn && historyOpen) || report)" :class="{'profile-page':historyOpen,workspace:report && !historyOpen && !onboarding}">
   <section v-if="signedIn && historyOpen" :aria-label="t('Profile')">
    <div class="profile-page-heading"><h1>{{t("Profile")}}</h1></div>
 <div class="profile-identity"><span class="profile-avatar"><UserRound :size="32"/></span><div class="profile-details"><strong>{{profileName||t("Profile")}}</strong><p>{{profileEmail}}</p></div><button type="button" class="saved-report-delete profile-signout" :disabled="busy||deleteBusy" @click="signOut">{{t("Sign out")}} <LogOut :size="17"/></button></div><div v-if="!reportPanelOpen || uploadOpen" class="profile-report-heading"><h3>{{t("My reports")}}</h3><button class="outline-button" :disabled="busy||chatBusy||historyBusy||reportBusy||!historyLoaded" @click="addReport"><Plus :size="16"/> {{t("Add new")}}</button></div><div v-if="error" class="error" role="alert"><p>{{t(error)}}</p><button class="outline-button" @click="loadHistory">{{t("Retry")}}</button></div><p v-if="historyBusy||reportBusy" class="loading-message branded-loading" role="status"><LoadingMark/>{{t("Loading reports…")}}</p><template v-if="!historyBusy && !reportBusy && historyLoaded && (!reportPanelOpen || uploadOpen)"><p v-if="historyLoaded && savedReports.length===1" class="panel-footnote">{{t("Keep at least one report. Add another report before deleting this one.")}}</p><div v-for="saved in savedReports" :key="saved.id" class="saved-report-row"><button class="saved-report" :disabled="reportBusy||deleteBusy||chatBusy||busy" @click="openReport(saved.id,true,true)" :aria-expanded="reportPanelOpen && report?.id===saved.id"><FileText :size="19"/><span><strong>{{saved.major||t('Academic report')}}</strong><small>{{saved.filename}}</small><small>{{new Date(saved.createdAt).toLocaleDateString()}}</small></span><ChevronRight :size="17"/></button><button class="saved-report-delete" :disabled="deleteBusy||reportBusy||chatBusy||busy||!canDeleteReport" :title="!canDeleteReport?t('Keep at least one report. Add another report before deleting this one.'):undefined" :aria-label="`Delete ${saved.filename||saved.major||'report'}`" @click="confirmDelete(saved)"><Trash2 :size="17"/><span>{{t("Delete")}}</span></button></div>
@@ -211,8 +242,10 @@ function value(n){return Number.isFinite(n)?n:'—';}
   </section>
   </template>
   </section>
-  <ChatSidebar v-if="chatListVisible" :items="savedReports" :active-id="report.id" :disabled="busy||chatBusy||reportBusy||clearChatBusy" :t="t" @select="id=>openReport(id)" @add="addReport"/>
+  <Transition name="chats-slide"><div v-if="chatListVisible" class="chat-sidebar-slot"><ChatSidebar :items="savedReports" :active-id="report.id" :disabled="busy||chatBusy||reportBusy||clearChatBusy" :t="t" @select="id=>openReport(id)" @add="addReport"/></div></Transition>
   <section v-if="report && !historyOpen && !onboarding" class="conversation-main" :aria-label="t(&quot;Ask your report&quot;)"><div class="chat-header"><button v-if="chatListAvailable" type="button" class="chat-list-toggle" :aria-expanded="chatListVisible" :aria-label="t(chatListVisible?'Hide chats':'Show chats')" :title="t(chatListVisible?'Hide chats':'Show chats')" @click="toggleChatList"><PanelLeftClose v-if="chatListVisible" :size="18"/><PanelLeftOpen v-else :size="18"/></button><div class="chat-title"><span class="chat-subtitle"><FileText :size="13"/><span>{{report.fileName||report.major}}<template v-if="report.demo"> · {{t("Sample conversation")}}</template></span></span></div><div class="chat-actions"><button v-if="!reportPanelOpen" type="button" class="outline-button chat-action report-toggle" @click="reportPanelOpen=true" :aria-expanded="false"><PanelRightOpen :size="16"/><span>{{t("View report")}}</span></button><div ref="chatSettings" class="chat-settings"><button type="button" class="chat-settings-button" aria-haspopup="true" :aria-expanded="chatSettingsOpen" :aria-label="t('Chat settings')" :title="t('Chat settings')" @click="chatSettingsOpen=!chatSettingsOpen"><Ellipsis :size="18"/></button><div v-if="chatSettingsOpen" class="chat-settings-menu"><label v-if="!report.demo" class="chat-settings-item chat-web-toggle"><input type="checkbox" v-model="webSearch" :disabled="chatBusy"><span><strong>{{t("Search the web when needed")}}</strong><small>{{t("Your question may be used for search. Do not include personal information.")}}</small></span></label><button v-if="!report.demo" type="button" class="chat-settings-item memory-menu-button" @click="chatSettingsOpen=false;openMemories()"><Sparkles :size="16"/><span>{{t("Memories")}}</span></button><button type="button" class="chat-settings-item clear-chat-button" :disabled="!messages.length||chatBusy||clearChatBusy||busy" @click="chatSettingsOpen=false;confirmClearChat()"><RotateCcw :size="16"/><span>{{t("Clear chat")}}</span></button></div></div></div></div><div ref="chatBody" class="chat-body" role="log" aria-live="polite" :aria-busy="chatBusy"><div v-if="!messages.length" class="conversation-welcome"><h1>{{t("What would you like to plan?")}}</h1><p>{{t("Your report is ready. Ask about courses, credits or a minor.")}}</p></div><div v-if="!messages.length" class="suggestions"><button v-for="q in ['How many credits are left?','Explain Department List','Is my minor included?']" :key="q" @click="question=t(q);send()">{{t(q)}}<ArrowUpRight :size="14"/></button></div><template v-for="(msg,i) in messages" :key="i"><div :class="['chat-message',msg.role]"><ChatAnswer v-if="msg.role==='assistant'" :text="msg.text" :research="msg.webResearch"/><template v-else>{{msg.text}}</template><p v-for="m in msg.memoryChanges||[]" :key="m.id+m.action" class="memory-chip"><span>{{m.action==='forgotten'?t("Removed from memory:"):t("Saved to memory:")}} {{m.content}}</span><button v-if="m.action==='saved'" type="button" @click="forgetMemory(m)">{{t("Undo")}}</button></p></div><AdvisorView v-if="msg.view && msg.viewOpen" class="chat-view" :view="msg.view" :inventory="report.courseInventory" @close="msg.viewOpen=false" @ask="askMathMinor"/><button v-else-if="msg.view" type="button" class="view-chip" @click="msg.viewOpen=true">{{t("Open screen:")}} {{t(viewTitle(msg.view))}}<ArrowUpRight :size="13"/></button></template><div v-if="chatBusy" class="chat-thinking agent-progress" role="status" aria-live="polite"><ul v-if="!report.demo && agentProgress.done.length" class="progress-done"><li v-for="d in agentProgress.done" :key="d"><Check :size="13"/> {{t(d)}}</li></ul><div class="progress-current"><LoadingMark :size="28"/> <span>{{report.demo?t("Reading your report…"):t(agentProgress.current)}}</span><small v-if="!report.demo && chatElapsed>=3">{{chatElapsed}}s</small></div></div></div><form class="chat-form" @submit.prevent="send"><Sparkles class="chat-form-icon" :size="20" aria-hidden="true"/><label for="chat-question" class="sr-only">{{t("Question about your report")}}</label><textarea id="chat-question" v-model="question" @keydown="submitOnEnter" rows="1" maxlength="2000" :title="t(&quot;Enter to send · Shift+Enter for a new line&quot;)" :placeholder="t(&quot;Ask about a requirement…&quot;)"></textarea><button :disabled="chatBusy||!question.trim()" :aria-label="t(&quot;Send question&quot;)"><ArrowUp :size="19"/></button></form><p class="chat-disclaimer">{{t("Confirm academic decisions with your adviser.")}}</p></section>
+  <Transition name="report-slide" :css="!historyOpen">
+
   <component :is="historyOpen?'section':'aside'" v-if="report && reportPanelOpen && !onboarding && !uploadOpen && (!historyOpen || (!historyBusy && !reportBusy && historyLoaded))" class="dashboard" :class="historyOpen?'profile-report':'report-sidebar'" :aria-label="t('Your degree overview')">
    <div v-if="historyOpen" class="profile-report-actions"><button type="button" class="outline-button back-to-reports" @click="reportPanelOpen=false"><ArrowRight :size="18" class="back-arrow"/> {{t("My reports")}}</button><button type="button" class="outline-button profile-to-chat" :disabled="busy" @click="home"><MessageCircle :size="18"/> {{t("Ask your report")}}</button></div>
    <div class="report-sidebar-heading"><div><h2>{{t("Your degree overview")}}</h2><p>{{report.major||t('Major needs confirmation')}} · {{report.campus||t('Campus not specified')}}</p></div><button v-if="!historyOpen" class="outline-button" @click="reportPanelOpen=false" :aria-label="t('Hide report')"><X :size="20"/></button></div>
@@ -236,8 +269,9 @@ function value(n){return Number.isFinite(n)?n:'—';}
    <MinorPlanner v-if="!report.demo && report.minorAssessment && hasMathMinorInterest(report)" :assessment="report.minorAssessment" :inventory="report.courseInventory" @ask="askMathMinor"/>
    <div class="report-footer"><span><FileText :size="15"/> {{report.fileName}}</span><div class="report-tools"><button @click="download"><Download :size="15"/> {{t("Export analysis")}}</button><button v-if="!report.demo" class="delete-link" :disabled="!canDeleteReport||deleteBusy" :title="!canDeleteReport?t('Keep at least one report. Add another report before deleting this one.'):undefined" @click="confirmDelete(report)">{{t("Delete report")}}</button></div></div>
   </component>
+  </Transition>
   </main>
-  <footer class="site-footer"><span>OnlyPlans <span class="footer-dot">•</span> <span class="footer-team">{{t("Built by BLS")}}</span></span><span>{{t("Independent of Penn State.")}}</span></footer>
+  <footer ref="fixedFooter" class="site-footer"><span>OnlyPlans <span class="footer-dot">•</span> <span class="footer-team">{{t("Built by BLS")}}</span></span><span>{{t("Independent of Penn State.")}}</span></footer>
   <div v-if="source" class="modal-backdrop" @click.self="source=null"><section class="source-modal" role="dialog" aria-modal="true" :aria-label="t(&quot;Report evidence&quot;)"><div class="panel-heading"><span><FileText :size="18"/> {{t("Report evidence")}}</span><button @click="source=null" :aria-label="t(&quot;Close evidence&quot;)"><X :size="20"/></button></div><h2>{{source.title}}</h2><p class="muted">{{report.demo?t('Illustrative source'):t('Extracted source')}} {{t("· Page")}} {{source.evidence.page||'unknown'}}</p><blockquote>{{source.evidence.quote}}</blockquote><p class="panel-footnote">{{report.demo?'Illustrative sample evidence; no personal PDF was analyzed.':source.evidence.verified?'This text matches the extracted report page. This does not independently verify the academic interpretation.':'This citation could not be matched to the extracted page. Please check the original PDF.'}}</p></section></div>
 
   <div v-if="memoryOpen" class="modal-backdrop" @click.self="memoryOpen=false"><section class="source-modal memory-modal" role="dialog" aria-modal="true" :aria-label="t('Memories')"><div class="panel-heading"><span><Sparkles :size="18"/> {{t("Memories")}}</span><button type="button" @click="memoryOpen=false" :aria-label="t('Close screen')"><X :size="20"/></button></div><p class="muted">{{t("Things you told the assistant to remember. They apply to all your reports.")}}</p><p v-if="memoryError" class="error" role="alert">{{t(memoryError)}}</p><p v-else-if="!memories.length" class="muted">{{t("No saved memories yet.")}}</p><ul class="memory-list"><li v-for="m in memories" :key="m.id"><span>{{m.content}}</span><button type="button" @click="forgetMemory(m)" :aria-label="t('Delete memory')"><X :size="14"/></button></li></ul></section></div>

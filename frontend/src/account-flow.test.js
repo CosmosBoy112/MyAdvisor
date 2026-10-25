@@ -70,16 +70,25 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    assert.doesNotMatch(document.querySelector('.chat-body').textContent,/Previous conversation/);
    assert.equal(requests.filter(r=>r.options.method==='DELETE').length,1);
    assert.equal(requests.find(r=>r.options.method==='DELETE').url,'/api/reports/saved/messages');
-   await click('Profile');assert.equal(document.querySelectorAll('.saved-report').length,1);document.querySelector('.saved-report').click();await settle();document.querySelector('.brand').click();await settle();
+   await click('Profile');assert.equal(document.querySelectorAll('.saved-report').length,1);document.querySelector('.saved-report').click();await settle();document.querySelector('.brand').click();await settle();await click('Try OnlyPlans');
    assert.doesNotMatch(document.querySelector('.chat-body').textContent,/Previous conversation/);
    await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}],{clearFails:true});
    await menu();await click('Clear chat');document.querySelector('.confirm-actions .danger-button').click();await settle();
    assert.match(document.querySelector('.chat-body').textContent,/Previous conversation/);assert.match(document.querySelector('[role=dialog]').textContent,/Reset failed/);
   });
+  await t.test('signed-in logo opens introduction and Try OnlyPlans restores the conversation',async()=>{
+   const {requests}=await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}]);
+   document.querySelector('.brand').click();await settle();
+   assert.ok(document.querySelector('.welcome'));assert.equal(document.querySelector('.conversation-main'),null);assert.equal(window.location.hash,'#/intro');
+   await click('Try OnlyPlans');assert.ok(document.querySelector('.conversation-main'));assert.match(document.querySelector('.chat-body').textContent,/Previous conversation/);
+   assert.equal(requests.filter(r=>r.options.method==='POST').length,0);
+   await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}],{hash:'#/intro'});
+   assert.ok(document.querySelector('.welcome'));await click('Try OnlyPlans');assert.ok(document.querySelector('.conversation-main'));
+  });
   await t.test('first report setup appears after account sign-in, never on the public main page',async()=>{
    const {auth}=await mount([],{authenticated:false});assert.equal(document.querySelector('input[type=file]'),null);assert.equal(button('Add new'),undefined);
    auth.isAuthenticated.value=true;await settle();
-   assert.match(document.querySelector('.profile-upload').textContent,/Add your first report/);assert.equal(window.location.hash,'#/profile');document.querySelector('.brand').click();await settle();window.location.hash='#/';await settle();assert.equal(window.location.hash,'#/profile');assert.ok(document.querySelector('main.profile-page'));assert.equal(document.querySelector('[role=dialog]'),null);assert.equal(document.querySelector('.upload-close'),null);assert.ok(document.querySelector('input[type=file]'));assert.equal(document.querySelector('.conversation-main'),null);
+   assert.match(document.querySelector('.profile-upload').textContent,/Add your first report/);assert.equal(window.location.hash,'#/profile');document.querySelector('.brand').click();await settle();assert.ok(document.querySelector('.welcome'));await click('Try OnlyPlans');window.location.hash='#/';await settle();assert.equal(window.location.hash,'#/profile');assert.ok(document.querySelector('main.profile-page'));assert.equal(document.querySelector('[role=dialog]'),null);assert.equal(document.querySelector('.upload-close'),null);assert.ok(document.querySelector('input[type=file]'));assert.equal(document.querySelector('.conversation-main'),null);
    await mount([],{listFails:true});assert.equal(document.querySelector('.profile-upload'),null);assert.match(document.body.textContent,/HTTP 404/);
    await click('Profile');assert.doesNotMatch(document.querySelector('.profile-page').textContent,/No saved reports yet/);
   });
@@ -89,7 +98,7 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    assert.ok(document.querySelector('main.profile-page .profile-upload'));assert.equal(document.querySelector('.conversation-main'),null);
    await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}],{hash:'#/profile'});
    assert.ok(document.querySelector('main.profile-page'));assert.equal(document.querySelector('.conversation-main'),null);
-   assert.equal(button('Ask your report'),undefined);document.querySelector('.brand').click();await settle();assert.ok(document.querySelector('.conversation-main'));assert.equal(window.location.hash,'#/');
+   assert.equal(button('Ask your report'),undefined);document.querySelector('.brand').click();await settle();assert.ok(document.querySelector('.welcome'));await click('Try OnlyPlans');assert.ok(document.querySelector('.conversation-main'));assert.equal(window.location.hash,'#/');
   });
   await t.test('returning account restores chat; report is optional and profile reopens it',async()=>{
    const {requests}=await mount([{id:'saved-one',filename:'saved-report.pdf',major:'Computer Science',createdAt:'2026-10-24'}]);
@@ -112,7 +121,7 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    document.querySelector('.report-toggle').click();await settle();assert.ok(document.querySelector('.report-sidebar'));assert.equal(document.querySelector('.chat-sidebar'),null);
    document.querySelector('.chat-list-toggle').click();await settle();assert.ok(document.querySelector('.chat-sidebar'));assert.ok(document.querySelector('.report-sidebar'));
    document.querySelector('.report-sidebar-heading button').click();await settle();assert.ok(document.querySelector('.chat-sidebar'));
-   document.querySelector('.chat-list-toggle').click();await settle();assert.equal(document.querySelector('.chat-sidebar'),null);assert.equal(localStorage.getItem('onlyplans-chat-list'),'hidden');
+   document.querySelector('.chat-list-toggle').click();await settle();assert.equal(document.querySelector('.chat-sidebar'),null);assert.equal(localStorage.getItem('onlyplans-chat-list'),'hidden');assert.ok(document.querySelector('.workspace .conversation-main'));assert.equal(document.querySelector('.chat-sidebar-slot'),null);
    document.querySelector('.chat-list-toggle').click();await settle();assert.ok(document.querySelector('.chat-sidebar'));
    await click('Profile');assert.equal(document.querySelector('.chat-sidebar'),null);
    document.querySelector('.saved-report').click();await settle();assert.ok(document.querySelector('.profile-report'));
