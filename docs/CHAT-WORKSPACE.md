@@ -24,7 +24,18 @@ Selecting My reports keeps the user on Profile and replaces the list with the fu
 
 
 ## Clear conversation
-View report stays in the chat header. Clear chat sits at the right end of the PDF filename row, and is disabled for empty or active conversations.
+Clear chat lives in the chat settings menu (⋯) and is disabled for empty or active conversations.
 A confirmation dialog explains that messages will be permanently removed while the report remains.
 `DELETE /api/reports/{id}/messages` verifies ownership and deletes only that report's messages.
 The UI clears messages after success and preserves them on error. Sample conversations reset locally.
+
+
+## Chat sidebar and compact header
+- Signed-in chat shows a left sidebar of saved reports, newest first. Each item is titled by that report's latest user question (`lastQuestion` from `GET /api/reports`, first 120 characters) or "New conversation", with the major and date underneath. Selecting an item opens that report and its conversation; switching is disabled while a reply, upload or reset is in progress. "New report" opens the Profile upload form.
+- The toggle at the left of the chat header hides or shows the sidebar and remembers the choice in `localStorage` (`onlyplans-chat-list`). Opening View report tucks the sidebar away without changing that preference; the toggle can bring it back next to the report, and closing the report restores the saved state.
+- The sidebar is not shown in sample mode, on Profile, during first-report setup, or below 1100px width, where Profile remains the way to switch reports.
+- The chat header is a single row: the PDF filename, View report, and a settings menu (⋯) holding the web search toggle (signed-in reports only) and Clear chat. The menu closes on outside click, Escape, or report change.
+- `lastQuestion` comes from a read-only correlated subquery on `chat_messages`; no schema or index was added. The table has no `report_id` index, so the list query may slow down if conversations grow large.
+
+## Chat answer formatting
+`chatBlocks()` in `chat-content.js` turns model answers into headings, ordered/unordered lists, paragraphs, rules, and inline bold, italic, code and links. Vue renders this data as text nodes, so HTML in an answer is shown literally and never executed. Plain asterisks and underscores in ordinary text (for example `2 * 3`, `snake_case`) are left as-is. Existing `[W1]` web-source links and HTTPS Markdown links still work.

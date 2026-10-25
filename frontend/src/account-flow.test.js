@@ -63,16 +63,17 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
   });
   await t.test('clear chat confirms, preserves the report and stays cleared after reopening',async()=>{
    const {requests}=await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}]);
-   assert.ok(document.querySelector('.conversation-context .clear-chat-button'));assert.equal(document.querySelector('.chat-form .clear-chat-button'),null);assert.equal(document.querySelector('.chat-header .clear-chat-button'),null);
+   const menu=async()=>{document.querySelector('.chat-settings-button').click();await settle();};
+   assert.equal(document.querySelector('.clear-chat-button'),null);await menu();assert.ok(document.querySelector('.chat-settings-menu .clear-chat-button'));assert.ok(document.querySelector('.chat-settings-menu .chat-web-toggle'));assert.equal(document.querySelector('.chat-form .clear-chat-button'),null);
    await click('Clear chat');await click('Keep conversation');assert.match(document.querySelector('.chat-body').textContent,/Previous conversation/);
-   await click('Clear chat');document.querySelector('.confirm-actions .danger-button').click();await settle();
+   await menu();await click('Clear chat');document.querySelector('.confirm-actions .danger-button').click();await settle();
    assert.doesNotMatch(document.querySelector('.chat-body').textContent,/Previous conversation/);
    assert.equal(requests.filter(r=>r.options.method==='DELETE').length,1);
    assert.equal(requests.find(r=>r.options.method==='DELETE').url,'/api/reports/saved/messages');
    await click('Profile');assert.equal(document.querySelectorAll('.saved-report').length,1);document.querySelector('.saved-report').click();await settle();document.querySelector('.brand').click();await settle();
    assert.doesNotMatch(document.querySelector('.chat-body').textContent,/Previous conversation/);
    await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}],{clearFails:true});
-   await click('Clear chat');document.querySelector('.confirm-actions .danger-button').click();await settle();
+   await menu();await click('Clear chat');document.querySelector('.confirm-actions .danger-button').click();await settle();
    assert.match(document.querySelector('.chat-body').textContent,/Previous conversation/);assert.match(document.querySelector('[role=dialog]').textContent,/Reset failed/);
   });
   await t.test('first report setup appears after account sign-in, never on the public main page',async()=>{
@@ -97,6 +98,25 @@ test('account onboarding, profile reports and conversation-first workspace',asyn
    await click('Profile');document.querySelector('.saved-report').click();await settle();assert.ok(document.querySelector('.profile-page .profile-report'));assert.equal(document.querySelector('.report-sidebar'),null);assert.equal(document.querySelector('.conversation-main'),null);
    await click('Profile');await click('Add new');assert.ok(document.querySelector('.profile-upload'));assert.equal(document.querySelector('.conversation-main'),null);
    assert.ok(requests.some(r=>r.url==='/api/reports/saved-one/messages'));
+  });
+  await t.test('chat sidebar lists saved conversations and switches between them',async()=>{
+   const {requests}=await mount([{id:'first',filename:'first.pdf',major:'Data Sciences (BS)',createdAt:'2026-10-24',lastQuestion:'Which electives count?'},{id:'second',filename:'second.pdf',major:'Computer Science (BS)',createdAt:'2026-10-23',lastQuestion:null}]);
+   const items=()=>[...document.querySelectorAll('.chat-sidebar-item')];
+   assert.equal(items().length,2);assert.match(items()[0].textContent,/Which electives count\?/);assert.match(items()[1].textContent,/New conversation/);
+   assert.equal(items()[0].getAttribute('aria-current'),'true');
+   items()[1].click();await settle();
+   assert.ok(requests.some(r=>r.url==='/api/reports/second'));assert.equal(items()[1].getAttribute('aria-current'),'true');assert.ok(document.querySelector('.conversation-main'));
+   const box=document.querySelector('#chat-question');box.value='How many credits are left?';box.dispatchEvent(new Event('input',{bubbles:true}));await settle();
+   document.querySelector('.chat-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));await settle();
+   assert.match(items()[1].textContent,/How many credits are left\?/);
+   document.querySelector('.report-toggle').click();await settle();assert.ok(document.querySelector('.report-sidebar'));assert.equal(document.querySelector('.chat-sidebar'),null);
+   document.querySelector('.chat-list-toggle').click();await settle();assert.ok(document.querySelector('.chat-sidebar'));assert.ok(document.querySelector('.report-sidebar'));
+   document.querySelector('.report-sidebar-heading button').click();await settle();assert.ok(document.querySelector('.chat-sidebar'));
+   document.querySelector('.chat-list-toggle').click();await settle();assert.equal(document.querySelector('.chat-sidebar'),null);assert.equal(localStorage.getItem('onlyplans-chat-list'),'hidden');
+   document.querySelector('.chat-list-toggle').click();await settle();assert.ok(document.querySelector('.chat-sidebar'));
+   await click('Profile');assert.equal(document.querySelector('.chat-sidebar'),null);
+   document.querySelector('.saved-report').click();await settle();assert.ok(document.querySelector('.profile-report'));
+   document.querySelector('.profile-to-chat').click();await settle();assert.ok(document.querySelector('.conversation-main'));assert.equal(document.querySelector('.profile-report'),null);
   });
   await t.test('profile hides previous report content until loading finishes',async()=>{
    await mount([{id:'saved',filename:'saved.pdf',createdAt:'2026-10-24'}]);

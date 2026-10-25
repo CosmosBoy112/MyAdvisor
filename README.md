@@ -26,6 +26,9 @@ Open `http://localhost:5173` and click **Explore a sample**. The sample screens 
 - Completed / in-progress / remaining credit bar chart; missing values are shown as unknown
 - Requirement filters, details, and the PDF source page and quotation for each requirement
 - Per-requirement questions and Gemini chat, with the last 12 messages sent as context
+- Chat answers render headings, lists, bold/italic and inline code (parsed as data, never inserted as HTML)
+- Collapsible chat sidebar listing each saved report's conversation by its latest question; tucks away while the report panel is open
+- Chat settings menu (⋯) for the web search toggle and Clear chat
 - After sign-in, reopen reports from My reports, restore recent conversations, and delete with confirmation
 - Auth0 sign-in, JWT issuer/audience validation, report ownership checks
 - PDFBox text extraction, limited to 10 MB / 40 pages / 160,000 extracted characters
@@ -135,10 +138,11 @@ The free Render instance sleeps when idle and takes about a minute to wake up, s
 |---|---|---|
 | GET | `/api/health` | Public status check |
 | POST | `/api/reports` | Auth required. multipart `file`, `intent` |
-| GET | `/api/reports` | Your 50 most recent reports |
+| GET | `/api/reports` | Your 50 most recent reports, each with `lastQuestion` (first 120 characters of the latest user message, or null) |
 | GET | `/api/reports/{id}/messages` | Recent conversation, after an ownership check |
 | GET | `/api/reports/{id}` | One of your reports |
 | POST | `/api/reports/{id}/chat` | Ask about your report. JSON `{"question":"..."}` |
+| DELETE | `/api/reports/{id}/messages` | Clear your report's conversation; the report stays |
 | DELETE | `/api/reports/{id}` | Delete your report and its conversation |
 
 Send the Auth0 API access token to protected APIs as `Authorization: Bearer ...`; don't use the ID token. Other users' reports return 404. Personal report APIs are blocked in the demo profile.
