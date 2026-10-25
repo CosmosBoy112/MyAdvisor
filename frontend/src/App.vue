@@ -1,5 +1,5 @@
 <script setup>
-import {t,locale,useInputLanguage} from './i18n.js';
+import {t as translate,locale,useInputLanguage,pageText,displayLanguage} from './i18n.js';
 import {computed,inject,nextTick,ref,watch,onMounted,onUnmounted} from 'vue';
 import {useAuth0} from '@auth0/auth0-vue';
 import {ArrowUp,ArrowUpRight,ArrowRight,Plus,X,FileText,Check,ChevronDown,ChevronRight,BookOpen,GraduationCap,MessageCircle,ShieldCheck,LoaderCircle,LogOut,Download,Info,Search,RotateCcw,Trash2,Sun,Moon} from 'lucide-vue-next';
@@ -23,9 +23,10 @@ function toggleTheme(){
 const configured=inject('authConfigured');
 const auth=configured?useAuth0():null;
 const report=ref(null),intent=ref(''),file=ref(null),fileInput=ref(null),busy=ref(false),error=ref(''),notice=ref(''),dragging=ref(false),filter=ref('all'),expanded=ref(null),source=ref(null),chatOpen=ref(false),question=ref(''),messages=ref([]),chatBusy=ref(false),chatBody=ref(null),consent=ref(false);
+const t=text=>pageText(text,Boolean(report.value));
 watch(intent,value=>useInputLanguage(value));
 watch(question,value=>useInputLanguage(value));
-watch(locale,value=>{document.documentElement.lang=value;},{immediate:true});
+watch([locale,report],()=>{document.documentElement.lang=displayLanguage(Boolean(report.value));},{immediate:true});
 const webSearch=ref(true);
 const base=import.meta.env.VITE_API_BASE_URL||'';
 const uploadStage=ref('auth'),elapsed=ref(0);let uploadController=null;
@@ -86,10 +87,10 @@ async function openRequirement(item){
  target?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
  target?.querySelector('.requirement-summary')?.focus({preventScroll:true});
 }
-function askAbout(item){chatOpen.value=true;question.value=locale.value==='ko'?`“${item.title}”의 의미와 남은 요건을 설명해 주세요.`:`What does “${item.title}” mean, and what is left to complete?`;}
-function askCourses(item){chatOpen.value=true;question.value=locale.value==='ko'?`“${item.title}” 요건을 충족하려면 어떤 과목을 들어야 하나요? 보고서와 카탈로그를 근거로 과목 코드, 선택 조건, 선수과목과 남은 학점을 설명하고, 이수 여부나 승인 목록이 불확실하면 알려주세요.`:`Which courses can satisfy “${item.title}”? Use the report and catalog to explain course codes, selection rules, prerequisites and remaining credits. Flag unknown completion status or approval lists.`;}
-function askMathMinor(){chatOpen.value=true;question.value=locale.value==='ko'?'현재 이수·예정 과목으로 Math minor를 하려면 무엇이 더 필요한가요? 추가 학점과 과목 선택지, 선수과목, 전공과의 중복 인정 조건을 설명해 주세요.':'Based on my completed and planned courses, what would I need for the Mathematics minor? Explain the additional credits, course options, prerequisites and overlap with my major.';}
-function demoAnswer(q){if(locale.value==='ko')return '샘플 보고서는 총 120학점 중 72학점 이수 완료, 15학점 수강 중입니다. 아직 취득할 학점은 48학점이며, 현재 과목을 통과한 뒤에도 33학점이 필요합니다. 전체 학점을 채워도 개별 요건을 모두 충족한 것은 아닙니다.\n\n샘플 모드의 예시 답변이며 실제 AI 응답이 아닙니다.';let item=report.value.requirements.find(r=>q.toLowerCase().includes(r.title.toLowerCase()));if(!item&&/minor|math/i.test(q))item=report.value.requirements.find(r=>r.id==='minor');if(item)return `${item.description}\n\nSample source: page ${item.evidence.page}. This is an illustrative answer, not a live Gemini response.`;if(/credit|left|remaining/i.test(q))return 'In this sample, 72 of 120 credits are completed, 15 are in progress, and 33 remain beyond current courses. Finishing the credit total does not automatically satisfy every requirement.\n\nThis is an illustrative answer, not a live Gemini response.';return 'This is sample mode. Try asking about Department List, Supportive Electives, the Mathematics minor, or remaining credits. Live Gemini answers become available when the services are configured.';}
+function askAbout(item){chatOpen.value=true;question.value=translate('What does “{title}” mean, and what is left to complete?').replace('{title}',item.title);}
+function askCourses(item){chatOpen.value=true;question.value=translate('Which courses can satisfy “{title}”? Explain course options, prerequisites, remaining credits and any uncertain approvals using my report and catalog.').replace('{title}',item.title);}
+function askMathMinor(){chatOpen.value=true;question.value=translate('Based on my completed and planned courses, what would I need for the Mathematics minor? Explain additional credits, course options, prerequisites and overlap with my major.');}
+function demoAnswer(q){if(locale.value!=='en')return translate('This sample has 72 completed credits, 15 in progress and 33 additional credits needed out of 120. Meeting the credit total does not satisfy every requirement. This is a sample answer, not a live AI response.');let item=report.value.requirements.find(r=>q.toLowerCase().includes(r.title.toLowerCase()));if(!item&&/minor|math/i.test(q))item=report.value.requirements.find(r=>r.id==='minor');if(item)return `${item.description}\n\nSample source: page ${item.evidence.page}. This is an illustrative answer, not a live Gemini response.`;if(/credit|left|remaining/i.test(q))return 'In this sample, 72 of 120 credits are completed, 15 are in progress, and 33 remain beyond current courses. Finishing the credit total does not automatically satisfy every requirement.\n\nThis is an illustrative answer, not a live Gemini response.';return 'This is sample mode. Try asking about Department List, Supportive Electives, the Mathematics minor, or remaining credits. Live Gemini answers become available when the services are configured.';}
 async function send(){const q=question.value.trim();if(!q||chatBusy.value)return;useInputLanguage(q);question.value='';messages.value.push({role:'user',text:q});chatBusy.value=true;try{const result=report.value.demo?{answer:demoAnswer(q)}:await request(`/api/reports/${report.value.id}/chat`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,language:locale.value,webSearch:webSearch.value})},{timeoutMs:160000});messages.value.push({role:'assistant',text:result.answer,webResearch:result.webResearch});}catch(e){messages.value.push({role:'error',text:e.message});}finally{chatBusy.value=false;await nextTick();chatBody.value?.scrollTo({top:chatBody.value.scrollHeight,behavior:'smooth'});}}
 function download(){const blob=new Blob([JSON.stringify(report.value,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='lionpathway-analysis.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function value(n){return Number.isFinite(n)?n:'—';}

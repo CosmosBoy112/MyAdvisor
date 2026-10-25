@@ -10,12 +10,13 @@
     "test": "node --test src/*.test.js"
   },
   "dependencies": {
-    "vue": "^3.5.13",
     "@auth0/auth0-vue": "^2.4.0",
-    "lucide-vue-next": "^0.468.0"
+    "franc-min": "^6.2.0",
+    "lucide-vue-next": "^0.468.0",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "vite": "^6.1.0",
-    "@vitejs/plugin-vue": "^5.2.1"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "vite": "^6.1.0"
   }
 }

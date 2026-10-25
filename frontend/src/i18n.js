@@ -1,11 +1,9 @@
 import {ref} from 'vue';
+import translations from './locales/translations.js';
 // UI translations are intentionally explicit; report evidence and course names stay original.
 export const locale=ref('en');
-export function detectInputLanguage(text,current='en'){
- if(/[가-힣ㄱ-ㅎㅏ-ㅣ]/u.test(text||''))return 'ko';
- if(/[a-z]{2,}/i.test(text||''))return 'en';
- return current;
-}
+export {detectInputLanguage} from './language.js';
+import {detectInputLanguage} from './language.js';
 export function useInputLanguage(text){locale.value=detectInputLanguage(text,locale.value);}
 export const ko={
 'The 2026–27 Bulletin lists MATH 400 capped at 3 credits; the undated department guidance separately caps the learning-assistant MATH 497 experience at 3. This preview conservatively caps both pending adviser confirmation.':'2026–27 Bulletin은 MATH 400을 최대 3학점으로 제한합니다. 학과 안내는 학습조교 MATH 497에 3학점 제한을 두므로, 이 비교에서는 확인 전까지 둘 다 최대 3학점으로 계산합니다.',
@@ -114,4 +112,8 @@ Object.assign(ko,{
   "PHYS 213 or PHYS 214 are explicit choices; the other approved-list branch needs confirmation.": "PHYS 213 또는 PHYS 214가 명시된 선택지입니다. 그 밖의 승인 목록은 확인이 필요합니다.",
   "Do not add the old separate four-credit language requirement to the current program.": "이전 학년도의 별도 외국어 4학점 요건을 현재 전공 요건에 추가하지 마세요."
 });
-export function t(text){return locale.value==='ko'?(ko[text]??text):text;}
+export function t(text){return (locale.value==='ko'?ko:translations[locale.value])?.[text]??text;}
+export function displayLanguage(hasReport){return hasReport?locale.value:'en';}
+export function pageText(text,hasReport){return hasReport?t(text):text;}
+
+Object.assign(ko,{"What does “{title}” mean, and what is left to complete?": "“{title}”의 의미와 남은 요건을 설명해 주세요.", "Which courses can satisfy “{title}”? Explain course options, prerequisites, remaining credits and any uncertain approvals using my report and catalog.": "“{title}” 요건을 충족하는 과목, 선수과목, 남은 학점과 불확실한 승인 조건을 보고서와 카탈로그를 근거로 설명해 주세요.", "Based on my completed and planned courses, what would I need for the Mathematics minor? Explain additional credits, course options, prerequisites and overlap with my major.": "이수·예정 과목으로 수학 부전공을 하려면 무엇이 더 필요한가요? 추가 학점, 과목 선택지, 선수과목과 전공 중복 조건을 설명해 주세요.", "This sample has 72 completed credits, 15 in progress and 33 additional credits needed out of 120. Meeting the credit total does not satisfy every requirement. This is a sample answer, not a live AI response.": "샘플은 총 120학점 중 72학점 이수, 15학점 수강 중이며 추가 33학점이 필요합니다. 전체 학점만으로 모든 요건이 충족되지는 않습니다. 실제 AI 응답이 아닌 예시 답변입니다."});
